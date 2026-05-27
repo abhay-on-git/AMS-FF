@@ -1,0 +1,236 @@
+@custom-variant dark (&:is(.dark *));
+
+:root {
+  /* Chorus Design System - Brand Colors */
+  --primary-brand: #EF652B; /* Orange - primary buttons, key actions */
+  --secondary-links: #2D798D; /* Teal - links, secondary actions */
+
+  /* Chorus Orange Palette */
+  --orange-50: #FEF5EE;
+  --orange-350: #FF8D41;
+  --orange-400: #F27F45;
+  --orange-500: #EF652B;
+  --orange-600: #DF4417;
+
+  /* Chorus Teal Palette */
+  --teal-50: #F0FAFB;
+  --teal-100: #D9F1F4;
+  --teal-200: #B8E3E9;
+  --teal-400: #4FB1C1;
+  --teal-500: #3395A7;
+  --teal-600: #2D798D;
+  --teal-700: #2B6373;
+  --teal-800: #2A5260;
+
+  /* Chorus Black Palette */
+  --chorus-black-100: #353750;
+  --chorus-black-200: #2B2D46;
+  --chorus-black-300: #121321;
+  --chorus-black-400: #1A1B2E;
+  --chorus-black-500: #121321;
+
+  /* Chorus Gray Palette */
+  --chorus-gray-50: #F7F7F8;
+  --chorus-gray-100: #F1F1F3;
+  --chorus-gray-200: #E9E9EC;
+  --chorus-gray-300: #DCDDE5;
+  --chorus-gray-400: #C6C7D2;
+  --chorus-gray-500: #AFB1C0;
+  --chorus-gray-600: #989AAE;
+  --chorus-gray-700: #8789A1;
+  --chorus-gray-800: #767893;
+  --chorus-gray-900: #676983;
+
+  /* Status Colors */
+  --red-50: #FEF2F3;
+  --red-100: #FFE1E3;
+  --red-300: #FEA3A8;
+  --red-600: #E0222D;
+  --red-700: #BD1821;
+
+  --yellow-50: #FFFBEB;
+  --yellow-100: #FEF3C7;
+  --yellow-500: #F59E0B;
+  --yellow-700: #B45309;
+
+  --green-50: #EEFFF1;
+  --green-100: #D8FFE1;
+  --green-500: #0DC93C;
+  --green-600: #05B430;
+  --green-700: #088D2A;
+
+  /* Standard Variables */
+  --font-size: 16px;
+  --background: #F1F1F3; /* chorus-gray-100 */
+  --foreground: #121321; /* chorus-black-300 */
+  --card: #ffffff;
+  --card-foreground: #353750; /* chorus-black-100 */
+  --popover: #ffffff;
+  --popover-foreground: #121321;
+  --primary: #121321; /* chorus-black-300 */
+  --primary-foreground: #F7F7F8; /* chorus-gray-50 */
+  --secondary: #B8E3E9; /* teal-200 */
+  --secondary-foreground: #121321; /* chorus-black-500 */
+  --muted: #F1F1F3; /* chorus-gray-100 */
+  --muted-foreground: #989AAE; /* chorus-gray-600 */
+  --accent: #F1F1F3;
+  --accent-foreground: #353750;
+  --destructive: #BD1821; /* red-700 */
+  --destructive-foreground: #ffffff;
+  --border: #DCDDE5; /* chorus-gray-300 */
+  --input: transparent;
+  --input-background: #ffffff;
+  --switch-background: #DCDDE5;
+  --font-weight-medium: 500;
+  --font-weight-normal: 400;
+  --ring: #B8E3E9; /* teal-200 */
+  --chart-1: oklch(0.646 0.222 41.116);
+  --chart-2: oklch(0.6 0.118 184.704);
+  --chart-3: oklch(0.398 0.07 227.392);
+  --chart-4: oklch(0.828 0.189 84.429);
+  --chart-5: oklch(0.769 0.188 70.08);
+  --radius: 0.375rem; /* 6px - Chorus default */
+  --sidebar: #121321; /* chorus-black-500 */
+  --sidebar-foreground: #C6C7D2; /* chorus-gray-400 */
+  --sidebar-primary: #2D798D; /* teal-600 */
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: #1A1B2E; /* chorus-black-400 */
+  --sidebar-accent-foreground: #C6C7D2;
+  --sidebar-border: #353750; /* chorus-black-100 */
+  --sidebar-ring: #B8E3E9; /* teal-200 */
+}
+
+.dark {
+  --background: #121321; /* chorus-black-500 */
+  --foreground: #C6C7D2; /* chorus-gray-400 */
+  --card: #1A1B2E; /* chorus-black-400 */
+  --card-foreground: #C6C7D2;
+  --popover: #1A1B2E;
+  --popover-foreground: #C6C7D2;
+  --primary: #F7F7F8; /* chorus-gray-50 */
+  --primary-foreground: #121321; /* chorus-black-300 */
+  --secondary: #2B6373; /* teal-700 */
+  --secondary-foreground: #F7F7F8;
+  --muted: #353750; /* chorus-black-100 */
+  --muted-foreground: #989AAE; /* chorus-gray-600 */
+  --accent: #353750;
+  --accent-foreground: #C6C7D2;
+  --destructive: #E0222D; /* red-600 */
+  --destructive-foreground: #FFE1E3; /* red-100 */
+  --border: #353750; /* chorus-black-100 */
+  --input: transparent;
+  --input-background: #1A1B2E;
+  --ring: #B8E3E9; /* teal-200 */
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-input-background: var(--input-background);
+  --color-switch-background: var(--switch-background);
+  --color-ring: var(--ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family: 'Manrope', sans-serif;
+  }
+
+  /**
+  * Default typography styles for HTML elements (h1-h4, p, label, button, input).
+  * These are in @layer base, so Tailwind utility classes (like text-sm, text-lg) automatically override them.
+  */
+
+  html {
+    font-size: var(--font-size);
+  }
+
+  h1 {
+    font-size: var(--text-2xl);
+    font-weight: var(--font-weight-medium);
+    line-height: 1.5;
+    font-family: 'Sora', sans-serif;
+  }
+
+  h2 {
+    font-size: var(--text-xl);
+    font-family: 'Sora', sans-serif;
+    font-weight: var(--font-weight-medium);
+    line-height: 1.5;
+  }
+
+  h3 {
+    font-size: var(--text-lg);
+    font-weight: var(--font-weight-medium);
+    line-height: 1.5;
+    font-family: 'Sora', sans-serif;
+  }
+
+  h4 {
+    font-size: var(--text-base);
+    font-weight: var(--font-weight-medium);
+    line-height: 1.5;
+    font-family: 'Sora', sans-serif;
+  }
+
+  label {
+    font-size: var(--text-base);
+    font-weight: var(--font-weight-medium);
+    line-height: 1.5;
+  }
+
+  button {
+    font-size: var(--text-base);
+    font-weight: var(--font-weight-medium);
+    line-height: 1.5;
+  }
+
+  input {
+    font-size: var(--text-base);
+    font-weight: var(--font-weight-normal);
+    line-height: 1.5;
+  }
+}
+
+/* Hide scrollbar for webkit browsers */
+main.overflow-y-auto::-webkit-scrollbar {
+  display: none;
+}

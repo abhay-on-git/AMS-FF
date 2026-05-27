@@ -1,0 +1,470 @@
+@custom-variant dark (&:is(.dark *));
+
+/* Hide scrollbar utility */
+@utility scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+:root {
+  /* ===================================
+     CHORUS BRAND - ENTERPRISE THEME
+     Asset Management System
+     ================================== */
+  
+  /* Typography System */
+  --font-heading: 'Sora', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-ui: 'Sora', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-data: 'Manrope', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-document: 'Manrope', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  
+  --font-size: 14px;
+  --font-weight-regular: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+  
+  /* Chorus Brand Colors */
+  --color-brand-primary: #EF652B;
+  --color-brand-dark: #121321;
+  --color-brand-accent: #81CCD7;
+  
+  /* Chorus Neutral Palette */
+  --color-neutral-900: #000000;
+  --color-neutral-800: #333333;
+  --color-neutral-600: #999999;
+  --color-neutral-200: #EDEDED;
+  --color-neutral-100: #FFFFFF;
+  
+  /* Functional Colors - Aligned with Chorus */
+  --color-success: #81CCD7;
+  --color-success-light: #E6F7F9;
+  --color-success-dark: #5BA8B5;
+  
+  --color-warning: #EF652B;
+  --color-warning-light: #FEF3ED;
+  --color-warning-dark: #D95522;
+  
+  --color-error: #D93F3F;
+  --color-error-light: #FCEAEA;
+  --color-error-dark: #B33333;
+  
+  --color-info: #81CCD7;
+  --color-info-light: #E6F7F9;
+  --color-info-dark: #5BA8B5;
+  
+  /* Core Design Tokens */
+  --color-background: #EDEDED;
+  --color-surface: #FFFFFF;
+  --color-text-primary: #333333;
+  --color-text-secondary: #999999;
+  --color-border: #DDDDDD;
+  --color-disabled: #CCCCCC;
+  --color-hover: #F7F7F7;
+  
+  /* Status Colors - Chorus Aligned */
+  --color-status-registered: #81CCD7;
+  --color-status-in-use: #999999;
+  --color-status-under-verification: #81CCD7;
+  --color-status-damaged: #EF652B;
+  --color-status-retired: #999999;
+  --color-status-pending: #EF652B;
+  --color-status-approved: #81CCD7;
+  --color-status-disposed: #D93F3F;
+  --color-status-missing: #D93F3F;
+  
+  /* Spacing System (8px base) */
+  --spacing-xs: 4px;
+  --spacing-sm: 8px;
+  --spacing-md: 16px;
+  --spacing-lg: 24px;
+  --spacing-xl: 32px;
+  --spacing-2xl: 48px;
+  
+  /* Border Radius - Minimal/Structured */
+  --radius-none: 0px;
+  --radius-sm: 2px;
+  --radius-md: 4px;
+  --radius-lg: 6px;
+  
+  /* Shadows - Subtle */
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 1px 3px rgba(0, 0, 0, 0.08);
+  --shadow-lg: 0 2px 4px rgba(0, 0, 0, 0.1);
+  
+  /* Table Density */
+  --table-row-height: 42px;
+  --table-header-height: 44px;
+  
+  /* Design Tokens for Tailwind */
+  --background: #EDEDED;
+  --foreground: #333333;
+  --card: #FFFFFF;
+  --card-foreground: #333333;
+  --popover: #FFFFFF;
+  --popover-foreground: #333333;
+  --primary: #121321;
+  --primary-foreground: #FFFFFF;
+  --secondary: #EDEDED;
+  --secondary-foreground: #333333;
+  --muted: #F7F7F7;
+  --muted-foreground: #999999;
+  --accent: #E6F7F9;
+  --accent-foreground: #333333;
+  --destructive: #D93F3F;
+  --destructive-foreground: #FFFFFF;
+  --border: #DDDDDD;
+  --input: #DDDDDD;
+  --input-background: #FFFFFF;
+  --switch-background: #CCCCCC;
+  --ring: #121321;
+  
+  /* Chart Colors - Chorus Palette */
+  --chart-1: #121321;
+  --chart-2: #81CCD7;
+  --chart-3: #EF652B;
+  --chart-4: #999999;
+  --chart-5: #D95522;
+  
+  /* Sidebar - Chorus Dark */
+  --sidebar: #121321;
+  --sidebar-foreground: #FFFFFF;
+  --sidebar-primary: #121321;
+  --sidebar-primary-foreground: #FFFFFF;
+  --sidebar-accent: #2D3050;
+  --sidebar-accent-foreground: #FFFFFF;
+  --sidebar-border: #3A3E5C;
+  --sidebar-ring: #121321;
+  
+  --radius: 4px;
+}
+
+.dark {
+  /* Dark Mode - Chorus Theme */
+  --color-background: #1A1C2E;
+  --color-surface: #121321;
+  --color-text-primary: #FFFFFF;
+  --color-text-secondary: #999999;
+  --color-border: #3A3E5C;
+  --color-disabled: #525252;
+  --color-hover: #2D3050;
+  
+  /* Adjust functional colors for dark mode */
+  --color-success-light: #1A3D3D;
+  --color-warning-light: #3D2A1A;
+  --color-error-light: #3D1A1A;
+  --color-info-light: #1A3D3D;
+  
+  --background: #1A1C2E;
+  --foreground: #FFFFFF;
+  --card: #121321;
+  --card-foreground: #FFFFFF;
+  --popover: #121321;
+  --popover-foreground: #FFFFFF;
+  --primary: #3A3D5E;
+  --primary-foreground: #FFFFFF;
+  --secondary: #2D3050;
+  --secondary-foreground: #FFFFFF;
+  --muted: #2D3050;
+  --muted-foreground: #999999;
+  --accent: #1A3D3D;
+  --accent-foreground: #FFFFFF;
+  --destructive: #D93F3F;
+  --destructive-foreground: #FFFFFF;
+  --border: #3A3E5C;
+  --input: #3A3E5C;
+  --input-background: #121321;
+  --switch-background: #525252;
+  --ring: #3A3D5E;
+  
+  --sidebar: #121321;
+  --sidebar-foreground: #FFFFFF;
+  --sidebar-primary: #3A3D5E;
+  --sidebar-primary-foreground: #FFFFFF;
+  --sidebar-accent: #2D3050;
+  --sidebar-accent-foreground: #FFFFFF;
+  --sidebar-border: #3A3E5C;
+  --sidebar-ring: #3A3D5E;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-input-background: var(--input-background);
+  --color-switch-background: var(--switch-background);
+  --color-ring: var(--ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --radius-sm: calc(var(--radius) - 2px);
+  --radius-md: var(--radius);
+  --radius-lg: calc(var(--radius) + 2px);
+  --radius-xl: calc(var(--radius) + 4px);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family: var(--font-ui);
+  }
+}
+
+/**
+ * Chorus Typography System
+ * Headings: Sora (Regular/Medium/SemiBold)
+ * UI/Labels/Buttons: Sora (Regular/Medium)
+ * Body/Tables/Data/Forms: Manrope (Regular/Medium/SemiBold)
+ */
+@layer base {
+  :where(:not(:has([class*=" text-"]), :not(:has([class^="text-"])))) {
+    h1 {
+      font-family: var(--font-heading);
+      font-size: 28px;
+      font-weight: var(--font-weight-medium);
+      line-height: 1.3;
+      color: var(--color-text-primary);
+    }
+
+    h2 {
+      font-family: var(--font-heading);
+      font-size: 22px;
+      font-weight: var(--font-weight-medium);
+      line-height: 1.4;
+      color: var(--color-text-primary);
+    }
+
+    h3 {
+      font-family: var(--font-heading);
+      font-size: 18px;
+      font-weight: var(--font-weight-medium);
+      line-height: 1.4;
+      color: var(--color-text-primary);
+    }
+
+    h4 {
+      font-family: var(--font-heading);
+      font-size: 16px;
+      font-weight: var(--font-weight-medium);
+      line-height: 1.5;
+      color: var(--color-text-primary);
+    }
+
+    p {
+      font-family: var(--font-ui);
+      font-size: 14px;
+      font-weight: var(--font-weight-regular);
+      line-height: 1.6;
+      color: var(--color-text-primary);
+    }
+
+    label {
+      font-family: var(--font-ui);
+      font-size: 14px;
+      font-weight: var(--font-weight-medium);
+      line-height: 1.5;
+      color: var(--color-text-primary);
+    }
+
+    button {
+      font-family: var(--font-ui);
+      font-size: 14px;
+      font-weight: var(--font-weight-medium);
+      line-height: 1.5;
+    }
+
+    input, textarea, select {
+      font-family: var(--font-ui);
+      font-size: 14px;
+      font-weight: var(--font-weight-regular);
+      line-height: 1.5;
+    }
+  }
+}
+
+/* Enterprise Table Styles */
+@layer components {
+  .enterprise-table {
+    font-family: var(--font-data);
+  }
+  
+  .enterprise-table thead {
+    background-color: var(--color-hover);
+    border-bottom: 2px solid var(--color-border);
+  }
+  
+  .enterprise-table th {
+    font-family: var(--font-ui);
+    font-size: 13px;
+    font-weight: var(--font-weight-semibold);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--color-text-secondary);
+    padding: 12px 16px;
+    height: var(--table-header-height);
+    border-right: 1px solid var(--color-border);
+  }
+  
+  .enterprise-table th:last-child {
+    border-right: none;
+  }
+  
+  .enterprise-table td {
+    font-size: 13px;
+    padding: 10px 16px;
+    height: var(--table-row-height);
+    border-right: 1px solid var(--color-border);
+    border-bottom: 1px solid var(--color-border);
+  }
+  
+  .enterprise-table td:last-child {
+    border-right: none;
+  }
+  
+  .enterprise-table tbody tr:hover {
+    background-color: var(--color-hover);
+  }
+  
+  .enterprise-table .numeric {
+    text-align: right;
+    font-variant-numeric: tabular-nums;
+  }
+}
+
+/* Chorus Status Badges */
+@layer components {
+  .status-badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 4px 12px;
+    border-radius: var(--radius-md);
+    font-family: var(--font-ui);
+    font-size: 12px;
+    font-weight: var(--font-weight-medium);
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+  }
+  
+  .status-registered {
+    background-color: #E6F7F9;
+    color: #5BA8B5;
+  }
+  
+  .status-in-use {
+    background-color: #F0F0F0;
+    color: #999999;
+  }
+  
+  .status-under-verification {
+    background-color: #E6F7F9;
+    color: #5BA8B5;
+  }
+  
+  .status-damaged {
+    background-color: #FEF3ED;
+    color: #D95522;
+  }
+  
+  .status-retired {
+    background-color: #F0F0F0;
+    color: #999999;
+  }
+  
+  .status-pending {
+    background-color: #FEF3ED;
+    color: #D95522;
+  }
+  
+  .status-approved {
+    background-color: #E6F7F9;
+    color: #5BA8B5;
+  }
+  
+  .status-disposed {
+    background-color: #FCEAEA;
+    color: #B33333;
+  }
+  
+  .status-missing {
+    background-color: #FCEAEA;
+    color: #B33333;
+  }
+}
+
+/* Enterprise Form Sections */
+@layer components {
+  .form-section {
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    padding: var(--spacing-lg);
+    margin-bottom: var(--spacing-md);
+  }
+  
+  .form-section-header {
+    font-family: var(--font-heading);
+    font-size: 16px;
+    font-weight: var(--font-weight-semibold);
+    color: var(--color-text-primary);
+    margin-bottom: var(--spacing-md);
+    padding-bottom: var(--spacing-sm);
+    border-bottom: 1px solid var(--color-border);
+  }
+}
+
+/* Enterprise Card Styling - Structured, not rounded */
+@layer components {
+  .enterprise-card {
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-sm);
+  }
+}
+
+/* Reduced whitespace for data density */
+@layer utilities {
+  .dense-spacing {
+    padding: var(--spacing-sm);
+  }
+  
+  .dense-gap {
+    gap: var(--spacing-sm);
+  }
+}
+
+html {
+  font-size: var(--font-size);
+}

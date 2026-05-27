@@ -1,0 +1,13 @@
+export const AUTH_PATH = '/auth';
+export const DASHBOARD_PATH = '/dashboard';
+export const CATEGORIES_PATH = '/categories';
+export const ASSETS_PATH = '/assets';
+export const LOCATIONS_PATH = '/locations';
+export const REPORTING_PATH = '/reporting';
+export const USERS_PATH = '/users';
+export const NOTIFICATIONS_PATH = '/notifications';
+export const ACTION_LOG_PATH = '/action-log';
+export const RFID_SETTINGS_PATH = '/rfid-settings';
+export const PROFILE_PATH = '/profile';
+export const PENDING_ACTION_DETAIL_PATH = '/pending-action-detail';
+export const COMPLIANCE_GAP_DETAIL_PATH = '/compliance-gap-detail';
