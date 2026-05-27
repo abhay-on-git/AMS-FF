@@ -1,6 +1,6 @@
 import React from 'react';
-import { Skeleton } from '../ui/skeleton';
-import { Card, CardContent, CardHeader } from '../ui/card';
+import { Skeleton } from '@/components/ui/skeleton';
+import { Card, CardContent, CardHeader } from '@/components/ui/card';
 
 export function TableSkeleton({ rows = 5, columns = 6 }: { rows?: number; columns?: number }) {
   return (

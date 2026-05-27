@@ -1,11 +1,11 @@
 import React from "react";
-import { Button } from "../ui/button";
+import { Button } from "@/components/ui/button";
 import { MuiCheckbox } from "../shared/MuiCheckbox";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuTrigger,
-} from "../ui/dropdown-menu";
+} from "@/components/ui/dropdown-menu";
 import { ViewColumn as ColumnsIcon } from "@mui/icons-material";
 import { ColumnConfig } from "./types";
 

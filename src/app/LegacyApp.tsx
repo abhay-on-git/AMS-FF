@@ -15,7 +15,7 @@ import ActionLog from "./components/ActionLog";
 import PendingActionDetail from "./components/PendingActionDetail";
 import ComplianceGapDetail from "./components/ComplianceGapDetail";
 import ProfilePage from "./components/ProfilePage";
-import { Toaster } from "./components/ui/sonner";
+import { Toaster } from "@/components/ui/sonner";
 
 type PageType =
   | "dashboard"

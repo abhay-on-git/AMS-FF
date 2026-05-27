@@ -7,7 +7,7 @@ import {
   AlertDialogFooter,
   AlertDialogHeader,
   AlertDialogTitle,
-} from '../ui/alert-dialog';
+} from '@/components/ui/alert-dialog';
 import { Warning as AlertTriangle } from '@mui/icons-material';
 
 interface DeleteConfirmDialogProps {

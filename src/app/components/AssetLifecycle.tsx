@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
 import { formatDate } from '../utils/dateFormatter';
-import { Card, CardContent, CardHeader, CardTitle } from './ui/card';
-import { Button } from './ui/button';
-import { Input } from './ui/input';
-import { Label } from './ui/label';
-import { Badge } from './ui/badge';
-import { Textarea } from './ui/textarea';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from './ui/select';
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from './ui/table';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+import { Badge } from '@/components/ui/badge';
+import { Textarea } from '@/components/ui/textarea';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { TablePagination, paginateData } from './shared/TablePagination';
 import {
   Sheet,
@@ -15,10 +15,10 @@ import {
   SheetHeader,
   SheetTitle,
   SheetDescription,
-} from './ui/sheet';
-import { Separator } from './ui/separator';
-import { Alert, AlertDescription } from './ui/alert';
-import { Progress } from './ui/progress';
+} from '@/components/ui/sheet';
+import { Separator } from '@/components/ui/separator';
+import { Alert, AlertDescription } from '@/components/ui/alert';
+import { Progress } from '@/components/ui/progress';
 import {
   Search,
   SwapHoriz,

@@ -5,10 +5,10 @@ import {
   SheetHeader,
   SheetTitle,
   SheetDescription,
-} from '../ui/sheet';
-import { Button } from '../ui/button';
-import { Badge } from '../ui/badge';
-import { Progress } from '../ui/progress';
+} from '@/components/ui/sheet';
+import { Button } from '@/components/ui/button';
+import { Badge } from '@/components/ui/badge';
+import { Progress } from '@/components/ui/progress';
 import {
   CloudUpload as UploadCloud,
   InsertDriveFile as FileIcon,

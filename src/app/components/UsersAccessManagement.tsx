@@ -1,7 +1,7 @@
 import React, { useState, useCallback } from "react";
 import UserManagement from "./UserManagement";
 import RoleManagement from "./RoleManagement";
-import { Button } from "./ui/button";
+import { Button } from "@/components/ui/button";
 import {
   People as Users,
   Security as Shield,

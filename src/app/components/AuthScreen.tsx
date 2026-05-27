@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
-import { Card, CardContent } from "./ui/card";
-import { Button } from "./ui/button";
-import { Separator } from "./ui/separator";
+import { Card, CardContent } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Separator } from "@/components/ui/separator";
 import {
   Visibility as VisibilityIcon,
   VisibilityOff as VisibilityOffIcon,

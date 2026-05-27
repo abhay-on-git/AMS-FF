@@ -1,9 +1,9 @@
 import React from 'react';
 import { formatDate } from '../../utils/dateFormatter';
-import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetDescription } from '../ui/sheet';
-import { Badge } from '../ui/badge';
-import { Progress } from '../ui/progress';
-import { Separator } from '../ui/separator';
+import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetDescription } from '@/components/ui/sheet';
+import { Badge } from '@/components/ui/badge';
+import { Progress } from '@/components/ui/progress';
+import { Separator } from '@/components/ui/separator';
 import {
   LocationOn as MapPin,
   Person as PersonIcon,

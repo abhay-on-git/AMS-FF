@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import { Badge } from './ui/badge';
-import { Button } from './ui/button';
-import { Popover, PopoverContent, PopoverTrigger } from './ui/popover';
+import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
+import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
 import { 
   Notifications as BellIcon, 
   Warning as AlertCircleIcon, 
@@ -9,7 +9,7 @@ import {
   Info as InfoIcon, 
   ArrowForward as ArrowRightIcon 
 } from '@mui/icons-material';
-import { ScrollArea } from './ui/scroll-area';
+import { ScrollArea } from '@/components/ui/scroll-area';
 
 interface Notification {
   id: string;

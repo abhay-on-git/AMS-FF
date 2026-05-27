@@ -4,16 +4,16 @@ import {
   SheetContent,
   SheetHeader,
   SheetTitle,
-} from "../ui/sheet";
-import { Button } from "../ui/button";
-import { Input } from "../ui/input";
+} from "@/components/ui/sheet";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "../ui/select";
+} from "@/components/ui/select";
 import { LocationNode, FieldOfficeConfig } from "./types";
 import {
   Business as Building2,
@@ -26,7 +26,7 @@ import {
   Close as X,
 } from "@mui/icons-material";
 import { toast } from "sonner";
-import { Badge } from "../ui/badge";
+import { Badge } from "@/components/ui/badge";
 
 interface LocationHierarchyManagerProps {
   open: boolean;
