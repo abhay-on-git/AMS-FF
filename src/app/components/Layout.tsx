@@ -39,7 +39,7 @@ import {
 } from "@mui/icons-material";
 import { CircularProgress } from "@mui/material";
 import chorusLogo from "../../assets/c41ddd9636ba0cf84d17b65494aee06fd1254e8a.png";
-import chorusIcon from "../../imports/Chorus_Orange_Icon.png";
+import chorusIcon from "../../assets/Chorus_Orange_Icon.png";
 
 interface LayoutProps {
   children: React.ReactNode;
