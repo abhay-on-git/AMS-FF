@@ -255,6 +255,16 @@
   --text-17: 1.0625rem;
   --text-26: 1.625rem;
   --text-28: 1.75rem;
+
+  /* Sidebar & Layout */
+  --color-sidebar-text-inactive: #989AAE;
+  --color-sidebar-text-active: #dcdde5;
+  --color-sidebar-item-active: #2b2d46;
+  --color-sidebar-item-hover: #2b2d46;
+  --color-sidebar-avatar-bg: #2d3150;
+  --color-search-placeholder: #AFB1C0;
+  --color-search-hint: #767893;
+  --color-main-bg: #f7f7f8;
 }
 
 @layer base {

@@ -1,5 +1,6 @@
-import { Navigate, Outlet } from 'react-router-dom'
+import { Navigate } from 'react-router-dom'
 import { useAppSelector } from '@/store/hooks'
+import { AppShell } from '@/components/layout'
 
 export function ProtectedRoute() {
   const { isAuthenticated } = useAppSelector((state) => state.auth)
@@ -8,5 +9,5 @@ export function ProtectedRoute() {
     return <Navigate to="/auth" replace />
   }
 
-  return <Outlet />
+  return <AppShell />
 }

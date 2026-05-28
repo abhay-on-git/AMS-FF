@@ -1,2 +1,4 @@
-// src/components/layout — app shell, sidebar, topbar barrel
-// Populated in Phase 2
+export { AppShell } from './AppShell'
+export { Sidebar } from './Sidebar'
+export { TopBar } from './TopBar'
+export { NavItem } from './NavItem'
