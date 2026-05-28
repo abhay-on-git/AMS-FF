@@ -1,3 +1,112 @@
+import { useState } from 'react'
+import { toast } from 'sonner'
+import { Button } from '@/components/ui/button'
+import { Card, CardContent, CardHeader } from '@/components/ui/card'
+import { useAssets } from '@/features/assets/hooks/useAssets'
+import { useAssetFilters } from '@/features/assets/hooks/useAssetFilters'
+import { useAssetSelection } from '@/features/assets/hooks/useAssetSelection'
+import { AssetTabs } from '@/features/assets/components/AssetTabs'
+import { AssetFilters } from '@/features/assets/components/AssetFilters'
+import { AdvancedFilters } from '@/features/assets/components/AdvancedFilters'
+import { AssetTable } from '@/features/assets/components/AssetTable'
+import { BulkActions } from '@/features/assets/components/BulkActions'
+import { defaultAssetColumns } from '@/features/assets/constants/assetColumns'
+import type { ActiveTab, AssetColumnConfig, EnhancedAsset } from '@/features/assets/types'
+
 export default function AssetsPage() {
-  return <div data-page="assets">Assets Page</div>
+  const { data: assets = [], isLoading } = useAssets()
+  const filters = useAssetFilters(assets)
+  const selection = useAssetSelection(filters.filteredAssets.map((a) => a.id))
+
+  const [activeTab, setActiveTab] = useState<ActiveTab>('all')
+  const [columns, setColumns] = useState<AssetColumnConfig[]>(defaultAssetColumns)
+
+  const toggleColumn = (key: string) => {
+    setColumns((prev) => prev.map((c) => c.key === key ? { ...c, visible: !c.visible } : c))
+  }
+
+  const handleViewDetail = (asset: EnhancedAsset) => {
+    toast.info(`View detail: ${asset.assetId} — Sprint 5B`)
+  }
+
+  const handleEdit = (asset: EnhancedAsset) => {
+    toast.info(`Edit: ${asset.assetId} — Sprint 5B`)
+  }
+
+  const handleBulkAction = (action: string) => {
+    toast.info(`${action} ${selection.selectedCount} asset(s) — Sprint 5B`)
+    selection.clearSelection()
+  }
+
+  if (isLoading) {
+    return <div className="p-6 text-muted-foreground">Loading assets...</div>
+  }
+
+  return (
+    <div className="space-y-6 min-w-0">
+      <div className="flex items-center justify-between">
+        <AssetTabs activeTab={activeTab} onTabChange={setActiveTab} draftCount={0} />
+        {activeTab === 'all' && (
+          <Button onClick={() => toast.info('Register Asset — Sprint 5B')} className="text-[15px] bg-brand-navy hover:bg-brand-navy-mid text-white">
+            Register Asset
+          </Button>
+        )}
+      </div>
+
+      {activeTab === 'all' && (
+        <>
+          <AdvancedFilters
+            filters={filters.advancedFilters}
+            onFiltersChange={filters.setAdvancedFilters}
+            onClearAll={filters.clearAllFilters}
+          />
+
+          <BulkActions
+            selectedCount={selection.selectedCount}
+            onClearSelection={selection.clearSelection}
+            onTransfer={() => handleBulkAction('Transfer')}
+            onInspection={() => handleBulkAction('Inspection')}
+            onSurvey={() => handleBulkAction('Survey')}
+            onDisposal={() => handleBulkAction('Disposal')}
+            onChangeStatus={() => handleBulkAction('Change Status')}
+          />
+
+          <Card>
+            <CardHeader>
+              <AssetFilters
+                search={filters.search}
+                onSearchChange={filters.setSearch}
+                typeFilter={filters.typeFilter}
+                onTypeChange={filters.setTypeFilter}
+                conditionFilter={filters.conditionFilter}
+                onConditionChange={filters.setConditionFilter}
+                locationFilter={filters.locationFilter}
+                onLocationChange={filters.setLocationFilter}
+                classificationFilter={filters.classificationFilter}
+                onClassificationChange={filters.setClassificationFilter}
+                columns={columns}
+                onToggleColumn={toggleColumn}
+              />
+            </CardHeader>
+            <CardContent>
+              <AssetTable
+                assets={filters.filteredAssets}
+                columns={columns}
+                onViewDetail={handleViewDetail}
+                onEdit={handleEdit}
+              />
+            </CardContent>
+          </Card>
+        </>
+      )}
+
+      {activeTab === 'drafts' && (
+        <Card>
+          <CardContent className="py-12 text-center text-muted-foreground">
+            Draft Assets — Sprint 5B
+          </CardContent>
+        </Card>
+      )}
+    </div>
+  )
 }
