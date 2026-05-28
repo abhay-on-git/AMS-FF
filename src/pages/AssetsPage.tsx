@@ -10,8 +10,10 @@ import { AssetFilters } from '@/features/assets/components/AssetFilters'
 import { AdvancedFilters } from '@/features/assets/components/AdvancedFilters'
 import { AssetTable } from '@/features/assets/components/AssetTable'
 import { BulkActions } from '@/features/assets/components/BulkActions'
+import { AssetDetailView } from '@/features/assets/components/detail'
+import { EditAssetDrawer, ChangeStatusDrawer, ChangeLocationDrawer, TransferAssetDrawer } from '@/features/assets/components/drawers'
 import { defaultAssetColumns } from '@/features/assets/constants/assetColumns'
-import type { ActiveTab, AssetColumnConfig, EnhancedAsset } from '@/features/assets/types'
+import type { ActiveTab, AssetColumnConfig, EnhancedAsset, ViewMode } from '@/features/assets/types'
 
 export default function AssetsPage() {
   const { data: assets = [], isLoading } = useAssets()
@@ -20,21 +22,48 @@ export default function AssetsPage() {
 
   const [activeTab, setActiveTab] = useState<ActiveTab>('all')
   const [columns, setColumns] = useState<AssetColumnConfig[]>(defaultAssetColumns)
+  const [viewMode, setViewMode] = useState<ViewMode>('list')
+  const [selectedAsset, setSelectedAsset] = useState<EnhancedAsset | null>(null)
+
+  // Drawer states
+  const [editOpen, setEditOpen] = useState(false)
+  const [changeStatusOpen, setChangeStatusOpen] = useState(false)
+  const [changeLocationOpen, setChangeLocationOpen] = useState(false)
+  const [transferOpen, setTransferOpen] = useState(false)
 
   const toggleColumn = (key: string) => {
     setColumns((prev) => prev.map((c) => c.key === key ? { ...c, visible: !c.visible } : c))
   }
 
   const handleViewDetail = (asset: EnhancedAsset) => {
-    toast.info(`View detail: ${asset.assetId} — Sprint 5B`)
+    setSelectedAsset(asset)
+    setViewMode('detail')
   }
 
   const handleEdit = (asset: EnhancedAsset) => {
-    toast.info(`Edit: ${asset.assetId} — Sprint 5B`)
+    setSelectedAsset(asset)
+    setEditOpen(true)
+  }
+
+  const handleChangeStatus = () => {
+    setChangeStatusOpen(true)
+  }
+
+  const handleChangeLocation = () => {
+    setChangeLocationOpen(true)
+  }
+
+  const handleTransfer = () => {
+    setTransferOpen(true)
+  }
+
+  const handleBackToList = () => {
+    setViewMode('list')
+    setSelectedAsset(null)
   }
 
   const handleBulkAction = (action: string) => {
-    toast.info(`${action} ${selection.selectedCount} asset(s) — Sprint 5B`)
+    toast.info(`${action} ${selection.selectedCount} asset(s)`)
     selection.clearSelection()
   }
 
@@ -42,12 +71,31 @@ export default function AssetsPage() {
     return <div className="p-6 text-muted-foreground">Loading assets...</div>
   }
 
+  if (viewMode === 'detail' && selectedAsset) {
+    return (
+      <>
+        <AssetDetailView
+          asset={selectedAsset}
+          onBack={handleBackToList}
+          onEdit={handleEdit}
+          onChangeStatus={handleChangeStatus}
+          onChangeLocation={handleChangeLocation}
+          onTransferAsset={handleTransfer}
+        />
+        <EditAssetDrawer open={editOpen} onOpenChange={setEditOpen} asset={selectedAsset} />
+        <ChangeStatusDrawer open={changeStatusOpen} onOpenChange={setChangeStatusOpen} asset={selectedAsset} />
+        <ChangeLocationDrawer open={changeLocationOpen} onOpenChange={setChangeLocationOpen} asset={selectedAsset} />
+        <TransferAssetDrawer open={transferOpen} onOpenChange={setTransferOpen} asset={selectedAsset} />
+      </>
+    )
+  }
+
   return (
     <div className="space-y-6 min-w-0">
       <div className="flex items-center justify-between">
         <AssetTabs activeTab={activeTab} onTabChange={setActiveTab} draftCount={0} />
         {activeTab === 'all' && (
-          <Button onClick={() => toast.info('Register Asset — Sprint 5B')} className="text-[15px] bg-brand-navy hover:bg-brand-navy-mid text-white">
+          <Button onClick={() => toast.info('Register Asset — coming soon')} className="text-[15px] bg-brand-navy hover:bg-brand-navy-mid text-white">
             Register Asset
           </Button>
         )}
@@ -103,7 +151,7 @@ export default function AssetsPage() {
       {activeTab === 'drafts' && (
         <Card>
           <CardContent className="py-12 text-center text-muted-foreground">
-            Draft Assets — Sprint 5B
+            Draft Assets — coming soon
           </CardContent>
         </Card>
       )}

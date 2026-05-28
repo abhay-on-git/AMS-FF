@@ -108,3 +108,40 @@ export interface AssetColumnConfig {
   visible: boolean
   category: 'default' | 'tracking' | 'financial'
 }
+
+// --- Detail View Types (Sprint 5B) ---
+
+export type LifecycleStageType =
+  | 'registered'
+  | 'active'
+  | 'maintenance'
+  | 'survey'
+  | 'pending-disposal'
+  | 'disposed'
+
+export type DetailTab = 'overview' | 'lifecycle' | 'history'
+
+export type UserRole = 'admin' | 'smio' | 'auditor' | 'senior_management'
+
+export interface LifecycleEvent {
+  id: string
+  stage: string
+  action: string
+  date: string
+  user: string
+  details: string
+  icon: string
+}
+
+export interface AuditEvent {
+  id: string
+  eventType: 'status_change' | 'location_change' | 'transfer' | 'edit' | 'inspection' | 'disposal' | 'created' | 'custodian_change'
+  action: string
+  oldValue?: string
+  newValue?: string
+  user: string
+  timestamp: string
+  fieldOffice: string
+  comment?: string
+  details?: string
+}
