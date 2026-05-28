@@ -1,2 +1,11 @@
-// src/components/shared — composite shared components barrel
-// Populated in Phase 2
+export { PageHeader } from './PageHeader'
+export { PageShell } from './PageShell'
+export { StatCard } from './StatCard'
+export { StatusBadge } from './StatusBadge'
+export { EmptyState } from './EmptyState'
+export { ConfirmDialog } from './ConfirmDialog'
+export { FilterToolbar } from './FilterToolbar'
+export { DrawerFormFooter } from './DrawerFormFooter'
+export { DataTable } from './DataTable'
+export { LoadingOverlay } from './LoadingOverlay'
+export { PasswordStrengthIndicator } from './PasswordStrengthIndicator'

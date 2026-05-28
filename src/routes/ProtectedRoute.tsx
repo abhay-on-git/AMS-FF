@@ -1,5 +1,12 @@
-import type { PropsWithChildren } from 'react';
+import { Navigate, Outlet } from 'react-router-dom'
+import { useAppSelector } from '@/store/hooks'
 
-export function ProtectedRoute({ children }: PropsWithChildren) {
-  return <>{children}</>;
+export function ProtectedRoute() {
+  const { isAuthenticated } = useAppSelector((state) => state.auth)
+
+  if (!isAuthenticated) {
+    return <Navigate to="/auth" replace />
+  }
+
+  return <Outlet />
 }

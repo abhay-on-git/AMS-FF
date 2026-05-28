@@ -1,2 +1,7 @@
-// src/pages — route-level page components barrel
-// Populated in Phase 3 (Sprint 1)
+export { default as AuthPage } from './AuthPage'
+export { default as DashboardPage } from './DashboardPage'
+export { default as AssetsPage } from './AssetsPage'
+export { default as LocationsPage } from './LocationsPage'
+export { default as UsersPage } from './UsersPage'
+export { default as AccessPage } from './AccessPage'
+export { default as ReportingAnalyticsPage } from './ReportingAnalyticsPage'

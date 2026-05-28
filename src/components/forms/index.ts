@@ -1,2 +1,7 @@
-// src/components/forms — form primitives barrel
-// Populated in Phase 2 (section 2.3)
+export { FormField } from './FormField'
+export { FormInput } from './FormInput'
+export { FormSelect } from './FormSelect'
+export { FormTextarea } from './FormTextarea'
+export { FormDatePicker } from './FormDatePicker'
+export { FormCheckbox } from './FormCheckbox'
+export { FormRadioGroup } from './FormRadioGroup'

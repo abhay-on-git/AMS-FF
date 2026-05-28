@@ -255,6 +255,37 @@ export const transitions = {
 } as const;
 
 // ─────────────────────────────────────────────────────────────────────────────
+// AMS BRAND TOKENS (CSS variable references)
+// For programmatic use in charts, canvas, inline styles.
+// Source of truth: src/styles/globals.css @theme inline block
+// ─────────────────────────────────────────────────────────────────────────────
+
+export const brandTokens = {
+  colors: {
+    brandNavy: "var(--color-brand-navy)",
+    brandNavyMid: "var(--color-brand-navy-mid)",
+    brandNavyBorder: "var(--color-brand-navy-border)",
+    brandTeal: "var(--color-brand-teal)",
+    brandTealLight: "var(--color-brand-teal-light)",
+    pageBg: "var(--color-page-bg)",
+    pageBgDark: "var(--color-page-bg-dark)",
+    cardDark: "var(--color-card-dark)",
+    inputBorder: "var(--color-input-border)",
+    inputPlaceholder: "var(--color-input-placeholder)",
+    divider: "var(--color-divider)",
+    hoverLight: "var(--color-hover-light)",
+    hoverDark: "var(--color-hover-dark)",
+  },
+  text: {
+    13: "var(--text-13)",
+    15: "var(--text-15)",
+    17: "var(--text-17)",
+    26: "var(--text-26)",
+    28: "var(--text-28)",
+  },
+} as const;
+
+// ─────────────────────────────────────────────────────────────────────────────
 // COMPONENT TOKENS
 // Specific tokens for reusable component styling
 // ─────────────────────────────────────────────────────────────────────────────

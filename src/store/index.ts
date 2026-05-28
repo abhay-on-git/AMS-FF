@@ -1,2 +1,5 @@
-// src/store — Zustand stores barrel
-// Populated in Phase 4 (authStore, uiStore)
+export { store } from './store'
+export type { RootState, AppDispatch } from './store'
+export { useAppDispatch, useAppSelector } from './hooks'
+export { authSlice } from './authSlice'
+export type { AuthState, User } from './authSlice'

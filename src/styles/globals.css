@@ -229,6 +229,32 @@
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-ring: var(--sidebar-ring);
+
+  /* AMS Brand Palette */
+  --color-brand-navy: #121321;
+  --color-brand-navy-mid: #1e2240;
+  --color-brand-navy-border: #353750;
+  --color-brand-teal: #81CCD7;
+  --color-brand-teal-light: #B8E3E9;
+
+  /* Page backgrounds */
+  --color-page-bg: #F3F4F6;
+  --color-page-bg-dark: #0d0f1a;
+  --color-card-dark: #1a1c2e;
+
+  /* Input styling */
+  --color-input-border: #D1D5DB;
+  --color-input-placeholder: #9CA3AF;
+  --color-divider: #E5E7EB;
+  --color-hover-light: #F9FAFB;
+  --color-hover-dark: #2d3154;
+
+  /* Custom text sizes */
+  --text-13: 0.8125rem;
+  --text-15: 0.9375rem;
+  --text-17: 1.0625rem;
+  --text-26: 1.625rem;
+  --text-28: 1.75rem;
 }
 
 @layer base {
