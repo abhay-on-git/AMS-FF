@@ -1,6 +1,17 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { toast } from 'sonner'
-import type { EditAssetFormData, ChangeStatusFormData, ChangeLocationFormData, TransferAssetFormData, CreateAssetFormData } from '../schemas/assetSchemas'
+import type {
+  EditAssetFormData,
+  ChangeStatusFormData,
+  ChangeLocationFormData,
+  TransferAssetFormData,
+  CreateAssetFormData,
+  BulkTransferFormData,
+  BulkInspectionFormData,
+  BulkSurveyFormData,
+  BulkDisposalFormData,
+  BulkChangeStatusFormData,
+} from '../schemas/assetSchemas'
 
 function simulateDelay(ms = 800): Promise<void> {
   return new Promise((resolve) => setTimeout(resolve, ms))
@@ -79,6 +90,89 @@ export function useTransferAsset(onSuccess?: () => void) {
     onError: () => {
       toast.error('Failed to submit transfer')
     },
+  })
+}
+
+export function useBulkTransfer(onSuccess?: () => void) {
+  const queryClient = useQueryClient()
+
+  return useMutation({
+    mutationFn: async (data: BulkTransferFormData & { assetIds: string[] }) => {
+      await simulateDelay(1000)
+      return data
+    },
+    onSuccess: (data) => {
+      toast.success(`Transfer request submitted for ${data.assetIds.length} asset(s) → ${data.destination}`)
+      queryClient.invalidateQueries({ queryKey: ['assets'] })
+      onSuccess?.()
+    },
+    onError: () => {
+      toast.error('Failed to submit bulk transfer')
+    },
+  })
+}
+
+export function useBulkInspection(onSuccess?: () => void) {
+  const queryClient = useQueryClient()
+  return useMutation({
+    mutationFn: async (data: BulkInspectionFormData & { assetIds: string[] }) => {
+      await simulateDelay(1000)
+      return data
+    },
+    onSuccess: (data) => {
+      toast.success(`Inspection scheduled for ${data.assetIds.length} asset(s) on ${data.scheduledDate}`)
+      queryClient.invalidateQueries({ queryKey: ['assets'] })
+      onSuccess?.()
+    },
+    onError: () => toast.error('Failed to schedule inspection'),
+  })
+}
+
+export function useBulkSurvey(onSuccess?: () => void) {
+  const queryClient = useQueryClient()
+  return useMutation({
+    mutationFn: async (data: BulkSurveyFormData & { assetIds: string[] }) => {
+      await simulateDelay(1000)
+      return data
+    },
+    onSuccess: (data) => {
+      toast.success(`${data.surveyType} survey scheduled for ${data.assetIds.length} asset(s)`)
+      queryClient.invalidateQueries({ queryKey: ['assets'] })
+      onSuccess?.()
+    },
+    onError: () => toast.error('Failed to schedule survey'),
+  })
+}
+
+export function useBulkDisposal(onSuccess?: () => void) {
+  const queryClient = useQueryClient()
+  return useMutation({
+    mutationFn: async (data: BulkDisposalFormData & { assetIds: string[] }) => {
+      await simulateDelay(1200)
+      return data
+    },
+    onSuccess: (data) => {
+      toast.success(`${data.assetIds.length} asset(s) marked for disposal via ${data.disposalMethod}`)
+      queryClient.invalidateQueries({ queryKey: ['assets'] })
+      onSuccess?.()
+    },
+    onError: () => toast.error('Failed to submit disposal request'),
+  })
+}
+
+export function useBulkChangeStatus(onSuccess?: () => void) {
+  const queryClient = useQueryClient()
+  return useMutation({
+    mutationFn: async (data: BulkChangeStatusFormData & { assetIds: string[] }) => {
+      await simulateDelay(1000)
+      return data
+    },
+    onSuccess: (data) => {
+      toast.success(`Status updated to "${data.newStatus}" for ${data.assetIds.length} asset(s)`)
+      queryClient.invalidateQueries({ queryKey: ['assets'] })
+      onSuccess?.()
+    },
+    onError: () => toast.error('Failed to update status'),
   })
 }
 

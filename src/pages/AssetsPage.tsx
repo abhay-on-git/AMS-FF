@@ -1,5 +1,4 @@
 import { useState } from 'react'
-import { toast } from 'sonner'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardHeader } from '@/components/ui/card'
 import { useAssets } from '@/features/assets/hooks/useAssets'
@@ -11,7 +10,17 @@ import { AdvancedFilters } from '@/features/assets/components/AdvancedFilters'
 import { AssetTable } from '@/features/assets/components/AssetTable'
 import { BulkActions } from '@/features/assets/components/BulkActions'
 import { AssetDetailView } from '@/features/assets/components/detail'
-import { AssetFormDrawer, ChangeStatusDrawer, ChangeLocationDrawer, TransferAssetDrawer } from '@/features/assets/components/drawers'
+import {
+  AssetFormDrawer,
+  ChangeStatusDrawer,
+  ChangeLocationDrawer,
+  TransferAssetDrawer,
+  BulkTransferDrawer,
+  BulkInspectionDrawer,
+  BulkSurveyDrawer,
+  BulkDisposalDrawer,
+  BulkChangeStatusDrawer,
+} from '@/features/assets/components/drawers'
 import { defaultAssetColumns } from '@/features/assets/constants/assetColumns'
 import type { ActiveTab, AssetColumnConfig, EnhancedAsset, ViewMode } from '@/features/assets/types'
 
@@ -31,6 +40,11 @@ export default function AssetsPage() {
   const [changeStatusOpen, setChangeStatusOpen] = useState(false)
   const [changeLocationOpen, setChangeLocationOpen] = useState(false)
   const [transferOpen, setTransferOpen] = useState(false)
+  const [bulkTransferOpen, setBulkTransferOpen] = useState(false)
+  const [bulkInspectionOpen, setBulkInspectionOpen] = useState(false)
+  const [bulkSurveyOpen, setBulkSurveyOpen] = useState(false)
+  const [bulkDisposalOpen, setBulkDisposalOpen] = useState(false)
+  const [bulkChangeStatusOpen, setBulkChangeStatusOpen] = useState(false)
 
   const toggleColumn = (key: string) => {
     setColumns((prev) => prev.map((c) => c.key === key ? { ...c, visible: !c.visible } : c))
@@ -62,10 +76,11 @@ export default function AssetsPage() {
     setSelectedAsset(null)
   }
 
-  const handleBulkAction = (action: string) => {
-    toast.info(`${action} ${selection.selectedCount} asset(s)`)
-    selection.clearSelection()
-  }
+  const handleBulkTransfer = () => setBulkTransferOpen(true)
+  const handleBulkInspection = () => setBulkInspectionOpen(true)
+  const handleBulkSurvey = () => setBulkSurveyOpen(true)
+  const handleBulkDisposal = () => setBulkDisposalOpen(true)
+  const handleBulkChangeStatus = () => setBulkChangeStatusOpen(true)
 
   if (isLoading) {
     return <div className="p-6 text-muted-foreground">Loading assets...</div>
@@ -104,11 +119,11 @@ export default function AssetsPage() {
               <BulkActions
                 selectedCount={selection.selectedCount}
                 onClearSelection={selection.clearSelection}
-                onTransfer={() => handleBulkAction('Transfer')}
-                onInspection={() => handleBulkAction('Inspection')}
-                onSurvey={() => handleBulkAction('Survey')}
-                onDisposal={() => handleBulkAction('Disposal')}
-                onChangeStatus={() => handleBulkAction('Change Status')}
+                onTransfer={handleBulkTransfer}
+                onInspection={handleBulkInspection}
+                onSurvey={handleBulkSurvey}
+                onDisposal={handleBulkDisposal}
+                onChangeStatus={handleBulkChangeStatus}
               />
 
               <Card>
@@ -160,6 +175,36 @@ export default function AssetsPage() {
       <ChangeStatusDrawer open={changeStatusOpen} onOpenChange={setChangeStatusOpen} asset={selectedAsset} />
       <ChangeLocationDrawer open={changeLocationOpen} onOpenChange={setChangeLocationOpen} asset={selectedAsset} />
       <TransferAssetDrawer open={transferOpen} onOpenChange={setTransferOpen} asset={selectedAsset} />
+      <BulkTransferDrawer
+        open={bulkTransferOpen}
+        onOpenChange={setBulkTransferOpen}
+        assetIds={Array.from(selection.selectedIds)}
+        onClearSelection={selection.clearSelection}
+      />
+      <BulkInspectionDrawer
+        open={bulkInspectionOpen}
+        onOpenChange={setBulkInspectionOpen}
+        assetIds={Array.from(selection.selectedIds)}
+        onClearSelection={selection.clearSelection}
+      />
+      <BulkSurveyDrawer
+        open={bulkSurveyOpen}
+        onOpenChange={setBulkSurveyOpen}
+        assetIds={Array.from(selection.selectedIds)}
+        onClearSelection={selection.clearSelection}
+      />
+      <BulkDisposalDrawer
+        open={bulkDisposalOpen}
+        onOpenChange={setBulkDisposalOpen}
+        assetIds={Array.from(selection.selectedIds)}
+        onClearSelection={selection.clearSelection}
+      />
+      <BulkChangeStatusDrawer
+        open={bulkChangeStatusOpen}
+        onOpenChange={setBulkChangeStatusOpen}
+        assetIds={Array.from(selection.selectedIds)}
+        onClearSelection={selection.clearSelection}
+      />
     </>
   )
 }
