@@ -13,7 +13,7 @@ import { changeStatusSchema, type ChangeStatusFormData } from '../../schemas/ass
 import { useChangeStatus } from '../../hooks/useAssetMutations'
 import { lifecycleValidTransitions } from '../../constants/lifecycleConstants'
 import { getLifecycleStageColor, formatLifecycleStage, daysSince } from '../../utils'
-import { formatDate } from '@/app/utils/dateFormatter'
+import { formatDate } from '@/lib/utils/dateFormatter'
 import type { EnhancedAsset, LifecycleStageType } from '../../types'
 
 interface ChangeStatusDrawerProps {

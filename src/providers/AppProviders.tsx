@@ -1,5 +1,6 @@
 import type { PropsWithChildren } from 'react';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { Toaster } from '@/components/ui/sonner';
 import { ThemeProvider } from './ThemeProvider';
 import { LanguageProvider } from './LanguageProvider';
 
@@ -18,6 +19,7 @@ export function AppProviders({ children }: PropsWithChildren) {
       <ThemeProvider>
         <LanguageProvider>{children}</LanguageProvider>
       </ThemeProvider>
+      <Toaster richColors position="top-right" />
     </QueryClientProvider>
   );
 }

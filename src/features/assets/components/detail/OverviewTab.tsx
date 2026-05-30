@@ -8,7 +8,7 @@ import { Separator } from '@/components/ui/separator'
 import { Pencil, Save, X, MapPin, User, Building2 } from 'lucide-react'
 import type { EnhancedAsset, UserRole } from '../../types'
 import { getStatusColor, getConditionColor, daysSince } from '../../utils'
-import { formatDate } from '@/app/utils/dateFormatter'
+import { formatDate } from '@/lib/utils/dateFormatter'
 
 interface OverviewTabProps {
   asset: EnhancedAsset

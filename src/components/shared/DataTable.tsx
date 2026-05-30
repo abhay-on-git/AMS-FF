@@ -125,7 +125,7 @@ export function DataTable<T>({
   return (
     <div className={cn('rounded-md border overflow-hidden', className)}>
       <div className={cn('overflow-auto scrollbar-hide', stickyHeader && 'relative')} style={{ maxHeight }}>
-        <table className="w-full text-[15px]">
+        <table className="w-full text-[15px] font-['Manrope']">
           <thead className={cn(stickyHeader && 'sticky top-0 z-10 bg-background')}>
             <tr className="border-b bg-muted/30">
               {visibleColumns.map((col) => (

@@ -62,7 +62,7 @@ export function AssetTable({ assets, columns, onViewDetail, onEdit, emptyMessage
 
   return (
     <div className="rounded-md border overflow-hidden">
-      <div className="overflow-auto max-h-[calc(100vh-420px)] scrollbar-hide">
+      <div className="overflow-auto max-h-[calc(100vh-420px)] scrollbar-hide font-['Manrope']">
         <Table>
           <TableHeader>
             <TableRow>
@@ -178,9 +178,9 @@ function renderCell(asset: EnhancedAsset, key: string) {
         </span>
       )
     case 'epc':
-      return <span className="font-[Manrope] text-[15px]">{asset.epc}</span>
+      return <span className="text-[15px]">{asset.epc}</span>
     case 'barcode':
-      return <span className="font-[Manrope] text-[15px]">{asset.barcode}</span>
+      return <span className="text-[15px]">{asset.barcode}</span>
     case 'type':
       return asset.type
     case 'name':

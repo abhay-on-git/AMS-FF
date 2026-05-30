@@ -54,6 +54,8 @@ export const createAssetSchema = z.object({
   unitPrice: z.string().optional(),
   currency: z.string().default('USD'),
   totalValue: z.string().optional(),
+  classification: z.string().optional(),
+  custodian: z.string().optional(),
   notes: z.string().optional(),
 })
 
@@ -107,3 +109,66 @@ export const bulkChangeStatusSchema = z.object({
 })
 
 export type BulkChangeStatusFormData = z.infer<typeof bulkChangeStatusSchema>
+
+// ── Initiate Transfer ─────────────────────────────────────────────────────────
+
+export const initiateTransferSchema = z.object({
+  assetIds:        z.array(z.string()).min(1, 'Select at least one asset'),
+  toCustodian:     z.string().min(1, 'Receiving custodian is required'),
+  toFieldOffice:   z.string().min(1, 'Destination field office is required'),
+  toBuilding:      z.string().optional(),
+  toRoom:          z.string().optional(),
+  reason:          z.string().min(10, 'Please provide at least 10 characters of reason'),
+  notes:           z.string().optional(),
+})
+
+export type InitiateTransferFormData = z.infer<typeof initiateTransferSchema>
+
+// ── Create Inspection ─────────────────────────────────────────────────────────
+
+export const createInspectionSchema = z.object({
+  title:          z.string().min(1, 'Title is required'),
+  description:    z.string().optional(),
+  inspectionType: z.string().min(1, 'Inspection type is required'),
+  inspector:      z.string().min(1, 'Inspector is required'),
+  reviewer:       z.string().optional(),
+  fieldOffice:    z.string().min(1, 'Field office is required'),
+  location:       z.string().min(1, 'Location is required'),
+  scheduledDate:  z.string().min(1, 'Scheduled date is required'),
+  dueDate:        z.string().optional(),
+})
+
+export type CreateInspectionFormData = z.infer<typeof createInspectionSchema>
+
+// ── Create Survey ──────────────────────────────────────────────────────────────
+
+export const createSurveySchema = z.object({
+  title:            z.string().min(5, 'Title must be at least 5 characters'),
+  description:      z.string().optional(),
+  scope:            z.string().min(5, 'Describe the scope'),
+  surveyType:       z.string().min(1, 'Select a survey type'),
+  workflowType:     z.string().min(1, 'Select a workflow type'),
+  surveyTeamLead:   z.string().min(1, 'Select a team lead'),
+  fieldOffice:      z.string().min(1, 'Select a field office'),
+  targetLocations:  z.string().min(1, 'Enter at least one location'),
+  plannedStartDate: z.string().min(1, 'Required'),
+  plannedEndDate:   z.string().optional(),
+})
+
+export type CreateSurveyFormData = z.infer<typeof createSurveySchema>
+
+// ── Create Disposal ────────────────────────────────────────────────────────────
+
+export const createDisposalSchema = z.object({
+  title:                 z.string().min(5, 'Title must be at least 5 characters'),
+  disposalMethod:        z.string().min(1, 'Select a disposal method'),
+  workflowType:          z.string().min(1, 'Select a workflow type'),
+  fieldOffice:           z.string().min(1, 'Select a field office'),
+  justification:         z.string().min(10, 'Provide a justification (min 10 chars)'),
+  notes:                 z.string().optional(),
+  linkedSurveyId:        z.string().optional(),
+  targetDisposalDate:    z.string().min(1, 'Required'),
+  recipientOrganization: z.string().optional(),
+})
+
+export type CreateDisposalFormData = z.infer<typeof createDisposalSchema>

@@ -5,7 +5,7 @@ import { Lock, ArrowRightLeft, Info, GitBranch, FileText, User, Calendar } from 
 import type { EnhancedAsset, LifecycleStageType, LifecycleEvent, UserRole } from '../../types'
 import { lifecycleSteps, lifecycleValidTransitions } from '../../constants/lifecycleConstants'
 import { getStatusColor, formatLifecycleStage } from '../../utils'
-import { formatDate } from '@/app/utils/dateFormatter'
+import { formatDate } from '@/lib/utils/dateFormatter'
 import { LifecycleStepper } from './LifecycleStepper'
 
 interface LifecycleTabProps {

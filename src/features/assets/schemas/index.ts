@@ -1,2 +1,1 @@
-// src/features/assets/schemas
-
+export * from './assetSchemas'

@@ -177,3 +177,14 @@ export type {
 export type {
   AdvancedFilterState,
 } from "../components/assets/types";
+
+// Signature workflow — reused by Transfers, Inspections, Surveys, Disposals
+export interface SignatureStep {
+  id:        string
+  role:      string
+  label:     string
+  signedBy?: string
+  signedAt?: string
+  status:    'pending' | 'signed' | 'rejected'
+  comment?:  string
+}
