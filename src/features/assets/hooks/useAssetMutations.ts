@@ -1,6 +1,6 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { toast } from 'sonner'
-import type { EditAssetFormData, ChangeStatusFormData, ChangeLocationFormData, TransferAssetFormData } from '../schemas/assetSchemas'
+import type { EditAssetFormData, ChangeStatusFormData, ChangeLocationFormData, TransferAssetFormData, CreateAssetFormData } from '../schemas/assetSchemas'
 
 function simulateDelay(ms = 800): Promise<void> {
   return new Promise((resolve) => setTimeout(resolve, ms))
@@ -78,6 +78,25 @@ export function useTransferAsset(onSuccess?: () => void) {
     },
     onError: () => {
       toast.error('Failed to submit transfer')
+    },
+  })
+}
+
+export function useCreateAsset(onSuccess?: () => void) {
+  const queryClient = useQueryClient()
+
+  return useMutation({
+    mutationFn: async (data: CreateAssetFormData) => {
+      await simulateDelay(1000)
+      return data
+    },
+    onSuccess: () => {
+      toast.success('Asset registered successfully')
+      queryClient.invalidateQueries({ queryKey: ['assets'] })
+      onSuccess?.()
+    },
+    onError: () => {
+      toast.error('Failed to register asset')
     },
   })
 }

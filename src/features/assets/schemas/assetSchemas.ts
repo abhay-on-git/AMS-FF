@@ -32,3 +32,29 @@ export const transferAssetSchema = z.object({
 })
 
 export type TransferAssetFormData = z.infer<typeof transferAssetSchema>
+
+export const createAssetSchema = z.object({
+  assetId: z.string().min(1, 'Asset ID is required'),
+  epc: z.string().min(1, 'EPC is required'),
+  type: z.string().min(1, 'Type is required'),
+  name: z.string().min(1, 'Name is required'),
+  fieldOffice: z.string().min(1, 'Field Office is required'),
+  location: z.string().min(1, 'Location is required'),
+  barcode: z.string().optional(),
+  description: z.string().optional(),
+  responsiblePerson: z.string().optional(),
+  serialNumber: z.string().optional(),
+  condition: z.string().default('good'),
+  status: z.string().default('active'),
+  poNumber: z.string().optional(),
+  grnNumber: z.string().optional(),
+  supplier: z.string().optional(),
+  acquisitionDate: z.string().optional(),
+  quantity: z.string().default('1'),
+  unitPrice: z.string().optional(),
+  currency: z.string().default('USD'),
+  totalValue: z.string().optional(),
+  notes: z.string().optional(),
+})
+
+export type CreateAssetFormData = z.infer<typeof createAssetSchema>
