@@ -7,12 +7,14 @@ import type {
   PendingAction,
   PredefinedReport,
   ReportRow,
+  SavedQuery,
   ScheduledReport,
   UpdateSchedulePayload,
 } from '../types'
 import {
   MOCK_REPORT_DATA,
   PREDEFINED_REPORTS,
+  SEED_SAVED_QUERIES,
   SEED_SCHEDULED_REPORTS,
   filterPendingActions,
   resolveComplianceGaps,
@@ -20,6 +22,7 @@ import {
 } from '../constants/reportingData'
 
 let scheduledReportsCache = [...SEED_SCHEDULED_REPORTS]
+let savedQueriesCache = [...SEED_SAVED_QUERIES]
 
 export async function getDashboardData(fieldOffice: string): Promise<OfficeMetrics> {
   if (IS_MOCK) {
@@ -131,4 +134,36 @@ export async function deleteSchedule(id: string): Promise<void> {
     return Promise.resolve()
   }
   await apiClient.delete(`/reports/scheduled/${id}`)
+}
+
+export async function getSavedQueries(): Promise<SavedQuery[]> {
+  if (IS_MOCK) return Promise.resolve([...savedQueriesCache])
+  const { data } = await apiClient.get<SavedQuery[]>('/reports/saved-queries')
+  return data
+}
+
+export async function saveSavedQuery(query: Omit<SavedQuery, 'id' | 'createdAt'>): Promise<SavedQuery> {
+  if (IS_MOCK) {
+    const created: SavedQuery = {
+      ...query,
+      id: `SQ-${String(savedQueriesCache.length + 1).padStart(3, '0')}`,
+      createdAt: new Date().toISOString().split('T')[0],
+    }
+    savedQueriesCache = [created, ...savedQueriesCache]
+    return Promise.resolve(created)
+  }
+  const { data } = await apiClient.post<SavedQuery>('/reports/saved-queries', query)
+  return data
+}
+
+export async function deleteSavedQuery(id: string): Promise<void> {
+  if (IS_MOCK) {
+    savedQueriesCache = savedQueriesCache.filter((q) => q.id !== id)
+    return Promise.resolve()
+  }
+  await apiClient.delete(`/reports/saved-queries/${id}`)
+}
+
+export function exportReportMock(format: 'excel' | 'pdf' | 'csv'): void {
+  void format
 }

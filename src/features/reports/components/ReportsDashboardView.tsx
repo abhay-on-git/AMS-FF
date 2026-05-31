@@ -19,17 +19,24 @@ import {
 import type { ComplianceGap, PendingAction } from '../types'
 import { ComplianceGapsTable } from './ComplianceGapsTable'
 import { PendingActionsTable } from './PendingActionsTable'
+import { ReportsDashboardActions } from './ReportsDashboardActions'
 import { ReportsDashboardCharts } from './ReportsDashboardCharts'
 import { ReportsDashboardKPIs } from './ReportsDashboardKPIs'
 
 interface ReportsDashboardViewProps {
   onViewPendingAction?: (action: PendingAction) => void
   onViewComplianceGap?: (gap: ComplianceGap) => void
+  onOpenPredefined: () => void
+  onOpenScheduled: () => void
+  onOpenCustom: () => void
 }
 
 export function ReportsDashboardView({
   onViewPendingAction,
   onViewComplianceGap,
+  onOpenPredefined,
+  onOpenScheduled,
+  onOpenCustom,
 }: ReportsDashboardViewProps) {
   const [fieldOffice, setFieldOffice] = useState<string>('All Offices')
   const { data: metrics, isLoading: metricsLoading } = useDashboardData(fieldOffice)
@@ -38,18 +45,28 @@ export function ReportsDashboardView({
 
   return (
     <div className="space-y-6">
-      <Select value={fieldOffice} onValueChange={setFieldOffice}>
-        <SelectTrigger className="h-11 min-w-[220px] text-base">
-          <SelectValue />
-        </SelectTrigger>
-        <SelectContent>
-          {FIELD_OFFICES.map((office) => (
-            <SelectItem key={office} value={office} className="text-base">
-              {office}
-            </SelectItem>
-          ))}
-        </SelectContent>
-      </Select>
+      <div className="flex w-full min-w-0 items-center justify-between gap-4">
+        <div className="shrink-0">
+          <Select value={fieldOffice} onValueChange={setFieldOffice}>
+            <SelectTrigger className="h-11 w-[220px] text-base">
+              <SelectValue />
+            </SelectTrigger>
+            <SelectContent>
+              {FIELD_OFFICES.map((office) => (
+                <SelectItem key={office} value={office} className="text-base">
+                  {office}
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
+        </div>
+
+        <ReportsDashboardActions
+          onOpenPredefined={onOpenPredefined}
+          onOpenScheduled={onOpenScheduled}
+          onOpenCustom={onOpenCustom}
+        />
+      </div>
 
       {fieldOffice !== 'All Offices' && (
         <Badge className="gap-1.5 bg-brand-navy px-3 py-1.5 text-sm text-white">
