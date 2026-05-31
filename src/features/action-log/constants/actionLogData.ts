@@ -1,0 +1,192 @@
+import type { AuditLog } from '../types'
+
+export const mockAuditLogs: AuditLog[] = [
+  {
+    id: 'a1b2c3d4-0002-0000-0000-000000000002',
+    entity_type: 'Assets',
+    entity_id: 'e1000002-0000-0000-0000-000000000002',
+    event_type: 'Create',
+    actor_id: 'ac000002-0000-0000-0000-000000000002',
+    actor_name: 'john.doe@chorus.com',
+    actor_role_at_time: 'SMIO',
+    timestamp: '2026-02-26T14:28:15Z',
+    changes: {
+      asset_tag: { from: null, to: 'LAP-001250' },
+      model: { from: null, to: 'Dell Latitude 5540' },
+      sap_id: { from: null, to: '4000012345' },
+    },
+    justification: {
+      reason: 'New asset procurement',
+      context: 'Q1 2026 hardware refresh batch',
+    },
+    metadata: { ip_address: '192.168.1.105', session_id: 'SES-4518' },
+  },
+  {
+    id: 'a1b2c3d4-0003-0000-0000-000000000003',
+    entity_type: 'Assets',
+    entity_id: 'e1000003-0000-0000-0000-000000000003',
+    event_type: 'Update',
+    actor_id: 'ac000003-0000-0000-0000-000000000003',
+    actor_name: 'jane.smith@chorus.com',
+    actor_role_at_time: 'Standard User',
+    timestamp: '2026-02-26T14:25:00Z',
+    changes: {
+      location: { from: 'HQ Floor 1', to: 'Field Office B' },
+      transfer_ref: { from: null, to: 'TRF-2026-045' },
+    },
+    justification: {
+      reason: 'Inter-office asset transfer',
+      context: 'Field Office B expansion project',
+    },
+    metadata: { ip_address: '192.168.1.112', session_id: 'SES-4515' },
+  },
+  {
+    id: 'a1b2c3d4-0004-0000-0000-000000000004',
+    entity_type: 'Users',
+    entity_id: 'e1000004-0000-0000-0000-000000000004',
+    event_type: 'Update',
+    actor_id: 'ac000001-0000-0000-0000-000000000001',
+    actor_name: 'admin@chorus.com',
+    actor_role_at_time: 'Administrator',
+    timestamp: '2026-02-26T14:20:10Z',
+    changes: {
+      permissions: {
+        from: ['inspection.view'],
+        to: ['inspection.view', 'inspection.approve'],
+      },
+    },
+    justification: {
+      reason: 'Role permission update',
+      context: 'PDA Inspector role expanded per change request CR-2026-014',
+    },
+    metadata: { ip_address: '192.168.1.100', session_id: 'SES-4521' },
+  },
+  {
+    id: 'a1b2c3d4-0005-0000-0000-000000000005',
+    entity_type: 'Assets',
+    entity_id: 'e1000005-0000-0000-0000-000000000005',
+    event_type: 'Delete',
+    actor_id: 'ac000005-0000-0000-0000-000000000005',
+    actor_name: 'bob.wilson@chorus.com',
+    actor_role_at_time: 'Approver',
+    timestamp: '2026-02-26T14:15:33Z',
+    changes: {
+      status: { from: 'Active', to: 'Disposed' },
+      disposal_ref: { from: null, to: 'DSP-2026-012' },
+    },
+    justification: {
+      reason: 'Approved disposal — end of useful life',
+      context:
+        '8 assets, method: destruction, total value $12,450. Approved under policy POL-DSP-003',
+    },
+    metadata: { ip_address: '192.168.1.108', session_id: 'SES-4510' },
+  },
+  {
+    id: 'a1b2c3d4-0006-0000-0000-000000000006',
+    entity_type: 'Assets',
+    entity_id: 'e1000006-0000-0000-0000-000000000006',
+    event_type: 'Update',
+    actor_id: 'ac000006-0000-0000-0000-000000000006',
+    actor_name: 'system',
+    actor_role_at_time: 'System',
+    timestamp: '2026-02-26T14:10:05Z',
+    changes: {
+      synced_records: { from: 0, to: 156 },
+      last_sync: { from: '2026-02-25T14:10:00Z', to: '2026-02-26T14:10:05Z' },
+    },
+    justification: {
+      reason: 'Scheduled SAP sync',
+      context:
+        'Automated nightly sync job SYNC-2026-089: 42 created, 114 updated, 0 failed',
+    },
+    metadata: { ip_address: 'N/A', session_id: 'N/A' },
+  },
+  {
+    id: 'a1b2c3d4-0008-0000-0000-000000000008',
+    entity_type: 'Users',
+    entity_id: 'e1000008-0000-0000-0000-000000000008',
+    event_type: 'Update',
+    actor_id: 'ac000001-0000-0000-0000-000000000001',
+    actor_name: 'admin@chorus.com',
+    actor_role_at_time: 'Administrator',
+    timestamp: '2026-02-26T13:45:20Z',
+    changes: { account_status: { from: 'Active', to: 'Locked' } },
+    justification: {
+      reason: 'Security lockout',
+      context:
+        'Account david.lee@chorus.com locked after 5 consecutive failed login attempts',
+    },
+    metadata: { ip_address: '192.168.1.100', session_id: 'SES-4521' },
+  },
+  {
+    id: 'a1b2c3d4-0009-0000-0000-000000000009',
+    entity_type: 'Assets',
+    entity_id: 'e1000009-0000-0000-0000-000000000009',
+    event_type: 'Update',
+    actor_id: 'ac000002-0000-0000-0000-000000000002',
+    actor_name: 'john.doe@chorus.com',
+    actor_role_at_time: 'SMIO',
+    timestamp: '2026-02-26T13:30:00Z',
+    changes: {
+      lifecycle_status: { from: 'In Use', to: 'Under Verification' },
+    },
+    justification: {
+      reason: 'Annual audit',
+      context:
+        'Asset LAP-001234 pulled for physical verification per annual audit schedule AUD-2026-Q1',
+    },
+    metadata: { ip_address: '192.168.1.105', session_id: 'SES-4518' },
+  },
+  {
+    id: 'a1b2c3d4-0011-0000-0000-000000000011',
+    entity_type: 'Assets',
+    entity_id: 'e1000011-0000-0000-0000-000000000011',
+    event_type: 'Update',
+    actor_id: 'ac000001-0000-0000-0000-000000000001',
+    actor_name: 'admin@chorus.com',
+    actor_role_at_time: 'Administrator',
+    timestamp: '2026-02-26T12:55:00Z',
+    changes: { lifecycle_status: { from: 'Disposed', to: 'Available' } },
+    justification: {
+      reason: 'Admin override — data correction',
+      context:
+        'PRN-001236: Disposal recorded in error. Reverting to Available per helpdesk ticket HLP-2026-0892',
+    },
+    metadata: { ip_address: '192.168.1.100', session_id: 'SES-4521' },
+  },
+  {
+    id: 'a1b2c3d4-0012-0000-0000-000000000012',
+    entity_type: 'Categories',
+    entity_id: 'e1000012-0000-0000-0000-000000000012',
+    event_type: 'Create',
+    actor_id: 'ac000001-0000-0000-0000-000000000001',
+    actor_name: 'admin@chorus.com',
+    actor_role_at_time: 'Administrator',
+    timestamp: '2026-02-26T12:10:00Z',
+    changes: {
+      name: { from: null, to: 'IT Hardware' },
+      sub_categories: { from: null, to: 3 },
+    },
+    justification: {
+      reason: 'New asset category setup',
+      context: 'CAT-IT-HARDWARE created as part of asset taxonomy restructure project',
+    },
+    metadata: { ip_address: '192.168.1.100', session_id: 'SES-4521' },
+  },
+  {
+    id: 'a1b2c3d4-0013-0000-0000-000000000013',
+    entity_type: 'Locations',
+    entity_id: 'e1000013-0000-0000-0000-000000000013',
+    event_type: 'Update',
+    actor_id: 'ac000003-0000-0000-0000-000000000003',
+    actor_name: 'jane.smith@chorus.com',
+    actor_role_at_time: 'Standard User',
+    timestamp: '2026-02-26T11:50:00Z',
+    changes: { capacity: { from: 80, to: 95 } },
+    justification: {
+      reason: 'Capacity update after renovation',
+      context: 'LOC-HQ-FL2: HQ Floor 2 expanded following Q4 2025 refurbishment',
+    },
+    metadata: { ip_address: '192.168.1.112', session_id: 'SES-4515' },
+  },
+]
