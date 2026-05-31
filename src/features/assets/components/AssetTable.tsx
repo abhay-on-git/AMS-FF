@@ -1,5 +1,4 @@
-import { useState } from 'react'
-import { Eye, Pencil, MoreVertical, Search, Lock, ChevronLeft, ChevronRight, ChevronsLeft, ChevronsRight } from 'lucide-react'
+import { Eye, Pencil, MoreVertical, Search, Lock } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import {
   Table,
@@ -16,18 +15,13 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu'
 import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from '@/components/ui/select'
-import {
   Tooltip,
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
 } from '@/components/ui/tooltip'
+import { TablePagination } from '@/components/shared'
+import { useTablePagination } from '@/hooks/useTablePagination'
 import type { EnhancedAsset, AssetColumnConfig } from '../types'
 
 interface AssetTableProps {
@@ -39,14 +33,9 @@ interface AssetTableProps {
 }
 
 export function AssetTable({ assets, columns, onViewDetail, onEdit, emptyMessage }: AssetTableProps) {
-  const [page, setPage] = useState(0)
-  const [rowsPerPage, setRowsPerPage] = useState(10)
+  const { page, rowsPerPage, setPage, setRowsPerPage, pageData } = useTablePagination(assets)
 
   const visibleColumns = columns.filter((c) => c.visible)
-  const totalPages = Math.max(1, Math.ceil(assets.length / rowsPerPage))
-  const pageData = assets.slice(page * rowsPerPage, (page + 1) * rowsPerPage)
-  const startItem = assets.length === 0 ? 0 : page * rowsPerPage + 1
-  const endItem = Math.min((page + 1) * rowsPerPage, assets.length)
 
   if (assets.length === 0) {
     return (
@@ -107,52 +96,15 @@ export function AssetTable({ assets, columns, onViewDetail, onEdit, emptyMessage
         </Table>
       </div>
 
-      {/* Pagination - matching original TablePagination */}
-      <div className="flex items-center justify-between gap-4 px-4 py-2 border-t bg-background text-[15px] text-muted-foreground">
-        <div className="whitespace-nowrap">
-          Showing {assets.length} of {assets.length} assets
-        </div>
-
-        <div className="flex items-center gap-4 ml-auto">
-          <div className="flex items-center gap-2">
-            <span className="whitespace-nowrap">Rows per page:</span>
-            <Select
-              value={String(rowsPerPage)}
-              onValueChange={(val) => { setRowsPerPage(Number(val)); setPage(0) }}
-            >
-              <SelectTrigger className="h-8 w-[70px] border-0 bg-white shadow-none focus:ring-0 px-2 text-[15px]">
-                <SelectValue />
-              </SelectTrigger>
-              <SelectContent>
-                {[5, 10, 25, 50, 100].map((opt) => (
-                  <SelectItem key={opt} value={String(opt)} className="text-[15px]">{opt}</SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
-          </div>
-
-          <span className="whitespace-nowrap">{startItem}–{endItem} of {assets.length}</span>
-
-          <div className="flex items-center gap-0.5">
-            <button onClick={() => setPage(0)} disabled={page === 0}
-              className="inline-flex items-center justify-center w-8 h-8 rounded-full disabled:opacity-30 disabled:pointer-events-none transition-colors" aria-label="First page">
-              <ChevronsLeft className="w-5 h-5" />
-            </button>
-            <button onClick={() => setPage(Math.max(0, page - 1))} disabled={page === 0}
-              className="inline-flex items-center justify-center w-8 h-8 rounded-full disabled:opacity-30 disabled:pointer-events-none transition-colors" aria-label="Previous page">
-              <ChevronLeft className="w-5 h-5" />
-            </button>
-            <button onClick={() => setPage(Math.min(totalPages - 1, page + 1))} disabled={page >= totalPages - 1}
-              className="inline-flex items-center justify-center w-8 h-8 rounded-full disabled:opacity-30 disabled:pointer-events-none transition-colors" aria-label="Next page">
-              <ChevronRight className="w-5 h-5" />
-            </button>
-            <button onClick={() => setPage(totalPages - 1)} disabled={page >= totalPages - 1}
-              className="inline-flex items-center justify-center w-8 h-8 rounded-full disabled:opacity-30 disabled:pointer-events-none transition-colors" aria-label="Last page">
-              <ChevronsRight className="w-5 h-5" />
-            </button>
-          </div>
-        </div>
-      </div>
+      <TablePagination
+        totalItems={assets.length}
+        page={page}
+        rowsPerPage={rowsPerPage}
+        onPageChange={setPage}
+        onRowsPerPageChange={setRowsPerPage}
+        totalUnfilteredItems={assets.length}
+        itemLabel="assets"
+      />
     </div>
   )
 }

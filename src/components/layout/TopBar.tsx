@@ -2,7 +2,6 @@ import { useState, useEffect } from 'react'
 import { useLocation } from 'react-router-dom'
 import { Search, X, ChevronDown, Menu, Loader2 } from 'lucide-react'
 import { cn } from '@/lib/cn'
-import { NotificationBell } from '@/features/notifications/components/NotificationBell'
 import { entityOptions } from './constants'
 import {
   DropdownMenu,
@@ -137,7 +136,6 @@ export function TopBar({ onMenuClick }: TopBarProps) {
               </DropdownMenuContent>
             </DropdownMenu>
           </div>
-          <NotificationBell />
         </div>
       </div>
     </header>

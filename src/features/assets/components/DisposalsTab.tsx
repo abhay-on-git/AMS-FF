@@ -17,6 +17,8 @@ import {
   Table, TableBody, TableCell, TableHead, TableHeader, TableRow,
 } from '@/components/ui/table'
 import { useDisposals } from '../hooks/useAssets'
+import { TablePagination } from '@/components/shared'
+import { useTablePagination } from '@/hooks/useTablePagination'
 import { useAppSelector } from '@/store/hooks'
 import { defaultDisposalColumns } from '../constants/disposalColumns'
 import {
@@ -85,7 +87,12 @@ export function DisposalsTab({
       d.fieldOffice.toLowerCase().includes(search.toLowerCase())
     )
     return list
-  }, [disposals, subView, statusFilter, methodFilter, search])
+  }, [disposals, subView, statusFilter, methodFilter, search, currentUser])
+
+  const { page, rowsPerPage, setPage, setRowsPerPage, pageData } = useTablePagination(
+    filtered,
+    [search, statusFilter, methodFilter, subView],
+  )
 
   const visibleCols = columns.filter((c) => c.visible)
 
@@ -242,7 +249,7 @@ export function DisposalsTab({
                     </TableRow>
                   </TableHeader>
                   <TableBody>
-                    {filtered.map((disposal) => (
+                    {pageData.map((disposal) => (
                       <TableRow
                         key={disposal.id}
                         className="cursor-pointer hover:bg-muted/30"
@@ -303,6 +310,15 @@ export function DisposalsTab({
                   </TableBody>
                 </Table>
               </div>
+              <TablePagination
+                totalItems={filtered.length}
+                page={page}
+                rowsPerPage={rowsPerPage}
+                onPageChange={setPage}
+                onRowsPerPageChange={setRowsPerPage}
+                totalUnfilteredItems={disposals.length}
+                itemLabel="disposals"
+              />
             </div>
           ) : (
             <div className="text-center py-12 px-6">

@@ -17,6 +17,8 @@ import {
   Table, TableBody, TableCell, TableHead, TableHeader, TableRow,
 } from '@/components/ui/table'
 import { useSurveys } from '../hooks/useAssets'
+import { TablePagination } from '@/components/shared'
+import { useTablePagination } from '@/hooks/useTablePagination'
 import { useAppSelector } from '@/store/hooks'
 import { defaultSurveyColumns } from '../constants/surveyColumns'
 import {
@@ -83,7 +85,12 @@ export function SurveysTab({
       s.fieldOffice.toLowerCase().includes(search.toLowerCase())
     )
     return list
-  }, [surveys, subView, statusFilter, typeFilter, search])
+  }, [surveys, subView, statusFilter, typeFilter, search, currentUser])
+
+  const { page, rowsPerPage, setPage, setRowsPerPage, pageData } = useTablePagination(
+    filtered,
+    [search, statusFilter, typeFilter, subView],
+  )
 
   const visibleCols = columns.filter((c) => c.visible)
 
@@ -229,7 +236,7 @@ export function SurveysTab({
                 </TableRow>
               </TableHeader>
               <TableBody>
-                {filtered.map((survey) => (
+                {pageData.map((survey) => (
                   <TableRow
                     key={survey.id}
                     className="cursor-pointer hover:bg-muted/30"
@@ -280,6 +287,15 @@ export function SurveysTab({
               </TableBody>
             </Table>
           </div>
+          <TablePagination
+            totalItems={filtered.length}
+            page={page}
+            rowsPerPage={rowsPerPage}
+            onPageChange={setPage}
+            onRowsPerPageChange={setRowsPerPage}
+            totalUnfilteredItems={surveys.length}
+            itemLabel="surveys"
+          />
         </div>
       ) : (
         <div className="text-center py-12 px-6">

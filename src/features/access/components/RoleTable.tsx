@@ -8,7 +8,8 @@ import {
   DropdownMenuTrigger, DropdownMenuCheckboxItem, DropdownMenuSeparator,
 } from '@/components/ui/dropdown-menu'
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table'
-import { ConfirmDialog } from '@/components/shared'
+import { ConfirmDialog, TablePagination } from '@/components/shared'
+import { useTablePagination } from '@/hooks/useTablePagination'
 import { useDeleteRole, useCloneRole } from '../hooks/useRoleMutations'
 import type { Role } from '../types'
 
@@ -46,6 +47,8 @@ export function RoleTable({ data, isLoading, onViewDetail, onEdit }: RoleTablePr
   }, [data, search])
 
   const visibleCols = columns.filter((c) => c.visible)
+
+  const { page, rowsPerPage, setPage, setRowsPerPage, pageData } = useTablePagination(filtered, [search])
 
   if (isLoading) return <div className="p-6 text-muted-foreground text-[15px]">Loading roles…</div>
 
@@ -107,7 +110,7 @@ export function RoleTable({ data, isLoading, onViewDetail, onEdit }: RoleTablePr
                     No roles found
                   </TableCell>
                 </TableRow>
-              ) : filtered.map((r) => (
+              ) : pageData.map((r) => (
                 <TableRow key={r.id} className="cursor-pointer hover:bg-muted/20" onClick={() => onViewDetail(r)}>
                   {visibleCols.map((col) => (
                     <TableCell key={col.key}>
@@ -162,6 +165,16 @@ export function RoleTable({ data, isLoading, onViewDetail, onEdit }: RoleTablePr
             </TableBody>
           </Table>
         </div>
+
+        <TablePagination
+          totalItems={filtered.length}
+          page={page}
+          rowsPerPage={rowsPerPage}
+          onPageChange={setPage}
+          onRowsPerPageChange={setRowsPerPage}
+          totalUnfilteredItems={data.length}
+          itemLabel="roles"
+        />
       </div>
 
       <ConfirmDialog

@@ -37,7 +37,9 @@ import {
   AlertDialogTitle,
 } from '@/components/ui/alert-dialog'
 import { getLocationStatistics } from '../lib/hierarchyUtils'
-import type { FieldOfficeConfig, FieldOfficeSummary, LocationNode } from '../../types'
+import { TablePagination } from '@/components/shared'
+import { useTablePagination } from '@/hooks/useTablePagination'
+import type { FieldOfficeConfig, FieldOfficeSummary, LocationNode } from '../types'
 
 interface LocationsOverviewProps {
   locations: LocationNode[]
@@ -108,6 +110,11 @@ export function LocationsOverview({
     ? locations.filter((loc) => loc.fieldOfficeId === viewingFieldOfficeId)
     : locations
 
+  const { page, rowsPerPage, setPage, setRowsPerPage, pageData } = useTablePagination(
+    filteredLocations,
+    [viewingFieldOfficeId],
+  )
+
   const getLocationTypeName = (locationTypeId: string) => {
     const type = fieldOffice?.locationTypes.find((t) => t.id === locationTypeId)
     return type?.name || 'Location'
@@ -169,7 +176,7 @@ export function LocationsOverview({
                 </TableHeader>
                 <TableBody>
                   {filteredLocations.length > 0 ? (
-                    filteredLocations.map((location) => (
+                    pageData.map((location) => (
                       <TableRow key={location.id} className="hover:bg-muted/30">
                         <TableCell className="font-medium py-4">{location.name}</TableCell>
                         <TableCell className="py-4">
@@ -216,6 +223,15 @@ export function LocationsOverview({
                   )}
                 </TableBody>
               </Table>
+              <TablePagination
+                totalItems={filteredLocations.length}
+                page={page}
+                rowsPerPage={rowsPerPage}
+                onPageChange={setPage}
+                onRowsPerPageChange={setRowsPerPage}
+                totalUnfilteredItems={filteredLocations.length}
+                itemLabel="locations"
+              />
             </div>
           </CardContent>
         </Card>

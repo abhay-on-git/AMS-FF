@@ -1,3 +1,5 @@
+import { CategoriesView } from '@/features/categories/components/CategoriesView'
+
 export default function CategoriesPage() {
-  return <div className="p-4"></div>
+  return <CategoriesView />
 }

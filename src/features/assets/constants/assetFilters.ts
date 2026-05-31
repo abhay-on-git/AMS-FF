@@ -1,9 +1,18 @@
 import type { ActiveTab } from '../types'
+import { mockCategories } from '@/features/categories'
 
 export interface FilterOption {
   value: string
   label: string
 }
+
+export const categoryOptions: FilterOption[] = [
+  { value: 'all', label: 'All Categories' },
+  ...mockCategories.map((c) => ({
+    label: c.categoryName,
+    value: c.id,
+  })),
+]
 
 export const typeOptions: FilterOption[] = [
   { value: 'all', label: 'All Types' },

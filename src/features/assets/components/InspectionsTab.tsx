@@ -17,6 +17,8 @@ import {
   Table, TableBody, TableCell, TableHead, TableHeader, TableRow,
 } from '@/components/ui/table'
 import { useInspections } from '../hooks/useAssets'
+import { TablePagination } from '@/components/shared'
+import { useTablePagination } from '@/hooks/useTablePagination'
 import { useAppSelector } from '@/store/hooks'
 import { defaultInspectionColumns } from '../constants/inspectionColumns'
 import {
@@ -80,7 +82,12 @@ export function InspectionsTab({ onViewDetail, onSchedule, onStart, onComplete, 
       const matchView   = subView === 'mine' ? ins.inspector === currentUser : true
       return matchSearch && matchStatus && matchType && matchView
     })
-  }, [inspections, search, effectiveStatus, effectiveType, subView])
+  }, [inspections, search, effectiveStatus, effectiveType, subView, currentUser])
+
+  const { page, rowsPerPage, setPage, setRowsPerPage, pageData } = useTablePagination(
+    filtered,
+    [search, effectiveStatus, effectiveType, subView],
+  )
 
   const stats = useMemo(() => ({
     total:         inspections.length,
@@ -226,7 +233,7 @@ export function InspectionsTab({ onViewDetail, onSchedule, onStart, onComplete, 
                     </TableRow>
                   </TableHeader>
                   <TableBody>
-                    {filtered.map((ins) => {
+                    {pageData.map((ins) => {
                       const checkedCount = ins.checklist.filter((c) => c.checked).length
                       const totalCheck   = ins.checklist.length
                       return (
@@ -306,6 +313,15 @@ export function InspectionsTab({ onViewDetail, onSchedule, onStart, onComplete, 
                   </TableBody>
                 </Table>
               </div>
+              <TablePagination
+                totalItems={filtered.length}
+                page={page}
+                rowsPerPage={rowsPerPage}
+                onPageChange={setPage}
+                onRowsPerPageChange={setRowsPerPage}
+                totalUnfilteredItems={inspections.length}
+                itemLabel="inspections"
+              />
             </div>
           ) : (
             <div className="text-center py-12 px-6">

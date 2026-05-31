@@ -9,7 +9,8 @@ import {
   DropdownMenuTrigger, DropdownMenuCheckboxItem, DropdownMenuSeparator,
 } from '@/components/ui/dropdown-menu'
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table'
-import { ConfirmDialog } from '@/components/shared'
+import { ConfirmDialog, TablePagination } from '@/components/shared'
+import { useTablePagination } from '@/hooks/useTablePagination'
 import { useDeleteUser, useToggleUserStatus } from '../hooks/useUserMutations'
 import { roleOptions, fieldOfficeOptions } from '../constants/userOptions'
 import type { UserData } from '../types'
@@ -84,6 +85,11 @@ export function UserTable({
   }, [data, search, roleFilter, officeFilter, statusFilter])
 
   const visibleCols = columns.filter((c) => c.visible)
+
+  const { page, rowsPerPage, setPage, setRowsPerPage, pageData } = useTablePagination(
+    filtered,
+    [search, roleFilter, officeFilter, statusFilter],
+  )
 
   if (isLoading) return <div className="p-6 text-muted-foreground text-[15px]">Loading users…</div>
 
@@ -180,7 +186,7 @@ export function UserTable({
                     No users found
                   </TableCell>
                 </TableRow>
-              ) : filtered.map((u) => (
+              ) : pageData.map((u) => (
                 <TableRow key={u.id} className="cursor-pointer hover:bg-muted/20" onClick={() => onViewDetail(u)}>
                   {visibleCols.map((col) => (
                     <TableCell key={col.key}>
@@ -231,6 +237,16 @@ export function UserTable({
             </TableBody>
           </Table>
         </div>
+
+        <TablePagination
+          totalItems={filtered.length}
+          page={page}
+          rowsPerPage={rowsPerPage}
+          onPageChange={setPage}
+          onRowsPerPageChange={setRowsPerPage}
+          totalUnfilteredItems={data.length}
+          itemLabel="users"
+        />
       </div>
 
       <ConfirmDialog

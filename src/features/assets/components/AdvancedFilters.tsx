@@ -17,6 +17,7 @@ import {
   SelectValue,
 } from '@/components/ui/select'
 import type { AdvancedFilterState } from '../types'
+import { categoryOptions } from '../constants/assetFilters'
 
 interface AdvancedFiltersProps {
   filters: AdvancedFilterState
@@ -80,7 +81,7 @@ export function AdvancedFilters({ filters, onFiltersChange, onClearAll }: Advanc
               </FilterField>
               <FilterField label="Category">
                 <FilterSelect value={filters.category} onChange={(v) => update('category', v)}
-                  options={[{ value: 'all', label: 'All Categories' }, { value: 'IT Equipment', label: 'IT Equipment' }, { value: 'Office Equipment', label: 'Office Equipment' }, { value: 'Office Furniture', label: 'Office Furniture' }]} />
+                  options={categoryOptions} />
               </FilterField>
             </div>
 

@@ -17,6 +17,8 @@ import {
   Table, TableBody, TableCell, TableHead, TableHeader, TableRow,
 } from '@/components/ui/table'
 import { useTransfers } from '../hooks/useAssets'
+import { TablePagination } from '@/components/shared'
+import { useTablePagination } from '@/hooks/useTablePagination'
 import { useAppSelector } from '@/store/hooks'
 import { defaultTransferColumns } from '../constants/transferColumns'
 import {
@@ -105,7 +107,12 @@ export function TransfersTab({ onViewDetail, onInitiate, onApprove, onReject, on
         subView === 'mine'              ? t.initiatedBy === currentUser : true
       return matchSearch && matchStatus && matchType && matchOffice && matchView
     })
-  }, [transfers, search, effectiveStatus, effectiveType, effectiveOffice, subView])
+  }, [transfers, search, effectiveStatus, effectiveType, effectiveOffice, subView, currentUser])
+
+  const { page, rowsPerPage, setPage, setRowsPerPage, pageData } = useTablePagination(
+    filtered,
+    [search, effectiveStatus, effectiveType, effectiveOffice, subView],
+  )
 
   const stats = useMemo(() => ({
     total:           transfers.length,
@@ -269,7 +276,7 @@ export function TransfersTab({ onViewDetail, onInitiate, onApprove, onReject, on
                     </TableRow>
                   </TableHeader>
                   <TableBody>
-                    {filtered.map((t) => (
+                    {pageData.map((t) => (
                       <TableRow key={t.id} className="cursor-pointer hover:bg-muted/30" onClick={() => onViewDetail(t)}>
                         <TableCell className="font-medium text-[15px] text-brand-navy dark:text-brand-teal">
                           {t.transferId}
@@ -341,6 +348,15 @@ export function TransfersTab({ onViewDetail, onInitiate, onApprove, onReject, on
                   </TableBody>
                 </Table>
               </div>
+              <TablePagination
+                totalItems={filtered.length}
+                page={page}
+                rowsPerPage={rowsPerPage}
+                onPageChange={setPage}
+                onRowsPerPageChange={setRowsPerPage}
+                totalUnfilteredItems={transfers.length}
+                itemLabel="transfers"
+              />
             </div>
           ) : (
             <div className="text-center py-12 px-6">
