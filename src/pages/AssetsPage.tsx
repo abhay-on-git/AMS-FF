@@ -1,12 +1,8 @@
-import { useState } from 'react'
+import { lazy, Suspense, useMemo, useState } from 'react'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardHeader } from '@/components/ui/card'
+import { RouteLoading } from '@/components/shared/RouteLoading'
 import { useAssets } from '@/features/assets/hooks/useAssets'
-import { DraftAssetsTab } from '@/features/assets/components/DraftAssetsTab'
-import { TransfersTab } from '@/features/assets/components/TransfersTab'
-import { InspectionsTab } from '@/features/assets/components/InspectionsTab'
-import { SurveysTab } from '@/features/assets/components/SurveysTab'
-import { DisposalsTab } from '@/features/assets/components/DisposalsTab'
 import { useAssetFilters } from '@/features/assets/hooks/useAssetFilters'
 import { useAssetSelection } from '@/features/assets/hooks/useAssetSelection'
 import { AssetTabs } from '@/features/assets/components/AssetTabs'
@@ -14,60 +10,42 @@ import { AssetFilters } from '@/features/assets/components/AssetFilters'
 import { AdvancedFilters } from '@/features/assets/components/AdvancedFilters'
 import { AssetTable } from '@/features/assets/components/AssetTable'
 import { BulkActions } from '@/features/assets/components/BulkActions'
-import { AssetDetailView } from '@/features/assets/components/detail'
-import { TransferDetailView } from '@/features/assets/components/detail/TransferDetailView'
-import { InspectionDetailView } from '@/features/assets/components/detail/InspectionDetailView'
-import { SurveyDetailView } from '@/features/assets/components/detail/SurveyDetailView'
-import { DisposalDetailView } from '@/features/assets/components/detail/DisposalDetailView'
-import {
-  AssetFormDrawer,
-  ChangeStatusDrawer,
-  ChangeLocationDrawer,
-  TransferAssetDrawer,
-  BulkTransferDrawer,
-  BulkInspectionDrawer,
-  BulkSurveyDrawer,
-  BulkDisposalDrawer,
-  BulkChangeStatusDrawer,
-  InitiateTransferDrawer,
-  CreateInspectionDrawer,
-  CreateSurveyDrawer,
-  CreateDisposalDrawer,
-} from '@/features/assets/components/drawers'
-import {
-  useApproveTransfer,
-  useRejectTransfer,
-  useAcknowledgeTransfer,
-  useStartInspection,
-  useCompleteInspection,
-  useApproveInspectionReview,
-  useStartSurvey,
-  useCompleteSurvey,
-  useSubmitSurveyForApproval,
-  useApproveSurvey,
-  useSubmitDisposalForReview,
-  useApproveDisposalReview,
-  useApproveDisposal,
-  useRejectDisposal,
-  useExecuteDisposal,
-  useCompleteDisposal,
-} from '@/features/assets/hooks/useAssetMutations'
+import { AssetsPageDrawers } from '@/features/assets/components/AssetsPageDrawers'
+import { AssetWorkflowTabs } from '@/features/assets/components/AssetWorkflowTabs'
 import { defaultAssetColumns } from '@/features/assets/constants/assetColumns'
 import type { ActiveTab, AssetColumnConfig, EnhancedAsset, ViewMode } from '@/features/assets/types'
 import type { DraftAsset } from '@/features/assets/types/draftTypes'
-import type { TransferRequest } from '@/features/assets/types/transferTypes'
+
+const AssetDetailView = lazy(() =>
+  import('@/features/assets/components/detail/AssetDetailView').then((m) => ({ default: m.AssetDetailView })),
+)
+const TransferDetailView = lazy(() =>
+  import('@/features/assets/components/detail/TransferDetailView').then((m) => ({ default: m.TransferDetailView })),
+)
+const InspectionDetailView = lazy(() =>
+  import('@/features/assets/components/detail/InspectionDetailView').then((m) => ({ default: m.InspectionDetailView })),
+)
+const SurveyDetailView = lazy(() =>
+  import('@/features/assets/components/detail/SurveyDetailView').then((m) => ({ default: m.SurveyDetailView })),
+)
+const DisposalDetailView = lazy(() =>
+  import('@/features/assets/components/detail/DisposalDetailView').then((m) => ({ default: m.DisposalDetailView })),
+)
 
 export default function AssetsPage() {
   const { data: assets = [], isLoading } = useAssets()
   const filters = useAssetFilters(assets)
-  const selection = useAssetSelection(filters.filteredAssets.map((a) => a.id))
+  const filteredAssetIds = useMemo(
+    () => filters.filteredAssets.map((a) => a.id),
+    [filters.filteredAssets],
+  )
+  const selection = useAssetSelection(filteredAssetIds)
 
   const [activeTab, setActiveTab] = useState<ActiveTab>('all')
   const [columns, setColumns] = useState<AssetColumnConfig[]>(defaultAssetColumns)
   const [viewMode, setViewMode] = useState<ViewMode>('list')
   const [selectedAsset, setSelectedAsset] = useState<EnhancedAsset | null>(null)
 
-  // Drawer states
   const [assetFormOpen, setAssetFormOpen] = useState(false)
   const [assetFormMode, setAssetFormMode] = useState<'add' | 'edit' | 'draft'>('add')
   const [changeStatusOpen, setChangeStatusOpen] = useState(false)
@@ -80,38 +58,76 @@ export default function AssetsPage() {
   const [bulkChangeStatusOpen, setBulkChangeStatusOpen] = useState(false)
   const [selectedDraft, setSelectedDraft] = useState<DraftAsset | null>(null)
 
-  // Workflow creation drawers
   const [initiateTransferOpen, setInitiateTransferOpen] = useState(false)
   const [scheduleInspectionOpen, setScheduleInspectionOpen] = useState(false)
   const [createSurveyOpen, setCreateSurveyOpen] = useState(false)
   const [createDisposalOpen, setCreateDisposalOpen] = useState(false)
 
-  // Full-page workflow detail view IDs (null = list mode)
-  const [selectedTransferId,   setSelectedTransferId]   = useState<string | null>(null)
+  const [selectedTransferId, setSelectedTransferId] = useState<string | null>(null)
   const [selectedInspectionId, setSelectedInspectionId] = useState<string | null>(null)
-  const [selectedSurveyId,     setSelectedSurveyId]     = useState<string | null>(null)
-  const [selectedDisposalId,   setSelectedDisposalId]   = useState<string | null>(null)
+  const [selectedSurveyId, setSelectedSurveyId] = useState<string | null>(null)
+  const [selectedDisposalId, setSelectedDisposalId] = useState<string | null>(null)
 
-  // Quick-action mutations (used by row actions in tab list views)
-  const approveTransfer       = useApproveTransfer()
-  const rejectTransfer        = useRejectTransfer()
-  const ackTransfer           = useAcknowledgeTransfer()
-  const startInspection       = useStartInspection()
-  const completeInspection    = useCompleteInspection()
-  const approveReview         = useApproveInspectionReview()
-  const startSurvey           = useStartSurvey()
-  const completeSurvey        = useCompleteSurvey()
-  const submitSurvey          = useSubmitSurveyForApproval()
-  const approveSurvey         = useApproveSurvey()
-  const submitDisposalReview  = useSubmitDisposalForReview()
-  const approveDisposalReview = useApproveDisposalReview()
-  const approveDisposal       = useApproveDisposal()
-  const rejectDisposal        = useRejectDisposal()
-  const executeDisposal       = useExecuteDisposal()
-  const completeDisposal      = useCompleteDisposal()
+  const selectedAssetIds = useMemo(
+    () => Array.from(selection.selectedIds),
+    [selection.selectedIds],
+  )
+
+  const anyDrawerOpen =
+    assetFormOpen ||
+    changeStatusOpen ||
+    changeLocationOpen ||
+    transferOpen ||
+    bulkTransferOpen ||
+    bulkInspectionOpen ||
+    bulkSurveyOpen ||
+    bulkDisposalOpen ||
+    bulkChangeStatusOpen ||
+    initiateTransferOpen ||
+    scheduleInspectionOpen ||
+    createSurveyOpen ||
+    createDisposalOpen
+
+  const drawerProps = {
+    assetFormOpen,
+    onAssetFormOpenChange: setAssetFormOpen,
+    assetFormMode,
+    selectedAsset,
+    selectedDraft,
+    changeStatusOpen,
+    onChangeStatusOpenChange: setChangeStatusOpen,
+    changeLocationOpen,
+    onChangeLocationOpenChange: setChangeLocationOpen,
+    transferOpen,
+    onTransferOpenChange: setTransferOpen,
+    bulkTransferOpen,
+    onBulkTransferOpenChange: setBulkTransferOpen,
+    bulkTransferAssetIds: selectedAssetIds,
+    onClearSelection: selection.clearSelection,
+    bulkInspectionOpen,
+    onBulkInspectionOpenChange: setBulkInspectionOpen,
+    bulkInspectionAssetIds: selectedAssetIds,
+    bulkSurveyOpen,
+    onBulkSurveyOpenChange: setBulkSurveyOpen,
+    bulkSurveyAssetIds: selectedAssetIds,
+    bulkDisposalOpen,
+    onBulkDisposalOpenChange: setBulkDisposalOpen,
+    bulkDisposalAssetIds: selectedAssetIds,
+    bulkChangeStatusOpen,
+    onBulkChangeStatusOpenChange: setBulkChangeStatusOpen,
+    bulkChangeStatusAssetIds: selectedAssetIds,
+    initiateTransferOpen,
+    onInitiateTransferOpenChange: setInitiateTransferOpen,
+    scheduleInspectionOpen,
+    onScheduleInspectionOpenChange: setScheduleInspectionOpen,
+    createSurveyOpen,
+    onCreateSurveyOpenChange: setCreateSurveyOpen,
+    createDisposalOpen,
+    onCreateDisposalOpenChange: setCreateDisposalOpen,
+  }
 
   const toggleColumn = (key: string) => {
-    setColumns((prev) => prev.map((c) => c.key === key ? { ...c, visible: !c.visible } : c))
+    setColumns((prev) => prev.map((c) => (c.key === key ? { ...c, visible: !c.visible } : c)))
   }
 
   const handleViewDetail = (asset: EnhancedAsset) => {
@@ -131,20 +147,10 @@ export default function AssetsPage() {
     setAssetFormOpen(true)
   }
 
-  const handleChangeStatus = () => setChangeStatusOpen(true)
-  const handleChangeLocation = () => setChangeLocationOpen(true)
-  const handleTransfer = () => setTransferOpen(true)
-
   const handleBackToList = () => {
     setViewMode('list')
     setSelectedAsset(null)
   }
-
-  const handleBulkTransfer = () => setBulkTransferOpen(true)
-  const handleBulkInspection = () => setBulkInspectionOpen(true)
-  const handleBulkSurvey = () => setBulkSurveyOpen(true)
-  const handleBulkDisposal = () => setBulkDisposalOpen(true)
-  const handleBulkChangeStatus = () => setBulkChangeStatusOpen(true)
 
   const handleRegisterFromDraft = (draft: DraftAsset) => {
     setSelectedDraft(draft)
@@ -153,72 +159,71 @@ export default function AssetsPage() {
   }
 
   if (isLoading) {
-    return <div className="p-6 text-muted-foreground">Loading assets...</div>
+    return <RouteLoading />
   }
 
-  // ── Full-page detail views (replace entire page content) ──────────────────
   if (viewMode === 'detail' && selectedAsset) {
     return (
       <>
-        <AssetDetailView
-          asset={selectedAsset}
-          onBack={handleBackToList}
-          onEdit={handleEdit}
-          onChangeStatus={handleChangeStatus}
-          onChangeLocation={handleChangeLocation}
-          onTransferAsset={handleTransfer}
-        />
-        <ChangeStatusDrawer open={changeStatusOpen} onOpenChange={setChangeStatusOpen} asset={selectedAsset} />
-        <ChangeLocationDrawer open={changeLocationOpen} onOpenChange={setChangeLocationOpen} asset={selectedAsset} />
-        <TransferAssetDrawer open={transferOpen} onOpenChange={setTransferOpen} asset={selectedAsset} />
-        <AssetFormDrawer
-          open={assetFormOpen}
-          onOpenChange={setAssetFormOpen}
-          mode={assetFormMode}
-          asset={selectedAsset}
-          draft={selectedDraft}
-        />
+        <Suspense fallback={<RouteLoading />}>
+          <AssetDetailView
+            asset={selectedAsset}
+            onBack={handleBackToList}
+            onEdit={handleEdit}
+            onChangeStatus={() => setChangeStatusOpen(true)}
+            onChangeLocation={() => setChangeLocationOpen(true)}
+            onTransferAsset={() => setTransferOpen(true)}
+          />
+        </Suspense>
+        {anyDrawerOpen && <AssetsPageDrawers {...drawerProps} />}
       </>
     )
   }
 
   if (selectedTransferId) {
     return (
-      <TransferDetailView
-        id={selectedTransferId}
-        onBack={() => setSelectedTransferId(null)}
-      />
+      <Suspense fallback={<RouteLoading />}>
+        <TransferDetailView
+          id={selectedTransferId}
+          onBack={() => setSelectedTransferId(null)}
+        />
+      </Suspense>
     )
   }
 
   if (selectedInspectionId) {
     return (
-      <InspectionDetailView
-        id={selectedInspectionId}
-        onBack={() => setSelectedInspectionId(null)}
-      />
+      <Suspense fallback={<RouteLoading />}>
+        <InspectionDetailView
+          id={selectedInspectionId}
+          onBack={() => setSelectedInspectionId(null)}
+        />
+      </Suspense>
     )
   }
 
   if (selectedSurveyId) {
     return (
-      <SurveyDetailView
-        id={selectedSurveyId}
-        onBack={() => setSelectedSurveyId(null)}
-      />
+      <Suspense fallback={<RouteLoading />}>
+        <SurveyDetailView
+          id={selectedSurveyId}
+          onBack={() => setSelectedSurveyId(null)}
+        />
+      </Suspense>
     )
   }
 
   if (selectedDisposalId) {
     return (
-      <DisposalDetailView
-        id={selectedDisposalId}
-        onBack={() => setSelectedDisposalId(null)}
-      />
+      <Suspense fallback={<RouteLoading />}>
+        <DisposalDetailView
+          id={selectedDisposalId}
+          onBack={() => setSelectedDisposalId(null)}
+        />
+      </Suspense>
     )
   }
 
-  // ── List view ─────────────────────────────────────────────────────────────
   return (
     <>
       <div className="space-y-6 min-w-0">
@@ -241,11 +246,11 @@ export default function AssetsPage() {
             <BulkActions
               selectedCount={selection.selectedCount}
               onClearSelection={selection.clearSelection}
-              onTransfer={handleBulkTransfer}
-              onInspection={handleBulkInspection}
-              onSurvey={handleBulkSurvey}
-              onDisposal={handleBulkDisposal}
-              onChangeStatus={handleBulkChangeStatus}
+              onTransfer={() => setBulkTransferOpen(true)}
+              onInspection={() => setBulkInspectionOpen(true)}
+              onSurvey={() => setBulkSurveyOpen(true)}
+              onDisposal={() => setBulkDisposalOpen(true)}
+              onChangeStatus={() => setBulkChangeStatusOpen(true)}
             />
             <Card>
               <CardHeader>
@@ -276,112 +281,21 @@ export default function AssetsPage() {
           </>
         )}
 
-        {activeTab === 'drafts' && (
-          <DraftAssetsTab onRegister={handleRegisterFromDraft} />
-        )}
-
-        {activeTab === 'inspections' && (
-          <InspectionsTab
-            onViewDetail={(ins) => setSelectedInspectionId(ins.id)}
-            onSchedule={() => setScheduleInspectionOpen(true)}
-            onStart={(id) => startInspection.mutate(id)}
-            onComplete={(id) => completeInspection.mutate(id)}
-            onApproveReview={(id) => approveReview.mutate(id)}
-          />
-        )}
-
-        {activeTab === 'transfers' && (
-          <TransfersTab
-            onViewDetail={(t) => setSelectedTransferId(t.id)}
-            onInitiate={() => setInitiateTransferOpen(true)}
-            onApprove={(id) => approveTransfer.mutate(id)}
-            onReject={(t: TransferRequest) => setSelectedTransferId(t.id)}
-            onAcknowledge={(id) => ackTransfer.mutate(id)}
-          />
-        )}
-
-        {activeTab === 'surveys' && (
-          <SurveysTab
-            onViewDetail={(s) => setSelectedSurveyId(s.id)}
-            onCreateSurvey={() => setCreateSurveyOpen(true)}
-            onStart={(id) => startSurvey.mutate(id)}
-            onComplete={(id) => completeSurvey.mutate(id)}
-            onSubmit={(id) => submitSurvey.mutate(id)}
-            onApprove={(id) => approveSurvey.mutate(id)}
-          />
-        )}
-
-        {activeTab === 'disposals' && (
-          <DisposalsTab
-            onViewDetail={(d) => setSelectedDisposalId(d.id)}
-            onCreateDisposal={() => setCreateDisposalOpen(true)}
-            onSubmitReview={(id) => submitDisposalReview.mutate(id)}
-            onApproveReview={(id) => approveDisposalReview.mutate(id)}
-            onApprove={(id) => approveDisposal.mutate(id)}
-            onReject={(d) => setSelectedDisposalId(d.id)}
-            onExecute={(id) => executeDisposal.mutate(id)}
-            onComplete={(id) => completeDisposal.mutate(id)}
-          />
-        )}
+        <AssetWorkflowTabs
+          activeTab={activeTab}
+          onRegisterFromDraft={handleRegisterFromDraft}
+          onViewTransfer={setSelectedTransferId}
+          onViewInspection={setSelectedInspectionId}
+          onViewSurvey={setSelectedSurveyId}
+          onViewDisposal={setSelectedDisposalId}
+          onInitiateTransfer={() => setInitiateTransferOpen(true)}
+          onScheduleInspection={() => setScheduleInspectionOpen(true)}
+          onCreateSurvey={() => setCreateSurveyOpen(true)}
+          onCreateDisposal={() => setCreateDisposalOpen(true)}
+        />
       </div>
 
-      {/* Page-level drawers */}
-      <AssetFormDrawer
-        open={assetFormOpen}
-        onOpenChange={setAssetFormOpen}
-        mode={assetFormMode}
-        asset={selectedAsset}
-        draft={selectedDraft}
-      />
-      <ChangeStatusDrawer open={changeStatusOpen} onOpenChange={setChangeStatusOpen} asset={selectedAsset} />
-      <ChangeLocationDrawer open={changeLocationOpen} onOpenChange={setChangeLocationOpen} asset={selectedAsset} />
-      <TransferAssetDrawer open={transferOpen} onOpenChange={setTransferOpen} asset={selectedAsset} />
-      <BulkTransferDrawer
-        open={bulkTransferOpen}
-        onOpenChange={setBulkTransferOpen}
-        assetIds={Array.from(selection.selectedIds)}
-        onClearSelection={selection.clearSelection}
-      />
-      <BulkInspectionDrawer
-        open={bulkInspectionOpen}
-        onOpenChange={setBulkInspectionOpen}
-        assetIds={Array.from(selection.selectedIds)}
-        onClearSelection={selection.clearSelection}
-      />
-      <BulkSurveyDrawer
-        open={bulkSurveyOpen}
-        onOpenChange={setBulkSurveyOpen}
-        assetIds={Array.from(selection.selectedIds)}
-        onClearSelection={selection.clearSelection}
-      />
-      <BulkDisposalDrawer
-        open={bulkDisposalOpen}
-        onOpenChange={setBulkDisposalOpen}
-        assetIds={Array.from(selection.selectedIds)}
-        onClearSelection={selection.clearSelection}
-      />
-      <BulkChangeStatusDrawer
-        open={bulkChangeStatusOpen}
-        onOpenChange={setBulkChangeStatusOpen}
-        assetIds={Array.from(selection.selectedIds)}
-        onClearSelection={selection.clearSelection}
-      />
-      <InitiateTransferDrawer
-        open={initiateTransferOpen}
-        onOpenChange={setInitiateTransferOpen}
-      />
-      <CreateInspectionDrawer
-        open={scheduleInspectionOpen}
-        onOpenChange={setScheduleInspectionOpen}
-      />
-      <CreateSurveyDrawer
-        open={createSurveyOpen}
-        onOpenChange={setCreateSurveyOpen}
-      />
-      <CreateDisposalDrawer
-        open={createDisposalOpen}
-        onOpenChange={setCreateDisposalOpen}
-      />
+      {anyDrawerOpen && <AssetsPageDrawers {...drawerProps} />}
     </>
   )
 }
