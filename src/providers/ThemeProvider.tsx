@@ -1,1 +1,1 @@
-export { ThemeProvider, useTheme } from '../app/contexts/ThemeContext';
+export { ThemeProvider, useTheme } from '../contexts/ThemeContext';
