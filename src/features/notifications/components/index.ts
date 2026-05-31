@@ -1,2 +1,1 @@
-// src/features/notifications/components
-
+export { NotificationBell } from './NotificationBell'

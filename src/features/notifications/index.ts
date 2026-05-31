@@ -1,3 +1,3 @@
-// src/features/notifications — public API barrel
-// Populated during Sprint implementation
-
+export * from './types'
+export * from './constants'
+export * from './components'

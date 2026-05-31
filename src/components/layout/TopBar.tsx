@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import { useLocation } from 'react-router-dom'
 import { Search, X, ChevronDown, Menu, Loader2 } from 'lucide-react'
 import { cn } from '@/lib/cn'
+import { NotificationBell } from '@/features/notifications/components/NotificationBell'
 import { entityOptions } from './constants'
 import {
   DropdownMenu,
@@ -66,7 +67,7 @@ export function TopBar({ onMenuClick }: TopBarProps) {
           )}
         </div>
 
-        <div className="hidden md:flex relative">
+        <div className="hidden md:flex items-center gap-3">
           <div className="relative flex items-center w-[444px] h-14 rounded-full border border-muted bg-white shadow-[0_12px_20px_-2px_rgba(32,34,57,0.04),0_6px_8px_-4px_rgba(32,34,57,0.02)] overflow-visible">
             <div className="relative h-14 flex items-center flex-1 min-w-[203px] rounded-l-full overflow-hidden">
               <Search
@@ -136,6 +137,7 @@ export function TopBar({ onMenuClick }: TopBarProps) {
               </DropdownMenuContent>
             </DropdownMenu>
           </div>
+          <NotificationBell />
         </div>
       </div>
     </header>

@@ -1,2 +1,5 @@
-// src/features/profile/schemas
+export {
+  changePasswordSchema,
+  type ChangePasswordFormData,
+} from './changePasswordSchema'
 

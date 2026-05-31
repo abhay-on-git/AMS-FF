@@ -1,13 +1,17 @@
-import { ChevronLeft, ChevronRight, MoreHorizontal, LogOut, Globe } from 'lucide-react'
+import { useState } from 'react'
+import { ChevronLeft, ChevronRight, KeyRound, LogOut, MoreHorizontal } from 'lucide-react'
 import { useNavigate } from 'react-router-dom'
 import { cn } from '@/lib/cn'
 import { useAppSelector, useAppDispatch } from '@/store/hooks'
 import { logout } from '@/store/authSlice'
+import { ChangePasswordDialog } from '@/components/shared/ChangePasswordDialog'
+import { LanguageSwitcher } from '@/components/shared/LanguageSwitcher'
 import { NavItem } from './NavItem'
 import { mainNavItems, bottomNavItems } from './navItems'
 import {
   DropdownMenu,
   DropdownMenuContent,
+  DropdownMenuItem,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu'
 import chorusLogo from '@/assets/c41ddd9636ba0cf84d17b65494aee06fd1254e8a.png'
@@ -24,6 +28,7 @@ export function Sidebar({ collapsed, onToggleCollapse, mobileOpen, onCloseMobile
   const user = useAppSelector((state) => state.auth.user)
   const dispatch = useAppDispatch()
   const navigate = useNavigate()
+  const [changePasswordOpen, setChangePasswordOpen] = useState(false)
 
   const handleLogout = () => {
     dispatch(logout())
@@ -90,35 +95,49 @@ export function Sidebar({ collapsed, onToggleCollapse, mobileOpen, onCloseMobile
             </button>
           </DropdownMenuTrigger>
 
-          <DropdownMenuContent align="start" side="top" sideOffset={8} className="w-72 p-0 bg-sidebar border-[#4B5168]" style={{ zIndex: 99999 }}>
-            <div className="px-5 py-5 border-b border-[#4B5168]">
-              <p className="font-[Manrope] text-[13px] font-semibold text-sidebar-text-inactive uppercase tracking-wider">ACCOUNT</p>
-              <p className="font-[Manrope] text-base text-white">{user?.email || ''}</p>
+          <DropdownMenuContent
+            align="start"
+            side="top"
+            sideOffset={8}
+            className="w-72 p-0 bg-sidebar border-sidebar-border"
+            style={{ zIndex: 99999 }}
+          >
+            <div className="px-5 py-5 border-b border-sidebar-border">
+              <p className="font-[Manrope] text-[13px] font-semibold text-sidebar-text-inactive uppercase tracking-wider">
+                ACCOUNT
+              </p>
+              <p className="font-[Manrope] text-base text-sidebar-foreground">{user?.email || ''}</p>
             </div>
 
-            <div className="px-5 py-4 border-b border-[#4B5168]">
-              <div className="flex items-center justify-between">
-                <div className="flex items-center gap-2">
-                  <Globe className="w-5 h-5 text-[#60A5FA]" />
-                  <span className="font-[Manrope] text-sm font-semibold text-sidebar-text-inactive uppercase tracking-wide">LANGUAGE</span>
-                </div>
-                <div className="flex items-center gap-1.5 px-3 py-1.5 bg-[#374151] rounded">
-                  <span className="font-[Manrope] text-sm text-white">English</span>
-                </div>
+            <div className="px-5 py-4 border-b border-sidebar-border">
+              <div className="flex items-center justify-between gap-2">
+                <span className="font-[Manrope] text-sm font-semibold text-sidebar-text-inactive uppercase tracking-wide">
+                  Language
+                </span>
+                <LanguageSwitcher variant="sidebar" />
               </div>
             </div>
 
-            <div className="p-3">
-              <button
+            <div className="p-3 space-y-1">
+              <DropdownMenuItem
+                className="flex items-center gap-2 px-4 py-2.5 text-sidebar-foreground font-[Manrope] text-[14px] cursor-pointer focus:bg-sidebar-item-hover focus:text-sidebar-foreground"
+                onClick={() => setChangePasswordOpen(true)}
+              >
+                <KeyRound className="w-4 h-4" />
+                Change password
+              </DropdownMenuItem>
+              <DropdownMenuItem
+                className="flex items-center gap-2 px-4 py-2.5 text-sidebar-foreground font-[Manrope] text-[14px] cursor-pointer focus:bg-sidebar-item-hover focus:text-sidebar-foreground"
                 onClick={handleLogout}
-                className="w-full flex items-center gap-2 px-4 py-2.5 rounded text-left text-white font-[Manrope] text-[14px] hover:bg-[#374151] transition-colors"
               >
                 <LogOut className="w-4 h-4" />
                 Log out
-              </button>
+              </DropdownMenuItem>
             </div>
           </DropdownMenuContent>
         </DropdownMenu>
+
+        <ChangePasswordDialog open={changePasswordOpen} onOpenChange={setChangePasswordOpen} />
       </div>
     </div>
   )

@@ -1,2 +1,1 @@
-// src/features/notifications/constants
-
+export { MOCK_NOTIFICATIONS } from './notificationsData'
