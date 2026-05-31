@@ -1,3 +1,5 @@
+import { Navigate } from 'react-router-dom'
+
 export default function AccessPage() {
-  return <div data-page="access">Access Page</div>
+  return <Navigate to="/users?tab=roles" replace />
 }

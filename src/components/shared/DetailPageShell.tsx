@@ -1,10 +1,12 @@
 import { ChevronLeft } from 'lucide-react'
-import { cn } from '@/lib/cn'
+import { SubNavTabs } from './SubNavTabs'
+import type { SubNavTab } from './SubNavTabs'
 
 interface TabDef {
-  key:    string
-  label:  string
-  badge?: number
+  key:         string
+  label:       string
+  badge?:      number
+  badgeColor?: string
 }
 
 interface DetailPageShellProps {
@@ -70,32 +72,16 @@ export function DetailPageShell({
       {alert}
 
       {/* Tab bar */}
-      <div className="flex items-center gap-1 bg-muted/50 p-1 rounded-[4px] w-fit flex-wrap">
-        {tabs.map((tab) => (
-          <button
-            key={tab.key}
-            onClick={() => onTabChange(tab.key)}
-            className={cn(
-              'px-4 py-1.5 rounded-[4px] text-[15px] transition-colors flex items-center gap-1.5',
-              activeTab === tab.key
-                ? 'bg-[#121321] text-white shadow-sm'
-                : 'text-foreground hover:bg-muted',
-            )}
-          >
-            {tab.label}
-            {tab.badge !== undefined && tab.badge > 0 && (
-              <span className={cn(
-                'text-[11px] font-semibold rounded-full px-1.5 py-0.5 min-w-[18px] text-center',
-                activeTab === tab.key
-                  ? 'bg-white/20 text-white'
-                  : 'bg-destructive/10 text-destructive',
-              )}>
-                {tab.badge}
-              </span>
-            )}
-          </button>
-        ))}
-      </div>
+      <SubNavTabs
+        tabs={tabs.map((t): SubNavTab => ({
+          id:         t.key,
+          label:      t.label,
+          badge:      t.badge,
+          badgeColor: t.badgeColor,
+        }))}
+        activeTab={activeTab}
+        onTabChange={onTabChange}
+      />
 
       {/* Tab content */}
       {children}

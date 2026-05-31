@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { useLanguage } from "../contexts/LanguageContext";
 import { formatDate } from "../utils/dateFormatter";
 import {
   Card,
@@ -174,7 +173,6 @@ export default function UserManagement({
   createTrigger,
   onDetailViewChange,
 }: UserManagementProps) {
-  const { t } = useLanguage();
   const [viewMode, setViewMode] = useState<ViewMode>("list");
   const [selectedUser, setSelectedUser] =
     useState<UserData | null>(null);

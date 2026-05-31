@@ -2,7 +2,12 @@
 
 import * as React from"react";
 import * as DropdownMenuPrimitive from "@radix-ui/react-dropdown-menu";
-import { Check as CheckIcon, ChevronRight as ChevronRightIcon, Circle as CircleIcon } from"@mui/icons-material";
+import {
+  Check,
+  CheckBoxOutlineBlank,
+  ChevronRight as ChevronRightIcon,
+  Circle as CircleIcon,
+} from "@mui/icons-material";
 
 import { cn } from"./utils";
 
@@ -92,16 +97,27 @@ function DropdownMenuCheckboxItem({
   return (
     <DropdownMenuPrimitive.CheckboxItem
       data-slot="dropdown-menu-checkbox-item"
-      className={cn("focus:bg-accent focus:text-accent-foreground relative flex cursor-default items-center gap-2 rounded-sm py-1.5 pr-2 pl-8 text-sm outline-hidden select-none data-[disabled]:pointer-events-none data-[disabled]:opacity-50 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4",
+      className={cn(
+        "focus:bg-accent focus:text-accent-foreground relative flex cursor-default items-center gap-2 rounded-sm py-1.5 pr-2 pl-8 text-sm outline-hidden select-none",
+        "data-[disabled]:pointer-events-none data-[disabled]:opacity-50",
         className,
       )}
       checked={checked}
       {...props}
     >
-      <span className="pointer-events-none absolute left-2 flex size-3.5 items-center justify-center">
-        <DropdownMenuPrimitive.ItemIndicator>
-          <CheckIcon className="size-4" />
-        </DropdownMenuPrimitive.ItemIndicator>
+      {/* Always-visible checkbox — two-tone when checked to match Checkbox component */}
+      <span className="pointer-events-none absolute left-1.5 flex items-center justify-center">
+        {checked ? (
+          <span style={{
+            display: "inline-flex", width: 18, height: 18,
+            borderRadius: 2, background: "#b8e3e9",
+            alignItems: "center", justifyContent: "center",
+          }}>
+            <Check sx={{ fontSize: 14, color: "#1a5c68" }} />
+          </span>
+        ) : (
+          <CheckBoxOutlineBlank sx={{ fontSize: 18, color: "rgba(0,0,0,0.23)" }} />
+        )}
       </span>
       {children}
     </DropdownMenuPrimitive.CheckboxItem>
