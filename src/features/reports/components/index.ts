@@ -1,2 +1,5 @@
-// src/features/reports/components
-
+export { ReportsDashboardView } from './ReportsDashboardView'
+export { ReportsDashboardCharts } from './ReportsDashboardCharts'
+export { ReportsDashboardKPIs } from './ReportsDashboardKPIs'
+export { PendingActionsTable } from './PendingActionsTable'
+export { ComplianceGapsTable } from './ComplianceGapsTable'

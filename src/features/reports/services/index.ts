@@ -1,2 +1,1 @@
-// src/features/reports/services
-
+export * from './reportingService'

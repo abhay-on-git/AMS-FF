@@ -1,2 +1,1 @@
-// src/features/reports/constants
-
+export * from './reportingData'
