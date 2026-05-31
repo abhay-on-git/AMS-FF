@@ -1,9 +1,22 @@
-// TODO: Replace mock data with real API calls — GET /api/v1/users
+import { apiClient } from '@/services/apiClient'
+import { IS_MOCK } from '@/services/mockMode'
 import type { UserData, UserStatus, ResetPasswordData } from '../types'
+
+// ─── Filters shape ────────────────────────────────────────────────────────────
+
+export interface UserFilters {
+  search?:     string
+  role?:       string
+  fieldOffice?: string
+  status?:     string
+  page?:       number
+  pageSize?:   number
+}
+
+// ─── In-memory mock store ─────────────────────────────────────────────────────
 
 const delay = (ms: number) => new Promise((r) => setTimeout(r, ms))
 
-// In-memory store so mutations reflect in subsequent reads
 let _users: UserData[] = [
   {
     id: '1', name: 'Admin User',  email: 'admin@company.com',
@@ -37,63 +50,114 @@ let _users: UserData[] = [
   },
 ]
 
-export async function getUsers(): Promise<UserData[]> {
-  await delay(1000)
-  return [..._users]
+// ─── getUsers ─────────────────────────────────────────────────────────────────
+// GET /users?search=&role=&fieldOffice=&status=&page=&pageSize=
+
+export async function getUsers(filters?: UserFilters): Promise<UserData[]> {
+  if (IS_MOCK) {
+    await delay(600)
+    let result = [..._users]
+    if (filters?.search) {
+      const q = filters.search.toLowerCase()
+      result = result.filter(
+        (u) => u.name.toLowerCase().includes(q) || u.email.toLowerCase().includes(q),
+      )
+    }
+    if (filters?.role        && filters.role        !== 'all') result = result.filter((u) => u.role        === filters.role)
+    if (filters?.fieldOffice && filters.fieldOffice !== 'all') result = result.filter((u) => u.fieldOffice === filters.fieldOffice)
+    if (filters?.status      && filters.status      !== 'all') result = result.filter((u) => u.status      === filters.status)
+    return result
+  }
+
+  const { data } = await apiClient.get<UserData[]>('/users', { params: filters })
+  return data
 }
 
+// ─── getUserById ──────────────────────────────────────────────────────────────
+// GET /users/:id
+
 export async function getUserById(id: string): Promise<UserData> {
-  await delay(600)
-  const user = _users.find((u) => u.id === id)
-  if (!user) throw new Error(`User ${id} not found`)
-  return { ...user }
+  if (IS_MOCK) {
+    await delay(400)
+    const user = _users.find((u) => u.id === id)
+    if (!user) throw new Error(`User ${id} not found`)
+    return { ...user }
+  }
+
+  const { data } = await apiClient.get<UserData>(`/users/${id}`)
+  return data
 }
+
+// ─── createUser ───────────────────────────────────────────────────────────────
+// POST /users
 
 export async function createUser(
   data: Omit<UserData, 'id' | 'createdDate' | 'lastLogin'>,
 ): Promise<UserData> {
-  await delay(1000)
-  // TODO: POST /api/v1/users
-  const newUser: UserData = {
-    ...data,
-    id: `u-${Date.now()}`,
-    createdDate: new Date().toISOString().split('T')[0],
+  if (IS_MOCK) {
+    await delay(800)
+    const newUser: UserData = {
+      ...data,
+      id:          `u-${Date.now()}`,
+      createdDate: new Date().toISOString().split('T')[0],
+    }
+    _users = [..._users, newUser]
+    return newUser
   }
-  _users = [..._users, newUser]
-  return newUser
+
+  const { data: created } = await apiClient.post<UserData>('/users', data)
+  return created
 }
 
-export async function updateUser(
-  id: string,
-  data: Partial<UserData>,
-): Promise<UserData> {
-  await delay(1000)
-  // TODO: PATCH /api/v1/users/:id
-  _users = _users.map((u) => (u.id === id ? { ...u, ...data } : u))
-  return _users.find((u) => u.id === id)!
+// ─── updateUser ───────────────────────────────────────────────────────────────
+// PATCH /users/:id
+
+export async function updateUser(id: string, data: Partial<UserData>): Promise<UserData> {
+  if (IS_MOCK) {
+    await delay(800)
+    _users = _users.map((u) => (u.id === id ? { ...u, ...data } : u))
+    return { ..._users.find((u) => u.id === id)! }
+  }
+
+  const { data: updated } = await apiClient.patch<UserData>(`/users/${id}`, data)
+  return updated
 }
+
+// ─── deleteUser ───────────────────────────────────────────────────────────────
+// DELETE /users/:id
 
 export async function deleteUser(id: string): Promise<void> {
-  await delay(1000)
-  // TODO: DELETE /api/v1/users/:id
-  _users = _users.filter((u) => u.id !== id)
+  if (IS_MOCK) {
+    await delay(600)
+    _users = _users.filter((u) => u.id !== id)
+    return
+  }
+
+  await apiClient.delete(`/users/${id}`)
 }
 
-export async function resetPassword(
-  id: string,
-  _data: ResetPasswordData,
-): Promise<void> {
-  await delay(1000)
-  // TODO: POST /api/v1/users/:id/reset-password
-  // _data carries method, newPassword, forceChange, notifyUser, revokeOtherSessions
+// ─── resetPassword ────────────────────────────────────────────────────────────
+// POST /users/:id/reset-password
+
+export async function resetPassword(id: string, data: ResetPasswordData): Promise<void> {
+  if (IS_MOCK) {
+    await delay(800)
+    return
+  }
+
+  await apiClient.post(`/users/${id}/reset-password`, data)
 }
 
-export async function toggleUserStatus(
-  id: string,
-  status: UserStatus,
-): Promise<UserData> {
-  await delay(1000)
-  // TODO: PATCH /api/v1/users/:id/status
-  _users = _users.map((u) => (u.id === id ? { ...u, status } : u))
-  return _users.find((u) => u.id === id)!
+// ─── toggleUserStatus ─────────────────────────────────────────────────────────
+// PATCH /users/:id/status   Body: { status }
+
+export async function toggleUserStatus(id: string, status: UserStatus): Promise<UserData> {
+  if (IS_MOCK) {
+    await delay(600)
+    _users = _users.map((u) => (u.id === id ? { ...u, status } : u))
+    return { ..._users.find((u) => u.id === id)! }
+  }
+
+  const { data } = await apiClient.patch<UserData>(`/users/${id}/status`, { status })
+  return data
 }

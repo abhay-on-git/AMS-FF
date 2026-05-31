@@ -1,9 +1,18 @@
-// TODO: Replace mock data with real API calls — GET /api/v1/roles
-import type { Role, ModulePermission } from '../types'
+import { apiClient } from '@/services/apiClient'
+import { IS_MOCK } from '@/services/mockMode'
+import type { Role, ModulePermission, RoleType, RoleCategory } from '../types'
+
+// ─── Filters shape ────────────────────────────────────────────────────────────
+
+export interface RoleFilters {
+  search?:   string
+  type?:     RoleType
+  category?: RoleCategory
+}
+
+// ─── Mock seed data ───────────────────────────────────────────────────────────
 
 const delay = (ms: number) => new Promise((r) => setTimeout(r, ms))
-
-// ── Seed data (mirrors legacy RoleManagement.tsx) ────────────────────────────
 
 const fieldOfficesList = [
   { officeId: '1', officeName: 'Amman Office',      code: 'FO-AMM', location: 'Amman, Jordan',       granted: true },
@@ -43,13 +52,13 @@ const defaultModulePermissions: ModulePermission[] = [
       { field: 'vendor_info',    label: 'Vendor/Supplier Info',  restricted: false, description: 'Vendor contacts and contract details' },
     ],
   },
-  { module: 'Categories',    icon: '🏷️', view: true,  create: true,  edit: true,  approve: false, delete: true,  export: true,  subModules: [], fieldRestrictions: [] },
-  { module: 'Locations',     icon: '📍', view: true,  create: false, edit: false, approve: false, delete: false, export: true,  subModules: [], fieldRestrictions: [] },
+  { module: 'Categories',            icon: '🏷️', view: true,  create: true,  edit: true,  approve: false, delete: true,  export: true,  subModules: [], fieldRestrictions: [] },
+  { module: 'Locations',             icon: '📍', view: true,  create: false, edit: false, approve: false, delete: false, export: true,  subModules: [], fieldRestrictions: [] },
   {
     module: 'Asset Lifecycle', icon: '🔄',
     view: true, create: false, edit: true, approve: true, delete: false, export: true,
     subModules: [
-      { name: 'Lifecycle Transitions', view: true,  create: false, edit: true,  approve: true,  delete: false, export: true },
+      { name: 'Lifecycle Transitions', view: true,  create: false, edit: true,  approve: true,  delete: false, export: true  },
       { name: 'Admin Override',        view: false, create: false, edit: false, approve: false, delete: false, export: false },
     ],
     fieldRestrictions: [],
@@ -87,125 +96,169 @@ const defaultModulePermissions: ModulePermission[] = [
 const fullAccess = (): ModulePermission[] =>
   defaultModulePermissions.map((m) => ({
     ...m, view: true, create: true, edit: true, approve: true, delete: true, export: true,
-    subModules:         m.subModules.map((s) => ({ ...s, view: true, create: true, edit: true, approve: true, delete: true, export: true })),
-    fieldRestrictions:  m.fieldRestrictions.map((f) => ({ ...f, restricted: false })),
+    subModules:        m.subModules.map((s) => ({ ...s, view: true, create: true, edit: true, approve: true, delete: true, export: true })),
+    fieldRestrictions: m.fieldRestrictions.map((f) => ({ ...f, restricted: false })),
   }))
 
 const readOnly = (): ModulePermission[] =>
   defaultModulePermissions.map((m) => ({
     ...m, view: true, create: false, edit: false, approve: false, delete: false, export: true,
-    subModules:         m.subModules.map((s) => ({ ...s, view: true, create: false, edit: false, approve: false, delete: false, export: true })),
-    fieldRestrictions:  m.fieldRestrictions.map((f) => ({ ...f, restricted: false })),
+    subModules:        m.subModules.map((s) => ({ ...s, view: true, create: false, edit: false, approve: false, delete: false, export: true })),
+    fieldRestrictions: m.fieldRestrictions.map((f) => ({ ...f, restricted: false })),
   }))
 
 let _roles: Role[] = [
   {
     id: '1', name: 'Administrator', type: 'system', category: 'administrator',
     userCount: 3,  createdDate: '2024-01-01', lastModified: '2025-12-15', isActive: true, allLocations: true,
-    permissions: fullAccess(),
-    locationAccess: fieldOfficesList.map((f) => ({ ...f, granted: true })),
+    permissions: fullAccess(), locationAccess: fieldOfficesList.map((f) => ({ ...f, granted: true })),
     description: 'Full access to all functionalities, including asset registration, editing, transfers, lifecycle management, user management, and reporting.',
   },
   {
     id: '2', name: 'Standard User', type: 'system', category: 'standard',
     userCount: 15, createdDate: '2024-01-01', lastModified: '2025-11-20', isActive: true, allLocations: false,
-    permissions: defaultModulePermissions,
-    locationAccess: fieldOfficesList.map((f, i) => ({ ...f, granted: i < 2 })),
+    permissions: defaultModulePermissions, locationAccess: fieldOfficesList.map((f, i) => ({ ...f, granted: i < 2 })),
     description: 'Can register and update asset information, perform transfers, submit disposal requests, and run reports for their assigned region.',
   },
   {
     id: '3', name: 'Auditor', type: 'system', category: 'auditor',
     userCount: 4,  createdDate: '2024-01-01', lastModified: '2025-10-10', isActive: true, allLocations: true,
-    permissions: readOnly(),
-    locationAccess: fieldOfficesList.map((f) => ({ ...f, granted: true })),
+    permissions: readOnly(), locationAccess: fieldOfficesList.map((f) => ({ ...f, granted: true })),
     description: 'View-only access to all asset data, history, and reports for audit and compliance purposes.',
     externalAuditorName: 'Rachel Anderson', auditFirm: 'KPMG International',
   },
   {
     id: '4', name: 'Approver / Reviewer', type: 'system', category: 'approver',
     userCount: 6,  createdDate: '2024-01-01', lastModified: '2025-12-01', isActive: true, allLocations: false,
-    permissions: defaultModulePermissions,
-    locationAccess: fieldOfficesList.map((f, i) => ({ ...f, granted: i < 3 })),
+    permissions: defaultModulePermissions, locationAccess: fieldOfficesList.map((f, i) => ({ ...f, granted: i < 3 })),
     description: 'May approve asset transfers, survey cases, disposal requests, or lifecycle changes based on workflow rules.',
   },
   {
     id: '5', name: 'Disposal Focal Point', type: 'custom', category: 'custom',
     userCount: 3,  createdDate: '2024-06-15', lastModified: '2025-11-05', isActive: true, allLocations: false,
-    permissions: defaultModulePermissions,
-    locationAccess: fieldOfficesList.map((f, i) => ({ ...f, granted: i === 0 })),
+    permissions: defaultModulePermissions, locationAccess: fieldOfficesList.map((f, i) => ({ ...f, granted: i === 0 })),
     description: 'Specialized role for managing asset disposal workflows, including creating disposal requests, conducting surveys, and generating disposal reports.',
   },
   {
     id: '6', name: 'PDA User', type: 'custom', category: 'custom',
     userCount: 8,  createdDate: '2024-08-20', lastModified: '2025-09-12', isActive: true, allLocations: false,
-    permissions: defaultModulePermissions,
-    locationAccess: fieldOfficesList.map((f, i) => ({ ...f, granted: i < 2 })),
+    permissions: defaultModulePermissions, locationAccess: fieldOfficesList.map((f, i) => ({ ...f, granted: i < 2 })),
     description: 'Mobile-only access for PDA/handheld device users performing inventory scans, asset verification, and basic lookups in the field.',
   },
 ]
 
-// ── Service functions ─────────────────────────────────────────────────────────
+// ─── getRoles ─────────────────────────────────────────────────────────────────
+// GET /roles?search=&type=&category=
 
-export async function getRoles(): Promise<Role[]> {
-  await delay(1000)
-  return [..._roles]
+export async function getRoles(filters?: RoleFilters): Promise<Role[]> {
+  if (IS_MOCK) {
+    await delay(600)
+    let result = [..._roles]
+    if (filters?.search) {
+      const q = filters.search.toLowerCase()
+      result = result.filter(
+        (r) => r.name.toLowerCase().includes(q) || r.description.toLowerCase().includes(q),
+      )
+    }
+    if (filters?.type)     result = result.filter((r) => r.type     === filters.type)
+    if (filters?.category) result = result.filter((r) => r.category === filters.category)
+    return result
+  }
+
+  const { data } = await apiClient.get<Role[]>('/roles', { params: filters })
+  return data
 }
+
+// ─── getRoleById ──────────────────────────────────────────────────────────────
+// GET /roles/:id
 
 export async function getRoleById(id: string): Promise<Role> {
-  await delay(600)
-  const role = _roles.find((r) => r.id === id)
-  if (!role) throw new Error(`Role ${id} not found`)
-  return { ...role }
+  if (IS_MOCK) {
+    await delay(400)
+    const role = _roles.find((r) => r.id === id)
+    if (!role) throw new Error(`Role ${id} not found`)
+    return { ...role }
+  }
+
+  const { data } = await apiClient.get<Role>(`/roles/${id}`)
+  return data
 }
+
+// ─── createRole ───────────────────────────────────────────────────────────────
+// POST /roles
 
 export async function createRole(
   data: Omit<Role, 'id' | 'createdDate' | 'lastModified' | 'userCount'>,
 ): Promise<Role> {
-  await delay(1000)
-  // TODO: POST /api/v1/roles
-  const now = new Date().toISOString().split('T')[0]
-  const newRole: Role = { ...data, id: `r-${Date.now()}`, userCount: 0, createdDate: now, lastModified: now }
-  _roles = [..._roles, newRole]
-  return newRole
+  if (IS_MOCK) {
+    await delay(800)
+    const now     = new Date().toISOString().split('T')[0]
+    const newRole = { ...data, id: `r-${Date.now()}`, userCount: 0, createdDate: now, lastModified: now }
+    _roles = [..._roles, newRole]
+    return newRole
+  }
+
+  const { data: created } = await apiClient.post<Role>('/roles', data)
+  return created
 }
+
+// ─── updateRole ───────────────────────────────────────────────────────────────
+// PATCH /roles/:id
 
 export async function updateRole(id: string, data: Partial<Role>): Promise<Role> {
-  await delay(1000)
-  // TODO: PATCH /api/v1/roles/:id
-  const now = new Date().toISOString().split('T')[0]
-  _roles = _roles.map((r) => (r.id === id ? { ...r, ...data, lastModified: now } : r))
-  return _roles.find((r) => r.id === id)!
+  if (IS_MOCK) {
+    await delay(800)
+    const now = new Date().toISOString().split('T')[0]
+    _roles    = _roles.map((r) => (r.id === id ? { ...r, ...data, lastModified: now } : r))
+    return { ..._roles.find((r) => r.id === id)! }
+  }
+
+  const { data: updated } = await apiClient.patch<Role>(`/roles/${id}`, data)
+  return updated
 }
+
+// ─── deleteRole ───────────────────────────────────────────────────────────────
+// DELETE /roles/:id
 
 export async function deleteRole(id: string): Promise<void> {
-  await delay(1000)
-  // TODO: DELETE /api/v1/roles/:id
-  _roles = _roles.filter((r) => r.id !== id)
+  if (IS_MOCK) {
+    await delay(600)
+    _roles = _roles.filter((r) => r.id !== id)
+    return
+  }
+
+  await apiClient.delete(`/roles/${id}`)
 }
+
+// ─── cloneRole ────────────────────────────────────────────────────────────────
+// POST /roles/:id/clone
 
 export async function cloneRole(id: string): Promise<Role> {
-  await delay(1000)
-  // TODO: POST /api/v1/roles/:id/clone
-  const source = _roles.find((r) => r.id === id)
-  if (!source) throw new Error(`Role ${id} not found`)
-  const now = new Date().toISOString().split('T')[0]
-  const cloned: Role = {
-    ...source,
-    id: `r-${Date.now()}`,
-    name: `${source.name} (Copy)`,
-    type: 'custom',
-    userCount: 0,
-    createdDate: now,
-    lastModified: now,
+  if (IS_MOCK) {
+    await delay(800)
+    const source = _roles.find((r) => r.id === id)
+    if (!source) throw new Error(`Role ${id} not found`)
+    const now    = new Date().toISOString().split('T')[0]
+    const cloned = { ...source, id: `r-${Date.now()}`, name: `${source.name} (Copy)`, type: 'custom' as const, userCount: 0, createdDate: now, lastModified: now }
+    _roles = [..._roles, cloned]
+    return cloned
   }
-  _roles = [..._roles, cloned]
-  return cloned
+
+  const { data } = await apiClient.post<Role>(`/roles/${id}/clone`)
+  return data
 }
 
+// ─── updatePermissions ────────────────────────────────────────────────────────
+// PATCH /roles/:id/permissions
+
 export async function updatePermissions(id: string, permissions: ModulePermission[]): Promise<Role> {
-  await delay(1000)
-  // TODO: PATCH /api/v1/roles/:id/permissions
-  const now = new Date().toISOString().split('T')[0]
-  _roles = _roles.map((r) => (r.id === id ? { ...r, permissions, lastModified: now } : r))
-  return _roles.find((r) => r.id === id)!
+  if (IS_MOCK) {
+    await delay(800)
+    const now = new Date().toISOString().split('T')[0]
+    _roles    = _roles.map((r) => (r.id === id ? { ...r, permissions, lastModified: now } : r))
+    return { ..._roles.find((r) => r.id === id)! }
+  }
+
+  const { data } = await apiClient.patch<Role>(`/roles/${id}/permissions`, { permissions })
+  return data
 }

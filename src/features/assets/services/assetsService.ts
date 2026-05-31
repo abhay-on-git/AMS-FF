@@ -1,11 +1,11 @@
+import { apiClient } from '@/services/apiClient'
+import { IS_MOCK } from '@/services/mockMode'
 import type { EnhancedAsset } from '../types'
 import type { DraftAsset, RegistrationForm } from '../types/draftTypes'
 import type { TransferRequest } from '../types/transferTypes'
 import type { InspectionRequest } from '../types/inspectionTypes'
 import type { SurveyRequest } from '../types/surveyTypes'
 import type { DisposalRequest } from '../types/disposalTypes'
-
-// TODO: Replace with real API call via apiClient
 const mockAssets: EnhancedAsset[] = [
   {
     id: '1', assetId: 'LAP-001234', epc: 'E2801160600002040000001234', barcode: '123456789012',
@@ -133,8 +133,58 @@ const mockAssets: EnhancedAsset[] = [
 ]
 
 export async function getAssets(): Promise<EnhancedAsset[]> {
-  // TODO: Replace with apiClient.get('/assets')
-  return Promise.resolve(mockAssets)
+  if (IS_MOCK) return Promise.resolve(mockAssets)
+  const { data } = await apiClient.get<EnhancedAsset[]>('/assets')
+  return data
+}
+
+// GET /assets/:id
+export async function getAssetById(id: string): Promise<EnhancedAsset> {
+  if (IS_MOCK) {
+    const asset = mockAssets.find((a) => a.id === id)
+    if (!asset) throw new Error(`Asset ${id} not found`)
+    return { ...asset }
+  }
+  const { data } = await apiClient.get<EnhancedAsset>(`/assets/${id}`)
+  return data
+}
+
+// POST /assets
+export async function createAsset(
+  payload: Omit<EnhancedAsset, 'id'>,
+): Promise<EnhancedAsset> {
+  if (IS_MOCK) {
+    const created = { ...payload, id: `a-${Date.now()}` }
+    mockAssets.push(created)
+    return created
+  }
+  const { data } = await apiClient.post<EnhancedAsset>('/assets', payload)
+  return data
+}
+
+// PATCH /assets/:id
+export async function updateAsset(
+  id: string,
+  payload: Partial<EnhancedAsset>,
+): Promise<EnhancedAsset> {
+  if (IS_MOCK) {
+    const idx = mockAssets.findIndex((a) => a.id === id)
+    if (idx === -1) throw new Error(`Asset ${id} not found`)
+    mockAssets[idx] = { ...mockAssets[idx], ...payload }
+    return { ...mockAssets[idx] }
+  }
+  const { data } = await apiClient.patch<EnhancedAsset>(`/assets/${id}`, payload)
+  return data
+}
+
+// DELETE /assets/:id
+export async function deleteAsset(id: string): Promise<void> {
+  if (IS_MOCK) {
+    const idx = mockAssets.findIndex((a) => a.id === id)
+    if (idx !== -1) mockAssets.splice(idx, 1)
+    return
+  }
+  await apiClient.delete(`/assets/${id}`)
 }
 
 // TODO: Replace with apiClient.get('/assets/drafts') — SAP GRN sync feed
@@ -239,18 +289,20 @@ const mockDrafts: DraftAsset[] = [
 ]
 
 export async function getDrafts(): Promise<DraftAsset[]> {
-  // TODO: Replace with apiClient.get('/assets/drafts')
-  return Promise.resolve(mockDrafts)
+  if (IS_MOCK) return Promise.resolve(mockDrafts)
+  const { data } = await apiClient.get<DraftAsset[]>('/assets/drafts')
+  return data
 }
 
 export async function registerAssetFromDraft(
   draftId: string,
   data: RegistrationForm,
 ): Promise<void> {
-  // TODO: Replace with apiClient.post(`/assets/drafts/${draftId}/register`, data)
-  await new Promise<void>((resolve) => setTimeout(resolve, 1000))
-  void draftId
-  void data
+  if (IS_MOCK) {
+    await new Promise<void>((resolve) => setTimeout(resolve, 1000))
+    return
+  }
+  await apiClient.post(`/assets/drafts/${draftId}/register`, data)
 }
 
 // ── Transfers ─────────────────────────────────────────────────────────────────
@@ -436,57 +488,69 @@ const mockTransfers: TransferRequest[] = [
 ]
 
 export async function getTransfers(): Promise<TransferRequest[]> {
-  // TODO: Replace with apiClient.get('/assets/transfers')
-  return Promise.resolve(mockTransfers)
+  if (IS_MOCK) return Promise.resolve(mockTransfers)
+  const { data } = await apiClient.get<TransferRequest[]>('/transfers')
+  return data
 }
 
 export async function initiateTransfer(data: Record<string, unknown>): Promise<void> {
-  // TODO: Replace with apiClient.post('/assets/transfers', data)
-  await new Promise<void>((resolve) => setTimeout(resolve, 1000))
-  void data
+  if (IS_MOCK) {
+    await new Promise<void>((resolve) => setTimeout(resolve, 1000))
+    return
+  }
+  await apiClient.post('/transfers', data)
 }
 
 export async function approveTransfer(id: string): Promise<void> {
-  // TODO: Replace with apiClient.post(`/assets/transfers/${id}/approve`)
-  await new Promise<void>((resolve) => setTimeout(resolve, 800))
-  const tr = mockTransfers.find((t) => t.id === id)
-  if (tr) {
-    tr.status = 'pending-acknowledgment'
-    tr.approvedBy = 'Current User'
-    tr.approvedDate = new Date().toISOString()
-    tr.signatures = tr.signatures.map((s) =>
-      s.role === 'approving_officer' ? { ...s, status: 'signed' as const, signedDate: new Date().toISOString() } : s
-    )
-    tr.auditTrail.push({ id: `audit-${Date.now()}`, action: 'Transfer Approved', user: 'Current User', timestamp: new Date().toISOString() })
+  if (IS_MOCK) {
+    await new Promise<void>((resolve) => setTimeout(resolve, 800))
+    const tr = mockTransfers.find((t) => t.id === id)
+    if (tr) {
+      tr.status = 'pending-acknowledgment'
+      tr.approvedBy = 'Current User'
+      tr.approvedDate = new Date().toISOString()
+      tr.signatures = tr.signatures.map((s) =>
+        s.role === 'approving_officer' ? { ...s, status: 'signed' as const, signedDate: new Date().toISOString() } : s
+      )
+      tr.auditTrail.push({ id: `audit-${Date.now()}`, action: 'Transfer Approved', user: 'Current User', timestamp: new Date().toISOString() })
+    }
+    return
   }
+  await apiClient.patch(`/transfers/${id}/approve`)
 }
 
 export async function rejectTransfer(id: string, reason: string): Promise<void> {
-  // TODO: Replace with apiClient.post(`/assets/transfers/${id}/reject`, { reason })
-  await new Promise<void>((resolve) => setTimeout(resolve, 800))
-  const tr = mockTransfers.find((t) => t.id === id)
-  if (tr) {
-    tr.status = 'rejected'
-    tr.rejectedBy = 'Current User'
-    tr.rejectedDate = new Date().toISOString()
-    tr.rejectionReason = reason
-    tr.signatures = tr.signatures.map((s) =>
-      s.role === 'approving_officer' ? { ...s, status: 'declined' as const } : s
-    )
-    tr.auditTrail.push({ id: `audit-${Date.now()}`, action: 'Transfer Rejected', user: 'Current User', timestamp: new Date().toISOString(), details: `Reason: ${reason}` })
+  if (IS_MOCK) {
+    await new Promise<void>((resolve) => setTimeout(resolve, 800))
+    const tr = mockTransfers.find((t) => t.id === id)
+    if (tr) {
+      tr.status = 'rejected'
+      tr.rejectedBy = 'Current User'
+      tr.rejectedDate = new Date().toISOString()
+      tr.rejectionReason = reason
+      tr.signatures = tr.signatures.map((s) =>
+        s.role === 'approving_officer' ? { ...s, status: 'declined' as const } : s
+      )
+      tr.auditTrail.push({ id: `audit-${Date.now()}`, action: 'Transfer Rejected', user: 'Current User', timestamp: new Date().toISOString(), details: `Reason: ${reason}` })
+    }
+    return
   }
+  await apiClient.patch(`/transfers/${id}/reject`, { reason })
 }
 
 export async function acknowledgeTransfer(id: string): Promise<void> {
-  // TODO: Replace with apiClient.post(`/assets/transfers/${id}/acknowledge`)
-  await new Promise<void>((resolve) => setTimeout(resolve, 800))
-  const tr = mockTransfers.find((t) => t.id === id)
-  if (tr) {
-    tr.status = 'completed'
-    tr.acknowledged = true
-    tr.completedDate = new Date().toISOString()
-    tr.auditTrail.push({ id: `audit-${Date.now()}`, action: 'Transfer Acknowledged', user: 'Current User', timestamp: new Date().toISOString() })
+  if (IS_MOCK) {
+    await new Promise<void>((resolve) => setTimeout(resolve, 800))
+    const tr = mockTransfers.find((t) => t.id === id)
+    if (tr) {
+      tr.status = 'completed'
+      tr.acknowledged = true
+      tr.completedDate = new Date().toISOString()
+      tr.auditTrail.push({ id: `audit-${Date.now()}`, action: 'Transfer Acknowledged', user: 'Current User', timestamp: new Date().toISOString() })
+    }
+    return
   }
+  await apiClient.patch(`/transfers/${id}/acknowledge`)
 }
 
 // ── Inspections ───────────────────────────────────────────────────────────────
@@ -657,8 +721,9 @@ const mockInspections: InspectionRequest[] = [
 ]
 
 export async function getInspections(): Promise<InspectionRequest[]> {
-  // TODO: Replace with apiClient.get('/assets/inspections')
-  return Promise.resolve(mockInspections)
+  if (IS_MOCK) return Promise.resolve(mockInspections)
+  const { data } = await apiClient.get<InspectionRequest[]>('/inspections')
+  return data
 }
 
 export async function createInspection(data: Record<string, unknown>): Promise<void> {
@@ -864,8 +929,9 @@ const mockSurveys: SurveyRequest[] = [
 ]
 
 export async function getSurveys(): Promise<SurveyRequest[]> {
-  // TODO: Replace with apiClient.get('/assets/surveys')
-  return Promise.resolve(mockSurveys)
+  if (IS_MOCK) return Promise.resolve(mockSurveys)
+  const { data } = await apiClient.get<SurveyRequest[]>('/surveys')
+  return data
 }
 
 export async function createSurvey(data: Record<string, unknown>): Promise<void> {
@@ -1116,8 +1182,9 @@ const mockDisposals: DisposalRequest[] = [
 ]
 
 export async function getDisposals(): Promise<DisposalRequest[]> {
-  // TODO: Replace with apiClient.get('/assets/disposals')
-  return Promise.resolve(mockDisposals)
+  if (IS_MOCK) return Promise.resolve(mockDisposals)
+  const { data } = await apiClient.get<DisposalRequest[]>('/disposals')
+  return data
 }
 
 export async function createDisposal(data: Record<string, unknown>): Promise<void> {

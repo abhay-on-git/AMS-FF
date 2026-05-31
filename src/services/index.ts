@@ -1,2 +1,2 @@
-// src/services — API client barrel
-// Populated in Phase 4.4
+export { apiClient } from './apiClient'
+export { IS_MOCK } from './mockMode'
