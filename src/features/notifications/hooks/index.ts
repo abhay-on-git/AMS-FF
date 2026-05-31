@@ -1,2 +1,1 @@
-// src/features/notifications/hooks
-
+export { useNotifications, useMarkNotificationRead, useMarkAllNotificationsRead } from './useNotifications'

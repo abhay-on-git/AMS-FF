@@ -1,1 +1,5 @@
 export { NotificationBell } from './NotificationBell'
+export { NotificationsView } from './NotificationsView'
+export { NotificationTypeIcon } from './NotificationTypeIcon'
+export { NotificationStatsCards } from './NotificationStatsCards'
+export { NotificationListCard, NotificationListHeader } from './NotificationListCard'

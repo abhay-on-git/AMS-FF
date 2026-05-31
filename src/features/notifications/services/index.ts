@@ -1,2 +1,5 @@
-// src/features/notifications/services
-
+export {
+  getNotifications,
+  markNotificationRead,
+  markAllNotificationsRead,
+} from './notificationsService'

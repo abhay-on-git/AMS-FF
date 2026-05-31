@@ -1,35 +1,24 @@
 import { useMemo, useState } from 'react'
 import { Link } from 'react-router-dom'
-import {
-  AlertCircle,
-  ArrowRight,
-  Bell,
-  CheckCircle2,
-  Info,
-} from 'lucide-react'
+import { ArrowRight, Bell } from 'lucide-react'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover'
 import { ScrollArea } from '@/components/ui/scroll-area'
 import { cn } from '@/lib/cn'
-import { MOCK_NOTIFICATIONS } from '../constants/notificationsData'
-import type { AppNotification, NotificationType } from '../types'
-
-function NotificationTypeIcon({ type }: { type: NotificationType }) {
-  switch (type) {
-    case 'warning':
-      return <AlertCircle className="h-4 w-4 text-amber-600" />
-    case 'success':
-      return <CheckCircle2 className="h-4 w-4 text-green-600" />
-    case 'info':
-    default:
-      return <Info className="h-4 w-4 text-blue-600" />
-  }
-}
+import { NotificationTypeIcon } from './NotificationTypeIcon'
+import {
+  useMarkAllNotificationsRead,
+  useMarkNotificationRead,
+  useNotifications,
+} from '../hooks/useNotifications'
+import type { AppNotification } from '../types'
 
 export function NotificationBell() {
   const [open, setOpen] = useState(false)
-  const [notifications, setNotifications] = useState(MOCK_NOTIFICATIONS)
+  const { data: notifications = [] } = useNotifications()
+  const markRead = useMarkNotificationRead()
+  const markAllRead = useMarkAllNotificationsRead()
 
   const unreadCount = useMemo(
     () => notifications.filter((n) => !n.isRead).length,
@@ -37,16 +26,6 @@ export function NotificationBell() {
   )
 
   const recent = notifications.slice(0, 5)
-
-  const markAllRead = () => {
-    setNotifications((prev) => prev.map((n) => ({ ...n, isRead: true })))
-  }
-
-  const markRead = (id: string) => {
-    setNotifications((prev) =>
-      prev.map((n) => (n.id === id ? { ...n, isRead: true } : n)),
-    )
-  }
 
   return (
     <Popover open={open} onOpenChange={setOpen}>
@@ -70,7 +49,8 @@ export function NotificationBell() {
             variant="ghost"
             size="sm"
             className="h-auto p-0 text-xs text-muted-foreground"
-            onClick={markAllRead}
+            onClick={() => markAllRead.mutate()}
+            disabled={unreadCount === 0 || markAllRead.isPending}
           >
             Mark all as read
           </Button>
@@ -83,7 +63,7 @@ export function NotificationBell() {
                 <NotificationRow
                   key={notification.id}
                   notification={notification}
-                  onRead={() => markRead(notification.id)}
+                  onRead={() => markRead.mutate(notification.id)}
                 />
               ))}
             </div>
@@ -126,7 +106,7 @@ function NotificationRow({
     >
       <div className="flex gap-3">
         <div className="mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-muted">
-          <NotificationTypeIcon type={notification.type} />
+          <NotificationTypeIcon type={notification.type} className="h-4 w-4" />
         </div>
         <div className="min-w-0 flex-1">
           <div className="mb-1 flex items-start justify-between gap-2">

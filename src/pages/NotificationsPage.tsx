@@ -1,3 +1,5 @@
+import { NotificationsView } from '@/features/notifications/components/NotificationsView'
+
 export default function NotificationsPage() {
-  return <div className="p-4"></div>
+  return <NotificationsView />
 }
