@@ -21,31 +21,31 @@ let _users: UserData[] = [
   {
     id: '1', name: 'Admin User',  email: 'admin@company.com',
     mobile: '1234567890', countryCode: '+1',
-    role: 'Admin',           fieldOffice: 'FO-AMM',
+    role: 'Admin',           fieldOffice: 'FO-LV',
     status: 'active', lastLogin: '2024-01-22 09:30:00', createdDate: '2024-01-01',
   },
   {
     id: '2', name: 'John Doe',    email: 'john.doe@company.com',
     mobile: '9876543210', countryCode: '+66',
-    role: 'Manager',         fieldOffice: 'FO-BKK',
+    role: 'Manager',         fieldOffice: 'FO-BLD',
     status: 'active', lastLogin: '2024-01-22 08:45:00', createdDate: '2024-01-10',
   },
   {
     id: '3', name: 'Jane Smith',  email: 'jane.smith@company.com',
     mobile: '5551234567', countryCode: '+855',
-    role: 'Inventory Staff', fieldOffice: 'FO-PNH',
+    role: 'Inventory Staff', fieldOffice: 'FO-MTV',
     status: 'active', lastLogin: '2024-01-21 16:20:00', createdDate: '2024-01-15',
   },
   {
     id: '4', name: 'Bob Wilson',  email: 'bob.wilson@company.com',
     mobile: '412345678',  countryCode: '+61',
-    role: 'Inventory Staff', fieldOffice: 'FO-MEL',
+    role: 'Inventory Staff', fieldOffice: 'FO-AUS',
     status: 'locked', lastLogin: '2024-01-18 14:10:00', createdDate: '2024-01-20',
   },
   {
     id: '5', name: 'Alice Brown', email: 'alice@company.com',
     mobile: '701234567',  countryCode: '+93',
-    role: 'Manager',         fieldOffice: 'FO-AFA',
+    role: 'Manager',         fieldOffice: 'FO-PHL',
     status: 'active', lastLogin: '2024-01-22 07:15:00', createdDate: '2024-01-12',
   },
 ]

@@ -1,2 +1,2 @@
-// src/features/locations/hooks
-
+export * from './useLocations'
+export * from './useLocationMutations'

@@ -1,3 +1,5 @@
+import { LocationsView } from '@/features/locations/components/LocationsView'
+
 export default function LocationsPage() {
-  return <div data-page="locations">Locations Page</div>
+  return <LocationsView />
 }

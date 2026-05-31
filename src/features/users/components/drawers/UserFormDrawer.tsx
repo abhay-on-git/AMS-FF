@@ -9,10 +9,9 @@ import { FormInput, FormSelect } from '@/components/forms'
 import { useCreateUser, useUpdateUser } from '../../hooks/useUserMutations'
 import { createUserSchema, editUserSchema } from '../../schemas/userSchemas'
 import { roleOptions, statusOptions, fieldOfficeOptions, countryCodeOptions } from '../../constants/userOptions'
+import { mockFieldOffices, mockLocationNodes } from '@/features/locations'
 import type { UserData, DrawerMode } from '../../types'
 import type { CreateUserFormData, EditUserFormData } from '../../schemas/userSchemas'
-
-const LOCATIONS = ['HQ Storage', 'Field Office A', 'Field Office B', 'Warehouse 1', 'Warehouse 2']
 
 interface UserFormDrawerProps {
   open:         boolean
@@ -52,6 +51,11 @@ export function UserFormDrawer({ open, onOpenChange, mode, user }: UserFormDrawe
   }, [open, user, isEdit, reset])
 
   const selectedLocations = (watch('assignedLocations') ?? []) as string[]
+  const selectedFieldOfficeCode = watch('fieldOffice')
+  const selectedOfficeId = mockFieldOffices.find((fo) => fo.code === selectedFieldOfficeCode)?.id
+  const assignableLocations = selectedOfficeId
+    ? mockLocationNodes.filter((n) => n.fieldOfficeId === selectedOfficeId)
+    : []
 
   const onSubmit = handleSubmit((data) => {
     const name = `${data.firstName} ${data.lastName}`.trim()
@@ -141,23 +145,32 @@ export function UserFormDrawer({ open, onOpenChange, mode, user }: UserFormDrawe
                   control={control}
                   render={({ field }) => (
                     <>
-                      {LOCATIONS.map((loc) => (
-                        <div key={loc} className="flex items-center gap-2">
-                          <Checkbox
-                            id={loc}
-                            checked={selectedLocations.includes(loc)}
-                            onCheckedChange={(checked) => {
-                              const next = checked
-                                ? [...selectedLocations, loc]
-                                : selectedLocations.filter((l) => l !== loc)
-                              field.onChange(next)
-                            }}
-                          />
-                          <Label htmlFor={loc} className="text-[13px] font-normal cursor-pointer">
-                            {loc}
-                          </Label>
-                        </div>
-                      ))}
+                      {assignableLocations.length > 0 ? (
+                        assignableLocations.map((loc) => (
+                          <div key={loc.id} className="flex items-center gap-2">
+                            <Checkbox
+                              id={loc.id}
+                              checked={selectedLocations.includes(loc.id)}
+                              onCheckedChange={(checked) => {
+                                const next = checked
+                                  ? [...selectedLocations, loc.id]
+                                  : selectedLocations.filter((l) => l !== loc.id)
+                                field.onChange(next)
+                              }}
+                            />
+                            <Label htmlFor={loc.id} className="text-[13px] font-normal cursor-pointer">
+                              {loc.name}
+                              <span className="text-muted-foreground ml-1">({loc.code})</span>
+                            </Label>
+                          </div>
+                        ))
+                      ) : (
+                        <p className="text-[13px] text-muted-foreground">
+                          {selectedFieldOfficeCode
+                            ? 'No locations for this field office.'
+                            : 'Select a field office to assign locations.'}
+                        </p>
+                      )}
                     </>
                   )}
                 />

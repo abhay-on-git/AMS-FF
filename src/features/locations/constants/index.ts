@@ -1,2 +1,1 @@
-// src/features/locations/constants
-
+export * from './locationsData'

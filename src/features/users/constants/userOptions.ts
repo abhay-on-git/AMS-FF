@@ -1,3 +1,5 @@
+import { mockFieldOffices } from '@/features/locations'
+
 export const roleOptions = [
   { value: 'Admin',                label: 'Admin' },
   { value: 'Manager',              label: 'Manager' },
@@ -16,13 +18,10 @@ export const statusOptions = [
   { value: 'locked',   label: 'Locked' },
 ]
 
-export const fieldOfficeOptions = [
-  { value: 'FO-AMM', label: 'Amman Office' },
-  { value: 'FO-AFA', label: 'Afghanistan Office' },
-  { value: 'FO-BKK', label: 'Bangkok Office' },
-  { value: 'FO-MEL', label: 'Melbourne Office' },
-  { value: 'FO-PNH', label: 'Phnom Penh Office' },
-]
+export const fieldOfficeOptions = mockFieldOffices.map((fo) => ({
+  value: fo.code,
+  label: fo.name,
+}))
 
 export const countryCodeOptions = [
   { value: '+1',   label: '+1 (US/CA)' },

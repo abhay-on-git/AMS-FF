@@ -1,2 +1,1 @@
-// src/features/locations/services
-
+export * from './locationsService'
