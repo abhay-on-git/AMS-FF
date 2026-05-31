@@ -1,2 +1,10 @@
-// src/features/dashboard/components
-
+export { DashboardView } from './DashboardView'
+export { KpiCard } from './KpiCard'
+export { AssetTrendChart } from './AssetTrendChart'
+export { CategoryPieChart } from './CategoryPieChart'
+export { AssetHealthCard } from './AssetHealthCard'
+export { PendingActionsCard } from './PendingActionsCard'
+export { RecentActivityCard } from './RecentActivityCard'
+export { InspectionProgressCard } from './InspectionProgressCard'
+export { ComplianceCard } from './ComplianceCard'
+export { SystemStatusCard } from './SystemStatusCard'
