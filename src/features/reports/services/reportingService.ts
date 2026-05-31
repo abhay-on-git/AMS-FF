@@ -2,9 +2,11 @@ import { apiClient } from '@/services/apiClient'
 import { IS_MOCK } from '@/services/mockMode'
 import type {
   ComplianceGap,
+  ComplianceGapDetailData,
   CreateSchedulePayload,
   OfficeMetrics,
   PendingAction,
+  PendingActionDetailData,
   PredefinedReport,
   ReportRow,
   SavedQuery,
@@ -16,10 +18,15 @@ import {
   PREDEFINED_REPORTS,
   SEED_SAVED_QUERIES,
   SEED_SCHEDULED_REPORTS,
+  ALL_PENDING_ACTIONS,
   filterPendingActions,
   resolveComplianceGaps,
   resolveOfficeMetrics,
 } from '../constants/reportingData'
+import {
+  resolveComplianceGapDetail,
+  resolvePendingActionDetail,
+} from '../constants/reportDetailData'
 
 let scheduledReportsCache = [...SEED_SCHEDULED_REPORTS]
 let savedQueriesCache = [...SEED_SAVED_QUERIES]
@@ -51,6 +58,26 @@ export async function getComplianceGaps(fieldOffice: string): Promise<Compliance
   const { data } = await apiClient.get<ComplianceGap[]>('/reports/compliance-gaps', {
     params: { fieldOffice },
   })
+  return data
+}
+
+export async function getPendingActionDetail(actionId: string): Promise<PendingActionDetailData | null> {
+  if (IS_MOCK) {
+    return Promise.resolve(resolvePendingActionDetail(actionId, ALL_PENDING_ACTIONS))
+  }
+  const { data } = await apiClient.get<PendingActionDetailData | null>(
+    `/reports/pending-actions/${actionId}`,
+  )
+  return data
+}
+
+export async function getComplianceGapDetail(gapType: string): Promise<ComplianceGapDetailData | null> {
+  if (IS_MOCK) {
+    return Promise.resolve(resolveComplianceGapDetail(gapType))
+  }
+  const { data } = await apiClient.get<ComplianceGapDetailData | null>(
+    `/reports/compliance-gaps/${encodeURIComponent(gapType)}`,
+  )
   return data
 }
 

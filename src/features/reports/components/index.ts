@@ -18,3 +18,5 @@ export {
   ReportPreviewDialog,
   handleReportExport,
 } from './ReportDialogs'
+export { PendingActionDetailView } from './PendingActionDetailView'
+export { ComplianceGapDetailView } from './ComplianceGapDetailView'

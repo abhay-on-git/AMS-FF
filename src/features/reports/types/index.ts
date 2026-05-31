@@ -92,6 +92,51 @@ export interface ComplianceGap {
   count: number
 }
 
+export interface ComplianceGapDetail extends ComplianceGap {
+  id: string
+  description: string
+  regulation: string
+  dueDate: string
+  assignedTo: string
+}
+
+export interface AffectedAsset {
+  id: string
+  name: string
+  tag: string
+  location: string
+  status: string
+  category: string
+  lastScanned?: string
+  issue?: string
+}
+
+export interface DetailNote {
+  date: string
+  user: string
+  note: string
+}
+
+export interface DetailTimelineEntry {
+  date: string
+  user: string
+  event: string
+}
+
+export interface PendingActionDetailData {
+  action: PendingAction
+  assets: AffectedAsset[]
+  timeline: DetailTimelineEntry[]
+  notes: DetailNote[]
+}
+
+export interface ComplianceGapDetailData {
+  gap: ComplianceGapDetail
+  assets: AffectedAsset[]
+  timeline: DetailTimelineEntry[]
+  notes: DetailNote[]
+}
+
 export interface OfficeMetrics {
   totalAssets: number
   totalValue: string
