@@ -14,6 +14,25 @@ import type {
   KpiCardItem,
 } from '../types'
 
+/** Chart/series colors — CSS var tokens from globals.css @theme */
+export const CHART_COLORS = {
+  blue: 'var(--color-chart-blue)',
+  green: 'var(--color-chart-green)',
+  yellow: 'var(--color-chart-yellow)',
+  red: 'var(--color-chart-red)',
+  purple: 'var(--color-chart-purple)',
+  orange: 'var(--color-chart-orange)',
+  teal: 'var(--color-chart-teal)',
+  pink: 'var(--color-chart-pink)',
+  brandTeal: 'var(--color-brand-teal)',
+  brandPrimary: 'var(--color-chart-3)',
+  statusActive: 'var(--color-status-active)',
+  statusPending: 'var(--color-status-pending)',
+  statusDisposed: 'var(--color-status-disposed)',
+  statusInactive: 'var(--color-status-inactive)',
+  statusDraft: 'var(--color-status-draft)',
+} as const
+
 export const TOTAL_ASSETS = 2847
 
 export const KPI_CARDS: KpiCardItem[] = [
@@ -425,21 +444,21 @@ export function getTrendPeriodLabel(
 }
 
 export const CATEGORY_DISTRIBUTION: CategoryDistributionItem[] = [
-  { name: "IT Equipment", value: 892, color: "#4F83E3" },
-  { name: "Furniture", value: 634, color: "#81CCD7" },
-  { name: "Vehicles", value: 187, color: "#EF652B" },
-  { name: "Networking", value: 412, color: "#A78BFA" },
-  { name: "Office Equip.", value: 356, color: "#34D399" },
-  { name: "Other", value: 366, color: "#94A3B8" },
+  { name: "IT Equipment", value: 892, color: CHART_COLORS.blue },
+  { name: "Furniture", value: 634, color: CHART_COLORS.brandTeal },
+  { name: "Vehicles", value: 187, color: CHART_COLORS.brandPrimary },
+  { name: "Networking", value: 412, color: CHART_COLORS.purple },
+  { name: "Office Equip.", value: 356, color: CHART_COLORS.green },
+  { name: "Other", value: 366, color: CHART_COLORS.statusInactive },
 ];
 
 export const STATUS_BREAKDOWN: StatusBreakdownItem[] = [
-  { status: "Active", count: 2654, color: "#22C55E" },
-  { status: "In Transit", count: 47, color: "#A78BFA" },
-  { status: "Maintenance", count: 68, color: "#F59E0B" },
-  { status: "Missing", count: 12, color: "#EF4444" },
-  { status: "Disposed", count: 31, color: "#94A3B8" },
-  { status: "Inactive", count: 35, color: "#CBD5E1" },
+  { status: "Active", count: 2654, color: CHART_COLORS.statusActive },
+  { status: "In Transit", count: 47, color: CHART_COLORS.purple },
+  { status: "Maintenance", count: 68, color: CHART_COLORS.statusPending },
+  { status: "Missing", count: 12, color: CHART_COLORS.statusDisposed },
+  { status: "Disposed", count: 31, color: CHART_COLORS.statusInactive },
+  { status: "Inactive", count: 35, color: CHART_COLORS.statusDraft },
 ];
 
 export const LOCATION_DATA: LocationDistributionItem[] = [

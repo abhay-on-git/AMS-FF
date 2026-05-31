@@ -39,15 +39,15 @@ function toSignatureSteps(sigs: InspectionSignature[]): SignatureStep[] {
 function InfoCard({ label, children }: { label: string; children: React.ReactNode }) {
   return (
     <div className="p-4 rounded-[6px] bg-muted/40 border flex flex-col gap-1">
-      <span className="text-[13px] text-muted-foreground">{label}</span>
-      <div className="text-[15px] font-['Manrope'] font-medium">{children}</div>
+      <span className="text-13 text-muted-foreground">{label}</span>
+      <div className="text-15 font-['Manrope'] font-medium">{children}</div>
     </div>
   )
 }
 
 function SectionLabel({ children }: { children: React.ReactNode }) {
   return (
-    <p className="text-[13px] font-semibold uppercase tracking-wide text-muted-foreground mb-3">
+    <p className="text-13 font-semibold uppercase tracking-wide text-muted-foreground mb-3">
       {children}
     </p>
   )
@@ -104,7 +104,7 @@ function OverviewTab({ inspection }: { inspection: InspectionRequest }) {
       {inspection.description && (
         <div className="p-4 rounded-[6px] bg-muted/40 border">
           <SectionLabel>Description</SectionLabel>
-          <p className="text-[15px] font-['Manrope']">{inspection.description}</p>
+          <p className="text-15 font-['Manrope']">{inspection.description}</p>
         </div>
       )}
 
@@ -112,7 +112,7 @@ function OverviewTab({ inspection }: { inspection: InspectionRequest }) {
       {inspection.overallFindings && (
         <div className="p-4 rounded-[6px] bg-muted/40 border border-l-4 border-amber-400 pl-4">
           <SectionLabel>Overall Findings</SectionLabel>
-          <p className="text-[15px] font-['Manrope']">{inspection.overallFindings}</p>
+          <p className="text-15 font-['Manrope']">{inspection.overallFindings}</p>
         </div>
       )}
 
@@ -120,7 +120,7 @@ function OverviewTab({ inspection }: { inspection: InspectionRequest }) {
       {inspection.recommendations && (
         <div className="p-4 rounded-[6px] bg-muted/40 border border-l-4 border-blue-400 pl-4">
           <SectionLabel>Recommendations</SectionLabel>
-          <p className="text-[15px] font-['Manrope']">{inspection.recommendations}</p>
+          <p className="text-15 font-['Manrope']">{inspection.recommendations}</p>
         </div>
       )}
     </div>
@@ -136,7 +136,7 @@ function ChecklistTab({ inspection }: { inspection: InspectionRequest }) {
     <div className="space-y-4">
       {/* Progress */}
       <div className="p-4 rounded-[6px] bg-muted/40 border space-y-2">
-        <div className="flex items-center justify-between text-[13px] text-muted-foreground">
+        <div className="flex items-center justify-between text-13 text-muted-foreground">
           <span>{checked} of {total} items completed</span>
           <span>{pct}%</span>
         </div>
@@ -158,9 +158,9 @@ function ChecklistTab({ inspection }: { inspection: InspectionRequest }) {
                 : <Square className="w-4 h-4 text-muted-foreground" />}
             </div>
             <div>
-              <p className="text-[15px] font-['Manrope']">{item.label}</p>
+              <p className="text-15 font-['Manrope']">{item.label}</p>
               {item.notes && (
-                <p className="text-[13px] text-muted-foreground font-['Manrope'] mt-0.5">{item.notes}</p>
+                <p className="text-13 text-muted-foreground font-['Manrope'] mt-0.5">{item.notes}</p>
               )}
             </div>
           </div>
@@ -173,11 +173,11 @@ function ChecklistTab({ inspection }: { inspection: InspectionRequest }) {
 function AssetsTab({ inspection }: { inspection: InspectionRequest }) {
   return (
     <div className="p-4 rounded-[6px] bg-muted/40 border overflow-x-auto">
-      <table className="w-full text-[15px] font-['Manrope']">
+      <table className="w-full text-15 font-['Manrope']">
         <thead>
           <tr className="border-b">
             {['Asset ID', 'Name', 'Serial', 'Type', 'Location', 'Condition', 'Result', 'Findings'].map(h => (
-              <th key={h} className="text-left text-[13px] font-semibold uppercase tracking-wide text-muted-foreground pb-2 pr-4">
+              <th key={h} className="text-left text-13 font-semibold uppercase tracking-wide text-muted-foreground pb-2 pr-4">
                 {h}
               </th>
             ))}
@@ -228,7 +228,7 @@ export function InspectionDetailView({ id, onBack }: InspectionDetailViewProps) 
 
   if (!inspection) {
     return (
-      <div className="p-8 text-center text-muted-foreground text-[15px]">
+      <div className="p-8 text-center text-muted-foreground text-15">
         Inspection record not found.
       </div>
     )

@@ -64,7 +64,7 @@ function DialogContent({
         {...props}
       >
         {children}
-        <DialogPrimitive.Close className="focus:ring-[#D9F1F4] data-[state=open]:bg-accent data-[state=open]:text-[#989AAE] absolute top-4 right-4 w-8 h-8 rounded-md opacity-70 transition-opacity100 focus:ring-4 focus:outline-hidden disabled:pointer-events-none [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4">
+        <DialogPrimitive.Close className="focus:ring-brand-teal-light data-[state=open]:bg-accent data-[state=open]:text-sidebar-text-inactive absolute top-4 right-4 w-8 h-8 rounded-md opacity-70 transition-opacity100 focus:ring-4 focus:outline-hidden disabled:pointer-events-none [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4">
           <XIcon />
           <span className="sr-only">Close</span>
         </DialogPrimitive.Close>
@@ -102,7 +102,7 @@ function DialogTitle({
   return (
     <DialogPrimitive.Title
       data-slot="dialog-title"
-      className={cn("font-['Sora'] text-lg leading-none font-semibold text-[#121321]", className)}
+      className={cn("font-['Sora'] text-lg leading-none font-semibold text-brand-navy", className)}
       {...props}
     />
   );
@@ -115,7 +115,7 @@ function DialogDescription({
   return (
     <DialogPrimitive.Description
       data-slot="dialog-description"
-      className={cn("text-[#989AAE] text-xs", className)}
+      className={cn("text-sidebar-text-inactive text-xs", className)}
       {...props}
     />
   );

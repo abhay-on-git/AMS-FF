@@ -68,7 +68,7 @@ export function CategoryFormDrawer({ open, onOpenChange, mode, category }: Categ
       <SheetContent side="right" className="!w-full sm:!max-w-xl flex flex-col overflow-hidden p-0">
         <SheetHeader className="px-6 py-4 border-b shrink-0">
           <SheetTitle className="text-[18px]">{isEdit ? 'Edit Category' : 'Add Category'}</SheetTitle>
-          <SheetDescription className="text-[13px]">
+          <SheetDescription className="text-13">
             {isEdit ? 'Update asset category details.' : 'Add a new asset category.'}
           </SheetDescription>
         </SheetHeader>

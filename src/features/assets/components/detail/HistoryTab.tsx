@@ -24,7 +24,7 @@ export function HistoryTab({ events }: HistoryTabProps) {
           <Button
             variant="outline"
             size="sm"
-            className="text-[15px] h-8"
+            className="text-15 h-8"
             onClick={() => toast.success('History exported as PDF')}
           >
             <Download className="w-3.5 h-3.5 mr-1" /> PDF
@@ -47,7 +47,7 @@ export function HistoryTab({ events }: HistoryTabProps) {
                   <div className="flex items-start justify-between gap-2">
                     <div className="min-w-0">
                       <div className="flex items-center gap-2 flex-wrap">
-                        <p className="font-medium text-[15px]">{event.action}</p>
+                        <p className="font-medium text-15">{event.action}</p>
                         <Badge variant="outline" className="text-sm py-1">
                           {event.eventType.replace('_', ' ')}
                         </Badge>

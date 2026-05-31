@@ -13,7 +13,7 @@ import {
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { cn } from '@/lib/cn'
-import { TREND_DATA_SETS, getTrendPeriodLabel } from '../constants'
+import { TREND_DATA_SETS, getTrendPeriodLabel, CHART_COLORS } from '../constants'
 import type { TrendPeriod } from '../types'
 
 const PERIODS: TrendPeriod[] = ['weekly', 'monthly', 'quarterly', 'yearly']
@@ -44,9 +44,9 @@ export function AssetTrendChart() {
 
   const series = useMemo(
     () => [
-      { key: 'total', name: 'Total Assets', stroke: '#4F83E3', fill: '#4F83E3' },
-      { key: 'acquired', name: 'Acquired', stroke: '#81CCD7', fill: '#81CCD7' },
-      { key: 'disposed', name: 'Disposed', stroke: '#EF652B', fill: '#EF652B' },
+      { key: 'total', name: 'Total Assets', stroke: CHART_COLORS.blue, fill: CHART_COLORS.blue },
+      { key: 'acquired', name: 'Acquired', stroke: CHART_COLORS.brandTeal, fill: CHART_COLORS.brandTeal },
+      { key: 'disposed', name: 'Disposed', stroke: CHART_COLORS.brandPrimary, fill: CHART_COLORS.brandPrimary },
     ],
     [],
   )
@@ -67,7 +67,7 @@ export function AssetTrendChart() {
                   type="button"
                   onClick={() => handlePeriodChange(period)}
                   className={cn(
-                    'px-3 py-1.5 rounded-[4px] text-[13px] transition-colors capitalize',
+                    'px-3 py-1.5 rounded-[4px] text-13 transition-colors capitalize',
                     trendPeriod === period
                       ? 'bg-brand-navy text-white shadow-sm'
                       : 'text-brand-navy hover:bg-black/5 dark:text-foreground dark:hover:bg-white/10',
@@ -89,7 +89,7 @@ export function AssetTrendChart() {
               >
                 <ChevronLeft className="w-4 h-4" />
               </Button>
-              <span className="text-[13px] text-muted-foreground min-w-[140px] text-center">
+              <span className="text-13 text-muted-foreground min-w-[140px] text-center">
                 {periodLabel}
               </span>
               <Button

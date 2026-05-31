@@ -32,7 +32,7 @@ export function UserDetail({ userId, onBack, onEdit, onResetPassword }: UserDeta
 
   if (isLoading || !user) {
     return (
-      <div className="flex h-64 items-center justify-center text-muted-foreground text-[15px]">
+      <div className="flex h-64 items-center justify-center text-muted-foreground text-15">
         {isLoading ? 'Loading…' : 'User not found.'}
       </div>
     )
@@ -78,8 +78,8 @@ export function UserDetail({ userId, onBack, onEdit, onResetPassword }: UserDeta
                     {user.status.charAt(0).toUpperCase() + user.status.slice(1)}
                   </Badge>
                 </div>
-                <p className="text-[15px] text-muted-foreground mt-0.5">{user.email}</p>
-                <div className="flex items-center gap-3 mt-1.5 text-[13px] text-muted-foreground">
+                <p className="text-15 text-muted-foreground mt-0.5">{user.email}</p>
+                <div className="flex items-center gap-3 mt-1.5 text-13 text-muted-foreground">
                   <span className="flex items-center gap-1"><Shield className="w-3.5 h-3.5" />{user.role}</span>
                   <span className="flex items-center gap-1"><Building2 className="w-3.5 h-3.5" />{user.fieldOffice}</span>
                 </div>
@@ -88,15 +88,15 @@ export function UserDetail({ userId, onBack, onEdit, onResetPassword }: UserDeta
 
             {/* Action buttons */}
             <div className="flex gap-2 flex-wrap">
-              <Button variant="outline" size="sm" className="text-[15px] gap-1.5 h-9"
+              <Button variant="outline" size="sm" className="text-15 gap-1.5 h-9"
                 onClick={() => onEdit(user)}>
                 <Edit className="w-3.5 h-3.5" /> Edit
               </Button>
-              <Button variant="outline" size="sm" className="text-[15px] gap-1.5 h-9"
+              <Button variant="outline" size="sm" className="text-15 gap-1.5 h-9"
                 onClick={() => onResetPassword(user)}>
                 <KeyRound className="w-3.5 h-3.5" /> Reset Password
               </Button>
-              <Button variant="outline" size="sm" className="text-[15px] gap-1.5 h-9"
+              <Button variant="outline" size="sm" className="text-15 gap-1.5 h-9"
                 onClick={() => toggleStatus.mutate({ id: user.id, status: user.status === 'active' ? 'inactive' : 'active' })}
                 disabled={toggleStatus.isPending}>
                 <Power className="w-3.5 h-3.5" />
@@ -119,8 +119,8 @@ export function UserDetail({ userId, onBack, onEdit, onResetPassword }: UserDeta
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-5">
             {profileFields.map(({ label, value }) => (
               <div key={label}>
-                <p className="text-[13px] text-muted-foreground mb-0.5">{label}</p>
-                <p className="text-[15px] font-medium font-['Manrope']">{value}</p>
+                <p className="text-13 text-muted-foreground mb-0.5">{label}</p>
+                <p className="text-15 font-medium font-['Manrope']">{value}</p>
               </div>
             ))}
           </div>
@@ -137,11 +137,11 @@ export function UserDetail({ userId, onBack, onEdit, onResetPassword }: UserDeta
             {mockActivityLogs.map((log) => (
               <div key={log.id} className="flex items-start justify-between gap-4 py-3.5">
                 <div className="min-w-0">
-                  <p className="text-[15px] font-medium font-['Manrope']">{log.action}</p>
-                  <p className="text-[13px] text-muted-foreground mt-0.5">{log.description}</p>
+                  <p className="text-15 font-medium font-['Manrope']">{log.action}</p>
+                  <p className="text-13 text-muted-foreground mt-0.5">{log.description}</p>
                 </div>
                 <div className="text-right shrink-0">
-                  <p className="text-[13px] text-muted-foreground whitespace-nowrap">{log.timestamp}</p>
+                  <p className="text-13 text-muted-foreground whitespace-nowrap">{log.timestamp}</p>
                   {log.ipAddress && (
                     <p className="text-[12px] text-muted-foreground/60 mt-0.5">{log.ipAddress}</p>
                   )}

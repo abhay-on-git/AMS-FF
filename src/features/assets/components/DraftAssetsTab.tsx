@@ -61,7 +61,7 @@ export function DraftAssetsTab({ onRegister }: DraftAssetsTabProps) {
       const val = draft[col.key as keyof DraftAsset]
 
       if (col.key === 'draftId')
-        return <span className="font-medium text-[15px] text-brand-navy dark:text-brand-teal">{String(val)}</span>
+        return <span className="font-medium text-15 text-brand-navy dark:text-brand-teal">{String(val)}</span>
 
       if (col.key === 'classification')
         return (
@@ -83,7 +83,7 @@ export function DraftAssetsTab({ onRegister }: DraftAssetsTabProps) {
 
       if (col.key === 'unitPrice' || col.key === 'totalCost')
         return (
-          <span className="text-[15px]">
+          <span className="text-15">
             ${typeof val === 'number' ? val.toLocaleString('en-US', { minimumFractionDigits: 2 }) : val}
           </span>
         )
@@ -91,7 +91,7 @@ export function DraftAssetsTab({ onRegister }: DraftAssetsTabProps) {
       if (val === undefined || val === null || val === '')
         return <span className="text-muted-foreground/50">—</span>
 
-      return <span className="text-[15px]">{String(val)}</span>
+      return <span className="text-15">{String(val)}</span>
     },
   }))
 
@@ -101,20 +101,20 @@ export function DraftAssetsTab({ onRegister }: DraftAssetsTabProps) {
     <div className="space-y-4">
       {/* Header bar */}
       <div className="flex items-center justify-between gap-4 flex-wrap">
-        <div className="flex items-center gap-2 text-[15px] text-muted-foreground">
+        <div className="flex items-center gap-2 text-15 text-muted-foreground">
           <RefreshCw className="w-4 h-4" />
           Last synced: {LAST_SYNCED}
         </div>
         <div className="flex items-center gap-2">
-          <Button variant="outline" size="sm" className="text-[15px] gap-2 h-10">
+          <Button variant="outline" size="sm" className="text-15 gap-2 h-10">
             <Download className="w-4 h-4" />
             Download Template
           </Button>
-          <Button variant="outline" size="sm" className="text-[15px] gap-2 h-10">
+          <Button variant="outline" size="sm" className="text-15 gap-2 h-10">
             <Upload className="w-4 h-4" />
             Bulk Upload
           </Button>
-          <Button size="sm" className="text-[15px] gap-2 h-10 bg-brand-navy hover:bg-brand-navy-mid text-white">
+          <Button size="sm" className="text-15 gap-2 h-10 bg-brand-navy hover:bg-brand-navy-mid text-white">
             <RefreshCw className="w-4 h-4" />
             Sync from SAP
           </Button>
@@ -129,36 +129,36 @@ export function DraftAssetsTab({ onRegister }: DraftAssetsTabProps) {
               placeholder="Search Draft ID, PO, GRN, description..."
               value={search}
               onChange={(e) => setSearch(e.target.value)}
-              className="h-10 text-[15px] pl-3 placeholder:text-muted-foreground/60"
+              className="h-10 text-15 pl-3 placeholder:text-muted-foreground/60"
             />
           </div>
 
           <Select value={classFilter} onValueChange={setClassFilter}>
-            <SelectTrigger className="h-10 w-[145px] text-[15px]">
+            <SelectTrigger className="h-10 w-[145px] text-15">
               <SelectValue placeholder="All Classes" />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="all" className="text-[15px]">All Classes</SelectItem>
-              <SelectItem value="Capital" className="text-[15px]">Capital</SelectItem>
-              <SelectItem value="Attractive" className="text-[15px]">Attractive</SelectItem>
+              <SelectItem value="all" className="text-15">All Classes</SelectItem>
+              <SelectItem value="Capital" className="text-15">Capital</SelectItem>
+              <SelectItem value="Attractive" className="text-15">Attractive</SelectItem>
             </SelectContent>
           </Select>
 
           <Select value={statusFilter} onValueChange={setStatusFilter}>
-            <SelectTrigger className="h-10 w-[135px] text-[15px]">
+            <SelectTrigger className="h-10 w-[135px] text-15">
               <SelectValue placeholder="All Status" />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="all" className="text-[15px]">All Status</SelectItem>
-              <SelectItem value="Unassigned" className="text-[15px]">Unassigned</SelectItem>
-              <SelectItem value="Assigned" className="text-[15px]">Assigned</SelectItem>
+              <SelectItem value="all" className="text-15">All Status</SelectItem>
+              <SelectItem value="Unassigned" className="text-15">Unassigned</SelectItem>
+              <SelectItem value="Assigned" className="text-15">Assigned</SelectItem>
             </SelectContent>
           </Select>
 
           {/* Column toggle */}
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
-              <Button variant="outline" size="sm" className="h-10 text-[15px] gap-2">
+              <Button variant="outline" size="sm" className="h-10 text-15 gap-2">
                 <Columns3 className="w-4 h-4" />
                 Columns
               </Button>
@@ -169,7 +169,7 @@ export function DraftAssetsTab({ onRegister }: DraftAssetsTabProps) {
                   key={col.key}
                   checked={col.visible}
                   onCheckedChange={() => toggleColumn(col.key)}
-                  className="text-[15px]"
+                  className="text-15"
                 >
                   {col.label}
                 </DropdownMenuCheckboxItem>

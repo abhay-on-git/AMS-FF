@@ -68,7 +68,7 @@ export function CreateDisposalDrawer({ open, onOpenChange }: CreateDisposalDrawe
       <SheetContent side="right" className="!w-full sm:!max-w-lg flex flex-col overflow-hidden p-0">
         <SheetHeader className="px-6 py-4 border-b shrink-0">
           <SheetTitle className="text-[18px]">Create Disposal Request</SheetTitle>
-          <SheetDescription className="text-[15px]">
+          <SheetDescription className="text-15">
             Submit a request to dispose of one or more assets.
           </SheetDescription>
         </SheetHeader>
@@ -78,99 +78,99 @@ export function CreateDisposalDrawer({ open, onOpenChange }: CreateDisposalDrawe
 
             {/* Disposal details */}
             <section className="space-y-4">
-              <h3 className="text-[13px] font-semibold uppercase tracking-wide text-muted-foreground">Disposal Details</h3>
+              <h3 className="text-13 font-semibold uppercase tracking-wide text-muted-foreground">Disposal Details</h3>
 
               <div>
-                <Label className="text-[15px] mb-1.5 block">Title <span className="text-destructive">*</span></Label>
+                <Label className="text-15 mb-1.5 block">Title <span className="text-destructive">*</span></Label>
                 <Input {...register('title')} placeholder="e.g. Write-Off: Water-Damaged Desktop"
-                  className="h-10 text-[15px]" />
-                {errors.title && <p className="text-[13px] text-destructive mt-1">{errors.title.message}</p>}
+                  className="h-10 text-15" />
+                {errors.title && <p className="text-13 text-destructive mt-1">{errors.title.message}</p>}
               </div>
 
               <div className="grid grid-cols-2 gap-3">
                 <div>
-                  <Label className="text-[15px] mb-1.5 block">Disposal Method <span className="text-destructive">*</span></Label>
+                  <Label className="text-15 mb-1.5 block">Disposal Method <span className="text-destructive">*</span></Label>
                   <Select onValueChange={(v) => setValue('disposalMethod', v, { shouldValidate: true })}>
-                    <SelectTrigger className="h-10 text-[15px]"><SelectValue placeholder="Select method" /></SelectTrigger>
+                    <SelectTrigger className="h-10 text-15"><SelectValue placeholder="Select method" /></SelectTrigger>
                     <SelectContent>
                       {DISPOSAL_METHODS.map((m) => (
-                        <SelectItem key={m.value} value={m.value} className="text-[15px]">{m.label}</SelectItem>
+                        <SelectItem key={m.value} value={m.value} className="text-15">{m.label}</SelectItem>
                       ))}
                     </SelectContent>
                   </Select>
-                  {errors.disposalMethod && <p className="text-[13px] text-destructive mt-1">{errors.disposalMethod.message}</p>}
+                  {errors.disposalMethod && <p className="text-13 text-destructive mt-1">{errors.disposalMethod.message}</p>}
                 </div>
                 <div>
-                  <Label className="text-[15px] mb-1.5 block">Workflow <span className="text-destructive">*</span></Label>
+                  <Label className="text-15 mb-1.5 block">Workflow <span className="text-destructive">*</span></Label>
                   <Select onValueChange={(v) => setValue('workflowType', v, { shouldValidate: true })}>
-                    <SelectTrigger className="h-10 text-[15px]"><SelectValue placeholder="Select workflow" /></SelectTrigger>
+                    <SelectTrigger className="h-10 text-15"><SelectValue placeholder="Select workflow" /></SelectTrigger>
                     <SelectContent>
                       {WORKFLOW_TYPES.map((w) => (
-                        <SelectItem key={w.value} value={w.value} className="text-[15px]">{w.label}</SelectItem>
+                        <SelectItem key={w.value} value={w.value} className="text-15">{w.label}</SelectItem>
                       ))}
                     </SelectContent>
                   </Select>
-                  {errors.workflowType && <p className="text-[13px] text-destructive mt-1">{errors.workflowType.message}</p>}
+                  {errors.workflowType && <p className="text-13 text-destructive mt-1">{errors.workflowType.message}</p>}
                 </div>
               </div>
 
               <div>
-                <Label className="text-[15px] mb-1.5 block">Field Office <span className="text-destructive">*</span></Label>
+                <Label className="text-15 mb-1.5 block">Field Office <span className="text-destructive">*</span></Label>
                 <Select onValueChange={(v) => setValue('fieldOffice', v, { shouldValidate: true })}>
-                  <SelectTrigger className="h-10 text-[15px]"><SelectValue placeholder="Select office" /></SelectTrigger>
+                  <SelectTrigger className="h-10 text-15"><SelectValue placeholder="Select office" /></SelectTrigger>
                   <SelectContent>
                     {TRANSFER_FIELD_OFFICES.map((o) => (
-                      <SelectItem key={o} value={o} className="text-[15px]">{o}</SelectItem>
+                      <SelectItem key={o} value={o} className="text-15">{o}</SelectItem>
                     ))}
                   </SelectContent>
                 </Select>
-                {errors.fieldOffice && <p className="text-[13px] text-destructive mt-1">{errors.fieldOffice.message}</p>}
+                {errors.fieldOffice && <p className="text-13 text-destructive mt-1">{errors.fieldOffice.message}</p>}
               </div>
 
               {showRecipient && (
                 <div>
-                  <Label className="text-[15px] mb-1.5 block">Recipient Organisation</Label>
+                  <Label className="text-15 mb-1.5 block">Recipient Organisation</Label>
                   <Input {...register('recipientOrganization')} placeholder="e.g. Springfield Elementary School"
-                    className="h-10 text-[15px]" />
+                    className="h-10 text-15" />
                 </div>
               )}
             </section>
 
             {/* Justification */}
             <section className="space-y-4">
-              <h3 className="text-[13px] font-semibold uppercase tracking-wide text-muted-foreground">Justification</h3>
+              <h3 className="text-13 font-semibold uppercase tracking-wide text-muted-foreground">Justification</h3>
 
               <div>
-                <Label className="text-[15px] mb-1.5 block">Justification <span className="text-destructive">*</span></Label>
+                <Label className="text-15 mb-1.5 block">Justification <span className="text-destructive">*</span></Label>
                 <Textarea {...register('justification')} placeholder="Explain why these assets should be disposed of…"
-                  rows={3} className="text-[15px]" />
-                {errors.justification && <p className="text-[13px] text-destructive mt-1">{errors.justification.message}</p>}
+                  rows={3} className="text-15" />
+                {errors.justification && <p className="text-13 text-destructive mt-1">{errors.justification.message}</p>}
               </div>
 
               <div>
-                <Label className="text-[15px] mb-1.5 block">Notes</Label>
+                <Label className="text-15 mb-1.5 block">Notes</Label>
                 <Textarea {...register('notes')} placeholder="Additional notes, special handling instructions…"
-                  rows={2} className="text-[15px]" />
+                  rows={2} className="text-15" />
               </div>
             </section>
 
             {/* Links & schedule */}
             <section className="space-y-4">
-              <h3 className="text-[13px] font-semibold uppercase tracking-wide text-muted-foreground">Schedule & Links</h3>
+              <h3 className="text-13 font-semibold uppercase tracking-wide text-muted-foreground">Schedule & Links</h3>
 
               <div className="grid grid-cols-2 gap-3">
                 <div>
-                  <Label className="text-[15px] mb-1.5 block">Target Disposal Date <span className="text-destructive">*</span></Label>
-                  <Input type="date" {...register('targetDisposalDate')} className="h-10 text-[15px]" />
-                  {errors.targetDisposalDate && <p className="text-[13px] text-destructive mt-1">{errors.targetDisposalDate.message}</p>}
+                  <Label className="text-15 mb-1.5 block">Target Disposal Date <span className="text-destructive">*</span></Label>
+                  <Input type="date" {...register('targetDisposalDate')} className="h-10 text-15" />
+                  {errors.targetDisposalDate && <p className="text-13 text-destructive mt-1">{errors.targetDisposalDate.message}</p>}
                 </div>
                 <div>
-                  <Label className="text-[15px] mb-1.5 block">Link to Survey</Label>
+                  <Label className="text-15 mb-1.5 block">Link to Survey</Label>
                   <Select onValueChange={(v) => setValue('linkedSurveyId', v)}>
-                    <SelectTrigger className="h-10 text-[15px]"><SelectValue placeholder="Optional" /></SelectTrigger>
+                    <SelectTrigger className="h-10 text-15"><SelectValue placeholder="Optional" /></SelectTrigger>
                     <SelectContent>
                       {SURVEY_REFS.map((s) => (
-                        <SelectItem key={s} value={s} className="text-[15px]">{s}</SelectItem>
+                        <SelectItem key={s} value={s} className="text-15">{s}</SelectItem>
                       ))}
                     </SelectContent>
                   </Select>

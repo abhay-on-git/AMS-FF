@@ -110,10 +110,10 @@ function DropdownMenuCheckboxItem({
         {checked ? (
           <span style={{
             display: "inline-flex", width: 18, height: 18,
-            borderRadius: 2, background: "#b8e3e9",
+            borderRadius: 2, background: "var(--color-brand-teal-light)",
             alignItems: "center", justifyContent: "center",
           }}>
-            <Check sx={{ fontSize: 14, color: "#1a5c68" }} />
+            <Check sx={{ fontSize: 14, color: "var(--color-brand-teal)" }} />
           </span>
         ) : (
           <CheckBoxOutlineBlank sx={{ fontSize: 18, color: "rgba(0,0,0,0.23)" }} />

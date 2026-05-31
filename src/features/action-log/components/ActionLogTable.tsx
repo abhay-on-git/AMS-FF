@@ -27,7 +27,7 @@ import { ENTITY_TYPES, EVENT_TYPES } from '../constants/filterOptions'
 import { formatLogTimestamp } from '../lib/formatUtils'
 import type { AuditLog } from '../types'
 
-const FIELD_TEXT = 'text-[15px]'
+const FIELD_TEXT = 'text-15'
 
 interface ActionLogTableProps {
   logs: AuditLog[]
@@ -84,7 +84,7 @@ export function ActionLogTable({ logs, isLoading, onViewDetail }: ActionLogTable
   }
 
   if (isLoading) {
-    return <div className="p-6 text-muted-foreground text-[15px]">Loading action log…</div>
+    return <div className="p-6 text-muted-foreground text-15">Loading action log…</div>
   }
 
   return (
@@ -203,19 +203,19 @@ export function ActionLogTable({ logs, isLoading, onViewDetail }: ActionLogTable
                       >
                         <TableCell className="whitespace-nowrap">
                           <p className={`${FIELD_TEXT} font-medium tabular-nums`}>{date}</p>
-                          <p className="text-[13px] text-muted-foreground tabular-nums">{time}</p>
+                          <p className="text-13 text-muted-foreground tabular-nums">{time}</p>
                         </TableCell>
                         <TableCell>
                           <p className={`${FIELD_TEXT} font-medium`}>{log.actor_name}</p>
-                          <p className="text-[13px] text-muted-foreground">{log.actor_role_at_time}</p>
+                          <p className="text-13 text-muted-foreground">{log.actor_role_at_time}</p>
                         </TableCell>
                         <TableCell>
-                          <Badge variant="outline" className="text-[13px] px-2.5 py-1">
+                          <Badge variant="outline" className="text-13 px-2.5 py-1">
                             {log.entity_type}
                           </Badge>
                         </TableCell>
                         <TableCell>
-                          <Badge variant="outline" className="text-[13px] px-2.5 py-1">
+                          <Badge variant="outline" className="text-13 px-2.5 py-1">
                             {log.event_type}
                           </Badge>
                         </TableCell>

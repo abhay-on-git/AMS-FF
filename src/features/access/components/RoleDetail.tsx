@@ -33,7 +33,7 @@ export function RoleDetail({ roleId, onBack, onEdit }: RoleDetailProps) {
 
   if (isLoading || !role) {
     return (
-      <div className="flex h-64 items-center justify-center text-muted-foreground text-[15px]">
+      <div className="flex h-64 items-center justify-center text-muted-foreground text-15">
         {isLoading ? 'Loading…' : 'Role not found.'}
       </div>
     )
@@ -58,16 +58,16 @@ export function RoleDetail({ roleId, onBack, onEdit }: RoleDetailProps) {
       <div className="flex items-start justify-between gap-4">
         <div>
           <h1 className="text-2xl font-semibold">{role.name}</h1>
-          <p className="text-[15px] text-muted-foreground mt-1">{role.description}</p>
+          <p className="text-15 text-muted-foreground mt-1">{role.description}</p>
         </div>
         <div className="flex gap-2 shrink-0">
           {!isReadOnly && (
-            <Button variant="outline" size="sm" className="text-[15px] gap-1.5 h-9" onClick={() => onEdit(role.id)}>
+            <Button variant="outline" size="sm" className="text-15 gap-1.5 h-9" onClick={() => onEdit(role.id)}>
               <Edit className="w-3.5 h-3.5" /> Edit
             </Button>
           )}
           <Button
-            variant="outline" size="sm" className="text-[15px] gap-1.5 h-9"
+            variant="outline" size="sm" className="text-15 gap-1.5 h-9"
             onClick={() => cloneMutation.mutate(role.id, { onSuccess: onBack })}
             disabled={cloneMutation.isPending}
           >
@@ -76,7 +76,7 @@ export function RoleDetail({ roleId, onBack, onEdit }: RoleDetailProps) {
           {!isReadOnly && (
             <Button
               variant="outline" size="sm"
-              className="text-[15px] gap-1.5 h-9 text-destructive hover:text-destructive"
+              className="text-15 gap-1.5 h-9 text-destructive hover:text-destructive"
               onClick={() => setDeleteOpen(true)}
             >
               <Trash2 className="w-3.5 h-3.5" /> Delete
@@ -103,7 +103,7 @@ export function RoleDetail({ roleId, onBack, onEdit }: RoleDetailProps) {
           {permissions && !isReadOnly && (
             <div className="flex justify-end">
               <Button
-                className="text-[15px]"
+                className="text-15"
                 onClick={() => permMutation.mutate({ id: role.id, permissions }, { onSuccess: () => setPermissions(null) })}
                 disabled={permMutation.isPending}
               >
@@ -120,8 +120,8 @@ export function RoleDetail({ roleId, onBack, onEdit }: RoleDetailProps) {
           <div className="flex items-start gap-3 rounded-lg border border-amber-200 bg-amber-50 p-4 dark:border-amber-800 dark:bg-amber-950/30">
             <EyeOff className="mt-0.5 h-5 w-5 shrink-0 text-amber-600 dark:text-amber-400" />
             <div>
-              <p className="text-[15px] font-medium text-amber-800 dark:text-amber-200">Field-Level Restrictions</p>
-              <p className="text-[15px] text-amber-700 dark:text-amber-300 mt-1">
+              <p className="text-15 font-medium text-amber-800 dark:text-amber-200">Field-Level Restrictions</p>
+              <p className="text-15 text-amber-700 dark:text-amber-300 mt-1">
                 Restrict specific data fields from being visible to users with this role.
               </p>
             </div>
@@ -131,7 +131,7 @@ export function RoleDetail({ roleId, onBack, onEdit }: RoleDetailProps) {
             .map((m) => (
               <Card key={m.module}>
                 <CardHeader className="pb-3">
-                  <CardTitle className="text-[15px]">{m.module}</CardTitle>
+                  <CardTitle className="text-15">{m.module}</CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-2">
                   {m.fieldRestrictions.map((fr) => (
@@ -144,8 +144,8 @@ export function RoleDetail({ roleId, onBack, onEdit }: RoleDetailProps) {
                       }`}
                     >
                       <div className="min-w-0">
-                        <p className="text-[15px] font-medium font-['Manrope']">{fr.label}</p>
-                        <p className="text-[13px] text-muted-foreground mt-0.5">{fr.description}</p>
+                        <p className="text-15 font-medium font-['Manrope']">{fr.label}</p>
+                        <p className="text-13 text-muted-foreground mt-0.5">{fr.description}</p>
                       </div>
                       <Badge
                         variant={fr.restricted ? 'destructive' : 'outline'}
@@ -159,7 +159,7 @@ export function RoleDetail({ roleId, onBack, onEdit }: RoleDetailProps) {
               </Card>
             ))}
           {role.permissions.every((m) => m.fieldRestrictions.length === 0) && (
-            <p className="py-8 text-center text-[15px] text-muted-foreground">
+            <p className="py-8 text-center text-15 text-muted-foreground">
               No field restrictions configured for this role.
             </p>
           )}
@@ -170,14 +170,14 @@ export function RoleDetail({ roleId, onBack, onEdit }: RoleDetailProps) {
       {activeTab === 'locations' && (
         <div className="space-y-2">
           {role.locationAccess.length === 0 ? (
-            <p className="py-8 text-center text-[15px] text-muted-foreground">No location access configured.</p>
+            <p className="py-8 text-center text-15 text-muted-foreground">No location access configured.</p>
           ) : (
             role.locationAccess.map((loc) => (
               <div key={loc.officeId} className="flex items-center gap-3 rounded-md border px-4 py-3">
                 <MapPin className="h-4 w-4 shrink-0 text-muted-foreground" />
                 <div className="flex-1 min-w-0">
-                  <p className="text-[15px] font-medium font-['Manrope']">{loc.officeName}</p>
-                  <p className="text-[13px] text-muted-foreground">{loc.location} · {loc.code}</p>
+                  <p className="text-15 font-medium font-['Manrope']">{loc.officeName}</p>
+                  <p className="text-13 text-muted-foreground">{loc.location} · {loc.code}</p>
                 </div>
                 <Badge variant={loc.granted ? 'default' : 'outline'} className="text-[12px] shrink-0">
                   {loc.granted ? 'Granted' : 'No Access'}

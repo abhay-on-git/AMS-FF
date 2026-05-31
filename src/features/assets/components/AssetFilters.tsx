@@ -59,7 +59,7 @@ export function AssetFilters({
           placeholder="Search Asset ID, EPC, Barcode, Serial, PO, Custodian, Location, Name..."
           value={search}
           onChange={(e) => onSearchChange(e.target.value)}
-          className="pl-9 text-[15px] placeholder:text-muted-foreground/60"
+          className="pl-9 text-15 placeholder:text-muted-foreground/60"
         />
       </div>
       <div className="flex gap-2 items-center">
@@ -70,7 +70,7 @@ export function AssetFilters({
 
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
-            <Button variant="outline" size="sm" className="gap-1.5 h-[2.6rem] text-[15px]">
+            <Button variant="outline" size="sm" className="gap-1.5 h-[2.6rem] text-15">
               <Columns3 className="w-4 h-4" />
               Columns
             </Button>
@@ -79,13 +79,13 @@ export function AssetFilters({
             {columns.map((col) => (
               <label
                 key={col.key}
-                className="flex items-center gap-2 px-2 py-1.5 rounded-[4px] cursor-pointer text-[15px] hover:bg-muted/50"
+                className="flex items-center gap-2 px-2 py-1.5 rounded-[4px] cursor-pointer text-15 hover:bg-muted/50"
                 onClick={() => onToggleColumn(col.key)}
               >
                 <span className={`flex items-center justify-center w-[18px] h-[18px] rounded-[5px] transition-all ${
                   col.visible
                     ? 'bg-sidebar border border-sidebar'
-                    : 'bg-[#F5F7FA] border-2 border-[#D9DEE5]'
+                    : 'bg-hover-light border-2 border-divider'
                 }`}>
                   {col.visible && <Check className="w-3 h-3 text-white" />}
                 </span>
@@ -121,12 +121,12 @@ function FilterSelect({ value, onChange, options, width }: {
 }) {
   return (
     <Select value={value} onValueChange={onChange}>
-      <SelectTrigger className={`${width} text-[15px] pr-2 [&>svg]:right-2`}>
+      <SelectTrigger className={`${width} text-15 pr-2 [&>svg]:right-2`}>
         <SelectValue placeholder={options[0]?.label} />
       </SelectTrigger>
-      <SelectContent className="z-50 w-[var(--radix-select-trigger-width)] bg-white dark:bg-[#1e2240]">
+      <SelectContent className="z-50 w-[var(--radix-select-trigger-width)] bg-white dark:bg-brand-navy-mid">
         {options.map((opt) => (
-          <SelectItem key={opt.value} value={opt.value} className="text-[15px]">
+          <SelectItem key={opt.value} value={opt.value} className="text-15">
             {opt.label}
           </SelectItem>
         ))}

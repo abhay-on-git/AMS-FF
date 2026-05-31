@@ -48,10 +48,10 @@ export function SubNavTabs({ tabs, activeTab, onTabChange, className }: SubNavTa
             type="button"
             onClick={() => onTabChange(tab.id)}
             className={cn(
-              'px-4 py-2 rounded-[4px] text-[15px] transition-colors flex items-center gap-1.5 whitespace-nowrap',
+              'px-4 py-2 rounded-[4px] text-15 transition-colors flex items-center gap-1.5 whitespace-nowrap',
               isActive
-                ? 'bg-[#121321] text-white shadow-sm'
-                : 'bg-transparent text-[#121321] hover:bg-black/5',
+                ? 'bg-brand-navy text-white shadow-sm'
+                : 'bg-transparent text-brand-navy hover:bg-black/5',
             )}
           >
             {tab.label}

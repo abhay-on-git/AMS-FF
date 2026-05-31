@@ -17,11 +17,11 @@ export function ProfileView() {
   }, [])
 
   if (!authUser) {
-    return <div className="p-6 text-muted-foreground text-[15px]">Please sign in to view your profile.</div>
+    return <div className="p-6 text-muted-foreground text-15">Please sign in to view your profile.</div>
   }
 
   if (isLoading || !profile) {
-    return <div className="p-6 text-muted-foreground text-[15px]">Loading profile…</div>
+    return <div className="p-6 text-muted-foreground text-15">Loading profile…</div>
   }
 
   const roleLabel = ROLE_LABELS[authUser.role] ?? authUser.role

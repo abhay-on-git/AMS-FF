@@ -16,7 +16,7 @@ interface PersonalInfoCardProps {
   registerSubmit: (fn: () => void) => void
 }
 
-const readCls = 'text-[15px] p-2.5 rounded-md bg-muted/50 border'
+const readCls = 'text-15 p-2.5 rounded-md bg-muted/50 border'
 
 export function PersonalInfoCard({
   profile,
@@ -86,24 +86,24 @@ export function PersonalInfoCard({
           {editing ? (
             <>
               <FormInput label="First Name" required error={errors.firstName?.message}
-                inputClassName="h-[52px] text-[15px]" {...register('firstName')} />
+                inputClassName="h-[52px] text-15" {...register('firstName')} />
               <FormInput label="Last Name" required error={errors.lastName?.message}
-                inputClassName="h-[52px] text-[15px]" {...register('lastName')} />
+                inputClassName="h-[52px] text-15" {...register('lastName')} />
               <FormInput label="Email Address" type="email" required error={errors.email?.message}
-                inputClassName="h-[52px] text-[15px]" {...register('email')} />
+                inputClassName="h-[52px] text-15" {...register('email')} />
               <div className="sm:col-span-2 flex gap-2">
                 <FormSelect label="Country Code" options={PHONE_COUNTRY_OPTIONS}
                   wrapperClassName="w-[140px] shrink-0"
-                  error={errors.phoneCountryCode?.message} selectClassName="h-[52px] text-[15px]"
+                  error={errors.phoneCountryCode?.message} selectClassName="h-[52px] text-15"
                   {...register('phoneCountryCode')} />
                 <FormInput label="Phone Number" type="tel" error={errors.phone?.message}
                   wrapperClassName="flex-1"
-                  inputClassName="h-[52px] text-[15px]" {...register('phone')} />
+                  inputClassName="h-[52px] text-15" {...register('phone')} />
               </div>
               <FormInput label="Department" required error={errors.department?.message}
-                inputClassName="h-[52px] text-[15px]" {...register('department')} />
+                inputClassName="h-[52px] text-15" {...register('department')} />
               <FormSelect label="Field Office" options={FIELD_OFFICE_OPTIONS} required
-                error={errors.fieldOffice?.message} selectClassName="h-[52px] text-[15px]"
+                error={errors.fieldOffice?.message} selectClassName="h-[52px] text-15"
                 {...register('fieldOffice')} />
             </>
           ) : (
@@ -125,7 +125,7 @@ export function PersonalInfoCard({
 function Field({ label, value, icon }: { label: string; value: string; icon?: React.ReactNode }) {
   return (
     <div className="space-y-2">
-      <p className="text-[15px] font-medium flex items-center gap-1.5">{icon}{label}</p>
+      <p className="text-15 font-medium flex items-center gap-1.5">{icon}{label}</p>
       <p className={readCls}>{value}</p>
     </div>
   )

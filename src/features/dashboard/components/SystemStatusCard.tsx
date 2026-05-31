@@ -22,7 +22,7 @@ export function SystemStatusCard() {
   return (
     <Card className="h-full">
       <CardHeader className="pb-3">
-        <CardTitle className="flex items-center gap-2 text-[15px]">
+        <CardTitle className="flex items-center gap-2 text-15">
           <Server className="w-5 h-5 text-brand-navy dark:text-brand-teal" />
           System Status & Quick Links
         </CardTitle>
@@ -40,7 +40,7 @@ export function SystemStatusCard() {
               </div>
               <div className="flex items-center gap-2">
                 <span className={cn('w-2 h-2 rounded-full', statusDotClass(item.status))} />
-                <span className="text-[13px] font-medium">{item.status}</span>
+                <span className="text-13 font-medium">{item.status}</span>
               </div>
             </div>
           ))}

@@ -48,8 +48,8 @@ function toSignatureSteps(sigs: TransferSignature[]): SignatureStep[] {
 function InfoRow({ label, children }: { label: string; children: React.ReactNode }) {
   return (
     <div className="flex items-center justify-between gap-4 py-1.5">
-      <span className="text-[13px] text-muted-foreground shrink-0">{label}</span>
-      <span className="text-[15px] font-['Manrope'] text-right">{children}</span>
+      <span className="text-13 text-muted-foreground shrink-0">{label}</span>
+      <span className="text-15 font-['Manrope'] text-right">{children}</span>
     </div>
   )
 }
@@ -81,20 +81,20 @@ function OverviewTab({ transfer }: { transfer: TransferRequest }) {
     <div className="space-y-4">
       {/* Transfer Flow */}
       <div className="p-4 rounded-[6px] bg-muted/40 border">
-        <p className="text-[13px] font-semibold uppercase tracking-wide text-muted-foreground mb-3">Transfer Flow</p>
+        <p className="text-13 font-semibold uppercase tracking-wide text-muted-foreground mb-3">Transfer Flow</p>
         <div className="flex items-center gap-4">
           <div className="flex-1 space-y-0.5">
-            <p className="text-[13px] font-semibold uppercase tracking-wide text-muted-foreground">From</p>
-            <p className="text-[15px] font-bold font-['Manrope']">{transfer.fromFieldOffice}</p>
-            <p className="text-[13px] text-muted-foreground font-['Manrope']">{transfer.fromCustodian}</p>
-            <p className="text-[13px] text-muted-foreground font-['Manrope']">{transfer.fromBuilding} · {transfer.fromRoom}</p>
+            <p className="text-13 font-semibold uppercase tracking-wide text-muted-foreground">From</p>
+            <p className="text-15 font-bold font-['Manrope']">{transfer.fromFieldOffice}</p>
+            <p className="text-13 text-muted-foreground font-['Manrope']">{transfer.fromCustodian}</p>
+            <p className="text-13 text-muted-foreground font-['Manrope']">{transfer.fromBuilding} · {transfer.fromRoom}</p>
           </div>
           <ArrowRight className="w-5 h-5 text-muted-foreground shrink-0" />
           <div className="flex-1 space-y-0.5">
-            <p className="text-[13px] font-semibold uppercase tracking-wide text-muted-foreground">To</p>
-            <p className="text-[15px] font-bold font-['Manrope']">{transfer.toFieldOffice}</p>
-            <p className="text-[13px] text-muted-foreground font-['Manrope']">{transfer.toCustodian}</p>
-            <p className="text-[13px] text-muted-foreground font-['Manrope']">{transfer.toBuilding} · {transfer.toRoom}</p>
+            <p className="text-13 font-semibold uppercase tracking-wide text-muted-foreground">To</p>
+            <p className="text-15 font-bold font-['Manrope']">{transfer.toFieldOffice}</p>
+            <p className="text-13 text-muted-foreground font-['Manrope']">{transfer.toCustodian}</p>
+            <p className="text-13 text-muted-foreground font-['Manrope']">{transfer.toBuilding} · {transfer.toRoom}</p>
           </div>
         </div>
       </div>
@@ -112,14 +112,14 @@ function OverviewTab({ transfer }: { transfer: TransferRequest }) {
 
       {/* Notes */}
       {transfer.notes && (
-        <div className="p-3 rounded-[6px] bg-muted/50 border text-[15px] font-['Manrope']">{transfer.notes}</div>
+        <div className="p-3 rounded-[6px] bg-muted/50 border text-15 font-['Manrope']">{transfer.notes}</div>
       )}
 
       {/* Rejection info */}
       {transfer.rejectionReason && (
         <Alert className="border-amber-500/30 bg-amber-500/10">
           <AlertTriangle className="h-4 w-4 text-amber-600" />
-          <AlertDescription className="text-[13px] space-y-1">
+          <AlertDescription className="text-13 space-y-1">
             <p><span className="font-semibold">Rejected by:</span> {transfer.rejectedBy}</p>
             {transfer.rejectedDate && <p><span className="font-semibold">Date:</span> {transfer.rejectedDate}</p>}
             <p><span className="font-semibold">Reason:</span> {transfer.rejectionReason}</p>
@@ -129,7 +129,7 @@ function OverviewTab({ transfer }: { transfer: TransferRequest }) {
 
       {/* Workflow Timeline */}
       <div className="p-4 rounded-[6px] bg-muted/40 border">
-        <p className="text-[13px] font-semibold uppercase tracking-wide text-muted-foreground mb-3">Workflow Timeline</p>
+        <p className="text-13 font-semibold uppercase tracking-wide text-muted-foreground mb-3">Workflow Timeline</p>
         <div className="space-y-0">
           {WORKFLOW_STEPS.map((step, i) => {
             const isRejected = transfer.status === 'rejected' && i >= currentIdx
@@ -139,7 +139,7 @@ function OverviewTab({ transfer }: { transfer: TransferRequest }) {
             return (
               <div key={step.key} className="flex gap-3">
                 <div className="flex flex-col items-center">
-                  <div className={`w-7 h-7 rounded-full flex items-center justify-center shrink-0 ${done ? 'bg-green-500' : current ? 'bg-[#121321]' : 'bg-muted border'}`}>
+                  <div className={`w-7 h-7 rounded-full flex items-center justify-center shrink-0 ${done ? 'bg-green-500' : current ? 'bg-brand-navy' : 'bg-muted border'}`}>
                     {done
                       ? <CheckCircle2 className="w-4 h-4 text-white" />
                       : current
@@ -152,7 +152,7 @@ function OverviewTab({ transfer }: { transfer: TransferRequest }) {
                   )}
                 </div>
                 <div className="pb-2 pt-1">
-                  <p className={`text-[14px] font-semibold font-['Manrope'] ${done ? 'text-green-700 dark:text-green-400' : current ? 'text-[#121321] dark:text-white' : 'text-muted-foreground'}`}>{step.label}</p>
+                  <p className={`text-[14px] font-semibold font-['Manrope'] ${done ? 'text-green-700 dark:text-green-400' : current ? 'text-brand-navy dark:text-white' : 'text-muted-foreground'}`}>{step.label}</p>
                   {info?.date && <p className="text-[12px] text-muted-foreground font-['Manrope']">{info.date}{info.user ? ` · ${info.user}` : ''}</p>}
                 </div>
               </div>
@@ -168,11 +168,11 @@ function AssetsTab({ transfer }: { transfer: TransferRequest }) {
   const totalValue = transfer.assets.reduce((sum, a) => sum + (a.acquisitionValue ?? 0), 0)
   return (
     <div className="p-4 rounded-[6px] bg-muted/40 border overflow-x-auto">
-      <table className="w-full text-[15px]">
+      <table className="w-full text-15">
         <thead>
           <tr className="border-b">
             {['Asset ID', 'Asset Name', 'Serial Number', 'Type', 'Location', 'Condition', 'Value'].map(h => (
-              <th key={h} className="text-left text-[13px] font-semibold text-muted-foreground uppercase tracking-wide pb-2 pr-4">{h}</th>
+              <th key={h} className="text-left text-13 font-semibold text-muted-foreground uppercase tracking-wide pb-2 pr-4">{h}</th>
             ))}
           </tr>
         </thead>
@@ -195,7 +195,7 @@ function AssetsTab({ transfer }: { transfer: TransferRequest }) {
         </tbody>
         <tfoot className="border-t">
           <tr>
-            <td colSpan={6} className="pt-2 text-[13px] text-muted-foreground font-semibold">{transfer.assets.length} asset{transfer.assets.length !== 1 ? 's' : ''}</td>
+            <td colSpan={6} className="pt-2 text-13 text-muted-foreground font-semibold">{transfer.assets.length} asset{transfer.assets.length !== 1 ? 's' : ''}</td>
             <td className="pt-2 font-semibold font-['Manrope']">
               {totalValue.toLocaleString('en-US', { style: 'currency', currency: 'USD' })}
             </td>
@@ -220,7 +220,7 @@ export function TransferDetailView({ id, onBack }: TransferDetailViewProps) {
 
   if (!transfer) {
     return (
-      <div className="flex items-center justify-center py-24 text-muted-foreground text-[15px] font-['Manrope']">
+      <div className="flex items-center justify-center py-24 text-muted-foreground text-15 font-['Manrope']">
         Transfer record not found.
       </div>
     )
@@ -289,7 +289,7 @@ export function TransferDetailView({ id, onBack }: TransferDetailViewProps) {
             placeholder="Enter rejection reason…"
             value={rejectReason}
             onChange={e => setRejectReason(e.target.value)}
-            className="min-h-[100px] text-[15px] font-['Manrope']"
+            className="min-h-[100px] text-15 font-['Manrope']"
           />
           <DialogFooter>
             <Button variant="outline" onClick={() => setRejectOpen(false)}>Cancel</Button>

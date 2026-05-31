@@ -59,7 +59,7 @@ export function ResetPasswordDrawer({ open, onOpenChange, user }: ResetPasswordD
       <SheetContent side="right" className="!w-full sm:!max-w-lg flex flex-col overflow-hidden p-0">
         <SheetHeader className="px-6 py-4 border-b shrink-0">
           <SheetTitle className="text-[18px]">Reset Password</SheetTitle>
-          <SheetDescription className="text-[13px]">
+          <SheetDescription className="text-13">
             {user ? `Reset password for ${user.name}` : 'Reset user password'}
           </SheetDescription>
         </SheetHeader>
@@ -98,7 +98,7 @@ export function ResetPasswordDrawer({ open, onOpenChange, user }: ResetPasswordD
             {method === 'email-link' && (
               <div className="flex items-start gap-3 rounded-md border border-blue-200 bg-blue-50 p-4">
                 <Info className="mt-0.5 h-4 w-4 shrink-0 text-blue-500" />
-                <p className="text-[13px] text-blue-700">
+                <p className="text-13 text-blue-700">
                   A password-reset link will be sent to <strong>{user?.email}</strong>.
                   The link expires in 24 hours.
                 </p>
@@ -107,9 +107,9 @@ export function ResetPasswordDrawer({ open, onOpenChange, user }: ResetPasswordD
 
             {method === 'temp-password' && (
               <div className="flex flex-col gap-2">
-                <Label className="text-[13px] font-medium">Generated Password</Label>
+                <Label className="text-13 font-medium">Generated Password</Label>
                 <div className="flex items-center gap-2 rounded-md border bg-muted px-4 py-2.5">
-                  <span className="flex-1 font-mono text-[13px] tracking-widest">{TEMP_PASSWORD}</span>
+                  <span className="flex-1 font-mono text-13 tracking-widest">{TEMP_PASSWORD}</span>
                   <button
                     type="button"
                     onClick={() => navigator.clipboard.writeText(TEMP_PASSWORD)}
@@ -146,7 +146,7 @@ export function ResetPasswordDrawer({ open, onOpenChange, user }: ResetPasswordD
                         checked={!!field.value}
                         onCheckedChange={field.onChange}
                       />
-                      <Label htmlFor={name} className="text-[13px] font-normal cursor-pointer">
+                      <Label htmlFor={name} className="text-13 font-normal cursor-pointer">
                         {label}
                       </Label>
                     </div>

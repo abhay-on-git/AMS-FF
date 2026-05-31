@@ -40,10 +40,10 @@ export function PendingActionsCard() {
       <CardHeader className="pb-3">
         <div className="flex items-center justify-between">
           <CardTitle className="flex items-center gap-2 text-xl">
-            <Hourglass className="w-5 h-5 text-[#EF652B]" />
+            <Hourglass className="w-5 h-5 text-chart-3" />
             Pending Approvals & Actions
           </CardTitle>
-          <Badge className="bg-[#EF652B]/10 text-[#EF652B] border-[#EF652B]/20 text-md">
+          <Badge className="bg-chart-3/10 text-chart-3 border-chart-3/20 text-md">
             {PENDING_ACTIONS.length} pending
           </Badge>
         </div>
@@ -67,7 +67,7 @@ export function PendingActionsCard() {
                 </div>
                 <div className="flex-1 min-w-0">
                   <div className="flex items-center gap-2">
-                    <p className="text-[15px] font-medium truncate">{action.title}</p>
+                    <p className="text-15 font-medium truncate">{action.title}</p>
                     <Badge
                       variant="outline"
                       className={cn('text-[11px] shrink-0', urgencyClasses(action.urgency))}

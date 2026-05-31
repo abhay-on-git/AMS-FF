@@ -32,7 +32,7 @@ import type { InspectionRequest, InspectionStatus } from '../types/inspectionTyp
 type SubView = 'all' | 'mine' | 'pending-review' | 'scheduled'
 
 const STAT_CARDS = [
-  { key: 'total',         label: 'Total',          color: 'bg-[#121321]', Icon: ClipboardCheck },
+  { key: 'total',         label: 'Total',          color: 'bg-brand-navy', Icon: ClipboardCheck },
   { key: 'scheduled',     label: 'Scheduled',      color: 'bg-blue-600',  Icon: Clock },
   { key: 'inProgress',    label: 'In Progress',    color: 'bg-amber-600', Icon: Play },
   { key: 'pendingReview', label: 'Pending Review', color: 'bg-purple-600',Icon: Star },
@@ -112,7 +112,7 @@ export function InspectionsTab({ onViewDetail, onSchedule, onStart, onComplete, 
             </div>
             <div className="min-w-0">
               <p className="text-xl font-bold">{stats[key as keyof typeof stats]}</p>
-              <p className="text-[13px] text-muted-foreground truncate">{label}</p>
+              <p className="text-13 text-muted-foreground truncate">{label}</p>
             </div>
           </div>
         ))}
@@ -128,8 +128,8 @@ export function InspectionsTab({ onViewDetail, onSchedule, onStart, onComplete, 
             { value: 'scheduled',      label: 'Scheduled',      badge: stats.scheduled },
           ] as { value: SubView; label: string; badge?: number }[]).map((tab) => (
             <button key={tab.value} onClick={() => setSubView(tab.value)}
-              className={`px-3 py-1.5 rounded-[4px] text-[15px] transition-colors flex items-center gap-1.5 ${
-                subView === tab.value ? 'bg-[#121321] text-white shadow-sm' : 'text-foreground hover:bg-muted'
+              className={`px-3 py-1.5 rounded-[4px] text-15 transition-colors flex items-center gap-1.5 ${
+                subView === tab.value ? 'bg-brand-navy text-white shadow-sm' : 'text-foreground hover:bg-muted'
               }`}>
               {tab.label}
               {tab.badge != null && tab.badge > 0 && (
@@ -141,7 +141,7 @@ export function InspectionsTab({ onViewDetail, onSchedule, onStart, onComplete, 
           ))}
         </div>
         <Button onClick={onSchedule}
-          className="gap-1.5 bg-brand-navy hover:bg-brand-navy-mid text-white text-[15px]">
+          className="gap-1.5 bg-brand-navy hover:bg-brand-navy-mid text-white text-15">
           <Plus className="w-4 h-4" />
           Schedule Inspection
         </Button>
@@ -157,50 +157,50 @@ export function InspectionsTab({ onViewDetail, onSchedule, onStart, onComplete, 
                 placeholder="Search ID, title, inspector, location..."
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
-                className="pl-9 h-10 text-[15px] placeholder:text-muted-foreground/60"
+                className="pl-9 h-10 text-15 placeholder:text-muted-foreground/60"
               />
             </div>
             <div className="flex gap-2 flex-wrap">
               <Select value={effectiveStatus} onValueChange={setStatusFilter} disabled={isLocked}>
-                <SelectTrigger className={`w-[165px] h-10 text-[15px] ${isLocked ? 'opacity-60 cursor-not-allowed' : ''}`}>
+                <SelectTrigger className={`w-[165px] h-10 text-15 ${isLocked ? 'opacity-60 cursor-not-allowed' : ''}`}>
                   <SelectValue placeholder="Status" />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="all" className="text-[15px]">All Status</SelectItem>
-                  <SelectItem value="draft" className="text-[15px]">Draft</SelectItem>
-                  <SelectItem value="scheduled" className="text-[15px]">Scheduled</SelectItem>
-                  <SelectItem value="in-progress" className="text-[15px]">In Progress</SelectItem>
-                  <SelectItem value="pending-review" className="text-[15px]">Pending Review</SelectItem>
-                  <SelectItem value="completed" className="text-[15px]">Completed</SelectItem>
-                  <SelectItem value="failed" className="text-[15px]">Failed</SelectItem>
-                  <SelectItem value="cancelled" className="text-[15px]">Cancelled</SelectItem>
+                  <SelectItem value="all" className="text-15">All Status</SelectItem>
+                  <SelectItem value="draft" className="text-15">Draft</SelectItem>
+                  <SelectItem value="scheduled" className="text-15">Scheduled</SelectItem>
+                  <SelectItem value="in-progress" className="text-15">In Progress</SelectItem>
+                  <SelectItem value="pending-review" className="text-15">Pending Review</SelectItem>
+                  <SelectItem value="completed" className="text-15">Completed</SelectItem>
+                  <SelectItem value="failed" className="text-15">Failed</SelectItem>
+                  <SelectItem value="cancelled" className="text-15">Cancelled</SelectItem>
                 </SelectContent>
               </Select>
 
               <Select value={effectiveType} onValueChange={setTypeFilter} disabled={isLocked}>
-                <SelectTrigger className={`w-[155px] h-10 text-[15px] ${isLocked ? 'opacity-60 cursor-not-allowed' : ''}`}>
+                <SelectTrigger className={`w-[155px] h-10 text-15 ${isLocked ? 'opacity-60 cursor-not-allowed' : ''}`}>
                   <SelectValue placeholder="Type" />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="all" className="text-[15px]">All Types</SelectItem>
-                  <SelectItem value="scheduled" className="text-[15px]">Scheduled</SelectItem>
-                  <SelectItem value="spot-check" className="text-[15px]">Spot Check</SelectItem>
-                  <SelectItem value="pre-transfer" className="text-[15px]">Pre-Transfer</SelectItem>
-                  <SelectItem value="post-incident" className="text-[15px]">Post-Incident</SelectItem>
-                  <SelectItem value="regulatory" className="text-[15px]">Regulatory</SelectItem>
+                  <SelectItem value="all" className="text-15">All Types</SelectItem>
+                  <SelectItem value="scheduled" className="text-15">Scheduled</SelectItem>
+                  <SelectItem value="spot-check" className="text-15">Spot Check</SelectItem>
+                  <SelectItem value="pre-transfer" className="text-15">Pre-Transfer</SelectItem>
+                  <SelectItem value="post-incident" className="text-15">Post-Incident</SelectItem>
+                  <SelectItem value="regulatory" className="text-15">Regulatory</SelectItem>
                 </SelectContent>
               </Select>
 
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
-                  <Button variant="outline" size="sm" className="h-10 text-[15px] gap-1.5 px-3">
+                  <Button variant="outline" size="sm" className="h-10 text-15 gap-1.5 px-3">
                     <Columns3 className="w-4 h-4" />Columns
                   </Button>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent align="end" className="w-48">
                   {columns.map((col) => (
                     <DropdownMenuCheckboxItem key={col.key} checked={col.visible}
-                      onCheckedChange={() => toggleColumn(col.key)} className="text-[15px]">
+                      onCheckedChange={() => toggleColumn(col.key)} className="text-15">
                       {col.label}
                     </DropdownMenuCheckboxItem>
                   ))}
@@ -221,15 +221,15 @@ export function InspectionsTab({ onViewDetail, onSchedule, onStart, onComplete, 
                 <Table>
                   <TableHeader>
                     <TableRow>
-                      <TableHead className="text-[15px]">Inspection ID</TableHead>
-                      <TableHead className="text-[15px]">Type</TableHead>
-                      <TableHead className="text-[15px]">Title</TableHead>
-                      <TableHead className="text-[15px]">Status</TableHead>
-                      <TableHead className="text-[15px]">Result</TableHead>
-                      <TableHead className="text-[15px]">Inspector</TableHead>
-                      <TableHead className="text-[15px]">Scheduled</TableHead>
-                      <TableHead className="text-[15px]">Checklist</TableHead>
-                      <TableHead className="w-20 text-[15px]">Actions</TableHead>
+                      <TableHead className="text-15">Inspection ID</TableHead>
+                      <TableHead className="text-15">Type</TableHead>
+                      <TableHead className="text-15">Title</TableHead>
+                      <TableHead className="text-15">Status</TableHead>
+                      <TableHead className="text-15">Result</TableHead>
+                      <TableHead className="text-15">Inspector</TableHead>
+                      <TableHead className="text-15">Scheduled</TableHead>
+                      <TableHead className="text-15">Checklist</TableHead>
+                      <TableHead className="w-20 text-15">Actions</TableHead>
                     </TableRow>
                   </TableHeader>
                   <TableBody>
@@ -238,7 +238,7 @@ export function InspectionsTab({ onViewDetail, onSchedule, onStart, onComplete, 
                       const totalCheck   = ins.checklist.length
                       return (
                         <TableRow key={ins.id} className="cursor-pointer hover:bg-muted/30" onClick={() => onViewDetail(ins)}>
-                          <TableCell className="font-medium text-[15px] text-brand-navy dark:text-brand-teal">
+                          <TableCell className="font-medium text-15 text-brand-navy dark:text-brand-teal">
                             {ins.inspectionId}
                           </TableCell>
                           <TableCell>
@@ -247,8 +247,8 @@ export function InspectionsTab({ onViewDetail, onSchedule, onStart, onComplete, 
                             </Badge>
                           </TableCell>
                           <TableCell className="max-w-[200px]">
-                            <p className="text-[15px] truncate">{ins.title}</p>
-                            <p className="text-[13px] text-muted-foreground">{ins.fieldOffice} · {ins.location}</p>
+                            <p className="text-15 truncate">{ins.title}</p>
+                            <p className="text-13 text-muted-foreground">{ins.fieldOffice} · {ins.location}</p>
                           </TableCell>
                           <TableCell>
                             <Badge variant="outline" className={`text-[12px] whitespace-nowrap ${getInspectionStatusColor(ins.status as InspectionStatus)}`}>
@@ -260,8 +260,8 @@ export function InspectionsTab({ onViewDetail, onSchedule, onStart, onComplete, 
                               {getResultLabel(ins.result)}
                             </Badge>
                           </TableCell>
-                          <TableCell className="text-[15px]">{ins.inspector}</TableCell>
-                          <TableCell className="text-[15px] text-muted-foreground whitespace-nowrap">
+                          <TableCell className="text-15">{ins.inspector}</TableCell>
+                          <TableCell className="text-15 text-muted-foreground whitespace-nowrap">
                             {new Date(ins.scheduledDate).toLocaleDateString()}
                           </TableCell>
                           <TableCell>
@@ -273,10 +273,10 @@ export function InspectionsTab({ onViewDetail, onSchedule, onStart, onComplete, 
                                     style={{ width: `${(checkedCount / totalCheck) * 100}%` }}
                                   />
                                 </div>
-                                <span className="text-[13px] text-muted-foreground whitespace-nowrap">{checkedCount}/{totalCheck}</span>
+                                <span className="text-13 text-muted-foreground whitespace-nowrap">{checkedCount}/{totalCheck}</span>
                               </div>
                             ) : (
-                              <span className="text-[15px] text-muted-foreground">—</span>
+                              <span className="text-15 text-muted-foreground">—</span>
                             )}
                           </TableCell>
                           <TableCell>
@@ -327,7 +327,7 @@ export function InspectionsTab({ onViewDetail, onSchedule, onStart, onComplete, 
             <div className="text-center py-12 px-6">
               <AlertCircle className="w-10 h-10 mx-auto mb-3 opacity-20" />
               <h3 className="text-lg font-medium mb-1">No inspections found</h3>
-              <p className="text-[15px] text-muted-foreground mb-4">
+              <p className="text-15 text-muted-foreground mb-4">
                 {search || statusFilter !== 'all' ? 'Try adjusting your filters' : 'Schedule an inspection to get started'}
               </p>
               {search || statusFilter !== 'all' ? (

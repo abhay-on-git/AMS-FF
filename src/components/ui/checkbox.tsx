@@ -20,7 +20,8 @@ export interface CheckboxProps {
 }
 
 const UNCHECKED_COLOR = "rgba(0,0,0,0.23)";
-const CHECKED_COLOR   = "#b8e3e9";
+const CHECKED_COLOR = "var(--color-brand-teal-light)";
+const CHECKED_ICON_COLOR = "var(--color-brand-teal)";
 
 function Checkbox({
   checked,
@@ -54,32 +55,29 @@ function Checkbox({
       onClick={handleClick}
       className={cn(
         "inline-flex shrink-0 items-center justify-center rounded-[4px] outline-none transition-opacity",
-        "focus-visible:ring-2 focus-visible:ring-[#b8e3e9]/70 focus-visible:ring-offset-1",
+        "focus-visible:ring-2 focus-visible:ring-brand-teal-light/70 focus-visible:ring-offset-1",
         "disabled:cursor-not-allowed disabled:opacity-50",
         className,
       )}
       {...rest}
     >
       {isIndeterminate ? (
-        /* indeterminate: #b8e3e9 box + dark teal minus icon */
         <span style={{
           display: "inline-flex", width: 18, height: 18,
-          borderRadius: 2, background: "rgba(184,227,233,0.6)",
+          borderRadius: 2, background: "color-mix(in srgb, var(--color-brand-teal-light) 60%, transparent)",
           alignItems: "center", justifyContent: "center",
         }}>
-          <Remove sx={{ fontSize: 14, color: "#1a5c68" }} />
+          <Remove sx={{ fontSize: 14, color: CHECKED_ICON_COLOR }} />
         </span>
       ) : isChecked ? (
-        /* checked: #b8e3e9 box + dark teal check icon */
         <span style={{
           display: "inline-flex", width: 18, height: 18,
           borderRadius: 2, background: CHECKED_COLOR,
           alignItems: "center", justifyContent: "center",
         }}>
-          <Check sx={{ fontSize: 14, color: "#1a5c68" }} />
+          <Check sx={{ fontSize: 14, color: CHECKED_ICON_COLOR }} />
         </span>
       ) : (
-        /* unchecked: MUI outline box */
         <CheckBoxOutlineBlank sx={{ fontSize: 18, display: "block", color: UNCHECKED_COLOR }} />
       )}
     </button>

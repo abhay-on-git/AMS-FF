@@ -89,7 +89,7 @@ export function LocationFormDrawer({
           <SheetTitle>
             {isEditMode ? 'Edit Location' : parentLocation ? `Add Location under ${parentLocation.name}` : 'Add Location'}
           </SheetTitle>
-          <SheetDescription className="text-[15px]">
+          <SheetDescription className="text-15">
             {isEditMode
               ? `Update details for ${editingLocation?.name}`
               : parentLocation
@@ -101,21 +101,21 @@ export function LocationFormDrawer({
         <div className="flex-1 overflow-y-auto px-6 space-y-6 pb-6">
           {!isEditMode && !parentLocation && (
             <div className="space-y-2">
-              <Label htmlFor="field-office-select" className="text-[15px] font-medium">
+              <Label htmlFor="field-office-select" className="text-15 font-medium">
                 Field Office <span className="text-red-500">*</span>
               </Label>
               <Select value={localFieldOfficeId} onValueChange={setLocalFieldOfficeId}>
-                <SelectTrigger id="field-office-select" className="h-[52px] text-[15px]">
+                <SelectTrigger id="field-office-select" className="h-[52px] text-15">
                   <SelectValue placeholder="Select field office" />
                 </SelectTrigger>
                 <SelectContent className="z-50 w-[var(--radix-select-trigger-width)]">
                   {fieldOffices.map((office) => (
-                    <SelectItem key={office.id} value={office.id} className="text-[15px]">
+                    <SelectItem key={office.id} value={office.id} className="text-15">
                       <div className="flex items-center gap-2">
                         <Building2 className="w-4 h-4" />
                         <div>
                           <p className="font-medium">{office.name}</p>
-                          <p className="text-[13px] text-muted-foreground">{office.location} • {office.code}</p>
+                          <p className="text-13 text-muted-foreground">{office.location} • {office.code}</p>
                         </div>
                       </div>
                     </SelectItem>
@@ -126,7 +126,7 @@ export function LocationFormDrawer({
           )}
 
           <div className="space-y-2">
-            <Label htmlFor="name" className="text-[15px] font-medium">
+            <Label htmlFor="name" className="text-15 font-medium">
               Location Name <span className="text-red-500">*</span>
             </Label>
             <Input
@@ -134,7 +134,7 @@ export function LocationFormDrawer({
               value={name}
               onChange={(e) => setName(e.target.value)}
               placeholder="e.g., Building A, Floor 1, Gym, Parking Lot"
-              className={`h-[52px] text-[15px] ${errors.name ? 'border-red-500' : ''}`}
+              className={`h-[52px] text-15 ${errors.name ? 'border-red-500' : ''}`}
             />
             {errors.name && <p className="text-xs text-red-500">{errors.name}</p>}
           </div>
@@ -142,10 +142,10 @@ export function LocationFormDrawer({
 
         <div className="shrink-0 border-t bg-background p-4">
           <div className="flex justify-end gap-2">
-            <Button type="button" variant="outline" onClick={() => onOpenChange(false)} className="text-[15px]">
+            <Button type="button" variant="outline" onClick={() => onOpenChange(false)} className="text-15">
               Cancel
             </Button>
-            <Button onClick={handleSave} disabled={saveMutation.isPending} className="text-[15px]">
+            <Button onClick={handleSave} disabled={saveMutation.isPending} className="text-15">
               {isEditMode ? 'Save Changes' : 'Create Location'}
             </Button>
           </div>

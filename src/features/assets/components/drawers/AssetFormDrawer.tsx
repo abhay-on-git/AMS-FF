@@ -101,7 +101,7 @@ export function AssetFormDrawer({ open, onOpenChange, mode, asset, draft }: Asse
       <SheetContent side="right" className="!w-full sm:!max-w-lg flex flex-col overflow-hidden p-0">
 
         <SheetHeader className="px-6 pt-6 pb-4 border-b shrink-0">
-          <SheetTitle className="text-[15px] flex items-center gap-2">
+          <SheetTitle className="text-15 flex items-center gap-2">
             {isDraft ? <ClipboardCheck className="w-5 h-5" /> : isEdit ? <Pencil className="w-5 h-5" /> : <PackagePlus className="w-5 h-5" />}
             {isDraft ? 'Complete Draft Registration' : isEdit ? 'Edit Asset' : 'Register Asset'}
           </SheetTitle>
@@ -121,19 +121,19 @@ export function AssetFormDrawer({ open, onOpenChange, mode, asset, draft }: Asse
             <div className="grid grid-cols-2 gap-3">
               <FieldWrap label="Asset ID" required error={errors.assetId?.message}>
                 <Input {...register('assetId')} disabled={isEdit} placeholder="e.g. LAP-001234"
-                  className="h-[44px] text-[14px] placeholder:text-[13px] font-['Manrope'] disabled:opacity-60" />
+                  className="h-[44px] text-[14px] placeholder:text-13 font-['Manrope'] disabled:opacity-60" />
               </FieldWrap>
               <FieldWrap label="EPC" required error={errors.epc?.message}>
                 <Input {...register('epc')} placeholder="e.g. E280116..."
-                  className="h-[44px] text-[14px] placeholder:text-[13px] font-['Manrope']" />
+                  className="h-[44px] text-[14px] placeholder:text-13 font-['Manrope']" />
               </FieldWrap>
               <FieldWrap label="Barcode">
                 <Input {...register('barcode')} placeholder="Enter barcode"
-                  className="h-[44px] text-[14px] placeholder:text-[13px] font-['Manrope']" />
+                  className="h-[44px] text-[14px] placeholder:text-13 font-['Manrope']" />
               </FieldWrap>
               <FieldWrap label="Serial Number">
                 <Input {...register('serialNumber')} placeholder="e.g. SN123456"
-                  className="h-[44px] text-[14px] placeholder:text-[13px] font-['Manrope']" />
+                  className="h-[44px] text-[14px] placeholder:text-13 font-['Manrope']" />
               </FieldWrap>
             </div>
 
@@ -144,12 +144,12 @@ export function AssetFormDrawer({ open, onOpenChange, mode, asset, draft }: Asse
             <div className="space-y-3">
               <FieldWrap label="Name" required error={errors.name?.message}>
                 <Input {...register('name')} placeholder="Enter asset name"
-                  className="h-[44px] text-[14px] placeholder:text-[13px]" />
+                  className="h-[44px] text-[14px] placeholder:text-13" />
               </FieldWrap>
               <FieldWrap label="Description">
                 <Textarea {...register('description')} rows={2}
                   placeholder="Brief description of the asset..."
-                  className="text-[14px] placeholder:text-[13px] resize-none" />
+                  className="text-[14px] placeholder:text-13 resize-none" />
               </FieldWrap>
               <div className="grid grid-cols-2 gap-3">
                 <FieldWrap label="Category" required error={errors.type?.message}>
@@ -181,7 +181,7 @@ export function AssetFormDrawer({ open, onOpenChange, mode, asset, draft }: Asse
 
             {/* PROCUREMENT DETAILS — collapsible */}
             <button type="button" onClick={() => setProcurementOpen((p) => !p)}
-              className="flex items-center gap-2 text-[13px] text-muted-foreground hover:text-foreground transition-colors w-full">
+              className="flex items-center gap-2 text-13 text-muted-foreground hover:text-foreground transition-colors w-full">
               <FileText className="w-4 h-4" />
               <span className="font-medium">Procurement Details</span>
               {procurementOpen
@@ -209,7 +209,7 @@ export function AssetFormDrawer({ open, onOpenChange, mode, asset, draft }: Asse
                   <Input {...register('acquisitionDate')} type="date" className="h-[44px] text-[14px]" />
                 </FieldWrap>
 
-                <div className="flex items-center gap-2 pt-1 text-[13px] text-muted-foreground">
+                <div className="flex items-center gap-2 pt-1 text-13 text-muted-foreground">
                   <DollarSign className="w-4 h-4" />
                   <span className="font-medium">Financial Details</span>
                 </div>
@@ -255,7 +255,7 @@ export function AssetFormDrawer({ open, onOpenChange, mode, asset, draft }: Asse
             <Separator />
 
             {/* ASSIGNMENT */}
-            <div className="flex items-center gap-2 text-[13px] text-muted-foreground">
+            <div className="flex items-center gap-2 text-13 text-muted-foreground">
               <MapPin className="w-4 h-4" />
               <span className="font-medium">Assignment</span>
             </div>
@@ -313,17 +313,17 @@ export function AssetFormDrawer({ open, onOpenChange, mode, asset, draft }: Asse
             <Separator />
 
             {/* ADDITIONAL NOTES */}
-            <div className="flex items-center gap-2 text-[13px] text-muted-foreground">
+            <div className="flex items-center gap-2 text-13 text-muted-foreground">
               <StickyNote className="w-4 h-4" />
               <span className="font-medium">Additional Notes</span>
             </div>
             <Textarea {...register('notes')} rows={3}
               placeholder="Add any additional notes about this asset..."
-              className="text-[14px] placeholder:text-[13px]" />
+              className="text-[14px] placeholder:text-13" />
 
             {/* REGISTRATION TIPS — draft mode only */}
             {isDraft && (
-              <div className="rounded-lg bg-muted/50 border px-4 py-3 text-[13px] text-muted-foreground space-y-1">
+              <div className="rounded-lg bg-muted/50 border px-4 py-3 text-13 text-muted-foreground space-y-1">
                 <p className="font-semibold text-foreground mb-2">Registration Tips</p>
                 {REGISTRATION_TIPS.map((tip) => <p key={tip}>- {tip}</p>)}
               </div>

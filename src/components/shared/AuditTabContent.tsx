@@ -26,7 +26,7 @@ export function AuditTabContent({ entries }: AuditTabContentProps) {
     return (
       <div className="flex flex-col items-center gap-2 py-16 text-muted-foreground">
         <Clock className="w-8 h-8 opacity-40" />
-        <p className="text-[15px]">No audit events recorded yet.</p>
+        <p className="text-15">No audit events recorded yet.</p>
       </div>
     )
   }
@@ -45,14 +45,14 @@ export function AuditTabContent({ entries }: AuditTabContentProps) {
 
             {/* Content */}
             <div className="pb-5 flex-1">
-              <p className="text-[15px] font-medium font-['Manrope']">{entry.action}</p>
-              <p className="text-[13px] text-muted-foreground font-['Manrope']">
+              <p className="text-15 font-medium font-['Manrope']">{entry.action}</p>
+              <p className="text-13 text-muted-foreground font-['Manrope']">
                 {entry.user}
                 <span className="mx-1">·</span>
                 {formatDate(entry.timestamp)}
               </p>
               {entry.details && (
-                <p className="text-[13px] text-muted-foreground mt-0.5">{entry.details}</p>
+                <p className="text-13 text-muted-foreground mt-0.5">{entry.details}</p>
               )}
               {(entry.oldValue || entry.newValue) && (
                 <div className="mt-1 flex items-center gap-2 text-[12px]">

@@ -91,7 +91,7 @@ export function UserTable({
     [search, roleFilter, officeFilter, statusFilter],
   )
 
-  if (isLoading) return <div className="p-6 text-muted-foreground text-[15px]">Loading users…</div>
+  if (isLoading) return <div className="p-6 text-muted-foreground text-15">Loading users…</div>
 
   return (
     <div className="space-y-5">
@@ -100,7 +100,7 @@ export function UserTable({
         {STAT_CARDS.map(({ key, label, Icon }) => (
           <div key={key} className="flex items-center justify-between rounded-lg border bg-background p-4">
             <div>
-              <p className="text-[13px] text-muted-foreground">{label}</p>
+              <p className="text-13 text-muted-foreground">{label}</p>
               <p className="text-2xl font-bold mt-0.5">{stats[key as keyof UserStats]}</p>
             </div>
             <Icon className="w-6 h-6 text-muted-foreground/40" />
@@ -117,43 +117,43 @@ export function UserTable({
               placeholder="Search name, email…"
               value={search}
               onChange={(e) => setSearch(e.target.value)}
-              className="pl-9 h-9 text-[15px] placeholder:text-muted-foreground/60"
+              className="pl-9 h-9 text-15 placeholder:text-muted-foreground/60"
             />
           </div>
           <div className="flex gap-2 flex-wrap">
             <Select value={roleFilter} onValueChange={setRoleFilter}>
-              <SelectTrigger className="h-9 w-[140px] text-[15px]"><SelectValue placeholder="All Roles" /></SelectTrigger>
+              <SelectTrigger className="h-9 w-[140px] text-15"><SelectValue placeholder="All Roles" /></SelectTrigger>
               <SelectContent>
-                <SelectItem value="all" className="text-[15px]">All Roles</SelectItem>
-                {roleOptions.map((o) => <SelectItem key={o.value} value={o.value} className="text-[15px]">{o.label}</SelectItem>)}
+                <SelectItem value="all" className="text-15">All Roles</SelectItem>
+                {roleOptions.map((o) => <SelectItem key={o.value} value={o.value} className="text-15">{o.label}</SelectItem>)}
               </SelectContent>
             </Select>
             <Select value={officeFilter} onValueChange={setOfficeFilter}>
-              <SelectTrigger className="h-9 w-[155px] text-[15px]"><SelectValue placeholder="All Field Offices" /></SelectTrigger>
+              <SelectTrigger className="h-9 w-[155px] text-15"><SelectValue placeholder="All Field Offices" /></SelectTrigger>
               <SelectContent>
-                <SelectItem value="all" className="text-[15px]">All Field Offices</SelectItem>
-                {fieldOfficeOptions.map((o) => <SelectItem key={o.value} value={o.value} className="text-[15px]">{o.label}</SelectItem>)}
+                <SelectItem value="all" className="text-15">All Field Offices</SelectItem>
+                {fieldOfficeOptions.map((o) => <SelectItem key={o.value} value={o.value} className="text-15">{o.label}</SelectItem>)}
               </SelectContent>
             </Select>
             <Select value={statusFilter} onValueChange={setStatusFilter}>
-              <SelectTrigger className="h-9 w-[120px] text-[15px]"><SelectValue placeholder="All Status" /></SelectTrigger>
+              <SelectTrigger className="h-9 w-[120px] text-15"><SelectValue placeholder="All Status" /></SelectTrigger>
               <SelectContent>
-                <SelectItem value="all"      className="text-[15px]">All Status</SelectItem>
-                <SelectItem value="active"   className="text-[15px]">Active</SelectItem>
-                <SelectItem value="inactive" className="text-[15px]">Inactive</SelectItem>
-                <SelectItem value="locked"   className="text-[15px]">Locked</SelectItem>
+                <SelectItem value="all"      className="text-15">All Status</SelectItem>
+                <SelectItem value="active"   className="text-15">Active</SelectItem>
+                <SelectItem value="inactive" className="text-15">Inactive</SelectItem>
+                <SelectItem value="locked"   className="text-15">Locked</SelectItem>
               </SelectContent>
             </Select>
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
-                <Button variant="outline" size="sm" className="h-9 text-[15px] gap-1.5 px-3">
+                <Button variant="outline" size="sm" className="h-9 text-15 gap-1.5 px-3">
                   <Columns3 className="w-4 h-4" /> Columns
                 </Button>
               </DropdownMenuTrigger>
               <DropdownMenuContent align="end" className="w-44">
                 {columns.map((col) => (
                   <DropdownMenuCheckboxItem key={col.key} checked={col.visible}
-                    onCheckedChange={() => toggleColumn(col.key)} className="text-[15px]">
+                    onCheckedChange={() => toggleColumn(col.key)} className="text-15">
                     {col.label}
                   </DropdownMenuCheckboxItem>
                 ))}
@@ -170,11 +170,11 @@ export function UserTable({
             <TableHeader>
               <TableRow className="bg-muted/40 hover:bg-muted/40">
                 {visibleCols.map((col) => (
-                  <TableHead key={col.key} className="text-[13px] font-semibold uppercase tracking-wide text-muted-foreground">
+                  <TableHead key={col.key} className="text-13 font-semibold uppercase tracking-wide text-muted-foreground">
                     {col.label}
                   </TableHead>
                 ))}
-                <TableHead className="text-[13px] font-semibold uppercase tracking-wide text-muted-foreground text-right pr-4">
+                <TableHead className="text-13 font-semibold uppercase tracking-wide text-muted-foreground text-right pr-4">
                   Actions
                 </TableHead>
               </TableRow>
@@ -182,7 +182,7 @@ export function UserTable({
             <TableBody>
               {filtered.length === 0 ? (
                 <TableRow>
-                  <TableCell colSpan={visibleCols.length + 1} className="text-center py-10 text-muted-foreground text-[15px]">
+                  <TableCell colSpan={visibleCols.length + 1} className="text-center py-10 text-muted-foreground text-15">
                     No users found
                   </TableCell>
                 </TableRow>
@@ -195,15 +195,15 @@ export function UserTable({
                           <div className="flex h-7 w-7 items-center justify-center rounded-full bg-primary/10 text-[11px] font-semibold text-primary shrink-0">
                             {u.name.split(' ').map((n) => n[0]).join('').slice(0, 2).toUpperCase()}
                           </div>
-                          <span className="text-[15px] font-medium">{u.name}</span>
+                          <span className="text-15 font-medium">{u.name}</span>
                         </div>
                       )}
-                      {col.key === 'email'       && <span className="text-[15px]">{u.email}</span>}
-                      {col.key === 'role'        && <span className="text-[15px]">{u.role}</span>}
-                      {col.key === 'fieldOffice' && <span className="text-[15px]">{u.fieldOffice}</span>}
-                      {col.key === 'mobile'      && <span className="text-[15px] text-muted-foreground">{u.countryCode} {u.mobile || '—'}</span>}
-                      {col.key === 'lastLogin'   && <span className="text-[15px] text-muted-foreground">{u.lastLogin ?? '—'}</span>}
-                      {col.key === 'createdDate' && <span className="text-[15px] text-muted-foreground">{u.createdDate}</span>}
+                      {col.key === 'email'       && <span className="text-15">{u.email}</span>}
+                      {col.key === 'role'        && <span className="text-15">{u.role}</span>}
+                      {col.key === 'fieldOffice' && <span className="text-15">{u.fieldOffice}</span>}
+                      {col.key === 'mobile'      && <span className="text-15 text-muted-foreground">{u.countryCode} {u.mobile || '—'}</span>}
+                      {col.key === 'lastLogin'   && <span className="text-15 text-muted-foreground">{u.lastLogin ?? '—'}</span>}
+                      {col.key === 'createdDate' && <span className="text-15 text-muted-foreground">{u.createdDate}</span>}
                       {col.key === 'status' && (
                         <Badge variant="outline" className={`text-[12px] ${STATUS_COLORS[u.status] ?? ''}`}>
                           {u.status.charAt(0).toUpperCase() + u.status.slice(1)}
@@ -219,15 +219,15 @@ export function UserTable({
                         </Button>
                       </DropdownMenuTrigger>
                       <DropdownMenuContent align="end" className="w-44" onClick={(e) => e.stopPropagation()}>
-                        <DropdownMenuItem className="text-[15px]" onClick={() => onViewDetail(u)}>View Detail</DropdownMenuItem>
-                        <DropdownMenuItem className="text-[15px]" onClick={() => onEdit(u)}>Edit</DropdownMenuItem>
-                        <DropdownMenuItem className="text-[15px]" onClick={() => onResetPassword(u)}>Reset Password</DropdownMenuItem>
-                        <DropdownMenuItem className="text-[15px]"
+                        <DropdownMenuItem className="text-15" onClick={() => onViewDetail(u)}>View Detail</DropdownMenuItem>
+                        <DropdownMenuItem className="text-15" onClick={() => onEdit(u)}>Edit</DropdownMenuItem>
+                        <DropdownMenuItem className="text-15" onClick={() => onResetPassword(u)}>Reset Password</DropdownMenuItem>
+                        <DropdownMenuItem className="text-15"
                           onClick={() => toggleStatusMutation.mutate({ id: u.id, status: u.status === 'active' ? 'inactive' : 'active' })}>
                           {u.status === 'active' ? 'Deactivate' : 'Activate'}
                         </DropdownMenuItem>
                         <DropdownMenuSeparator />
-                        <DropdownMenuItem className="text-[15px] text-destructive focus:text-destructive"
+                        <DropdownMenuItem className="text-15 text-destructive focus:text-destructive"
                           onClick={() => setDeleteTarget(u)}>Delete</DropdownMenuItem>
                       </DropdownMenuContent>
                     </DropdownMenu>

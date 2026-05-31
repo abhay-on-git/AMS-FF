@@ -28,7 +28,7 @@ export function CategoriesView() {
     <div className="flex flex-col gap-5">
       <div className="flex items-center justify-end">
         <Button
-          className="gap-1.5 bg-[#121321] hover:bg-[#1e2035] text-white text-[15px]"
+          className="gap-1.5 bg-brand-navy hover:bg-brand-navy-mid text-white text-15"
           onClick={openCreate}
         >
           <Plus className="w-4 h-4" /> Add Category

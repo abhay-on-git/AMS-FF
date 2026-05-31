@@ -94,7 +94,7 @@ export function LifecycleTab({ asset, events, userRole, onChangeStatus }: Lifecy
               <FileText className="w-4 h-4" />
               <span className="text-sm uppercase tracking-wide">Asset Details</span>
             </div>
-            <div className="space-y-2 text-[15px]">
+            <div className="space-y-2 text-15">
               <div className="flex justify-between">
                 <span className="text-muted-foreground">Asset ID</span>
                 <span className="font-['Manrope'] font-medium">{asset.assetId}</span>
@@ -119,7 +119,7 @@ export function LifecycleTab({ asset, events, userRole, onChangeStatus }: Lifecy
               <User className="w-4 h-4" />
               <span className="text-sm uppercase tracking-wide">Assignment</span>
             </div>
-            <div className="space-y-2 text-[15px]">
+            <div className="space-y-2 text-15">
               <div className="flex justify-between">
                 <span className="text-muted-foreground">Custodian</span>
                 <span>{asset.responsiblePerson}</span>
@@ -144,7 +144,7 @@ export function LifecycleTab({ asset, events, userRole, onChangeStatus }: Lifecy
               <Calendar className="w-4 h-4" />
               <span className="text-sm uppercase tracking-wide">Status Info</span>
             </div>
-            <div className="space-y-2 text-[15px]">
+            <div className="space-y-2 text-15">
               <div className="flex justify-between">
                 <span className="text-muted-foreground">Current Status</span>
                 <Badge className={getStatusColor(asset.status)}>

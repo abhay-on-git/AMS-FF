@@ -23,7 +23,7 @@ function DetailRow({ label, value, mono }: { label: string; value: React.ReactNo
     <div className="flex items-start gap-3 py-2.5">
       <div className="flex-1 min-w-0">
         <Label className="text-muted-foreground text-sm">{label}</Label>
-        <p className={`mt-0.5 ${mono ? "font-['Manrope'] text-[15px]" : ''}`}>
+        <p className={`mt-0.5 ${mono ? "font-['Manrope'] text-15" : ''}`}>
           {value || '—'}
         </p>
       </div>
@@ -147,9 +147,9 @@ export function OverviewTab({ asset, userRole }: OverviewTabProps) {
             ) : (
               <div className="min-h-[3rem] flex items-center">
                 {notes ? (
-                  <p className="text-[15px] leading-relaxed">{notes}</p>
+                  <p className="text-15 leading-relaxed">{notes}</p>
                 ) : (
-                  <p className="text-[15px] text-muted-foreground italic">No notes available.</p>
+                  <p className="text-15 text-muted-foreground italic">No notes available.</p>
                 )}
               </div>
             )}
@@ -166,19 +166,19 @@ export function OverviewTab({ asset, userRole }: OverviewTabProps) {
           </CardHeader>
           <CardContent className="space-y-4">
             <div className="flex items-center justify-between">
-              <span className="text-[15px] text-muted-foreground">Current Status</span>
+              <span className="text-15 text-muted-foreground">Current Status</span>
               <Badge className={getStatusColor(asset.status)}>
                 {asset.status.charAt(0).toUpperCase() + asset.status.slice(1)}
               </Badge>
             </div>
             <div className="flex items-center justify-between">
-              <span className="text-[15px] text-muted-foreground">Condition</span>
+              <span className="text-15 text-muted-foreground">Condition</span>
               <Badge className={getConditionColor(asset.condition)}>
                 {asset.condition.charAt(0).toUpperCase() + asset.condition.slice(1)}
               </Badge>
             </div>
             <Separator />
-            <div className="space-y-2 text-[15px]">
+            <div className="space-y-2 text-15">
               <div className="flex justify-between">
                 <span className="text-muted-foreground">Last Status Change</span>
                 <span>{formatDate(asset.lastStatusChange)}</span>
@@ -193,7 +193,7 @@ export function OverviewTab({ asset, userRole }: OverviewTabProps) {
             <CardTitle className="text-base">Lifecycle Summary</CardTitle>
           </CardHeader>
           <CardContent className="space-y-3">
-            <div className="space-y-2 text-[15px]">
+            <div className="space-y-2 text-15">
               {asset.maintenanceCount !== undefined && (
                 <div className="flex justify-between">
                   <span className="text-muted-foreground">Maintenance Cycles</span>

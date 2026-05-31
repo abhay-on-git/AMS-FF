@@ -75,7 +75,7 @@ export function CategoryTable({ data, isLoading, onEdit }: CategoryTableProps) {
   )
 
   if (isLoading) {
-    return <div className="p-6 text-muted-foreground text-[15px]">Loading categories…</div>
+    return <div className="p-6 text-muted-foreground text-15">Loading categories…</div>
   }
 
   return (
@@ -88,23 +88,23 @@ export function CategoryTable({ data, isLoading, onEdit }: CategoryTableProps) {
               placeholder="Search categories…"
               value={search}
               onChange={(e) => setSearch(e.target.value)}
-              className="pl-9 h-9 text-[15px] placeholder:text-muted-foreground/60"
+              className="pl-9 h-9 text-15 placeholder:text-muted-foreground/60"
             />
           </div>
           <div className="flex gap-2">
             <Select value={statusFilter} onValueChange={setStatusFilter}>
-              <SelectTrigger className="w-36 h-9 text-[15px]">
+              <SelectTrigger className="w-36 h-9 text-15">
                 <SelectValue placeholder="All Status" />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="all" className="text-[15px]">All Status</SelectItem>
-                <SelectItem value="active" className="text-[15px]">Active</SelectItem>
-                <SelectItem value="inactive" className="text-[15px]">Inactive</SelectItem>
+                <SelectItem value="all" className="text-15">All Status</SelectItem>
+                <SelectItem value="active" className="text-15">Active</SelectItem>
+                <SelectItem value="inactive" className="text-15">Inactive</SelectItem>
               </SelectContent>
             </Select>
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
-                <Button variant="outline" size="sm" className="h-9 text-[15px] gap-1.5 px-3">
+                <Button variant="outline" size="sm" className="h-9 text-15 gap-1.5 px-3">
                   <Columns3 className="w-4 h-4" /> Columns
                 </Button>
               </DropdownMenuTrigger>
@@ -114,7 +114,7 @@ export function CategoryTable({ data, isLoading, onEdit }: CategoryTableProps) {
                     key={col.key}
                     checked={col.visible}
                     onCheckedChange={() => toggleColumn(col.key)}
-                    className="text-[15px]"
+                    className="text-15"
                   >
                     {col.label}
                   </DropdownMenuCheckboxItem>
@@ -131,12 +131,12 @@ export function CategoryTable({ data, isLoading, onEdit }: CategoryTableProps) {
                 {visibleCols.map((col) => (
                   <TableHead
                     key={col.key}
-                    className="text-[13px] font-semibold uppercase tracking-wide text-muted-foreground"
+                    className="text-13 font-semibold uppercase tracking-wide text-muted-foreground"
                   >
                     {col.label}
                   </TableHead>
                 ))}
-                <TableHead className="text-[13px] font-semibold uppercase tracking-wide text-muted-foreground text-right pr-4">
+                <TableHead className="text-13 font-semibold uppercase tracking-wide text-muted-foreground text-right pr-4">
                   Actions
                 </TableHead>
               </TableRow>
@@ -146,7 +146,7 @@ export function CategoryTable({ data, isLoading, onEdit }: CategoryTableProps) {
                 <TableRow>
                   <TableCell
                     colSpan={visibleCols.length + 1}
-                    className="text-center py-10 text-muted-foreground text-[15px]"
+                    className="text-center py-10 text-muted-foreground text-15"
                   >
                     No categories found
                   </TableCell>
@@ -159,19 +159,19 @@ export function CategoryTable({ data, isLoading, onEdit }: CategoryTableProps) {
                         {col.key === 'categoryName' && (
                           <div className="flex items-center gap-2.5">
                             <FolderOpen className="h-4 w-4 text-muted-foreground shrink-0" />
-                            <span className="text-[15px] font-medium">{category.categoryName}</span>
+                            <span className="text-15 font-medium">{category.categoryName}</span>
                           </div>
                         )}
                         {col.key === 'categoryCode' && (
-                          <span className="text-[15px] font-mono">{category.categoryCode}</span>
+                          <span className="text-15 font-mono">{category.categoryCode}</span>
                         )}
                         {col.key === 'description' && (
-                          <span className="text-[15px] text-muted-foreground">
+                          <span className="text-15 text-muted-foreground">
                             {category.description || '—'}
                           </span>
                         )}
                         {col.key === 'createdDate' && (
-                          <span className="text-[15px] text-muted-foreground">{category.createdDate}</span>
+                          <span className="text-15 text-muted-foreground">{category.createdDate}</span>
                         )}
                         {col.key === 'status' && (
                           <Badge variant="outline" className={`text-[12px] ${STATUS_COLORS[category.status] ?? ''}`}>
@@ -188,12 +188,12 @@ export function CategoryTable({ data, isLoading, onEdit }: CategoryTableProps) {
                           </Button>
                         </DropdownMenuTrigger>
                         <DropdownMenuContent align="end" className="w-40">
-                          <DropdownMenuItem className="text-[15px]" onClick={() => onEdit(category)}>
+                          <DropdownMenuItem className="text-15" onClick={() => onEdit(category)}>
                             Edit
                           </DropdownMenuItem>
                           <DropdownMenuSeparator />
                           <DropdownMenuItem
-                            className="text-[15px] text-destructive focus:text-destructive"
+                            className="text-15 text-destructive focus:text-destructive"
                             onClick={() => setDeleteTarget(category)}
                           >
                             Delete

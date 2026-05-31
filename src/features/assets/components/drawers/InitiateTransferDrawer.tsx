@@ -95,7 +95,7 @@ export function InitiateTransferDrawer({ open, onOpenChange, preSelectedAssetIds
           <div className="flex-1 overflow-y-auto px-6 py-5 space-y-5">
             {/* Asset picker */}
             <section>
-              <Label className="text-[13px] font-semibold uppercase tracking-wide text-muted-foreground mb-2 block">
+              <Label className="text-13 font-semibold uppercase tracking-wide text-muted-foreground mb-2 block">
                 Select Assets <span className="text-destructive">*</span>
               </Label>
               {selectedAssets.length > 0 && (
@@ -126,7 +126,7 @@ export function InitiateTransferDrawer({ open, onOpenChange, preSelectedAssetIds
                       selectedAssets.includes(asset.id) ? 'bg-brand-teal/5' : ''
                     }`}>
                     <div>
-                      <p className="text-[13px] font-medium">{asset.name}</p>
+                      <p className="text-13 font-medium">{asset.name}</p>
                       <p className="text-[12px] text-muted-foreground">{asset.assetId} · {asset.currentLocation}</p>
                     </div>
                     {selectedAssets.includes(asset.id) && <span className="text-brand-teal text-[12px] font-medium">✓</span>}
@@ -138,13 +138,13 @@ export function InitiateTransferDrawer({ open, onOpenChange, preSelectedAssetIds
 
             {/* From (auto-filled, read-only) */}
             <section>
-              <Label className="text-[13px] font-semibold uppercase tracking-wide text-muted-foreground mb-2 block">From (Current)</Label>
+              <Label className="text-13 font-semibold uppercase tracking-wide text-muted-foreground mb-2 block">From (Current)</Label>
               <div className="grid grid-cols-2 gap-3">
-                <div className="p-3 rounded-[6px] bg-muted/40 border text-[13px]">
+                <div className="p-3 rounded-[6px] bg-muted/40 border text-13">
                   <span className="text-muted-foreground text-[11px] block mb-0.5">Field Office</span>
                   {FROM_OFFICE}
                 </div>
-                <div className="p-3 rounded-[6px] bg-muted/40 border text-[13px]">
+                <div className="p-3 rounded-[6px] bg-muted/40 border text-13">
                   <span className="text-muted-foreground text-[11px] block mb-0.5">Custodian</span>
                   John Doe
                 </div>
@@ -152,7 +152,7 @@ export function InitiateTransferDrawer({ open, onOpenChange, preSelectedAssetIds
             </section>
 
             {/* Arrow indicator */}
-            <div className="flex items-center gap-2 text-muted-foreground text-[13px]">
+            <div className="flex items-center gap-2 text-muted-foreground text-13">
               <div className="h-px flex-1 bg-border" />
               <ArrowRight className="w-4 h-4 text-brand-teal" />
               <div className="h-px flex-1 bg-border" />
@@ -161,7 +161,7 @@ export function InitiateTransferDrawer({ open, onOpenChange, preSelectedAssetIds
             {/* To */}
             <section>
               <div className="flex items-center justify-between mb-2">
-                <Label className="text-[13px] font-semibold uppercase tracking-wide text-muted-foreground">To (Destination)</Label>
+                <Label className="text-13 font-semibold uppercase tracking-wide text-muted-foreground">To (Destination)</Label>
                 {toFieldOffice && (
                   <Badge variant="outline" className={`text-[11px] ${transferType === 'Inter-Field' ? 'bg-violet-500/10 text-violet-700' : 'bg-blue-500/10 text-blue-700'}`}>
                     {transferType}
@@ -171,7 +171,7 @@ export function InitiateTransferDrawer({ open, onOpenChange, preSelectedAssetIds
               <div className="space-y-3">
                 <div className="grid grid-cols-2 gap-3">
                   <div>
-                    <Label className="text-[13px] mb-1.5 block">Field Office <span className="text-destructive">*</span></Label>
+                    <Label className="text-13 mb-1.5 block">Field Office <span className="text-destructive">*</span></Label>
                     <Select onValueChange={(v) => setValue('toFieldOffice', v, { shouldValidate: true })}>
                       <SelectTrigger className="h-9 text-[14px]"><SelectValue placeholder="Select office" /></SelectTrigger>
                       <SelectContent>
@@ -181,7 +181,7 @@ export function InitiateTransferDrawer({ open, onOpenChange, preSelectedAssetIds
                     {errors.toFieldOffice && <p className="text-[12px] text-destructive mt-1">{errors.toFieldOffice.message}</p>}
                   </div>
                   <div>
-                    <Label className="text-[13px] mb-1.5 block">Custodian <span className="text-destructive">*</span></Label>
+                    <Label className="text-13 mb-1.5 block">Custodian <span className="text-destructive">*</span></Label>
                     <Select onValueChange={(v) => setValue('toCustodian', v, { shouldValidate: true })}>
                       <SelectTrigger className="h-9 text-[14px]"><SelectValue placeholder="Select custodian" /></SelectTrigger>
                       <SelectContent>
@@ -193,7 +193,7 @@ export function InitiateTransferDrawer({ open, onOpenChange, preSelectedAssetIds
                 </div>
                 <div className="grid grid-cols-2 gap-3">
                   <div>
-                    <Label className="text-[13px] mb-1.5 block">Building</Label>
+                    <Label className="text-13 mb-1.5 block">Building</Label>
                     <Select onValueChange={(v) => setValue('toBuilding', v)}>
                       <SelectTrigger className="h-9 text-[14px]"><SelectValue placeholder="Optional" /></SelectTrigger>
                       <SelectContent>
@@ -202,7 +202,7 @@ export function InitiateTransferDrawer({ open, onOpenChange, preSelectedAssetIds
                     </Select>
                   </div>
                   <div>
-                    <Label className="text-[13px] mb-1.5 block">Room</Label>
+                    <Label className="text-13 mb-1.5 block">Room</Label>
                     <Select onValueChange={(v) => setValue('toRoom', v)}>
                       <SelectTrigger className="h-9 text-[14px]"><SelectValue placeholder="Optional" /></SelectTrigger>
                       <SelectContent>
@@ -216,7 +216,7 @@ export function InitiateTransferDrawer({ open, onOpenChange, preSelectedAssetIds
 
             {/* Reason */}
             <section>
-              <Label className="text-[13px] mb-1.5 block">Reason <span className="text-destructive">*</span></Label>
+              <Label className="text-13 mb-1.5 block">Reason <span className="text-destructive">*</span></Label>
               <Textarea {...register('reason')} placeholder="Provide a reason for this transfer (min 10 characters)..."
                 rows={3} className="text-[14px]" />
               {errors.reason && <p className="text-[12px] text-destructive mt-1">{errors.reason.message}</p>}
@@ -224,7 +224,7 @@ export function InitiateTransferDrawer({ open, onOpenChange, preSelectedAssetIds
 
             {/* Notes */}
             <section>
-              <Label className="text-[13px] mb-1.5 block">Additional Notes</Label>
+              <Label className="text-13 mb-1.5 block">Additional Notes</Label>
               <Textarea {...register('notes')} placeholder="Any additional notes or handling instructions..."
                 rows={2} className="text-[14px]" />
             </section>

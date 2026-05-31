@@ -14,7 +14,7 @@ export function AssetHealthCard() {
   return (
     <Card>
       <CardHeader className="pb-3">
-        <CardTitle className="flex items-center gap-2 text-[15px]">
+        <CardTitle className="flex items-center gap-2 text-15">
           <Gauge className="w-5 h-5 text-brand-navy dark:text-brand-teal" />
           Asset Health Overview
         </CardTitle>
@@ -29,8 +29,8 @@ export function AssetHealthCard() {
                   className="w-2.5 h-2.5 rounded-full shrink-0"
                   style={{ backgroundColor: s.color }}
                 />
-                <span className="text-[15px] flex-1">{s.status}</span>
-                <span className="text-[15px] font-medium w-12 text-right">{s.count}</span>
+                <span className="text-15 flex-1">{s.status}</span>
+                <span className="text-15 font-medium w-12 text-right">{s.count}</span>
                 <div className="w-20">
                   <Progress value={(s.count / TOTAL_ASSETS) * 100} className="h-1.5" />
                 </div>
@@ -47,8 +47,8 @@ export function AssetHealthCard() {
           <div className="space-y-2">
             {CONDITION_DATA.map((c) => (
               <div key={c.condition} className="flex items-center gap-3">
-                <span className="text-[15px] flex-1">{c.condition}</span>
-                <span className="text-[15px] font-medium w-12 text-right tabular-nums">
+                <span className="text-15 flex-1">{c.condition}</span>
+                <span className="text-15 font-medium w-12 text-right tabular-nums">
                   {c.count}
                 </span>
                 <div className="w-24">
@@ -64,8 +64,8 @@ export function AssetHealthCard() {
           <div className="space-y-2">
             {LOCATION_DATA.map((loc) => (
               <div key={loc.name} className="flex items-center gap-3">
-                <span className="text-[15px] flex-1 truncate">{loc.name}</span>
-                <span className="text-[15px] font-medium tabular-nums">{loc.assets}</span>
+                <span className="text-15 flex-1 truncate">{loc.name}</span>
+                <span className="text-15 font-medium tabular-nums">{loc.assets}</span>
                 <span className="text-md text-muted-foreground w-10 text-right">{loc.pct}%</span>
               </div>
             ))}

@@ -46,7 +46,7 @@ export function BulkInspectionDrawer({ open, onOpenChange, assetIds, onClearSele
     <Sheet open={open} onOpenChange={onOpenChange}>
       <SheetContent side="right" className="!w-full sm:!max-w-lg flex flex-col overflow-hidden p-0">
         <SheetHeader className="px-6 pt-6 pb-4 border-b shrink-0">
-          <SheetTitle className="text-[15px] flex items-center gap-2">
+          <SheetTitle className="text-15 flex items-center gap-2">
             <ClipboardCheck className="w-5 h-5" />
             Schedule Bulk Inspection
           </SheetTitle>
@@ -58,7 +58,7 @@ export function BulkInspectionDrawer({ open, onOpenChange, assetIds, onClearSele
         <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col flex-1 overflow-hidden">
           <div className="flex-1 overflow-y-auto px-6 py-4 space-y-6">
             <div className="rounded-lg border bg-muted/40 px-4 py-3 space-y-2">
-              <p className="text-[13px] font-semibold text-muted-foreground uppercase tracking-wide">
+              <p className="text-13 font-semibold text-muted-foreground uppercase tracking-wide">
                 Selected Assets ({assetIds.length})
               </p>
               <div className="flex flex-wrap gap-1.5">
@@ -76,9 +76,9 @@ export function BulkInspectionDrawer({ open, onOpenChange, assetIds, onClearSele
             <p className="text-sm font-semibold text-muted-foreground uppercase tracking-wide">Inspection Details</p>
 
             <div className="space-y-2">
-              <Label className="text-[15px] font-medium">Inspection Type <span className="text-destructive">*</span></Label>
+              <Label className="text-15 font-medium">Inspection Type <span className="text-destructive">*</span></Label>
               <Select value={watch('inspectionType')} onValueChange={(v) => setValue('inspectionType', v)}>
-                <SelectTrigger className="h-[52px] text-[15px]"><SelectValue placeholder="Select inspection type" /></SelectTrigger>
+                <SelectTrigger className="h-[52px] text-15"><SelectValue placeholder="Select inspection type" /></SelectTrigger>
                 <SelectContent>
                   {['Routine', 'Compliance', 'Emergency', 'Annual'].map((t) => (
                     <SelectItem key={t} value={t}>{t}</SelectItem>
@@ -89,26 +89,26 @@ export function BulkInspectionDrawer({ open, onOpenChange, assetIds, onClearSele
             </div>
 
             <div className="space-y-2">
-              <Label className="text-[15px] font-medium">Scheduled Date <span className="text-destructive">*</span></Label>
-              <Input {...register('scheduledDate')} type="date" className="h-[52px] text-[15px]" />
+              <Label className="text-15 font-medium">Scheduled Date <span className="text-destructive">*</span></Label>
+              <Input {...register('scheduledDate')} type="date" className="h-[52px] text-15" />
               {errors.scheduledDate && <p className="text-sm text-destructive">{errors.scheduledDate.message}</p>}
             </div>
 
             <div className="space-y-2">
-              <Label className="text-[15px] font-medium">Inspector <span className="text-destructive">*</span></Label>
-              <Input {...register('inspector')} placeholder="Enter inspector name" className="h-[52px] text-[15px] placeholder:text-[14px]" />
+              <Label className="text-15 font-medium">Inspector <span className="text-destructive">*</span></Label>
+              <Input {...register('inspector')} placeholder="Enter inspector name" className="h-[52px] text-15 placeholder:text-[14px]" />
               {errors.inspector && <p className="text-sm text-destructive">{errors.inspector.message}</p>}
             </div>
 
             <div className="space-y-2">
-              <Label className="text-[15px] font-medium">Location <span className="text-destructive">*</span></Label>
-              <Input {...register('location')} placeholder="Enter inspection location" className="h-[52px] text-[15px] placeholder:text-[14px]" />
+              <Label className="text-15 font-medium">Location <span className="text-destructive">*</span></Label>
+              <Input {...register('location')} placeholder="Enter inspection location" className="h-[52px] text-15 placeholder:text-[14px]" />
               {errors.location && <p className="text-sm text-destructive">{errors.location.message}</p>}
             </div>
 
             <div className="space-y-2">
-              <Label className="text-[15px] font-medium">Notes</Label>
-              <Textarea {...register('notes')} placeholder="Any additional notes..." rows={3} className="text-[15px] placeholder:text-[14px]" />
+              <Label className="text-15 font-medium">Notes</Label>
+              <Textarea {...register('notes')} placeholder="Any additional notes..." rows={3} className="text-15 placeholder:text-[14px]" />
             </div>
           </div>
 

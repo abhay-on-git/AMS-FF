@@ -73,14 +73,14 @@ export default function UsersPage() {
         />
         {tab === 'users' ? (
           <Button
-            className="gap-1.5 bg-[#121321] hover:bg-[#1e2035] text-white text-[15px]"
+            className="gap-1.5 bg-brand-navy hover:bg-brand-navy-mid text-white text-15"
             onClick={() => { setEditUser(null); setUserDrawerMode('create'); setUserDrawerOpen(true) }}
           >
             <UserPlus className="w-4 h-4" /> Add User
           </Button>
         ) : (
           <Button
-            className="gap-1.5 bg-[#121321] hover:bg-[#1e2035] text-white text-[15px]"
+            className="gap-1.5 bg-brand-navy hover:bg-brand-navy-mid text-white text-15"
             onClick={() => { setEditRole(null); setRoleDrawerOpen(true) }}
           >
             <ShieldPlus className="w-4 h-4" /> Add Role

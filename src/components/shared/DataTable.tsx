@@ -117,7 +117,7 @@ export function DataTable<T>({
           <Search className="w-8 h-8" />
         </div>
         <h3 className="text-lg mb-2">{emptyMessage}</h3>
-        <p className="text-[15px] text-muted-foreground">Try adjusting your search criteria or removing some filters</p>
+        <p className="text-15 text-muted-foreground">Try adjusting your search criteria or removing some filters</p>
       </div>
     )
   }
@@ -125,14 +125,14 @@ export function DataTable<T>({
   return (
     <div className={cn('rounded-md border overflow-hidden', className)}>
       <div className={cn('overflow-auto scrollbar-hide', stickyHeader && 'relative')} style={{ maxHeight }}>
-        <table className="w-full text-[15px] font-['Manrope']">
+        <table className="w-full text-15 font-['Manrope']">
           <thead className={cn(stickyHeader && 'sticky top-0 z-10 bg-background')}>
             <tr className="border-b bg-muted/30">
               {visibleColumns.map((col) => (
                 <th
                   key={col.key}
                   className={cn(
-                    'px-4 py-3 text-left font-medium text-muted-foreground text-[15px]',
+                    'px-4 py-3 text-left font-medium text-muted-foreground text-15',
                     col.sortable && 'cursor-pointer select-none hover:text-foreground',
                     col.headerClassName,
                   )}
@@ -150,7 +150,7 @@ export function DataTable<T>({
                 </th>
               ))}
               {actionsColumn && (
-                <th className={cn('px-4 py-3 text-left font-medium text-muted-foreground text-[15px]', actionsWidth)}>
+                <th className={cn('px-4 py-3 text-left font-medium text-muted-foreground text-15', actionsWidth)}>
                   {actionsHeader}
                 </th>
               )}
@@ -184,7 +184,7 @@ export function DataTable<T>({
       </div>
 
       {paginated && (
-        <div className="flex items-center justify-between gap-4 px-4 py-2 border-t bg-background text-[15px] text-muted-foreground">
+        <div className="flex items-center justify-between gap-4 px-4 py-2 border-t bg-background text-15 text-muted-foreground">
           <div className="whitespace-nowrap">
             Showing {sortedData.length} of {data.length} {itemLabel}
           </div>
@@ -196,12 +196,12 @@ export function DataTable<T>({
                 value={String(rowsPerPage)}
                 onValueChange={(val) => { setRowsPerPage(Number(val)); setPage(0) }}
               >
-                <SelectTrigger className="h-8 w-[70px] border-0 bg-white shadow-none focus:ring-0 px-2 text-[15px]">
+                <SelectTrigger className="h-8 w-[70px] border-0 bg-white shadow-none focus:ring-0 px-2 text-15">
                   <SelectValue />
                 </SelectTrigger>
                 <SelectContent>
                   {rowsPerPageOptions.map((opt) => (
-                    <SelectItem key={opt} value={String(opt)} className="text-[15px]">{opt}</SelectItem>
+                    <SelectItem key={opt} value={String(opt)} className="text-15">{opt}</SelectItem>
                   ))}
                 </SelectContent>
               </Select>

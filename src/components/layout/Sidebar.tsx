@@ -80,7 +80,7 @@ export function Sidebar({ collapsed, onToggleCollapse, mobileOpen, onCloseMobile
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <button className={cn('flex items-center gap-2 w-full rounded-md p-3.5 transition-colors hover:bg-sidebar-item-hover', collapsed ? 'justify-center' : 'justify-start')}>
-              <div className="w-10 h-10 rounded-full bg-sidebar-avatar-bg flex items-center justify-center text-[15px] font-semibold text-sidebar-text-active shrink-0">
+              <div className="w-10 h-10 rounded-full bg-sidebar-avatar-bg flex items-center justify-center text-15 font-semibold text-sidebar-text-active shrink-0">
                 {user?.name?.charAt(0) || 'U'}
               </div>
               {!collapsed && (
@@ -103,7 +103,7 @@ export function Sidebar({ collapsed, onToggleCollapse, mobileOpen, onCloseMobile
             style={{ zIndex: 99999 }}
           >
             <div className="px-5 py-5 border-b border-sidebar-border">
-              <p className="font-[Manrope] text-[13px] font-semibold text-sidebar-text-inactive uppercase tracking-wider">
+              <p className="font-[Manrope] text-13 font-semibold text-sidebar-text-inactive uppercase tracking-wider">
                 ACCOUNT
               </p>
               <p className="font-[Manrope] text-base text-sidebar-foreground">{user?.email || ''}</p>

@@ -64,15 +64,15 @@ function InfoRow({ label, value }: { label: string; value?: string | null }) {
   if (!value) return null
   return (
     <div>
-      <p className="text-[13px] text-muted-foreground font-['Manrope']">{label}</p>
-      <p className="text-[15px] font-['Manrope']">{value}</p>
+      <p className="text-13 text-muted-foreground font-['Manrope']">{label}</p>
+      <p className="text-15 font-['Manrope']">{value}</p>
     </div>
   )
 }
 
 function SectionLabel({ children }: { children: React.ReactNode }) {
   return (
-    <p className="text-[13px] font-semibold uppercase tracking-wide text-muted-foreground mb-3">
+    <p className="text-13 font-semibold uppercase tracking-wide text-muted-foreground mb-3">
       {children}
     </p>
   )
@@ -91,8 +91,8 @@ function OverviewTab({ d }: { d: DisposalRequest }) {
           <InfoRow label="Disposal Officer" value={d.disposalOfficer} />
           <InfoRow label="Field Office"   value={d.fieldOffice} />
           <div>
-            <p className="text-[13px] text-muted-foreground font-['Manrope']">Workflow Type</p>
-            <Badge className="mt-1 capitalize text-[13px]">{d.workflowType}</Badge>
+            <p className="text-13 text-muted-foreground font-['Manrope']">Workflow Type</p>
+            <Badge className="mt-1 capitalize text-13">{d.workflowType}</Badge>
           </div>
         </div>
       </div>
@@ -107,8 +107,8 @@ function OverviewTab({ d }: { d: DisposalRequest }) {
           <InfoRow label="Target Disposal Date" value={d.targetDisposalDate} />
           {d.actualDisposalDate && (
             <div>
-              <p className="text-[13px] text-muted-foreground font-['Manrope']">Actual Disposal Date</p>
-              <p className="text-[15px] font-['Manrope'] text-green-600 dark:text-green-400">{d.actualDisposalDate}</p>
+              <p className="text-13 text-muted-foreground font-['Manrope']">Actual Disposal Date</p>
+              <p className="text-15 font-['Manrope'] text-green-600 dark:text-green-400">{d.actualDisposalDate}</p>
             </div>
           )}
         </div>
@@ -118,7 +118,7 @@ function OverviewTab({ d }: { d: DisposalRequest }) {
       {d.justification && (
         <div className="p-4 rounded-[6px] bg-muted/40 border">
           <SectionLabel>Justification</SectionLabel>
-          <p className="text-[15px] font-['Manrope'] whitespace-pre-wrap">{d.justification}</p>
+          <p className="text-15 font-['Manrope'] whitespace-pre-wrap">{d.justification}</p>
         </div>
       )}
 
@@ -126,7 +126,7 @@ function OverviewTab({ d }: { d: DisposalRequest }) {
       {d.notes && (
         <div className="p-4 rounded-[6px] bg-muted/40 border">
           <SectionLabel>Notes</SectionLabel>
-          <p className="text-[15px] font-['Manrope'] whitespace-pre-wrap">{d.notes}</p>
+          <p className="text-15 font-['Manrope'] whitespace-pre-wrap">{d.notes}</p>
         </div>
       )}
 
@@ -139,7 +139,7 @@ function OverviewTab({ d }: { d: DisposalRequest }) {
             { ok: d.dataWipeCertified,        label: 'Data Wipe Certified' },
             { ok: d.certificateOfDestruction, label: 'Certificate of Destruction' },
           ].map(({ ok, label }) => (
-            <div key={label} className="flex items-center gap-2 text-[15px] font-['Manrope']">
+            <div key={label} className="flex items-center gap-2 text-15 font-['Manrope']">
               {ok
                 ? <CheckCircle2 className="w-4 h-4 text-green-500 shrink-0" />
                 : <XCircle      className="w-4 h-4 text-red-500 shrink-0" />}
@@ -151,7 +151,7 @@ function OverviewTab({ d }: { d: DisposalRequest }) {
 
       {/* Linked survey */}
       {d.linkedSurveyId && (
-        <div className="p-4 rounded-[6px] bg-blue-500/10 border border-blue-500/20 flex items-center gap-2 text-[15px] font-['Manrope'] text-blue-700 dark:text-blue-300">
+        <div className="p-4 rounded-[6px] bg-blue-500/10 border border-blue-500/20 flex items-center gap-2 text-15 font-['Manrope'] text-blue-700 dark:text-blue-300">
           <Link className="w-4 h-4 shrink-0" />
           <span>Linked Survey: <span className="font-semibold">{d.linkedSurveyId}</span></span>
         </div>
@@ -159,7 +159,7 @@ function OverviewTab({ d }: { d: DisposalRequest }) {
 
       {/* Asset lock */}
       {d.assetsLocked && (
-        <div className="p-4 rounded-[6px] bg-amber-500/10 border border-amber-500/20 flex items-center gap-2 text-[15px] font-['Manrope'] text-amber-700 dark:text-amber-300">
+        <div className="p-4 rounded-[6px] bg-amber-500/10 border border-amber-500/20 flex items-center gap-2 text-15 font-['Manrope'] text-amber-700 dark:text-amber-300">
           <AlertTriangle className="w-4 h-4 shrink-0" />
           <span>Assets Locked during disposal process</span>
         </div>
@@ -174,9 +174,9 @@ function AssetsTab({ d }: { d: DisposalRequest }) {
   const totalDis = d.assets.reduce((s, a) => s + a.disposalValue, 0)
   return (
     <div className="p-4 rounded-[6px] bg-muted/40 border overflow-x-auto">
-      <table className="w-full text-[15px] font-['Manrope']">
+      <table className="w-full text-15 font-['Manrope']">
         <thead>
-          <tr className="border-b text-[13px] text-muted-foreground">
+          <tr className="border-b text-13 text-muted-foreground">
             {['Asset ID','Name','Serial','Location','Condition','Acq. Value','NBV','Disp. Value','Reason'].map(h => (
               <th key={h} className="text-left py-2 pr-4 font-semibold whitespace-nowrap">{h}</th>
             ))}
@@ -198,7 +198,7 @@ function AssetsTab({ d }: { d: DisposalRequest }) {
           ))}
         </tbody>
         <tfoot>
-          <tr className="border-t font-semibold text-[15px]">
+          <tr className="border-t font-semibold text-15">
             <td colSpan={5} className="py-2 pr-4">Total</td>
             <td className="py-2 pr-4">{fmt(totalAcq)}</td>
             <td className="py-2 pr-4">{fmt(totalNBV)}</td>
@@ -223,7 +223,7 @@ function FinancialTab({ d }: { d: DisposalRequest }) {
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
         {tiles.map(t => (
           <div key={t.label} className="p-4 rounded-[6px] bg-muted/40 border">
-            <p className="text-[13px] text-muted-foreground font-['Manrope'] mb-1">{t.label}</p>
+            <p className="text-13 text-muted-foreground font-['Manrope'] mb-1">{t.label}</p>
             <p className={`text-[22px] font-bold font-['Manrope'] ${t.red ? 'text-red-600 dark:text-red-400' : ''}`}>
               {fmt(t.value)}
             </p>
@@ -233,9 +233,9 @@ function FinancialTab({ d }: { d: DisposalRequest }) {
 
       <div className="p-4 rounded-[6px] bg-muted/40 border overflow-x-auto">
         <SectionLabel>Per-Asset Breakdown</SectionLabel>
-        <table className="w-full text-[15px] font-['Manrope']">
+        <table className="w-full text-15 font-['Manrope']">
           <thead>
-            <tr className="border-b text-[13px] text-muted-foreground">
+            <tr className="border-b text-13 text-muted-foreground">
               {['Asset ID','Name','Acq. Value','NBV','Disp. Value','Write-Off','Method'].map(h => (
                 <th key={h} className="text-left py-2 pr-4 font-semibold whitespace-nowrap">{h}</th>
               ))}
@@ -283,11 +283,11 @@ function DocumentsTab({ d }: { d: DisposalRequest }) {
       <div className="p-4 rounded-[6px] bg-muted/40 border">
         <SectionLabel>Attachments</SectionLabel>
         {d.attachments.length === 0
-          ? <p className="text-[15px] text-muted-foreground font-['Manrope']">No attachments uploaded.</p>
+          ? <p className="text-15 text-muted-foreground font-['Manrope']">No attachments uploaded.</p>
           : (
             <ul className="space-y-2">
               {d.attachments.map(file => (
-                <li key={file} className="flex items-center justify-between gap-4 text-[15px] font-['Manrope']">
+                <li key={file} className="flex items-center justify-between gap-4 text-15 font-['Manrope']">
                   <div className="flex items-center gap-2">
                     <FileText className="w-4 h-4 text-muted-foreground shrink-0" />
                     <span>{file}</span>
@@ -301,12 +301,12 @@ function DocumentsTab({ d }: { d: DisposalRequest }) {
 
       <div className="p-4 rounded-[6px] bg-muted/40 border">
         <SectionLabel>Certificate of Destruction</SectionLabel>
-        <div className="flex items-center gap-2 text-[15px] font-['Manrope'] mb-4">
+        <div className="flex items-center gap-2 text-15 font-['Manrope'] mb-4">
           {d.certificateOfDestruction
             ? <><CheckCircle2 className="w-4 h-4 text-green-500" /><span>Certificate issued</span></>
             : <><FileText    className="w-4 h-4 text-muted-foreground" /><span className="text-muted-foreground">Not yet issued</span></>}
         </div>
-        <Button variant="outline" size="sm" className="text-[13px] gap-1.5">
+        <Button variant="outline" size="sm" className="text-13 gap-1.5">
           <FileText className="w-3.5 h-3.5" />
           Generate Disposal Report
         </Button>
@@ -332,7 +332,7 @@ export function DisposalDetailView({ id, onBack }: DisposalDetailViewProps) {
 
   if (!disposal) {
     return (
-      <div className="py-20 text-center text-muted-foreground text-[15px] font-['Manrope']">
+      <div className="py-20 text-center text-muted-foreground text-15 font-['Manrope']">
         Disposal request not found.
       </div>
     )
@@ -341,38 +341,38 @@ export function DisposalDetailView({ id, onBack }: DisposalDetailViewProps) {
   const headerActions = (
     <>
       {disposal.status === 'draft' && (
-        <Button size="sm" className="bg-blue-600 hover:bg-blue-700 text-white text-[13px]"
+        <Button size="sm" className="bg-blue-600 hover:bg-blue-700 text-white text-13"
           onClick={() => submitForReview.mutate({ id })}>
           Submit for Review
         </Button>
       )}
       {disposal.status === 'pending-review' && (
-        <Button size="sm" className="bg-green-600 hover:bg-green-700 text-white text-[13px]"
+        <Button size="sm" className="bg-green-600 hover:bg-green-700 text-white text-13"
           onClick={() => approveReview.mutate({ id })}>
           Approve Review
         </Button>
       )}
       {disposal.status === 'pending-approval' && (
         <>
-          <Button size="sm" className="bg-green-600 hover:bg-green-700 text-white text-[13px]"
+          <Button size="sm" className="bg-green-600 hover:bg-green-700 text-white text-13"
             onClick={() => approveDisposal.mutate({ id })}>
             Approve Disposal
           </Button>
           <Button size="sm" variant="outline"
-            className="border-red-500 text-red-600 hover:bg-red-50 dark:hover:bg-red-950 text-[13px]"
+            className="border-red-500 text-red-600 hover:bg-red-50 dark:hover:bg-red-950 text-13"
             onClick={() => setRejectOpen(true)}>
             Reject
           </Button>
         </>
       )}
       {disposal.status === 'approved' && (
-        <Button size="sm" className="bg-blue-600 hover:bg-blue-700 text-white text-[13px]"
+        <Button size="sm" className="bg-blue-600 hover:bg-blue-700 text-white text-13"
           onClick={() => executeDisposal.mutate({ id })}>
           Execute Disposal
         </Button>
       )}
       {disposal.status === 'in-progress' && (
-        <Button size="sm" className="bg-green-600 hover:bg-green-700 text-white text-[13px]"
+        <Button size="sm" className="bg-green-600 hover:bg-green-700 text-white text-13"
           onClick={() => completeDisposal.mutate({ id })}>
           Mark Complete
         </Button>
@@ -382,10 +382,10 @@ export function DisposalDetailView({ id, onBack }: DisposalDetailViewProps) {
 
   const badges = (
     <div className="flex items-center gap-2">
-      <Badge className={`text-[13px] ${getDisposalStatusColor(disposal.status)}`}>
+      <Badge className={`text-13 ${getDisposalStatusColor(disposal.status)}`}>
         {getDisposalStatusLabel(disposal.status)}
       </Badge>
-      <Badge className={`text-[13px] ${getDisposalMethodColor(disposal.disposalMethod)}`}>
+      <Badge className={`text-13 ${getDisposalMethodColor(disposal.disposalMethod)}`}>
         {getDisposalMethodLabel(disposal.disposalMethod)}
       </Badge>
     </div>
@@ -430,25 +430,25 @@ export function DisposalDetailView({ id, onBack }: DisposalDetailViewProps) {
       <Dialog open={rejectOpen} onOpenChange={setRejectOpen}>
         <DialogContent className="max-w-md">
           <DialogHeader>
-            <DialogTitle className="text-[17px] font-['Manrope']">Reject Disposal Request</DialogTitle>
+            <DialogTitle className="text-17 font-['Manrope']">Reject Disposal Request</DialogTitle>
           </DialogHeader>
           <div className="py-2">
-            <p className="text-[13px] text-muted-foreground mb-2 font-['Manrope']">
+            <p className="text-13 text-muted-foreground mb-2 font-['Manrope']">
               Please provide a reason for rejecting this disposal request.
             </p>
             <Textarea
               placeholder="Enter rejection reason…"
-              className="text-[15px] font-['Manrope'] min-h-[100px]"
+              className="text-15 font-['Manrope'] min-h-[100px]"
               value={rejectReason}
               onChange={e => setRejectReason(e.target.value)}
             />
           </div>
           <DialogFooter className="gap-2">
-            <Button variant="outline" size="sm" className="text-[13px]" onClick={() => setRejectOpen(false)}>
+            <Button variant="outline" size="sm" className="text-13" onClick={() => setRejectOpen(false)}>
               Cancel
             </Button>
             <Button size="sm"
-              className="bg-red-600 hover:bg-red-700 text-white text-[13px]"
+              className="bg-red-600 hover:bg-red-700 text-white text-13"
               disabled={!rejectReason.trim()}
               onClick={() => {
                 rejectDisposal.mutate({ id, reason: rejectReason })

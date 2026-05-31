@@ -36,7 +36,7 @@ export function ChangeLocationDrawer({ open, onOpenChange, asset }: ChangeLocati
     <Sheet open={open} onOpenChange={onOpenChange}>
       <SheetContent side="right" className="!w-full sm:!max-w-lg flex flex-col overflow-hidden p-0">
         <SheetHeader className="px-6 pt-6 pb-4 border-b shrink-0">
-          <SheetTitle className="text-[15px] flex items-center gap-2">
+          <SheetTitle className="text-15 flex items-center gap-2">
             <MapPin className="w-5 h-5" />
             Change Location
           </SheetTitle>
@@ -54,8 +54,8 @@ export function ChangeLocationDrawer({ open, onOpenChange, asset }: ChangeLocati
                   <p className="font-['Manrope'] font-medium">{asset.assetId}</p>
                 </div>
               </div>
-              <p className="text-[15px]">{asset.name}</p>
-              <div className="grid grid-cols-2 gap-3 text-[15px]">
+              <p className="text-15">{asset.name}</p>
+              <div className="grid grid-cols-2 gap-3 text-15">
                 <div>
                   <p className="text-sm text-muted-foreground">Current Location</p>
                   <p className="font-medium">{asset.location}</p>
@@ -70,11 +70,11 @@ export function ChangeLocationDrawer({ open, onOpenChange, asset }: ChangeLocati
             <Separator />
 
             <div className="space-y-2">
-              <Label className="text-[15px] font-medium">
+              <Label className="text-15 font-medium">
                 New Location <span className="text-destructive">*</span>
               </Label>
               <Select value={watch('newLocation')} onValueChange={(v) => setValue('newLocation', v)}>
-                <SelectTrigger className="h-[52px] text-[15px]">
+                <SelectTrigger className="h-[52px] text-15">
                   <SelectValue placeholder="Select new location" />
                 </SelectTrigger>
                 <SelectContent>
@@ -90,9 +90,9 @@ export function ChangeLocationDrawer({ open, onOpenChange, asset }: ChangeLocati
             </div>
 
             <div className="space-y-2">
-              <Label className="text-[15px] font-medium">Field Office</Label>
+              <Label className="text-15 font-medium">Field Office</Label>
               <Select value={watch('fieldOffice') || ''} onValueChange={(v) => setValue('fieldOffice', v)}>
-                <SelectTrigger className="h-[52px] text-[15px]">
+                <SelectTrigger className="h-[52px] text-15">
                   <SelectValue placeholder="Select field office (optional)" />
                 </SelectTrigger>
                 <SelectContent>
@@ -108,14 +108,14 @@ export function ChangeLocationDrawer({ open, onOpenChange, asset }: ChangeLocati
             <Separator />
 
             <div className="space-y-2">
-              <Label className="text-[15px] font-medium">
+              <Label className="text-15 font-medium">
                 Justification <span className="text-destructive">*</span>
               </Label>
               <Textarea
                 {...register('justification')}
                 placeholder="Provide reason for location change..."
                 rows={3}
-                className="text-[15px] placeholder:text-[14px]"
+                className="text-15 placeholder:text-[14px]"
               />
               {errors.justification && <p className="text-sm text-destructive">{errors.justification.message}</p>}
             </div>

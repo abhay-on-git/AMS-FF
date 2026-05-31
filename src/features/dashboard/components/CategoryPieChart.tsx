@@ -29,7 +29,7 @@ export function CategoryPieChart() {
   return (
     <Card>
       <CardHeader className="pb-3">
-        <CardTitle className="flex items-center gap-2 text-[15px]">
+        <CardTitle className="flex items-center gap-2 text-15">
           <Folder className="w-5 h-5 text-brand-navy dark:text-brand-teal" />
           Assets By Category
         </CardTitle>
@@ -86,8 +86,8 @@ export function CategoryPieChart() {
                   className="w-2.5 h-2.5 rounded-full shrink-0"
                   style={{ backgroundColor: cat.color }}
                 />
-                <span className="text-[13px] flex-1 truncate">{cat.name}</span>
-                <span className="text-[13px] font-medium tabular-nums">
+                <span className="text-13 flex-1 truncate">{cat.name}</span>
+                <span className="text-13 font-medium tabular-nums">
                   {cat.value.toLocaleString()}
                 </span>
                 <span className="text-[11px] text-muted-foreground w-10 text-right tabular-nums">

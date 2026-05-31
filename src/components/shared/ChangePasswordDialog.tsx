@@ -84,7 +84,7 @@ export function ChangePasswordDialog({ open, onOpenChange }: ChangePasswordDialo
     <Sheet open={open} onOpenChange={(o) => (o ? onOpenChange(true) : handleClose())}>
       <SheetContent side="right" className="!w-full sm:!max-w-md flex flex-col overflow-hidden p-0">
         <SheetHeader className="pr-8 px-6 pt-6 pb-4 border-b shrink-0">
-          <SheetTitle className="text-[15px]">Change Password</SheetTitle>
+          <SheetTitle className="text-15">Change Password</SheetTitle>
           <SheetDescription className="text-[14px]">
             Update your account password
           </SheetDescription>
@@ -99,7 +99,7 @@ export function ChangePasswordDialog({ open, onOpenChange }: ChangePasswordDialo
                 required
                 autoComplete="current-password"
                 error={errors.currentPassword?.message}
-                inputClassName="h-[52px] text-[15px]"
+                inputClassName="h-[52px] text-15"
                 {...register('currentPassword')}
               />
 
@@ -112,7 +112,7 @@ export function ChangePasswordDialog({ open, onOpenChange }: ChangePasswordDialo
                   required
                   autoComplete="new-password"
                   error={errors.newPassword?.message}
-                  inputClassName="h-[52px] text-[15px]"
+                  inputClassName="h-[52px] text-15"
                   {...register('newPassword')}
                 />
                 {newPassword ? <PasswordStrengthIndicator password={newPassword} /> : null}
@@ -124,12 +124,12 @@ export function ChangePasswordDialog({ open, onOpenChange }: ChangePasswordDialo
                 required
                 autoComplete="new-password"
                 error={errors.confirmPassword?.message}
-                inputClassName="h-[52px] text-[15px]"
+                inputClassName="h-[52px] text-15"
                 {...register('confirmPassword')}
               />
 
               <div className="rounded-md border bg-muted/50 px-4 py-4">
-                <p className="text-[13px] font-semibold text-muted-foreground uppercase tracking-wider">
+                <p className="text-13 font-semibold text-muted-foreground uppercase tracking-wider">
                   Password tips
                 </p>
                 <ul className="mt-2 space-y-1 text-[14px] text-muted-foreground list-none">
@@ -154,7 +154,7 @@ export function ChangePasswordDialog({ open, onOpenChange }: ChangePasswordDialo
             <h3 className="text-lg font-bold text-brand-navy dark:text-white mb-1">
               Password updated
             </h3>
-            <p className="text-[15px] text-muted-foreground mb-8 max-w-xs">
+            <p className="text-15 text-muted-foreground mb-8 max-w-xs">
               Your password has been changed successfully. Use your new password next time you sign in.
             </p>
             <Button onClick={handleClose} className="w-full max-w-xs">

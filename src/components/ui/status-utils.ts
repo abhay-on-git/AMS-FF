@@ -33,28 +33,28 @@ export function getStatusStyle(status: string): {
     case 'under-verification':
     case 'approved':
     case 'completed':
-      return { variant: 'info' }; // Uses #81CCD7 (Chorus accent)
+      return { variant: 'info' };
     
     case 'in-use':
     case 'active':
-      return { variant: 'secondary' }; // Uses #EDEDED background
+      return { variant: 'secondary' };
     
     case 'damaged':
     case 'pending':
     case 'pending-approval':
-      return { variant: 'warning' }; // Uses #EF652B (Chorus primary)
+      return { variant: 'warning' };
     
     case 'retired':
-      return { variant: 'secondary', className: 'bg-[#F0F0F0] text-[#999999]' };
+      return { variant: 'secondary', className: 'bg-muted text-muted-foreground' };
     
     case 'disposed':
     case 'missing':
     case 'inactive':
-      return { variant: 'destructive' }; // Uses #D93F3F
+      return { variant: 'destructive' };
     
     case 'created':
     case 'updated':
-      return { variant: 'info' }; // Uses #81CCD7 (Chorus accent)
+      return { variant: 'info' };
     
     default:
       return { variant: 'outline' };
@@ -74,25 +74,25 @@ export function getStatusColor(status: string): string {
     case 'completed':
     case 'created':
     case 'updated':
-      return 'text-[#81CCD7] dark:text-[#81CCD7]';
+      return 'text-brand-teal dark:text-brand-teal';
     
     case 'in-use':
     case 'active':
     case 'retired':
-      return 'text-[#999999] dark:text-[#999999]';
+      return 'text-muted-foreground dark:text-muted-foreground';
     
     case 'damaged':
     case 'pending':
     case 'pending-approval':
-      return 'text-[#EF652B] dark:text-[#EF652B]';
+      return 'text-chart-3 dark:text-chart-3';
     
     case 'disposed':
     case 'missing':
     case 'inactive':
-      return 'text-[#D93F3F] dark:text-[#D93F3F]';
+      return 'text-destructive dark:text-destructive';
     
     default:
-      return 'text-[#999999] dark:text-[#999999]';
+      return 'text-muted-foreground dark:text-muted-foreground';
   }
 }
 
@@ -109,24 +109,24 @@ export function getStatusBackgroundColor(status: string): string {
     case 'completed':
     case 'created':
     case 'updated':
-      return 'bg-[#E6F7F9] dark:bg-[#1A3D3D]';
+      return 'bg-accent dark:bg-accent';
     
     case 'in-use':
     case 'active':
     case 'retired':
-      return 'bg-[#F0F0F0] dark:bg-[#2D3050]';
+      return 'bg-muted dark:bg-sidebar-accent';
     
     case 'damaged':
     case 'pending':
     case 'pending-approval':
-      return 'bg-[#FEF3ED] dark:bg-[#3D2A1A]';
+      return 'bg-chart-3/10 dark:bg-chart-3/20';
     
     case 'disposed':
     case 'missing':
     case 'inactive':
-      return 'bg-[#FCEAEA] dark:bg-[#3D1A1A]';
+      return 'bg-destructive/10 dark:bg-destructive/20';
     
     default:
-      return 'bg-[#F0F0F0] dark:bg-[#2D3050]';
+      return 'bg-muted dark:bg-sidebar-accent';
   }
 }

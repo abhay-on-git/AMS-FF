@@ -54,7 +54,7 @@ export function CreateInspectionDrawer({ open, onOpenChange }: CreateInspectionD
       <SheetContent side="right" className="!w-full sm:!max-w-lg flex flex-col overflow-hidden p-0">
         <SheetHeader className="px-6 py-4 border-b shrink-0">
           <SheetTitle className="text-[18px]">Schedule Inspection</SheetTitle>
-          <SheetDescription className="text-[15px]">
+          <SheetDescription className="text-15">
             Create a new asset inspection and assign it to an inspector.
           </SheetDescription>
         </SheetHeader>
@@ -64,59 +64,59 @@ export function CreateInspectionDrawer({ open, onOpenChange }: CreateInspectionD
 
             {/* Inspection details */}
             <section className="space-y-4">
-              <h3 className="text-[13px] font-semibold uppercase tracking-wide text-muted-foreground">Inspection Details</h3>
+              <h3 className="text-13 font-semibold uppercase tracking-wide text-muted-foreground">Inspection Details</h3>
 
               <div>
-                <Label className="text-[15px] mb-1.5 block">Title <span className="text-destructive">*</span></Label>
+                <Label className="text-15 mb-1.5 block">Title <span className="text-destructive">*</span></Label>
                 <Input {...register('title')} placeholder="e.g. Q1 Server Room Equipment Inspection"
-                  className="h-10 text-[15px]" />
-                {errors.title && <p className="text-[13px] text-destructive mt-1">{errors.title.message}</p>}
+                  className="h-10 text-15" />
+                {errors.title && <p className="text-13 text-destructive mt-1">{errors.title.message}</p>}
               </div>
 
               <div>
-                <Label className="text-[15px] mb-1.5 block">Description</Label>
+                <Label className="text-15 mb-1.5 block">Description</Label>
                 <Textarea {...register('description')} placeholder="Describe the scope and purpose of this inspection..."
-                  rows={3} className="text-[15px]" />
+                  rows={3} className="text-15" />
               </div>
 
               <div>
-                <Label className="text-[15px] mb-1.5 block">Inspection Type <span className="text-destructive">*</span></Label>
+                <Label className="text-15 mb-1.5 block">Inspection Type <span className="text-destructive">*</span></Label>
                 <Select onValueChange={(v) => setValue('inspectionType', v, { shouldValidate: true })}>
-                  <SelectTrigger className="h-10 text-[15px]"><SelectValue placeholder="Select type" /></SelectTrigger>
+                  <SelectTrigger className="h-10 text-15"><SelectValue placeholder="Select type" /></SelectTrigger>
                   <SelectContent>
                     {INSPECTION_TYPES.map((t) => (
-                      <SelectItem key={t.value} value={t.value} className="text-[15px]">{t.label}</SelectItem>
+                      <SelectItem key={t.value} value={t.value} className="text-15">{t.label}</SelectItem>
                     ))}
                   </SelectContent>
                 </Select>
-                {errors.inspectionType && <p className="text-[13px] text-destructive mt-1">{errors.inspectionType.message}</p>}
+                {errors.inspectionType && <p className="text-13 text-destructive mt-1">{errors.inspectionType.message}</p>}
               </div>
             </section>
 
             {/* Assignment */}
             <section className="space-y-4">
-              <h3 className="text-[13px] font-semibold uppercase tracking-wide text-muted-foreground">Assignment</h3>
+              <h3 className="text-13 font-semibold uppercase tracking-wide text-muted-foreground">Assignment</h3>
 
               <div className="grid grid-cols-2 gap-3">
                 <div>
-                  <Label className="text-[15px] mb-1.5 block">Inspector <span className="text-destructive">*</span></Label>
+                  <Label className="text-15 mb-1.5 block">Inspector <span className="text-destructive">*</span></Label>
                   <Select onValueChange={(v) => setValue('inspector', v, { shouldValidate: true })}>
-                    <SelectTrigger className="h-10 text-[15px]"><SelectValue placeholder="Select inspector" /></SelectTrigger>
+                    <SelectTrigger className="h-10 text-15"><SelectValue placeholder="Select inspector" /></SelectTrigger>
                     <SelectContent>
                       {TRANSFER_CUSTODIANS.map((c) => (
-                        <SelectItem key={c} value={c} className="text-[15px]">{c}</SelectItem>
+                        <SelectItem key={c} value={c} className="text-15">{c}</SelectItem>
                       ))}
                     </SelectContent>
                   </Select>
-                  {errors.inspector && <p className="text-[13px] text-destructive mt-1">{errors.inspector.message}</p>}
+                  {errors.inspector && <p className="text-13 text-destructive mt-1">{errors.inspector.message}</p>}
                 </div>
                 <div>
-                  <Label className="text-[15px] mb-1.5 block">Reviewer</Label>
+                  <Label className="text-15 mb-1.5 block">Reviewer</Label>
                   <Select onValueChange={(v) => setValue('reviewer', v)}>
-                    <SelectTrigger className="h-10 text-[15px]"><SelectValue placeholder="Select reviewer" /></SelectTrigger>
+                    <SelectTrigger className="h-10 text-15"><SelectValue placeholder="Select reviewer" /></SelectTrigger>
                     <SelectContent>
                       {TRANSFER_CUSTODIANS.map((c) => (
-                        <SelectItem key={c} value={c} className="text-[15px]">{c}</SelectItem>
+                        <SelectItem key={c} value={c} className="text-15">{c}</SelectItem>
                       ))}
                     </SelectContent>
                   </Select>
@@ -125,44 +125,44 @@ export function CreateInspectionDrawer({ open, onOpenChange }: CreateInspectionD
 
               <div className="grid grid-cols-2 gap-3">
                 <div>
-                  <Label className="text-[15px] mb-1.5 block">Field Office <span className="text-destructive">*</span></Label>
+                  <Label className="text-15 mb-1.5 block">Field Office <span className="text-destructive">*</span></Label>
                   <Select onValueChange={(v) => setValue('fieldOffice', v, { shouldValidate: true })}>
-                    <SelectTrigger className="h-10 text-[15px]"><SelectValue placeholder="Select office" /></SelectTrigger>
+                    <SelectTrigger className="h-10 text-15"><SelectValue placeholder="Select office" /></SelectTrigger>
                     <SelectContent>
                       {TRANSFER_FIELD_OFFICES.map((o) => (
-                        <SelectItem key={o} value={o} className="text-[15px]">{o}</SelectItem>
+                        <SelectItem key={o} value={o} className="text-15">{o}</SelectItem>
                       ))}
                     </SelectContent>
                   </Select>
-                  {errors.fieldOffice && <p className="text-[13px] text-destructive mt-1">{errors.fieldOffice.message}</p>}
+                  {errors.fieldOffice && <p className="text-13 text-destructive mt-1">{errors.fieldOffice.message}</p>}
                 </div>
                 <div>
-                  <Label className="text-[15px] mb-1.5 block">Location <span className="text-destructive">*</span></Label>
+                  <Label className="text-15 mb-1.5 block">Location <span className="text-destructive">*</span></Label>
                   <Select onValueChange={(v) => setValue('location', v, { shouldValidate: true })}>
-                    <SelectTrigger className="h-10 text-[15px]"><SelectValue placeholder="Select location" /></SelectTrigger>
+                    <SelectTrigger className="h-10 text-15"><SelectValue placeholder="Select location" /></SelectTrigger>
                     <SelectContent>
                       {LOCATIONS.map((l) => (
-                        <SelectItem key={l} value={l} className="text-[15px]">{l}</SelectItem>
+                        <SelectItem key={l} value={l} className="text-15">{l}</SelectItem>
                       ))}
                     </SelectContent>
                   </Select>
-                  {errors.location && <p className="text-[13px] text-destructive mt-1">{errors.location.message}</p>}
+                  {errors.location && <p className="text-13 text-destructive mt-1">{errors.location.message}</p>}
                 </div>
               </div>
             </section>
 
             {/* Schedule */}
             <section className="space-y-4">
-              <h3 className="text-[13px] font-semibold uppercase tracking-wide text-muted-foreground">Schedule</h3>
+              <h3 className="text-13 font-semibold uppercase tracking-wide text-muted-foreground">Schedule</h3>
               <div className="grid grid-cols-2 gap-3">
                 <div>
-                  <Label className="text-[15px] mb-1.5 block">Scheduled Date <span className="text-destructive">*</span></Label>
-                  <Input type="date" {...register('scheduledDate')} className="h-10 text-[15px]" />
-                  {errors.scheduledDate && <p className="text-[13px] text-destructive mt-1">{errors.scheduledDate.message}</p>}
+                  <Label className="text-15 mb-1.5 block">Scheduled Date <span className="text-destructive">*</span></Label>
+                  <Input type="date" {...register('scheduledDate')} className="h-10 text-15" />
+                  {errors.scheduledDate && <p className="text-13 text-destructive mt-1">{errors.scheduledDate.message}</p>}
                 </div>
                 <div>
-                  <Label className="text-[15px] mb-1.5 block">Due Date</Label>
-                  <Input type="date" {...register('dueDate')} className="h-10 text-[15px]" />
+                  <Label className="text-15 mb-1.5 block">Due Date</Label>
+                  <Input type="date" {...register('dueDate')} className="h-10 text-15" />
                 </div>
               </div>
             </section>

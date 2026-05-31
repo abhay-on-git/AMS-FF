@@ -50,7 +50,7 @@ export function RoleTable({ data, isLoading, onViewDetail, onEdit }: RoleTablePr
 
   const { page, rowsPerPage, setPage, setRowsPerPage, pageData } = useTablePagination(filtered, [search])
 
-  if (isLoading) return <div className="p-6 text-muted-foreground text-[15px]">Loading roles…</div>
+  if (isLoading) return <div className="p-6 text-muted-foreground text-15">Loading roles…</div>
 
   return (
     <div className="space-y-0">
@@ -63,20 +63,20 @@ export function RoleTable({ data, isLoading, onViewDetail, onEdit }: RoleTablePr
               placeholder="Search roles…"
               value={search}
               onChange={(e) => setSearch(e.target.value)}
-              className="pl-9 h-9 text-[15px] placeholder:text-muted-foreground/60"
+              className="pl-9 h-9 text-15 placeholder:text-muted-foreground/60"
             />
           </div>
           <div className="flex gap-2">
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
-                <Button variant="outline" size="sm" className="h-9 text-[15px] gap-1.5 px-3">
+                <Button variant="outline" size="sm" className="h-9 text-15 gap-1.5 px-3">
                   <Columns3 className="w-4 h-4" /> Columns
                 </Button>
               </DropdownMenuTrigger>
               <DropdownMenuContent align="end" className="w-44">
                 {columns.map((col) => (
                   <DropdownMenuCheckboxItem key={col.key} checked={col.visible}
-                    onCheckedChange={() => toggleColumn(col.key)} className="text-[15px]">
+                    onCheckedChange={() => toggleColumn(col.key)} className="text-15">
                     {col.label}
                   </DropdownMenuCheckboxItem>
                 ))}
@@ -94,11 +94,11 @@ export function RoleTable({ data, isLoading, onViewDetail, onEdit }: RoleTablePr
             <TableHeader>
               <TableRow className="bg-muted/40 hover:bg-muted/40">
                 {visibleCols.map((col) => (
-                  <TableHead key={col.key} className="text-[13px] font-semibold uppercase tracking-wide text-muted-foreground">
+                  <TableHead key={col.key} className="text-13 font-semibold uppercase tracking-wide text-muted-foreground">
                     {col.label}
                   </TableHead>
                 ))}
-                <TableHead className="text-[13px] font-semibold uppercase tracking-wide text-muted-foreground text-right pr-4">
+                <TableHead className="text-13 font-semibold uppercase tracking-wide text-muted-foreground text-right pr-4">
                   Actions
                 </TableHead>
               </TableRow>
@@ -106,7 +106,7 @@ export function RoleTable({ data, isLoading, onViewDetail, onEdit }: RoleTablePr
             <TableBody>
               {filtered.length === 0 ? (
                 <TableRow>
-                  <TableCell colSpan={visibleCols.length + 1} className="text-center py-10 text-muted-foreground text-[15px]">
+                  <TableCell colSpan={visibleCols.length + 1} className="text-center py-10 text-muted-foreground text-15">
                     No roles found
                   </TableCell>
                 </TableRow>
@@ -117,23 +117,23 @@ export function RoleTable({ data, isLoading, onViewDetail, onEdit }: RoleTablePr
                       {col.key === 'name' && (
                         <div className="flex items-center gap-2.5">
                           <Shield className="h-4 w-4 text-muted-foreground shrink-0" />
-                          <span className="text-[15px] font-medium">{r.name}</span>
+                          <span className="text-15 font-medium">{r.name}</span>
                         </div>
                       )}
                       {col.key === 'description' && (
-                        <span className="text-[15px] text-muted-foreground line-clamp-1 max-w-sm">{r.description}</span>
+                        <span className="text-15 text-muted-foreground line-clamp-1 max-w-sm">{r.description}</span>
                       )}
                       {col.key === 'userCount' && (
                         <div className="flex items-center gap-1.5">
                           <Users className="w-3.5 h-3.5 text-muted-foreground" />
-                          <span className="text-[15px] tabular-nums">{r.userCount}</span>
+                          <span className="text-15 tabular-nums">{r.userCount}</span>
                         </div>
                       )}
                       {col.key === 'category' && (
                         <Badge variant="outline" className="text-[12px] capitalize">{r.category}</Badge>
                       )}
                       {col.key === 'lastModified' && (
-                        <span className="text-[15px] text-muted-foreground">{r.lastModified}</span>
+                        <span className="text-15 text-muted-foreground">{r.lastModified}</span>
                       )}
                     </TableCell>
                   ))}
@@ -150,11 +150,11 @@ export function RoleTable({ data, isLoading, onViewDetail, onEdit }: RoleTablePr
                           </Button>
                         </DropdownMenuTrigger>
                         <DropdownMenuContent align="end" className="w-40">
-                          <DropdownMenuItem className="text-[15px]" onClick={() => onViewDetail(r)}>View</DropdownMenuItem>
-                          <DropdownMenuItem className="text-[15px]" onClick={() => onEdit(r)}>Edit</DropdownMenuItem>
-                          <DropdownMenuItem className="text-[15px]" onClick={() => cloneMutation.mutate(r.id)}>Clone</DropdownMenuItem>
+                          <DropdownMenuItem className="text-15" onClick={() => onViewDetail(r)}>View</DropdownMenuItem>
+                          <DropdownMenuItem className="text-15" onClick={() => onEdit(r)}>Edit</DropdownMenuItem>
+                          <DropdownMenuItem className="text-15" onClick={() => cloneMutation.mutate(r.id)}>Clone</DropdownMenuItem>
                           <DropdownMenuSeparator />
-                          <DropdownMenuItem className="text-[15px] text-destructive focus:text-destructive"
+                          <DropdownMenuItem className="text-15 text-destructive focus:text-destructive"
                             onClick={() => setDeleteTarget(r)}>Delete</DropdownMenuItem>
                         </DropdownMenuContent>
                       </DropdownMenu>

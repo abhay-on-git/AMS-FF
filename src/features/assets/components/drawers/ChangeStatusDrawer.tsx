@@ -47,7 +47,7 @@ export function ChangeStatusDrawer({ open, onOpenChange, asset }: ChangeStatusDr
     <Sheet open={open} onOpenChange={onOpenChange}>
       <SheetContent side="right" className="!w-full sm:!max-w-lg flex flex-col overflow-hidden p-0">
         <SheetHeader className="px-6 pt-6 pb-4 border-b shrink-0">
-          <SheetTitle className="text-[15px] flex items-center gap-2">
+          <SheetTitle className="text-15 flex items-center gap-2">
             <ArrowRightLeft className="w-5 h-5" />
             Change Asset Status
           </SheetTitle>
@@ -70,8 +70,8 @@ export function ChangeStatusDrawer({ open, onOpenChange, asset }: ChangeStatusDr
                   </Badge>
                 )}
               </div>
-              <p className="text-[15px]">{asset.name}</p>
-              <div className="grid grid-cols-2 gap-3 text-[15px]">
+              <p className="text-15">{asset.name}</p>
+              <div className="grid grid-cols-2 gap-3 text-15">
                 <div>
                   <p className="text-sm text-muted-foreground">Type</p>
                   <p>{asset.type}</p>
@@ -96,7 +96,7 @@ export function ChangeStatusDrawer({ open, onOpenChange, asset }: ChangeStatusDr
             <Separator />
 
             <div>
-              <Label className="text-[15px] font-medium mb-2 block">Current Stage</Label>
+              <Label className="text-15 font-medium mb-2 block">Current Stage</Label>
               <div className="flex items-center gap-3 p-3 rounded-[4px] border bg-muted/20">
                 <Badge className={getLifecycleStageColor(currentStage)}>
                   {formatLifecycleStage(currentStage)}
@@ -108,7 +108,7 @@ export function ChangeStatusDrawer({ open, onOpenChange, asset }: ChangeStatusDr
             </div>
 
             <div className="space-y-2">
-              <Label className="text-[15px] font-medium">
+              <Label className="text-15 font-medium">
                 New Stage <span className="text-destructive">*</span>
               </Label>
               {validTransitions.length > 0 ? (
@@ -157,14 +157,14 @@ export function ChangeStatusDrawer({ open, onOpenChange, asset }: ChangeStatusDr
             <Separator />
 
             <div className="space-y-2">
-              <Label className="text-[15px] font-medium">
+              <Label className="text-15 font-medium">
                 Justification <span className="text-destructive">*</span>
               </Label>
               <Textarea
                 {...register('justification')}
                 placeholder="Provide reason for status change..."
                 rows={4}
-                className="text-[15px] placeholder:text-[14px]"
+                className="text-15 placeholder:text-[14px]"
               />
               {errors.justification && <p className="text-sm text-destructive">{errors.justification.message}</p>}
               <p className="text-[14px] text-muted-foreground">

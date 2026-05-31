@@ -12,7 +12,7 @@ export function NotificationsView() {
   const unreadCount = notifications.filter((n) => !n.isRead).length
 
   if (isLoading) {
-    return <div className="p-6 text-muted-foreground text-[15px]">Loading notifications…</div>
+    return <div className="p-6 text-muted-foreground text-15">Loading notifications…</div>
   }
 
   return (

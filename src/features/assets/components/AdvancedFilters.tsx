@@ -48,7 +48,7 @@ export function AdvancedFilters({ filters, onFiltersChange, onClearAll }: Advanc
       <Collapsible open={isOpen} onOpenChange={setIsOpen}>
         <div className="flex items-center justify-between">
           <CollapsibleTrigger asChild>
-            <Button variant="outline" size="sm" className="gap-2 text-[15px]">
+            <Button variant="outline" size="sm" className="gap-2 text-15">
               <Filter className="w-4 h-4" />
               Advanced Filters
               {activeFilterCount > 0 && (
@@ -60,7 +60,7 @@ export function AdvancedFilters({ filters, onFiltersChange, onClearAll }: Advanc
             </Button>
           </CollapsibleTrigger>
           {activeFilterCount > 0 && (
-            <Button variant="ghost" size="sm" onClick={onClearAll} className="text-[15px] gap-1">
+            <Button variant="ghost" size="sm" onClick={onClearAll} className="text-15 gap-1">
               <X className="w-3.5 h-3.5" />
               Clear All
             </Button>
@@ -101,15 +101,15 @@ export function AdvancedFilters({ filters, onFiltersChange, onClearAll }: Advanc
             <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
               <FilterField label="Acquisition Date">
                 <Input type="date" value={filters.acquisitionDateFrom}
-                  onChange={(e) => update('acquisitionDateFrom', e.target.value)} className="h-8 text-[15px]" />
+                  onChange={(e) => update('acquisitionDateFrom', e.target.value)} className="h-8 text-15" />
               </FilterField>
               <FilterField label="Value Min ($)">
                 <Input type="number" value={filters.valueMin}
-                  onChange={(e) => update('valueMin', e.target.value)} placeholder="0" className="h-8 text-[15px]" />
+                  onChange={(e) => update('valueMin', e.target.value)} placeholder="0" className="h-8 text-15" />
               </FilterField>
               <FilterField label="Value Max ($)">
                 <Input type="number" value={filters.valueMax}
-                  onChange={(e) => update('valueMax', e.target.value)} placeholder="999999" className="h-8 text-[15px]" />
+                  onChange={(e) => update('valueMax', e.target.value)} placeholder="999999" className="h-8 text-15" />
               </FilterField>
             </div>
           </div>
@@ -120,7 +120,7 @@ export function AdvancedFilters({ filters, onFiltersChange, onClearAll }: Advanc
       {activeChips.length > 0 && !isOpen && (
         <div className="flex flex-wrap gap-1.5">
           {activeChips.map((chip) => (
-            <Badge key={chip.key} variant="secondary" className="gap-1 pl-2 pr-1 py-0.5 text-[15px]">
+            <Badge key={chip.key} variant="secondary" className="gap-1 pl-2 pr-1 py-0.5 text-15">
               <span className="text-muted-foreground">{chip.label}:</span> {chip.value}
               <button onClick={() => removeChip(chip.key)} className="ml-0.5 rounded-full p-0.5 hover:bg-muted">
                 <X className="w-3 h-3" />
@@ -136,7 +136,7 @@ export function AdvancedFilters({ filters, onFiltersChange, onClearAll }: Advanc
 function FilterField({ label, children }: { label: string; children: React.ReactNode }) {
   return (
     <div className="space-y-1">
-      <Label className="text-[15px] text-muted-foreground">{label}</Label>
+      <Label className="text-15 text-muted-foreground">{label}</Label>
       {children}
     </div>
   )
@@ -149,12 +149,12 @@ function FilterSelect({ value, onChange, options }: {
 }) {
   return (
     <Select value={value} onValueChange={onChange}>
-      <SelectTrigger className="h-8 text-[15px]">
+      <SelectTrigger className="h-8 text-15">
         <SelectValue />
       </SelectTrigger>
-      <SelectContent className="z-50 w-[var(--radix-select-trigger-width)] bg-white dark:bg-[#1e2240]">
+      <SelectContent className="z-50 w-[var(--radix-select-trigger-width)] bg-white dark:bg-brand-navy-mid">
         {options.map((opt) => (
-          <SelectItem key={opt.value} value={opt.value} className="text-[15px]">
+          <SelectItem key={opt.value} value={opt.value} className="text-15">
             {opt.label}
           </SelectItem>
         ))}

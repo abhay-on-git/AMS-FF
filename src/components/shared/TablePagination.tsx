@@ -38,7 +38,7 @@ export function TablePagination({
   const endItem = Math.min((page + 1) * rowsPerPage, totalItems)
 
   return (
-    <div className="flex items-center justify-between gap-4 px-4 py-2 border-t bg-background text-[15px] text-muted-foreground">
+    <div className="flex items-center justify-between gap-4 px-4 py-2 border-t bg-background text-15 text-muted-foreground">
       {totalUnfilteredItems !== undefined && (
         <div className="whitespace-nowrap">
           Showing {totalItems} of {totalUnfilteredItems} {itemLabel}
@@ -55,12 +55,12 @@ export function TablePagination({
               onPageChange(0)
             }}
           >
-            <SelectTrigger className="h-8 w-[70px] border-0 bg-transparent shadow-none focus:ring-0 px-2 text-[15px]">
+            <SelectTrigger className="h-8 w-[70px] border-0 bg-transparent shadow-none focus:ring-0 px-2 text-15">
               <SelectValue />
             </SelectTrigger>
             <SelectContent>
               {rowsPerPageOptions.map((opt) => (
-                <SelectItem key={opt} value={String(opt)} className="text-[15px]">
+                <SelectItem key={opt} value={String(opt)} className="text-15">
                   {opt}
                 </SelectItem>
               ))}

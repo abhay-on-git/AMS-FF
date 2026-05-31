@@ -230,7 +230,7 @@ export default function AssetsPage() {
         <div className="flex items-center justify-between">
           <AssetTabs activeTab={activeTab} onTabChange={setActiveTab} />
           {activeTab === 'all' && (
-            <Button onClick={handleRegister} className="text-[15px] bg-brand-navy hover:bg-brand-navy-mid text-white">
+            <Button onClick={handleRegister} className="text-15 bg-brand-navy hover:bg-brand-navy-mid text-white">
               Register Asset
             </Button>
           )}

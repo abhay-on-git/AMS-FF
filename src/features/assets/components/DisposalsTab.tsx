@@ -31,7 +31,7 @@ import type { DisposalRequest, DisposalStatus } from '../types/disposalTypes'
 type SubView = 'all' | 'mine' | 'pending-approval' | 'active'
 
 const STAT_CARDS = [
-  { key: 'total',            label: 'Total Requests',   color: 'bg-[#121321]',   Icon: Trash2      },
+  { key: 'total',            label: 'Total Requests',   color: 'bg-brand-navy',   Icon: Trash2      },
   { key: 'pending-review',   label: 'Pending Review',   color: 'bg-cyan-600',    Icon: FileText    },
   { key: 'pending-approval', label: 'Pending Approval', color: 'bg-amber-600',   Icon: Clock       },
   { key: 'approved',         label: 'Approved',         color: 'bg-blue-600',    Icon: CheckCheck  },
@@ -114,7 +114,7 @@ export function DisposalsTab({
             </div>
             <div className="min-w-0">
               <p className="text-xl font-bold">{key === 'total' ? counts.total : counts[key as keyof typeof counts] ?? 0}</p>
-              <p className="text-[13px] text-muted-foreground truncate">{label}</p>
+              <p className="text-13 text-muted-foreground truncate">{label}</p>
             </div>
           </div>
         ))}
@@ -127,8 +127,8 @@ export function DisposalsTab({
             <button
               key={tab.key}
               onClick={() => setSubView(tab.key)}
-              className={`px-3 py-1.5 rounded-[4px] text-[15px] transition-colors flex items-center gap-1.5 ${
-                subView === tab.key ? 'bg-[#121321] text-white shadow-sm' : 'text-foreground hover:bg-muted'
+              className={`px-3 py-1.5 rounded-[4px] text-15 transition-colors flex items-center gap-1.5 ${
+                subView === tab.key ? 'bg-brand-navy text-white shadow-sm' : 'text-foreground hover:bg-muted'
               }`}
             >
               {tab.label}
@@ -144,7 +144,7 @@ export function DisposalsTab({
         </div>
         <Button
           onClick={onCreateDisposal}
-          className="gap-1.5 bg-brand-navy hover:bg-brand-navy-mid text-white text-[15px]"
+          className="gap-1.5 bg-brand-navy hover:bg-brand-navy-mid text-white text-15"
         >
           <Plus className="w-4 h-4" />New Disposal
         </Button>
@@ -153,7 +153,7 @@ export function DisposalsTab({
       {/* Filter + Table card */}
       <Card>
         {/* Warning banner */}
-        <div className="mx-4 mt-4 mb-3 flex items-center gap-2 px-4 py-2.5 rounded-[4px] bg-red-50 dark:bg-red-500/10 border border-red-200 dark:border-red-500/20 text-[15px] text-red-700 dark:text-red-400">
+        <div className="mx-4 mt-4 mb-3 flex items-center gap-2 px-4 py-2.5 rounded-[4px] bg-red-50 dark:bg-red-500/10 border border-red-200 dark:border-red-500/20 text-15 text-red-700 dark:text-red-400">
           <ShieldAlert className="w-4 h-4 shrink-0" />
           Disposal is irreversible. Assets will be permanently locked once a disposal is completed.
         </div>
@@ -167,43 +167,43 @@ export function DisposalsTab({
                 placeholder="Search by ID, title, requester, office…"
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
-                className="pl-9 h-10 text-[15px] placeholder:text-muted-foreground/60"
+                className="pl-9 h-10 text-15 placeholder:text-muted-foreground/60"
               />
             </div>
             <div className="flex gap-2 flex-wrap">
               <Select value={statusFilter} onValueChange={setStatusFilter}
                 disabled={subView === 'pending-approval' || subView === 'active'}>
-                <SelectTrigger className={`h-10 w-44 text-[15px] ${subView === 'pending-approval' || subView === 'active' ? 'opacity-60 cursor-not-allowed' : ''}`}>
+                <SelectTrigger className={`h-10 w-44 text-15 ${subView === 'pending-approval' || subView === 'active' ? 'opacity-60 cursor-not-allowed' : ''}`}>
                   <SelectValue placeholder="Status" />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="all" className="text-[15px]">All Status</SelectItem>
-                  <SelectItem value="draft" className="text-[15px]">Draft</SelectItem>
-                  <SelectItem value="pending-review" className="text-[15px]">Pending Review</SelectItem>
-                  <SelectItem value="pending-approval" className="text-[15px]">Pending Approval</SelectItem>
-                  <SelectItem value="approved" className="text-[15px]">Approved</SelectItem>
-                  <SelectItem value="in-progress" className="text-[15px]">In Progress</SelectItem>
-                  <SelectItem value="completed" className="text-[15px]">Completed</SelectItem>
-                  <SelectItem value="rejected" className="text-[15px]">Rejected</SelectItem>
+                  <SelectItem value="all" className="text-15">All Status</SelectItem>
+                  <SelectItem value="draft" className="text-15">Draft</SelectItem>
+                  <SelectItem value="pending-review" className="text-15">Pending Review</SelectItem>
+                  <SelectItem value="pending-approval" className="text-15">Pending Approval</SelectItem>
+                  <SelectItem value="approved" className="text-15">Approved</SelectItem>
+                  <SelectItem value="in-progress" className="text-15">In Progress</SelectItem>
+                  <SelectItem value="completed" className="text-15">Completed</SelectItem>
+                  <SelectItem value="rejected" className="text-15">Rejected</SelectItem>
                 </SelectContent>
               </Select>
 
               <Select value={methodFilter} onValueChange={setMethodFilter}>
-                <SelectTrigger className="h-10 w-40 text-[15px]"><SelectValue placeholder="Method" /></SelectTrigger>
+                <SelectTrigger className="h-10 w-40 text-15"><SelectValue placeholder="Method" /></SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="all" className="text-[15px]">All Methods</SelectItem>
-                  <SelectItem value="auction" className="text-[15px]">Auction</SelectItem>
-                  <SelectItem value="donation" className="text-[15px]">Donation</SelectItem>
-                  <SelectItem value="scrap" className="text-[15px]">Scrap</SelectItem>
-                  <SelectItem value="write-off" className="text-[15px]">Write-Off</SelectItem>
-                  <SelectItem value="trade-in" className="text-[15px]">Trade-In</SelectItem>
-                  <SelectItem value="recycling" className="text-[15px]">Recycling</SelectItem>
+                  <SelectItem value="all" className="text-15">All Methods</SelectItem>
+                  <SelectItem value="auction" className="text-15">Auction</SelectItem>
+                  <SelectItem value="donation" className="text-15">Donation</SelectItem>
+                  <SelectItem value="scrap" className="text-15">Scrap</SelectItem>
+                  <SelectItem value="write-off" className="text-15">Write-Off</SelectItem>
+                  <SelectItem value="trade-in" className="text-15">Trade-In</SelectItem>
+                  <SelectItem value="recycling" className="text-15">Recycling</SelectItem>
                 </SelectContent>
               </Select>
 
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
-                  <Button variant="outline" size="sm" className="h-10 text-[15px] gap-1.5 px-3">
+                  <Button variant="outline" size="sm" className="h-10 text-15 gap-1.5 px-3">
                     <Columns3 className="w-4 h-4" />Columns
                   </Button>
                 </DropdownMenuTrigger>
@@ -215,7 +215,7 @@ export function DisposalsTab({
                       onCheckedChange={(checked) =>
                         setColumns((prev) => prev.map((c) => c.key === col.key ? { ...c, visible: checked } : c))
                       }
-                      className="text-[15px]"
+                      className="text-15"
                     >
                       {col.label}
                     </DropdownMenuCheckboxItem>
@@ -233,7 +233,7 @@ export function DisposalsTab({
         {/* Table */}
         <CardContent className="p-0">
           {isLoading ? (
-            <div className="text-center py-12 text-muted-foreground text-[15px]">Loading disposal requests…</div>
+            <div className="text-center py-12 text-muted-foreground text-15">Loading disposal requests…</div>
           ) : filtered.length > 0 ? (
             <div className="rounded-md border mx-4 mb-0 overflow-hidden mt-3">
               <div className="overflow-auto max-h-[calc(100vh-520px)] scrollbar-hide font-['Manrope']">
@@ -241,11 +241,11 @@ export function DisposalsTab({
                   <TableHeader>
                     <TableRow>
                       {visibleCols.map((col) => (
-                        <TableHead key={String(col.key)} className="text-[15px] whitespace-nowrap">
+                        <TableHead key={String(col.key)} className="text-15 whitespace-nowrap">
                           {col.label}
                         </TableHead>
                       ))}
-                      <TableHead className="w-20 text-[15px]" />
+                      <TableHead className="w-20 text-15" />
                     </TableRow>
                   </TableHeader>
                   <TableBody>
@@ -256,7 +256,7 @@ export function DisposalsTab({
                         onClick={() => onViewDetail(disposal)}
                       >
                         {visibleCols.map((col) => (
-                          <TableCell key={String(col.key)} className="text-[15px]">
+                          <TableCell key={String(col.key)} className="text-15">
                             {renderCell(disposal, col.key as keyof DisposalRequest)}
                           </TableCell>
                         ))}
@@ -269,36 +269,36 @@ export function DisposalsTab({
                               </Button>
                             </DropdownMenuTrigger>
                             <DropdownMenuContent align="end" onClick={(e) => e.stopPropagation()}>
-                              <DropdownMenuItem onClick={() => onViewDetail(disposal)} className="text-[15px]">View Detail</DropdownMenuItem>
+                              <DropdownMenuItem onClick={() => onViewDetail(disposal)} className="text-15">View Detail</DropdownMenuItem>
                               {disposal.status === 'draft' && (
-                                <DropdownMenuItem onClick={() => onSubmitReview(disposal.id)} className="text-[15px]">
+                                <DropdownMenuItem onClick={() => onSubmitReview(disposal.id)} className="text-15">
                                   <FileText className="w-4 h-4 mr-2" />Submit for Review
                                 </DropdownMenuItem>
                               )}
                               {disposal.status === 'pending-review' && (
-                                <DropdownMenuItem onClick={() => onApproveReview(disposal.id)} className="text-[15px]">
+                                <DropdownMenuItem onClick={() => onApproveReview(disposal.id)} className="text-15">
                                   <CheckCheck className="w-4 h-4 mr-2" />Approve Finance Review
                                 </DropdownMenuItem>
                               )}
                               {disposal.status === 'pending-approval' && (
                                 <>
-                                  <DropdownMenuItem onClick={() => onApprove(disposal.id)} className="text-[15px]">
+                                  <DropdownMenuItem onClick={() => onApprove(disposal.id)} className="text-15">
                                     <CheckCheck className="w-4 h-4 mr-2" />Approve Disposal
                                   </DropdownMenuItem>
                                   <DropdownMenuItem
                                     onClick={() => onReject(disposal)}
-                                    className="text-[15px] text-destructive focus:text-destructive">
+                                    className="text-15 text-destructive focus:text-destructive">
                                     <XCircle className="w-4 h-4 mr-2" />Reject Disposal
                                   </DropdownMenuItem>
                                 </>
                               )}
                               {disposal.status === 'approved' && (
-                                <DropdownMenuItem onClick={() => onExecute(disposal.id)} className="text-[15px]">
+                                <DropdownMenuItem onClick={() => onExecute(disposal.id)} className="text-15">
                                   <Play className="w-4 h-4 mr-2" />Execute Disposal
                                 </DropdownMenuItem>
                               )}
                               {disposal.status === 'in-progress' && (
-                                <DropdownMenuItem onClick={() => onComplete(disposal.id)} className="text-[15px]">
+                                <DropdownMenuItem onClick={() => onComplete(disposal.id)} className="text-15">
                                   <CheckCheck className="w-4 h-4 mr-2" />Mark Completed
                                 </DropdownMenuItem>
                               )}
@@ -323,14 +323,14 @@ export function DisposalsTab({
           ) : (
             <div className="text-center py-12 px-6">
               <AlertCircle className="w-10 h-10 mx-auto mb-3 opacity-20" />
-              <h3 className="text-[15px] font-medium mb-1">No disposal requests found</h3>
-              <p className="text-[15px] text-muted-foreground mb-4">
+              <h3 className="text-15 font-medium mb-1">No disposal requests found</h3>
+              <p className="text-15 text-muted-foreground mb-4">
                 {search || statusFilter !== 'all' || methodFilter !== 'all'
                   ? 'Try adjusting your filters.'
                   : 'Create a disposal request to begin the process.'}
               </p>
               {!search && statusFilter === 'all' && methodFilter === 'all' && (
-                <Button size="sm" className="bg-brand-navy text-white text-[15px]" onClick={onCreateDisposal}>
+                <Button size="sm" className="bg-brand-navy text-white text-15" onClick={onCreateDisposal}>
                   <Plus className="w-4 h-4 mr-1.5" />New Disposal
                 </Button>
               )}
@@ -359,7 +359,7 @@ function renderCell(disposal: DisposalRequest, key: keyof DisposalRequest): Reac
       return (
         <div>
           <p className="font-medium max-w-[240px] truncate">{disposal.title}</p>
-          <p className="text-[13px] text-muted-foreground">{disposal.assets.length} asset{disposal.assets.length !== 1 ? 's' : ''}</p>
+          <p className="text-13 text-muted-foreground">{disposal.assets.length} asset{disposal.assets.length !== 1 ? 's' : ''}</p>
         </div>
       )
     case 'status':
@@ -374,7 +374,7 @@ function renderCell(disposal: DisposalRequest, key: keyof DisposalRequest): Reac
       return (
         <div>
           <p>{disposal.requestedBy}</p>
-          <p className="text-[13px] text-muted-foreground">{new Date(disposal.requestedDate).toLocaleDateString()}</p>
+          <p className="text-13 text-muted-foreground">{new Date(disposal.requestedDate).toLocaleDateString()}</p>
         </div>
       )
     case 'totalNBV':
@@ -382,7 +382,7 @@ function renderCell(disposal: DisposalRequest, key: keyof DisposalRequest): Reac
         <div>
           <p className="font-medium">{fmt(disposal.totalNBV)}</p>
           {disposal.writeOffAmount > 0 && (
-            <p className="text-[13px] text-red-600">Write-off: {fmt(disposal.writeOffAmount)}</p>
+            <p className="text-13 text-red-600">Write-off: {fmt(disposal.writeOffAmount)}</p>
           )}
         </div>
       )
@@ -391,7 +391,7 @@ function renderCell(disposal: DisposalRequest, key: keyof DisposalRequest): Reac
         <div>
           <p>{new Date(disposal.targetDisposalDate).toLocaleDateString()}</p>
           {disposal.actualDisposalDate && (
-            <p className="text-[13px] text-green-600">Done {new Date(disposal.actualDisposalDate).toLocaleDateString()}</p>
+            <p className="text-13 text-green-600">Done {new Date(disposal.actualDisposalDate).toLocaleDateString()}</p>
           )}
         </div>
       )

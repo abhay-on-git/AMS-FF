@@ -104,7 +104,7 @@ export function FieldOfficeFormDrawer({
       <SheetContent className="sm:max-w-[600px] flex flex-col h-full p-0">
         <SheetHeader className="pr-8 px-6 pt-6 pb-4 shrink-0">
           <SheetTitle>{isEditMode ? 'Edit Field Office' : 'Create Field Office'}</SheetTitle>
-          <SheetDescription className="text-[15px]">
+          <SheetDescription className="text-15">
             {isEditMode
               ? 'Update field office details'
               : 'Create a new field office and define its location hierarchy'}
@@ -114,7 +114,7 @@ export function FieldOfficeFormDrawer({
         <div className="flex-1 overflow-y-auto px-6 space-y-6 pb-6">
           <div className="space-y-4">
             <div className="space-y-2">
-              <Label htmlFor="fo-name" className="text-[15px] font-medium">
+              <Label htmlFor="fo-name" className="text-15 font-medium">
                 Office Name <span className="text-red-500">*</span>
               </Label>
               <Input
@@ -122,13 +122,13 @@ export function FieldOfficeFormDrawer({
                 value={formData.name}
                 onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                 placeholder="e.g., Godrej Office, Mumbai Office"
-                className={`h-[52px] text-[15px] ${errors.name ? 'border-red-500' : ''}`}
+                className={`h-[52px] text-15 ${errors.name ? 'border-red-500' : ''}`}
               />
               {errors.name && <p className="text-xs text-red-500">{errors.name}</p>}
             </div>
 
             <div className="space-y-2">
-              <Label htmlFor="fo-location" className="text-[15px] font-medium">
+              <Label htmlFor="fo-location" className="text-15 font-medium">
                 Location label <span className="text-red-500">*</span>
               </Label>
               <Input
@@ -136,13 +136,13 @@ export function FieldOfficeFormDrawer({
                 value={formData.location}
                 onChange={(e) => setFormData({ ...formData, location: e.target.value })}
                 placeholder="e.g., Las Vegas, Nevada"
-                className={`h-[52px] text-[15px] ${errors.location ? 'border-red-500' : ''}`}
+                className={`h-[52px] text-15 ${errors.location ? 'border-red-500' : ''}`}
               />
               {errors.location && <p className="text-xs text-red-500">{errors.location}</p>}
             </div>
 
             <div className="space-y-2">
-              <Label htmlFor="fo-description" className="text-[15px] font-medium">
+              <Label htmlFor="fo-description" className="text-15 font-medium">
                 Description <span className="text-muted-foreground">(Optional)</span>
               </Label>
               <Textarea
@@ -151,15 +151,15 @@ export function FieldOfficeFormDrawer({
                 onChange={(e) => setFormData({ ...formData, description: e.target.value })}
                 placeholder="Brief description of this field office..."
                 rows={3}
-                className="text-[15px]"
+                className="text-15"
               />
             </div>
           </div>
 
           <div className="space-y-4">
-            <p className="text-[15px] font-medium">Address</p>
+            <p className="text-15 font-medium">Address</p>
             <div className="space-y-2">
-              <Label htmlFor="fo-address1" className="text-[15px] font-medium">
+              <Label htmlFor="fo-address1" className="text-15 font-medium">
                 Address Line 1 <span className="text-red-500">*</span>
               </Label>
               <Input
@@ -167,41 +167,41 @@ export function FieldOfficeFormDrawer({
                 value={formData.address1}
                 onChange={(e) => setFormData({ ...formData, address1: e.target.value })}
                 placeholder="Street address, building number"
-                className={`h-[52px] text-[15px] ${errors.address1 ? 'border-red-500' : ''}`}
+                className={`h-[52px] text-15 ${errors.address1 ? 'border-red-500' : ''}`}
               />
               {errors.address1 && <p className="text-xs text-red-500">{errors.address1}</p>}
             </div>
 
             <div className="grid grid-cols-2 gap-4">
               <div className="space-y-2">
-                <Label htmlFor="fo-city" className="text-[15px] font-medium">City <span className="text-red-500">*</span></Label>
+                <Label htmlFor="fo-city" className="text-15 font-medium">City <span className="text-red-500">*</span></Label>
                 <Input
                   id="fo-city"
                   value={formData.city}
                   onChange={(e) => setFormData({ ...formData, city: e.target.value })}
-                  className={`h-[52px] text-[15px] ${errors.city ? 'border-red-500' : ''}`}
+                  className={`h-[52px] text-15 ${errors.city ? 'border-red-500' : ''}`}
                 />
                 {errors.city && <p className="text-xs text-red-500">{errors.city}</p>}
               </div>
               <div className="space-y-2">
-                <Label htmlFor="fo-state" className="text-[15px] font-medium">State <span className="text-red-500">*</span></Label>
+                <Label htmlFor="fo-state" className="text-15 font-medium">State <span className="text-red-500">*</span></Label>
                 <Input
                   id="fo-state"
                   value={formData.state}
                   onChange={(e) => setFormData({ ...formData, state: e.target.value })}
-                  className={`h-[52px] text-[15px] ${errors.state ? 'border-red-500' : ''}`}
+                  className={`h-[52px] text-15 ${errors.state ? 'border-red-500' : ''}`}
                 />
                 {errors.state && <p className="text-xs text-red-500">{errors.state}</p>}
               </div>
             </div>
 
             <div className="space-y-2 w-1/2">
-              <Label htmlFor="fo-zip" className="text-[15px] font-medium">Zip / Pin Code <span className="text-red-500">*</span></Label>
+              <Label htmlFor="fo-zip" className="text-15 font-medium">Zip / Pin Code <span className="text-red-500">*</span></Label>
               <Input
                 id="fo-zip"
                 value={formData.zip}
                 onChange={(e) => setFormData({ ...formData, zip: e.target.value })}
-                className={`h-[52px] text-[15px] ${errors.zip ? 'border-red-500' : ''}`}
+                className={`h-[52px] text-15 ${errors.zip ? 'border-red-500' : ''}`}
               />
               {errors.zip && <p className="text-xs text-red-500">{errors.zip}</p>}
             </div>
@@ -210,10 +210,10 @@ export function FieldOfficeFormDrawer({
 
         <div className="shrink-0 border-t bg-background p-4">
           <div className="flex justify-end gap-2">
-            <Button type="button" variant="outline" onClick={() => onOpenChange(false)} className="text-[15px]">
+            <Button type="button" variant="outline" onClick={() => onOpenChange(false)} className="text-15">
               Cancel
             </Button>
-            <Button onClick={handleSave} disabled={saveMutation.isPending} className="text-[15px]">
+            <Button onClick={handleSave} disabled={saveMutation.isPending} className="text-15">
               {isEditMode ? 'Save Changes' : 'Create Field Office'}
             </Button>
           </div>

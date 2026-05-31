@@ -9,15 +9,15 @@ const appButtonVariants = cva(
     variants: {
       color: {
         primary: 'bg-brand-navy text-white hover:bg-brand-navy-mid focus-visible:ring-brand-navy/40',
-        secondary: 'bg-white text-brand-navy border border-[#D9DEE5] hover:bg-[#F5F7FA] focus-visible:ring-brand-navy/20',
+        secondary: 'bg-white text-brand-navy border border-divider hover:bg-hover-light focus-visible:ring-brand-navy/20',
         danger: 'bg-red-600 text-white hover:bg-red-700 focus-visible:ring-red-600/40',
         ghost: 'bg-transparent text-brand-navy hover:bg-muted/50',
         teal: 'bg-brand-teal text-brand-navy hover:bg-brand-teal-light focus-visible:ring-brand-teal/40',
       },
       size: {
         xs: 'h-7 px-2.5 text-xs rounded-md gap-1',
-        sm: 'h-8 px-3 text-[13px] rounded-md gap-1.5',
-        md: 'h-10 px-4 text-[15px] rounded-lg gap-2',
+        sm: 'h-8 px-3 text-13 rounded-md gap-1.5',
+        md: 'h-10 px-4 text-15 rounded-lg gap-2',
         lg: 'h-11 px-5 text-base rounded-lg gap-2',
         xl: 'h-12 px-6 text-base rounded-lg gap-2.5',
       },

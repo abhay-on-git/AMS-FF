@@ -43,7 +43,7 @@ export function DetailPageShell({
       {/* Breadcrumb + Header */}
       <div className="flex items-start justify-between gap-4">
         <div>
-          <div className="flex items-center gap-2 text-[15px] mb-2">
+          <div className="flex items-center gap-2 text-15 mb-2">
             <button onClick={onBack} className="text-muted-foreground hover:text-foreground transition-colors">
               <ChevronLeft className="w-4 h-4" />
             </button>
@@ -56,7 +56,7 @@ export function DetailPageShell({
           <div className="flex items-center gap-3 flex-wrap">
             <h2 className="text-2xl font-bold">{title}</h2>
             {subtitle && (
-              <span className="text-[15px] text-muted-foreground">{subtitle}</span>
+              <span className="text-15 text-muted-foreground">{subtitle}</span>
             )}
             {badges}
           </div>

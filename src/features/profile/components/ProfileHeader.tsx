@@ -44,23 +44,23 @@ export function ProfileHeader({
                 {role}
               </Badge>
             </div>
-            <p className="text-[15px] text-muted-foreground mt-0.5">
+            <p className="text-15 text-muted-foreground mt-0.5">
               {profile.department} · {profile.fieldOffice}
             </p>
           </div>
 
           <div className="flex flex-wrap gap-2 sm:pb-1 shrink-0">
             {!editing ? (
-              <Button variant="outline" className="h-10 px-5 text-[15px] gap-2" onClick={onEdit}>
+              <Button variant="outline" className="h-10 px-5 text-15 gap-2" onClick={onEdit}>
                 <Edit className="w-4 h-4" /> Edit Profile
               </Button>
             ) : (
               <>
-                <Button variant="outline" className="h-10 px-5 text-[15px] gap-2" onClick={onCancel}>
+                <Button variant="outline" className="h-10 px-5 text-15 gap-2" onClick={onCancel}>
                   <X className="w-4 h-4" /> Cancel
                 </Button>
                 <Button
-                  className="h-10 px-5 text-[15px] gap-2 bg-brand-navy text-white hover:bg-brand-navy/90"
+                  className="h-10 px-5 text-15 gap-2 bg-brand-navy text-white hover:bg-brand-navy/90"
                   onClick={onSave}
                   disabled={saving}
                 >

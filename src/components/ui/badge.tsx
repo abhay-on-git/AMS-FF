@@ -10,7 +10,7 @@ import { cn } from "@/lib/cn";
  * ENTERPRISE BENEFIT: Centralized badge color tokens
  */
 const badgeVariants = cva(
-  "font-['Manrope'] inline-flex items-center justify-center border px-3 py-1 text-[15px] font-medium w-fit whitespace-nowrap shrink-0 [&>svg]:size-3.5 gap-1.5 [&>svg]:pointer-events-none transition-colors overflow-hidden rounded-[20px]",
+  "font-['Manrope'] inline-flex items-center justify-center border px-3 py-1 text-15 font-medium w-fit whitespace-nowrap shrink-0 [&>svg]:size-3.5 gap-1.5 [&>svg]:pointer-events-none transition-colors overflow-hidden rounded-[20px]",
   {
     variants: {
       variant: {

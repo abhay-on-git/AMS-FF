@@ -39,7 +39,7 @@ export function TransferAssetDrawer({ open, onOpenChange, asset }: TransferAsset
     <Sheet open={open} onOpenChange={onOpenChange}>
       <SheetContent side="right" className="!w-full sm:!max-w-lg flex flex-col overflow-hidden p-0">
         <SheetHeader className="px-6 pt-6 pb-4 border-b shrink-0">
-          <SheetTitle className="text-[15px] flex items-center gap-2">
+          <SheetTitle className="text-15 flex items-center gap-2">
             <ArrowRightLeft className="w-5 h-5" />
             Transfer Asset
           </SheetTitle>
@@ -60,8 +60,8 @@ export function TransferAssetDrawer({ open, onOpenChange, asset }: TransferAsset
                   {asset.status.charAt(0).toUpperCase() + asset.status.slice(1)}
                 </Badge>
               </div>
-              <p className="text-[15px]">{asset.name}</p>
-              <div className="grid grid-cols-2 gap-3 text-[15px]">
+              <p className="text-15">{asset.name}</p>
+              <div className="grid grid-cols-2 gap-3 text-15">
                 <div>
                   <p className="text-sm text-muted-foreground">Current Location</p>
                   <p>{asset.location}</p>
@@ -76,11 +76,11 @@ export function TransferAssetDrawer({ open, onOpenChange, asset }: TransferAsset
             <Separator />
 
             <div className="space-y-2">
-              <Label className="text-[15px] font-medium">
+              <Label className="text-15 font-medium">
                 Destination Office <span className="text-destructive">*</span>
               </Label>
               <Select value={watch('destination')} onValueChange={(v) => setValue('destination', v)}>
-                <SelectTrigger className="h-[52px] text-[15px]">
+                <SelectTrigger className="h-[52px] text-15">
                   <SelectValue placeholder="Select destination" />
                 </SelectTrigger>
                 <SelectContent>
@@ -95,11 +95,11 @@ export function TransferAssetDrawer({ open, onOpenChange, asset }: TransferAsset
             </div>
 
             <div className="space-y-2">
-              <Label className="text-[15px] font-medium">
+              <Label className="text-15 font-medium">
                 Receiving Custodian <span className="text-destructive">*</span>
               </Label>
               <Select value={watch('custodian')} onValueChange={(v) => setValue('custodian', v)}>
-                <SelectTrigger className="h-[52px] text-[15px]">
+                <SelectTrigger className="h-[52px] text-15">
                   <SelectValue placeholder="Select custodian" />
                 </SelectTrigger>
                 <SelectContent>
@@ -116,14 +116,14 @@ export function TransferAssetDrawer({ open, onOpenChange, asset }: TransferAsset
             <Separator />
 
             <div className="space-y-2">
-              <Label className="text-[15px] font-medium">
+              <Label className="text-15 font-medium">
                 Transfer Justification <span className="text-destructive">*</span>
               </Label>
               <Textarea
                 {...register('justification')}
                 placeholder="Reason for transfer (e.g., operational reallocation, project reassignment)..."
                 rows={4}
-                className="text-[15px] placeholder:text-[14px]"
+                className="text-15 placeholder:text-[14px]"
               />
               {errors.justification && <p className="text-sm text-destructive">{errors.justification.message}</p>}
             </div>

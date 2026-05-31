@@ -15,7 +15,7 @@ export function ComplianceCard() {
   return (
     <Card className="h-full">
       <CardHeader className="pb-3">
-        <CardTitle className="flex items-center gap-2 text-[15px]">
+        <CardTitle className="flex items-center gap-2 text-15">
           <ShieldCheck className="w-5 h-5 text-brand-navy dark:text-brand-teal" />
           Compliance Metrics
         </CardTitle>

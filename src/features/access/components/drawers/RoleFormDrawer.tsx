@@ -73,7 +73,7 @@ export function RoleFormDrawer({ open, onOpenChange, role }: RoleFormDrawerProps
       <SheetContent side="right" className="!w-full sm:!max-w-lg flex flex-col overflow-hidden p-0">
         <SheetHeader className="px-6 py-4 border-b shrink-0">
           <SheetTitle className="text-[18px]">{isEdit ? 'Edit Role' : 'New Role'}</SheetTitle>
-          <SheetDescription className="text-[13px]">
+          <SheetDescription className="text-13">
             {isEdit
               ? 'Update role name, description and category.'
               : 'Create a new custom role. Assign permissions after creation.'}
@@ -96,11 +96,11 @@ export function RoleFormDrawer({ open, onOpenChange, role }: RoleFormDrawerProps
               {...register('category')}
             />
             <div className="flex flex-col gap-1.5">
-              <Label className="text-[13px] font-medium">Description</Label>
+              <Label className="text-13 font-medium">Description</Label>
               <Textarea
                 rows={3}
                 placeholder="Describe what this role can do…"
-                className="text-[13px] resize-none"
+                className="text-13 resize-none"
                 {...register('description')}
               />
               {errors.description && (

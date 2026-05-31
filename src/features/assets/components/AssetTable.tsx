@@ -44,7 +44,7 @@ export function AssetTable({ assets, columns, onViewDetail, onEdit, emptyMessage
           <Search className="w-8 h-8" />
         </div>
         <h3 className="text-lg mb-2">{emptyMessage || 'No assets found'}</h3>
-        <p className="text-[15px] text-muted-foreground">Try adjusting your search criteria or removing some filters</p>
+        <p className="text-15 text-muted-foreground">Try adjusting your search criteria or removing some filters</p>
       </div>
     )
   }
@@ -56,9 +56,9 @@ export function AssetTable({ assets, columns, onViewDetail, onEdit, emptyMessage
           <TableHeader>
             <TableRow>
               {visibleColumns.map((col) => (
-                <TableHead key={col.key} className="text-[15px]">{col.label}</TableHead>
+                <TableHead key={col.key} className="text-15">{col.label}</TableHead>
               ))}
-              <TableHead className="w-20 text-[15px]">Actions</TableHead>
+              <TableHead className="w-20 text-15">Actions</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
@@ -69,7 +69,7 @@ export function AssetTable({ assets, columns, onViewDetail, onEdit, emptyMessage
                 onClick={() => onViewDetail(asset)}
               >
                 {visibleColumns.map((col) => (
-                  <TableCell key={col.key} className="text-foreground text-[15px]">
+                  <TableCell key={col.key} className="text-foreground text-15">
                     {renderCell(asset, col.key)}
                   </TableCell>
                 ))}
@@ -130,9 +130,9 @@ function renderCell(asset: EnhancedAsset, key: string) {
         </span>
       )
     case 'epc':
-      return <span className="text-[15px]">{asset.epc}</span>
+      return <span className="text-15">{asset.epc}</span>
     case 'barcode':
-      return <span className="text-[15px]">{asset.barcode}</span>
+      return <span className="text-15">{asset.barcode}</span>
     case 'type':
       return asset.type
     case 'name':

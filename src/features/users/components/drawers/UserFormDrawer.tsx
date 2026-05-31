@@ -87,7 +87,7 @@ export function UserFormDrawer({ open, onOpenChange, mode, user }: UserFormDrawe
       <SheetContent side="right" className="!w-full sm:!max-w-lg flex flex-col overflow-hidden p-0">
         <SheetHeader className="px-6 py-4 border-b shrink-0">
           <SheetTitle className="text-[18px]">{isEdit ? 'Edit User' : 'New User'}</SheetTitle>
-          <SheetDescription className="text-[13px]">
+          <SheetDescription className="text-13">
             {isEdit
               ? 'Update user profile and access settings.'
               : 'Fill in details to create a new user account.'}
@@ -138,7 +138,7 @@ export function UserFormDrawer({ open, onOpenChange, mode, user }: UserFormDrawe
             )}
 
             <div className="flex flex-col gap-2">
-              <Label className="text-[13px] font-medium">Assigned Locations</Label>
+              <Label className="text-13 font-medium">Assigned Locations</Label>
               <div className="rounded-md border p-3 flex flex-col gap-2">
                 <Controller
                   name="assignedLocations"
@@ -158,14 +158,14 @@ export function UserFormDrawer({ open, onOpenChange, mode, user }: UserFormDrawe
                                 field.onChange(next)
                               }}
                             />
-                            <Label htmlFor={loc.id} className="text-[13px] font-normal cursor-pointer">
+                            <Label htmlFor={loc.id} className="text-13 font-normal cursor-pointer">
                               {loc.name}
                               <span className="text-muted-foreground ml-1">({loc.code})</span>
                             </Label>
                           </div>
                         ))
                       ) : (
-                        <p className="text-[13px] text-muted-foreground">
+                        <p className="text-13 text-muted-foreground">
                           {selectedFieldOfficeCode
                             ? 'No locations for this field office.'
                             : 'Select a field office to assign locations.'}

@@ -40,7 +40,7 @@ interface TransfersTabProps {
 }
 
 function SignatureDots({ signatures }: { signatures: TransferRequest['signatures'] }) {
-  if (!signatures.length) return <span className="text-[15px] text-muted-foreground">—</span>
+  if (!signatures.length) return <span className="text-15 text-muted-foreground">—</span>
   const signed = signatures.filter((s) => s.status === 'signed').length
   return (
     <div className="flex items-center gap-1.5">
@@ -52,13 +52,13 @@ function SignatureDots({ signatures }: { signatures: TransferRequest['signatures
           }`} />
         ))}
       </div>
-      <span className="text-[13px] text-muted-foreground">{signed}/{signatures.length}</span>
+      <span className="text-13 text-muted-foreground">{signed}/{signatures.length}</span>
     </div>
   )
 }
 
 const STAT_CARDS = [
-  { key: 'total',          label: 'Total',             color: 'bg-[#121321]', Icon: ArrowLeftRight },
+  { key: 'total',          label: 'Total',             color: 'bg-brand-navy', Icon: ArrowLeftRight },
   { key: 'pendingCustodian', label: 'Awaiting Custodian', color: 'bg-cyan-600',  Icon: PenLine },
   { key: 'pending',        label: 'Pending Approval',  color: 'bg-amber-600', Icon: Clock },
   { key: 'inTransit',      label: 'In Transit',        color: 'bg-indigo-600',Icon: Truck },
@@ -137,7 +137,7 @@ export function TransfersTab({ onViewDetail, onInitiate, onApprove, onReject, on
             </div>
             <div className="min-w-0">
               <p className="text-xl font-bold">{stats[key as keyof typeof stats]}</p>
-              <p className="text-[13px] text-muted-foreground truncate">{label}</p>
+              <p className="text-13 text-muted-foreground truncate">{label}</p>
             </div>
           </div>
         ))}
@@ -153,9 +153,9 @@ export function TransfersTab({ onViewDetail, onInitiate, onApprove, onReject, on
             { value: 'pending-ack',       label: 'Pending Ack.',      badge: stats.pendingAck },
           ] as { value: SubView; label: string; badge?: number }[]).map((tab) => (
             <button key={tab.value} onClick={() => setSubView(tab.value)}
-              className={`px-3 py-1.5 rounded-[4px] text-[15px] transition-colors flex items-center gap-1.5 ${
+              className={`px-3 py-1.5 rounded-[4px] text-15 transition-colors flex items-center gap-1.5 ${
                 subView === tab.value
-                  ? 'bg-[#121321] text-white shadow-sm'
+                  ? 'bg-brand-navy text-white shadow-sm'
                   : 'text-foreground hover:bg-muted'
               }`}>
               {tab.label}
@@ -168,7 +168,7 @@ export function TransfersTab({ onViewDetail, onInitiate, onApprove, onReject, on
           ))}
         </div>
         <Button onClick={onInitiate}
-          className="gap-1.5 bg-brand-navy hover:bg-brand-navy-mid text-white text-[15px]">
+          className="gap-1.5 bg-brand-navy hover:bg-brand-navy-mid text-white text-15">
           <Plus className="w-4 h-4" />
           Initiate Transfer
         </Button>
@@ -184,7 +184,7 @@ export function TransfersTab({ onViewDetail, onInitiate, onApprove, onReject, on
                 placeholder="Search transfer ID, custodian, reason, field office..."
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
-                className="pl-9 h-10 text-[15px] placeholder:text-muted-foreground/60"
+                className="pl-9 h-10 text-15 placeholder:text-muted-foreground/60"
               />
             </div>
             <div className="flex gap-2 flex-wrap">
@@ -193,56 +193,56 @@ export function TransfersTab({ onViewDetail, onInitiate, onApprove, onReject, on
                 onValueChange={(v) => setStatusFilter(v)}
                 disabled={isLocked}
               >
-                <SelectTrigger className={`w-[165px] h-10 text-[15px] ${isLocked ? 'opacity-60 cursor-not-allowed' : ''}`}>
+                <SelectTrigger className={`w-[165px] h-10 text-15 ${isLocked ? 'opacity-60 cursor-not-allowed' : ''}`}>
                   <SelectValue placeholder="Status" />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="all" className="text-[15px]">All Status</SelectItem>
-                  <SelectItem value="draft" className="text-[15px]">Draft</SelectItem>
-                  <SelectItem value="pending-custodian" className="text-[15px]">Pending Custodian</SelectItem>
-                  <SelectItem value="pending-approval" className="text-[15px]">Pending Approval</SelectItem>
-                  <SelectItem value="approved" className="text-[15px]">Approved</SelectItem>
-                  <SelectItem value="in-transit" className="text-[15px]">In Transit</SelectItem>
-                  <SelectItem value="pending-acknowledgment" className="text-[15px]">Pending Ack.</SelectItem>
-                  <SelectItem value="completed" className="text-[15px]">Completed</SelectItem>
-                  <SelectItem value="rejected" className="text-[15px]">Rejected</SelectItem>
-                  <SelectItem value="cancelled" className="text-[15px]">Cancelled</SelectItem>
+                  <SelectItem value="all" className="text-15">All Status</SelectItem>
+                  <SelectItem value="draft" className="text-15">Draft</SelectItem>
+                  <SelectItem value="pending-custodian" className="text-15">Pending Custodian</SelectItem>
+                  <SelectItem value="pending-approval" className="text-15">Pending Approval</SelectItem>
+                  <SelectItem value="approved" className="text-15">Approved</SelectItem>
+                  <SelectItem value="in-transit" className="text-15">In Transit</SelectItem>
+                  <SelectItem value="pending-acknowledgment" className="text-15">Pending Ack.</SelectItem>
+                  <SelectItem value="completed" className="text-15">Completed</SelectItem>
+                  <SelectItem value="rejected" className="text-15">Rejected</SelectItem>
+                  <SelectItem value="cancelled" className="text-15">Cancelled</SelectItem>
                 </SelectContent>
               </Select>
 
               <Select value={effectiveType} onValueChange={setTypeFilter} disabled={isLocked}>
-                <SelectTrigger className={`w-[145px] h-10 text-[15px] ${isLocked ? 'opacity-60 cursor-not-allowed' : ''}`}>
+                <SelectTrigger className={`w-[145px] h-10 text-15 ${isLocked ? 'opacity-60 cursor-not-allowed' : ''}`}>
                   <SelectValue placeholder="Type" />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="all" className="text-[15px]">All Types</SelectItem>
-                  <SelectItem value="intra-field" className="text-[15px]">Intra-Field</SelectItem>
-                  <SelectItem value="inter-field" className="text-[15px]">Inter-Field</SelectItem>
+                  <SelectItem value="all" className="text-15">All Types</SelectItem>
+                  <SelectItem value="intra-field" className="text-15">Intra-Field</SelectItem>
+                  <SelectItem value="inter-field" className="text-15">Inter-Field</SelectItem>
                 </SelectContent>
               </Select>
 
               <Select value={effectiveOffice} onValueChange={setOfficeFilter} disabled={isLocked}>
-                <SelectTrigger className={`w-[160px] h-10 text-[15px] ${isLocked ? 'opacity-60 cursor-not-allowed' : ''}`}>
+                <SelectTrigger className={`w-[160px] h-10 text-15 ${isLocked ? 'opacity-60 cursor-not-allowed' : ''}`}>
                   <SelectValue placeholder="Field Office" />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="all" className="text-[15px]">All Offices</SelectItem>
+                  <SelectItem value="all" className="text-15">All Offices</SelectItem>
                   {TRANSFER_FIELD_OFFICES.map((o) => (
-                    <SelectItem key={o} value={o} className="text-[15px]">{o}</SelectItem>
+                    <SelectItem key={o} value={o} className="text-15">{o}</SelectItem>
                   ))}
                 </SelectContent>
               </Select>
 
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
-                  <Button variant="outline" size="sm" className="h-10 text-[15px] gap-1.5 px-3">
+                  <Button variant="outline" size="sm" className="h-10 text-15 gap-1.5 px-3">
                     <Columns3 className="w-4 h-4" />Columns
                   </Button>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent align="end" className="w-48">
                   {columns.map((col) => (
                     <DropdownMenuCheckboxItem key={col.key} checked={col.visible}
-                      onCheckedChange={() => toggleColumn(col.key)} className="text-[15px]">
+                      onCheckedChange={() => toggleColumn(col.key)} className="text-15">
                       {col.label}
                     </DropdownMenuCheckboxItem>
                   ))}
@@ -263,22 +263,22 @@ export function TransfersTab({ onViewDetail, onInitiate, onApprove, onReject, on
                 <Table>
                   <TableHeader>
                     <TableRow>
-                      <TableHead className="text-[15px]">Transfer ID</TableHead>
-                      <TableHead className="text-[15px]">Type</TableHead>
-                      <TableHead className="text-[15px]">From</TableHead>
+                      <TableHead className="text-15">Transfer ID</TableHead>
+                      <TableHead className="text-15">Type</TableHead>
+                      <TableHead className="text-15">From</TableHead>
                       <TableHead className="w-6" />
-                      <TableHead className="text-[15px]">To</TableHead>
-                      <TableHead className="text-[15px] text-center">Assets</TableHead>
-                      <TableHead className="text-[15px]">Status</TableHead>
-                      <TableHead className="text-[15px]">Date</TableHead>
-                      <TableHead className="text-[15px]">Signatures</TableHead>
-                      <TableHead className="w-20 text-[15px]">Actions</TableHead>
+                      <TableHead className="text-15">To</TableHead>
+                      <TableHead className="text-15 text-center">Assets</TableHead>
+                      <TableHead className="text-15">Status</TableHead>
+                      <TableHead className="text-15">Date</TableHead>
+                      <TableHead className="text-15">Signatures</TableHead>
+                      <TableHead className="w-20 text-15">Actions</TableHead>
                     </TableRow>
                   </TableHeader>
                   <TableBody>
                     {pageData.map((t) => (
                       <TableRow key={t.id} className="cursor-pointer hover:bg-muted/30" onClick={() => onViewDetail(t)}>
-                        <TableCell className="font-medium text-[15px] text-brand-navy dark:text-brand-teal">
+                        <TableCell className="font-medium text-15 text-brand-navy dark:text-brand-teal">
                           {t.transferId}
                         </TableCell>
                         <TableCell>
@@ -287,18 +287,18 @@ export function TransfersTab({ onViewDetail, onInitiate, onApprove, onReject, on
                           </Badge>
                         </TableCell>
                         <TableCell className="min-w-[140px]">
-                          <p className="text-[15px] font-medium truncate">{t.fromCustodian}</p>
-                          <p className="text-[13px] text-muted-foreground truncate">{t.fromFieldOffice} · {t.fromRoom || t.fromLocation}</p>
+                          <p className="text-15 font-medium truncate">{t.fromCustodian}</p>
+                          <p className="text-13 text-muted-foreground truncate">{t.fromFieldOffice} · {t.fromRoom || t.fromLocation}</p>
                         </TableCell>
                         <TableCell className="px-1">
                           <ArrowRight className="w-4 h-4 text-muted-foreground" />
                         </TableCell>
                         <TableCell className="min-w-[140px]">
-                          <p className="text-[15px] font-medium truncate">{t.toCustodian || <span className="italic text-muted-foreground">TBD</span>}</p>
-                          <p className="text-[13px] text-muted-foreground truncate">{t.toFieldOffice} · {t.toRoom || t.toLocation || '—'}</p>
+                          <p className="text-15 font-medium truncate">{t.toCustodian || <span className="italic text-muted-foreground">TBD</span>}</p>
+                          <p className="text-13 text-muted-foreground truncate">{t.toFieldOffice} · {t.toRoom || t.toLocation || '—'}</p>
                         </TableCell>
                         <TableCell className="text-center">
-                          <span className="inline-flex items-center justify-center w-8 h-8 rounded-full bg-muted text-[15px] font-medium">
+                          <span className="inline-flex items-center justify-center w-8 h-8 rounded-full bg-muted text-15 font-medium">
                             {t.assets.length}
                           </span>
                         </TableCell>
@@ -307,7 +307,7 @@ export function TransfersTab({ onViewDetail, onInitiate, onApprove, onReject, on
                             {getTransferStatusLabel(t.status as TransferStatus)}
                           </Badge>
                         </TableCell>
-                        <TableCell className="text-[15px] text-muted-foreground whitespace-nowrap">
+                        <TableCell className="text-15 text-muted-foreground whitespace-nowrap">
                           {new Date(t.initiatedDate).toLocaleDateString()}
                         </TableCell>
                         <TableCell>
@@ -362,7 +362,7 @@ export function TransfersTab({ onViewDetail, onInitiate, onApprove, onReject, on
             <div className="text-center py-12 px-6">
               <RefreshCw className="w-10 h-10 mx-auto mb-3 opacity-20" />
               <h3 className="text-lg font-medium mb-1">No transfers found</h3>
-              <p className="text-[15px] text-muted-foreground mb-4">
+              <p className="text-15 text-muted-foreground mb-4">
                 {isLocked
                   ? `No ${subView === 'pending-approvals' ? 'pending approval' : 'pending acknowledgment'} transfers`
                   : search || statusFilter !== 'all'

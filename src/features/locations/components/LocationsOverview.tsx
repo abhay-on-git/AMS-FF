@@ -317,7 +317,7 @@ export function LocationsOverview({
                         View Details
                       </Button>
                       <Button
-                        className="flex-1 h-10 bg-[#121321] text-white hover:bg-[#121321]/90"
+                        className="flex-1 h-10 bg-brand-navy text-white hover:bg-brand-navy/90"
                         onClick={() => onManageHierarchy(office)}
                       >
                         Manage

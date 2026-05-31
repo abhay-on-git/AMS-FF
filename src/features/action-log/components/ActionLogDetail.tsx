@@ -10,7 +10,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { formatChangeValue, formatLogTimestamp } from '../lib/formatUtils'
 import type { AuditLog } from '../types'
 
-const FIELD_TEXT = 'text-[15px]'
+const FIELD_TEXT = 'text-15'
 const LABEL_CLS = 'text-[14px] text-muted-foreground'
 
 interface ActionLogDetailProps {
@@ -131,26 +131,26 @@ export function ActionLogDetail({ log, onBack }: ActionLogDetailProps) {
 
                       {isNew ? (
                         <div className="px-4 py-3">
-                          <p className="text-[13px] text-muted-foreground mb-1">Set to</p>
+                          <p className="text-13 text-muted-foreground mb-1">Set to</p>
                           <p className={`${FIELD_TEXT} font-medium`}>{toVal ?? '—'}</p>
                         </div>
                       ) : (
                         <div className="grid grid-cols-2 divide-x">
                           <div className="px-4 py-3">
-                            <p className="text-[13px] text-muted-foreground mb-1.5">Before</p>
+                            <p className="text-13 text-muted-foreground mb-1.5">Before</p>
                             <p
                               className={`${FIELD_TEXT} font-medium ${isRemoved ? '' : 'text-muted-foreground'}`}
                             >
                               {fromVal ?? (
-                                <span className="italic text-[13px]">Not set</span>
+                                <span className="italic text-13">Not set</span>
                               )}
                             </p>
                           </div>
                           <div className="px-4 py-3 bg-muted/20">
-                            <p className="text-[13px] text-muted-foreground mb-1.5">After</p>
+                            <p className="text-13 text-muted-foreground mb-1.5">After</p>
                             <p className={`${FIELD_TEXT} font-semibold`}>
                               {toVal ?? (
-                                <span className="italic font-normal text-[13px]">Cleared</span>
+                                <span className="italic font-normal text-13">Cleared</span>
                               )}
                             </p>
                           </div>

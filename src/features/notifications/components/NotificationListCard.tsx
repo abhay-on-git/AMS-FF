@@ -162,20 +162,20 @@ function NotificationItem({
 
         <div className="flex-1 min-w-0">
           <h4
-            className={`text-[17px] font-semibold leading-snug mb-1.5 ${
+            className={`text-17 font-semibold leading-snug mb-1.5 ${
               !notification.isRead ? 'text-foreground' : 'text-muted-foreground'
             }`}
           >
             {notification.title}
           </h4>
           <p
-            className={`text-[15px] leading-relaxed mb-3 ${
+            className={`text-15 leading-relaxed mb-3 ${
               !notification.isRead ? 'text-foreground/80' : 'text-muted-foreground'
             }`}
           >
             {notification.message}
           </p>
-          <div className="flex flex-wrap items-center gap-2 text-[13px] text-muted-foreground">
+          <div className="flex flex-wrap items-center gap-2 text-13 text-muted-foreground">
             <span>{notification.source}</span>
             <span>·</span>
             <span>{notification.timestamp}</span>
@@ -189,7 +189,7 @@ function NotificationItem({
               variant="outline"
               onClick={onMarkRead}
               disabled={marking}
-              className="h-10 px-4 text-[13px] font-medium gap-1.5"
+              className="h-10 px-4 text-13 font-medium gap-1.5"
             >
               <Check className="w-4 h-4" />
               <span className="hidden sm:inline">Mark Read</span>

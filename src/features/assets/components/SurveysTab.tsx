@@ -126,7 +126,7 @@ export function SurveysTab({
           <button
             key={tab.key}
             onClick={() => setSubView(tab.key)}
-            className={`px-3 py-1.5 rounded-[4px] text-[15px] transition-colors flex items-center gap-1.5 ${
+            className={`px-3 py-1.5 rounded-[4px] text-15 transition-colors flex items-center gap-1.5 ${
               subView === tab.key ? 'bg-background shadow-sm text-foreground' : 'text-muted-foreground hover:text-foreground'
             }`}
           >
@@ -148,7 +148,7 @@ export function SurveysTab({
             placeholder="Search by ID, title, team lead, office…"
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            className="pl-9 h-10 text-[15px]"
+            className="pl-9 h-10 text-15"
           />
         </div>
 
@@ -157,35 +157,35 @@ export function SurveysTab({
           onValueChange={setStatusFilter}
           disabled={subView === 'pending-approval' || subView === 'in-progress'}
         >
-          <SelectTrigger className="h-10 w-44 text-[15px]"><SelectValue placeholder="Status" /></SelectTrigger>
+          <SelectTrigger className="h-10 w-44 text-15"><SelectValue placeholder="Status" /></SelectTrigger>
           <SelectContent>
-            <SelectItem value="all" className="text-[15px]">All Status</SelectItem>
-            <SelectItem value="draft" className="text-[15px]">Draft</SelectItem>
-            <SelectItem value="planned" className="text-[15px]">Planned</SelectItem>
-            <SelectItem value="in-progress" className="text-[15px]">In Progress</SelectItem>
-            <SelectItem value="reconciliation" className="text-[15px]">Reconciliation</SelectItem>
-            <SelectItem value="pending-approval" className="text-[15px]">Pending Approval</SelectItem>
-            <SelectItem value="completed" className="text-[15px]">Completed</SelectItem>
-            <SelectItem value="cancelled" className="text-[15px]">Cancelled</SelectItem>
+            <SelectItem value="all" className="text-15">All Status</SelectItem>
+            <SelectItem value="draft" className="text-15">Draft</SelectItem>
+            <SelectItem value="planned" className="text-15">Planned</SelectItem>
+            <SelectItem value="in-progress" className="text-15">In Progress</SelectItem>
+            <SelectItem value="reconciliation" className="text-15">Reconciliation</SelectItem>
+            <SelectItem value="pending-approval" className="text-15">Pending Approval</SelectItem>
+            <SelectItem value="completed" className="text-15">Completed</SelectItem>
+            <SelectItem value="cancelled" className="text-15">Cancelled</SelectItem>
           </SelectContent>
         </Select>
 
         <Select value={typeFilter} onValueChange={setTypeFilter}>
-          <SelectTrigger className="h-10 w-44 text-[15px]"><SelectValue placeholder="Type" /></SelectTrigger>
+          <SelectTrigger className="h-10 w-44 text-15"><SelectValue placeholder="Type" /></SelectTrigger>
           <SelectContent>
-            <SelectItem value="all" className="text-[15px]">All Types</SelectItem>
-            <SelectItem value="full-count" className="text-[15px]">Full Count</SelectItem>
-            <SelectItem value="sample-based" className="text-[15px]">Sample-Based</SelectItem>
-            <SelectItem value="location-based" className="text-[15px]">Location-Based</SelectItem>
-            <SelectItem value="custodian-based" className="text-[15px]">Custodian-Based</SelectItem>
-            <SelectItem value="high-value" className="text-[15px]">High-Value</SelectItem>
+            <SelectItem value="all" className="text-15">All Types</SelectItem>
+            <SelectItem value="full-count" className="text-15">Full Count</SelectItem>
+            <SelectItem value="sample-based" className="text-15">Sample-Based</SelectItem>
+            <SelectItem value="location-based" className="text-15">Location-Based</SelectItem>
+            <SelectItem value="custodian-based" className="text-15">Custodian-Based</SelectItem>
+            <SelectItem value="high-value" className="text-15">High-Value</SelectItem>
           </SelectContent>
         </Select>
 
         {/* Column toggle */}
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
-            <Button variant="outline" size="sm" className="h-10 text-[15px] gap-1.5">
+            <Button variant="outline" size="sm" className="h-10 text-15 gap-1.5">
               <Columns3 className="w-4 h-4" />Columns
             </Button>
           </DropdownMenuTrigger>
@@ -197,7 +197,7 @@ export function SurveysTab({
                 onCheckedChange={(checked) =>
                   setColumns((prev) => prev.map((c) => c.key === col.key ? { ...c, visible: checked } : c))
                 }
-                className="text-[15px]"
+                className="text-15"
               >
                 {col.label}
               </DropdownMenuCheckboxItem>
@@ -205,13 +205,13 @@ export function SurveysTab({
           </DropdownMenuContent>
         </DropdownMenu>
 
-        <Button variant="outline" size="sm" className="h-10 text-[15px] gap-1.5">
+        <Button variant="outline" size="sm" className="h-10 text-15 gap-1.5">
           <Download className="w-4 h-4" />Export
         </Button>
 
         <Button
           size="sm"
-          className="h-10 bg-brand-navy hover:bg-brand-navy-mid text-white text-[15px] gap-1.5 ml-auto"
+          className="h-10 bg-brand-navy hover:bg-brand-navy-mid text-white text-15 gap-1.5 ml-auto"
           onClick={onCreateSurvey}
         >
           <Plus className="w-4 h-4" />Create Survey
@@ -220,7 +220,7 @@ export function SurveysTab({
 
       {/* Table */}
       {isLoading ? (
-        <div className="text-center py-12 text-muted-foreground text-[15px]">Loading surveys…</div>
+        <div className="text-center py-12 text-muted-foreground text-15">Loading surveys…</div>
       ) : filtered.length > 0 ? (
         <div className="rounded-[6px] border overflow-hidden">
           <div className="overflow-auto max-h-[calc(100vh-500px)] scrollbar-hide font-['Manrope']">
@@ -228,11 +228,11 @@ export function SurveysTab({
               <TableHeader>
                 <TableRow className="bg-muted/40">
                   {visibleCols.map((col) => (
-                    <TableHead key={String(col.key)} className="text-[15px] font-semibold whitespace-nowrap px-4 py-3">
+                    <TableHead key={String(col.key)} className="text-15 font-semibold whitespace-nowrap px-4 py-3">
                       {col.label}
                     </TableHead>
                   ))}
-                  <TableHead className="w-12 text-[15px] font-semibold px-4 py-3" />
+                  <TableHead className="w-12 text-15 font-semibold px-4 py-3" />
                 </TableRow>
               </TableHeader>
               <TableBody>
@@ -243,7 +243,7 @@ export function SurveysTab({
                     onClick={() => onViewDetail(survey)}
                   >
                     {visibleCols.map((col) => (
-                      <TableCell key={String(col.key)} className="px-4 py-3 text-[15px]">
+                      <TableCell key={String(col.key)} className="px-4 py-3 text-15">
                         {renderCell(survey, col.key as keyof SurveyRequest)}
                       </TableCell>
                     ))}
@@ -256,26 +256,26 @@ export function SurveysTab({
                           </Button>
                         </DropdownMenuTrigger>
                         <DropdownMenuContent align="end" onClick={(e) => e.stopPropagation()}>
-                          <DropdownMenuItem onClick={() => onViewDetail(survey)} className="text-[15px]">
+                          <DropdownMenuItem onClick={() => onViewDetail(survey)} className="text-15">
                             View Detail
                           </DropdownMenuItem>
                           {survey.status === 'planned' && (
-                            <DropdownMenuItem onClick={() => onStart(survey.id)} className="text-[15px]">
+                            <DropdownMenuItem onClick={() => onStart(survey.id)} className="text-15">
                               <Play className="w-4 h-4 mr-2" />Start Survey
                             </DropdownMenuItem>
                           )}
                           {survey.status === 'in-progress' && (
-                            <DropdownMenuItem onClick={() => onComplete(survey.id)} className="text-[15px]">
+                            <DropdownMenuItem onClick={() => onComplete(survey.id)} className="text-15">
                               <CheckCheck className="w-4 h-4 mr-2" />Complete Survey
                             </DropdownMenuItem>
                           )}
                           {survey.status === 'reconciliation' && (
-                            <DropdownMenuItem onClick={() => onSubmit(survey.id)} className="text-[15px]">
+                            <DropdownMenuItem onClick={() => onSubmit(survey.id)} className="text-15">
                               <FileText className="w-4 h-4 mr-2" />Submit for Approval
                             </DropdownMenuItem>
                           )}
                           {survey.status === 'pending-approval' && (
-                            <DropdownMenuItem onClick={() => onApprove(survey.id)} className="text-[15px]">
+                            <DropdownMenuItem onClick={() => onApprove(survey.id)} className="text-15">
                               <CheckCheck className="w-4 h-4 mr-2" />Approve Survey
                             </DropdownMenuItem>
                           )}
@@ -300,14 +300,14 @@ export function SurveysTab({
       ) : (
         <div className="text-center py-12 px-6">
           <AlertCircle className="w-10 h-10 mx-auto mb-3 opacity-20" />
-          <h3 className="text-[15px] font-medium mb-1">No surveys found</h3>
-          <p className="text-[15px] text-muted-foreground mb-4">
+          <h3 className="text-15 font-medium mb-1">No surveys found</h3>
+          <p className="text-15 text-muted-foreground mb-4">
             {search || statusFilter !== 'all' || typeFilter !== 'all'
               ? 'Try adjusting your filters.'
               : 'Create a survey to begin physical asset verification.'}
           </p>
           {!search && statusFilter === 'all' && typeFilter === 'all' && (
-            <Button size="sm" className="bg-brand-navy text-white text-[15px]" onClick={onCreateSurvey}>
+            <Button size="sm" className="bg-brand-navy text-white text-15" onClick={onCreateSurvey}>
               <Plus className="w-4 h-4 mr-1.5" />Create Survey
             </Button>
           )}
@@ -331,7 +331,7 @@ function renderCell(survey: SurveyRequest, key: keyof SurveyRequest): React.Reac
       return (
         <div>
           <p className="font-medium max-w-[240px] truncate">{survey.title}</p>
-          <p className="text-[13px] text-muted-foreground truncate max-w-[240px]">{survey.scope}</p>
+          <p className="text-13 text-muted-foreground truncate max-w-[240px]">{survey.scope}</p>
         </div>
       )
     case 'status':
@@ -344,14 +344,14 @@ function renderCell(survey: SurveyRequest, key: keyof SurveyRequest): React.Reac
       return (
         <div>
           <p>{survey.fieldOffice}</p>
-          <p className="text-[13px] text-muted-foreground">{survey.targetLocations.slice(0, 2).join(', ')}{survey.targetLocations.length > 2 ? ` +${survey.targetLocations.length - 2}` : ''}</p>
+          <p className="text-13 text-muted-foreground">{survey.targetLocations.slice(0, 2).join(', ')}{survey.targetLocations.length > 2 ? ` +${survey.targetLocations.length - 2}` : ''}</p>
         </div>
       )
     case 'surveyTeamLead':
       return (
         <div>
           <p>{survey.surveyTeamLead}</p>
-          <p className="text-[13px] text-muted-foreground">{survey.surveyors.length} surveyor{survey.surveyors.length !== 1 ? 's' : ''}</p>
+          <p className="text-13 text-muted-foreground">{survey.surveyors.length} surveyor{survey.surveyors.length !== 1 ? 's' : ''}</p>
         </div>
       )
     case 'accuracyRate':
@@ -371,7 +371,7 @@ function renderCell(survey: SurveyRequest, key: keyof SurveyRequest): React.Reac
         <div>
           <p>{new Date(survey.plannedStartDate).toLocaleDateString()}</p>
           {survey.actualStartDate && (
-            <p className="text-[13px] text-muted-foreground">Started {new Date(survey.actualStartDate).toLocaleDateString()}</p>
+            <p className="text-13 text-muted-foreground">Started {new Date(survey.actualStartDate).toLocaleDateString()}</p>
           )}
         </div>
       )

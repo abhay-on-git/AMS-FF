@@ -17,7 +17,7 @@ export function AssetTabs({ activeTab, onTabChange }: AssetTabsProps) {
 
   const tabs: SubNavTab[] = [
     { id: 'all',         label: 'Published Assets' },
-    { id: 'drafts',      label: 'Draft Assets',      badge: drafts.length,                                                                                                                         badgeColor: 'bg-[#121321] text-white' },
+    { id: 'drafts',      label: 'Draft Assets',      badge: drafts.length,                                                                                                                         badgeColor: 'bg-brand-navy text-white' },
     { id: 'transfers',   label: 'Asset Transfers',   badge: transfers.filter((t)   => ['pending-approval','pending-custodian','pending-acknowledgment'].includes(t.status)).length,                badgeColor: 'bg-amber-500 text-white'  },
     { id: 'inspections', label: 'Asset Inspections', badge: inspections.filter((i) => ['pending-review','in-progress'].includes(i.status)).length,                                                  badgeColor: 'bg-purple-500 text-white' },
     { id: 'surveys',     label: 'Asset Surveys',     badge: surveys.filter((s)     => ['pending-approval','in-progress','reconciliation'].includes(s.status)).length,                              badgeColor: 'bg-orange-500 text-white' },

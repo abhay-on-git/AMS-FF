@@ -40,7 +40,7 @@ export function LifecycleStepper({ currentStage, visitedStages }: LifecycleStepp
 
             <span
               className={cn(
-                'mt-1.5 text-[13px] text-center leading-tight',
+                'mt-1.5 text-13 text-center leading-tight',
                 isCurrent ? 'font-bold text-foreground' : 'text-muted-foreground'
               )}
             >

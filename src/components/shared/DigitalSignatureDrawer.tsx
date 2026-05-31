@@ -79,7 +79,8 @@ export function DigitalSignatureDrawer({
     const ctx = canvas.getContext('2d')
     if (!ctx) return
     const { x, y } = getPos(e, canvas.getBoundingClientRect())
-    ctx.strokeStyle = '#121321'; ctx.lineWidth = 2
+    ctx.strokeStyle = getComputedStyle(document.documentElement).getPropertyValue('--color-brand-navy').trim()
+    ctx.lineWidth = 2
     ctx.lineCap = 'round'; ctx.lineJoin = 'round'
     ctx.lineTo(x, y); ctx.stroke()
   }
@@ -119,7 +120,7 @@ export function DigitalSignatureDrawer({
             <PenLine className="w-4 h-4 text-brand-navy dark:text-brand-teal shrink-0" />
             <SheetTitle className="text-[18px]">{title}</SheetTitle>
           </div>
-          <SheetDescription className="text-[15px]">{description}</SheetDescription>
+          <SheetDescription className="text-15">{description}</SheetDescription>
         </SheetHeader>
 
         <div className="flex-1 overflow-y-auto px-6 py-5 space-y-5 font-['Manrope']">
@@ -128,22 +129,22 @@ export function DigitalSignatureDrawer({
           <section>
             <div className="flex items-center gap-1.5 mb-3">
               <User className="w-4 h-4 text-muted-foreground" />
-              <span className="text-[13px] text-muted-foreground font-semibold uppercase tracking-wide">Signatory Information</span>
+              <span className="text-13 text-muted-foreground font-semibold uppercase tracking-wide">Signatory Information</span>
             </div>
             <div className="grid grid-cols-2 gap-3">
               <div className="space-y-1.5">
-                <Label className="text-[15px] font-medium">Full Name</Label>
-                <Input value={signatoryName} disabled className="h-10 text-[15px] bg-muted/50" />
+                <Label className="text-15 font-medium">Full Name</Label>
+                <Input value={signatoryName} disabled className="h-10 text-15 bg-muted/50" />
               </div>
               <div className="space-y-1.5">
-                <Label className="text-[15px] font-medium">Role</Label>
-                <Input value={signatoryRole} disabled className="h-10 text-[15px] bg-muted/50" />
+                <Label className="text-15 font-medium">Role</Label>
+                <Input value={signatoryRole} disabled className="h-10 text-15 bg-muted/50" />
               </div>
               <div className="col-span-2 space-y-1.5">
-                <Label className="text-[15px] font-medium">Date &amp; Time</Label>
+                <Label className="text-15 font-medium">Date &amp; Time</Label>
                 <Input
                   value={new Date().toLocaleString('en-US', { month: 'short', day: 'numeric', year: 'numeric', hour: '2-digit', minute: '2-digit' })}
-                  disabled className="h-10 text-[15px] bg-muted/50"
+                  disabled className="h-10 text-15 bg-muted/50"
                 />
               </div>
             </div>
@@ -155,7 +156,7 @@ export function DigitalSignatureDrawer({
           <section>
             <div className="flex items-center gap-1.5 mb-3">
               <PenLine className="w-4 h-4 text-muted-foreground" />
-              <span className="text-[13px] text-muted-foreground font-semibold uppercase tracking-wide">Signature Method</span>
+              <span className="text-13 text-muted-foreground font-semibold uppercase tracking-wide">Signature Method</span>
             </div>
 
             {/* Method tabs */}
@@ -164,8 +165,8 @@ export function DigitalSignatureDrawer({
                 <button
                   key={m}
                   onClick={() => setMethod(m)}
-                  className={`px-4 py-2 rounded-[4px] text-[15px] flex items-center gap-1.5 transition-colors ${
-                    method === m ? 'bg-[#121321] text-white shadow-sm' : 'text-foreground hover:bg-muted'
+                  className={`px-4 py-2 rounded-[4px] text-15 flex items-center gap-1.5 transition-colors ${
+                    method === m ? 'bg-brand-navy text-white shadow-sm' : 'text-foreground hover:bg-muted'
                   }`}
                 >
                   {m === 'typed' ? <PenLine className="w-4 h-4" /> : <Pen className="w-4 h-4" />}
@@ -177,19 +178,19 @@ export function DigitalSignatureDrawer({
             {method === 'typed' && (
               <div className="space-y-3">
                 <div className="space-y-1.5">
-                  <Label htmlFor="typed-sig" className="text-[15px] font-medium">Type your full name</Label>
+                  <Label htmlFor="typed-sig" className="text-15 font-medium">Type your full name</Label>
                   <Input
                     id="typed-sig"
                     value={typedName}
                     onChange={(e) => setTypedName(e.target.value)}
                     placeholder="Enter your full name…"
-                    className="h-10 text-[15px]"
+                    className="h-10 text-15"
                     autoFocus
                   />
                 </div>
                 {typedName.trim() && (
                   <div className="p-6 border rounded-[6px] bg-muted/30 flex items-center justify-center min-h-[80px]">
-                    <p className="font-serif italic text-[28px] text-brand-navy dark:text-brand-teal">
+                    <p className="font-serif italic text-28 text-brand-navy dark:text-brand-teal">
                       {typedName}
                     </p>
                   </div>
@@ -200,9 +201,9 @@ export function DigitalSignatureDrawer({
             {method === 'drawn' && (
               <div className="space-y-2">
                 <div className="flex items-center justify-between">
-                  <Label className="text-[15px] font-medium">Draw your signature</Label>
+                  <Label className="text-15 font-medium">Draw your signature</Label>
                   {hasDrawn && (
-                    <Button variant="ghost" size="sm" onClick={clearCanvas} className="h-7 text-[13px] gap-1">
+                    <Button variant="ghost" size="sm" onClick={clearCanvas} className="h-7 text-13 gap-1">
                       <X className="w-3.5 h-3.5" />Clear
                     </Button>
                   )}
@@ -220,7 +221,7 @@ export function DigitalSignatureDrawer({
                   onTouchMove={draw}
                   onTouchEnd={() => setIsDrawing(false)}
                 />
-                <p className="text-[13px] text-muted-foreground">Use your mouse or touchscreen to sign</p>
+                <p className="text-13 text-muted-foreground">Use your mouse or touchscreen to sign</p>
               </div>
             )}
           </section>
@@ -231,12 +232,12 @@ export function DigitalSignatureDrawer({
           <section>
             <div className="flex items-center gap-1.5 mb-3">
               <Info className="w-4 h-4 text-muted-foreground" />
-              <span className="text-[13px] text-muted-foreground font-semibold uppercase tracking-wide">Legal Agreement</span>
+              <span className="text-13 text-muted-foreground font-semibold uppercase tracking-wide">Legal Agreement</span>
             </div>
             <Alert className="bg-muted/30">
               <AlertDescription>
                 <div className="space-y-3">
-                  <p className="text-[13px] text-muted-foreground leading-relaxed">
+                  <p className="text-13 text-muted-foreground leading-relaxed">
                     By signing, I confirm the accuracy of this record and acknowledge that this digital signature has the same legal effect as a handwritten signature under applicable electronic signature laws.
                   </p>
                   <div className="flex items-start gap-2">
@@ -247,7 +248,7 @@ export function DigitalSignatureDrawer({
                       onChange={(e) => setAgreed(e.target.checked)}
                       className="mt-0.5 rounded border-border cursor-pointer"
                     />
-                    <Label htmlFor="sig-agree" className="text-[15px] cursor-pointer font-normal leading-snug">
+                    <Label htmlFor="sig-agree" className="text-15 cursor-pointer font-normal leading-snug">
                       I agree to the above statement and wish to sign this document digitally.
                     </Label>
                   </div>
@@ -260,11 +261,11 @@ export function DigitalSignatureDrawer({
 
         {/* Footer */}
         <div className="px-6 py-4 border-t shrink-0 flex justify-end gap-2 font-['Manrope']">
-          <Button variant="outline" className="text-[15px]" onClick={() => onOpenChange(false)}>
+          <Button variant="outline" className="text-15" onClick={() => onOpenChange(false)}>
             Cancel
           </Button>
           <Button
-            className="bg-brand-navy hover:bg-brand-navy-mid text-white text-[15px] gap-1.5"
+            className="bg-brand-navy hover:bg-brand-navy-mid text-white text-15 gap-1.5"
             disabled={!isValid || isLoading}
             onClick={handleConfirm}
           >

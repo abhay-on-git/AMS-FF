@@ -36,7 +36,7 @@ export function InspectionProgressCard() {
   return (
     <Card className="h-full">
       <CardHeader className="pb-3">
-        <CardTitle className="flex items-center gap-2 text-[15px]">
+        <CardTitle className="flex items-center gap-2 text-15">
           <ClipboardCheck className="w-5 h-5 text-brand-navy dark:text-brand-teal" />
           Inspection Progress
         </CardTitle>
@@ -46,8 +46,8 @@ export function InspectionProgressCard() {
           <div key={insp.id} className="rounded-lg border p-4 space-y-3">
             <div className="flex items-start justify-between gap-2">
               <div className="min-w-0">
-                <p className="text-[15px] font-medium truncate">{insp.title}</p>
-                <p className="text-[13px] text-muted-foreground">
+                <p className="text-15 font-medium truncate">{insp.title}</p>
+                <p className="text-13 text-muted-foreground">
                   {insp.inspector} · {insp.office}
                 </p>
               </div>
@@ -56,7 +56,7 @@ export function InspectionProgressCard() {
               </Badge>
             </div>
             <Progress value={insp.progress} className="h-2" />
-            <div className="flex justify-between text-[13px] text-muted-foreground">
+            <div className="flex justify-between text-13 text-muted-foreground">
               <span>
                 {insp.verified}/{insp.total} verified
               </span>

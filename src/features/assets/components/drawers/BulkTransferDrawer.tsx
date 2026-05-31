@@ -71,7 +71,7 @@ export function BulkTransferDrawer({ open, onOpenChange, assetIds, onClearSelect
     <Sheet open={open} onOpenChange={onOpenChange}>
       <SheetContent side="right" className="!w-full sm:!max-w-lg flex flex-col overflow-hidden p-0">
         <SheetHeader className="px-6 pt-6 pb-4 border-b shrink-0">
-          <SheetTitle className="text-[15px] flex items-center gap-2">
+          <SheetTitle className="text-15 flex items-center gap-2">
             <ArrowRightLeft className="w-5 h-5" />
             Bulk Transfer Assets
           </SheetTitle>
@@ -85,7 +85,7 @@ export function BulkTransferDrawer({ open, onOpenChange, assetIds, onClearSelect
 
             {/* Selected assets summary */}
             <div className="rounded-lg border bg-muted/40 px-4 py-3 space-y-2">
-              <p className="text-[13px] font-semibold text-muted-foreground uppercase tracking-wide">
+              <p className="text-13 font-semibold text-muted-foreground uppercase tracking-wide">
                 Selected Assets ({assetIds.length})
               </p>
               <div className="flex flex-wrap gap-1.5">
@@ -109,11 +109,11 @@ export function BulkTransferDrawer({ open, onOpenChange, assetIds, onClearSelect
             </p>
 
             <div className="space-y-2">
-              <Label className="text-[15px] font-medium">
+              <Label className="text-15 font-medium">
                 Destination <span className="text-destructive">*</span>
               </Label>
               <Select value={watch('destination')} onValueChange={(v) => setValue('destination', v)}>
-                <SelectTrigger className="h-[52px] text-[15px]">
+                <SelectTrigger className="h-[52px] text-15">
                   <SelectValue placeholder="Select destination office" />
                 </SelectTrigger>
                 <SelectContent>
@@ -126,11 +126,11 @@ export function BulkTransferDrawer({ open, onOpenChange, assetIds, onClearSelect
             </div>
 
             <div className="space-y-2">
-              <Label className="text-[15px] font-medium">
+              <Label className="text-15 font-medium">
                 Receiving Custodian <span className="text-destructive">*</span>
               </Label>
               <Select value={watch('custodian')} onValueChange={(v) => setValue('custodian', v)}>
-                <SelectTrigger className="h-[52px] text-[15px]">
+                <SelectTrigger className="h-[52px] text-15">
                   <SelectValue placeholder="Select custodian" />
                 </SelectTrigger>
                 <SelectContent>
@@ -143,34 +143,34 @@ export function BulkTransferDrawer({ open, onOpenChange, assetIds, onClearSelect
             </div>
 
             <div className="space-y-2">
-              <Label className="text-[15px] font-medium">Expected Transfer Date</Label>
+              <Label className="text-15 font-medium">Expected Transfer Date</Label>
               <Input
                 {...register('expectedDate')}
                 type="date"
-                className="h-[52px] text-[15px]"
+                className="h-[52px] text-15"
               />
             </div>
 
             <div className="space-y-2">
-              <Label className="text-[15px] font-medium">
+              <Label className="text-15 font-medium">
                 Justification <span className="text-destructive">*</span>
               </Label>
               <Textarea
                 {...register('justification')}
                 placeholder="Explain the reason for transferring these assets (min. 10 characters)..."
                 rows={4}
-                className="text-[15px] placeholder:text-[14px]"
+                className="text-15 placeholder:text-[14px]"
               />
               {errors.justification && <p className="text-sm text-destructive">{errors.justification.message}</p>}
             </div>
 
             <div className="space-y-2">
-              <Label className="text-[15px] font-medium">Additional Notes</Label>
+              <Label className="text-15 font-medium">Additional Notes</Label>
               <Textarea
                 {...register('notes')}
                 placeholder="Any additional transfer notes or instructions..."
                 rows={3}
-                className="text-[15px] placeholder:text-[14px]"
+                className="text-15 placeholder:text-[14px]"
               />
             </div>
 

@@ -53,7 +53,7 @@ export function BulkChangeStatusDrawer({ open, onOpenChange, assetIds, onClearSe
     <Sheet open={open} onOpenChange={onOpenChange}>
       <SheetContent side="right" className="!w-full sm:!max-w-lg flex flex-col overflow-hidden p-0">
         <SheetHeader className="px-6 pt-6 pb-4 border-b shrink-0">
-          <SheetTitle className="text-[15px] flex items-center gap-2">
+          <SheetTitle className="text-15 flex items-center gap-2">
             <RefreshCw className="w-5 h-5" />
             Bulk Change Status
           </SheetTitle>
@@ -65,7 +65,7 @@ export function BulkChangeStatusDrawer({ open, onOpenChange, assetIds, onClearSe
         <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col flex-1 overflow-hidden">
           <div className="flex-1 overflow-y-auto px-6 py-4 space-y-6">
             <div className="rounded-lg border bg-muted/40 px-4 py-3 space-y-2">
-              <p className="text-[13px] font-semibold text-muted-foreground uppercase tracking-wide">
+              <p className="text-13 font-semibold text-muted-foreground uppercase tracking-wide">
                 Selected Assets ({assetIds.length})
               </p>
               <div className="flex flex-wrap gap-1.5">
@@ -83,9 +83,9 @@ export function BulkChangeStatusDrawer({ open, onOpenChange, assetIds, onClearSe
             <p className="text-sm font-semibold text-muted-foreground uppercase tracking-wide">Status Update</p>
 
             <div className="space-y-2">
-              <Label className="text-[15px] font-medium">New Status <span className="text-destructive">*</span></Label>
+              <Label className="text-15 font-medium">New Status <span className="text-destructive">*</span></Label>
               <Select value={watch('newStatus')} onValueChange={(v) => setValue('newStatus', v)}>
-                <SelectTrigger className="h-[52px] text-[15px]"><SelectValue placeholder="Select new status" /></SelectTrigger>
+                <SelectTrigger className="h-[52px] text-15"><SelectValue placeholder="Select new status" /></SelectTrigger>
                 <SelectContent>
                   {STATUS_OPTIONS.map(({ value, label }) => (
                     <SelectItem key={value} value={value}>{label}</SelectItem>
@@ -96,26 +96,26 @@ export function BulkChangeStatusDrawer({ open, onOpenChange, assetIds, onClearSe
             </div>
 
             <div className="space-y-2">
-              <Label className="text-[15px] font-medium">
+              <Label className="text-15 font-medium">
                 Reason <span className="text-destructive">*</span>
               </Label>
               <Textarea
                 {...register('reason')}
                 placeholder="Explain the reason for this status change (min. 10 characters)..."
                 rows={4}
-                className="text-[15px] placeholder:text-[14px]"
+                className="text-15 placeholder:text-[14px]"
               />
               {errors.reason && <p className="text-sm text-destructive">{errors.reason.message}</p>}
             </div>
 
             <div className="space-y-2">
-              <Label className="text-[15px] font-medium">Effective Date</Label>
-              <Input {...register('effectiveDate')} type="date" className="h-[52px] text-[15px]" />
+              <Label className="text-15 font-medium">Effective Date</Label>
+              <Input {...register('effectiveDate')} type="date" className="h-[52px] text-15" />
             </div>
 
             <div className="space-y-2">
-              <Label className="text-[15px] font-medium">Additional Notes</Label>
-              <Textarea {...register('notes')} placeholder="Any additional notes..." rows={3} className="text-[15px] placeholder:text-[14px]" />
+              <Label className="text-15 font-medium">Additional Notes</Label>
+              <Textarea {...register('notes')} placeholder="Any additional notes..." rows={3} className="text-15 placeholder:text-[14px]" />
             </div>
           </div>
 

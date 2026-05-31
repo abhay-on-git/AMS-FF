@@ -313,8 +313,8 @@ export function LocationHierarchyManager({
                     onValueChange={setSelectedOfficeId}
                   >
                     <div className="flex items-center gap-3 py-3 px-4 rounded-lg border bg-background">
-                      <div className="w-11 h-11 rounded-lg bg-[#f7f7f8] dark:bg-[#f7f7f8]/10 flex items-center justify-center shrink-0">
-                        <Building2 className="w-5 h-5 text-[#121321] dark:text-white" />
+                      <div className="w-11 h-11 rounded-lg bg-main-bg dark:bg-main-bg/10 flex items-center justify-center shrink-0">
+                        <Building2 className="w-5 h-5 text-brand-navy dark:text-white" />
                       </div>
                       <div className="flex-1 min-w-0 text-left">
                         <p className="font-medium text-base truncate">
@@ -325,7 +325,7 @@ export function LocationHierarchyManager({
                         </p>
                       </div>
                     </div>
-                    <SelectContent className="z-50 w-[var(--radix-select-trigger-width)] bg-white dark:bg-[#1e2240]">
+                    <SelectContent className="z-50 w-[var(--radix-select-trigger-width)] bg-white dark:bg-brand-navy-mid">
                       {fieldOffices.map((office) => (
                         <SelectItem
                           key={office.id}
@@ -333,7 +333,7 @@ export function LocationHierarchyManager({
                           className="py-3"
                         >
                           <div className="flex items-center gap-3">
-                            <Building2 className="w-4 h-4 text-[#121321] dark:text-white" />
+                            <Building2 className="w-4 h-4 text-brand-navy dark:text-white" />
                             <div>
                               <p className="font-medium text-lg">
                                 {office.name}
@@ -380,7 +380,7 @@ export function LocationHierarchyManager({
 
                 {/* Tips */}
                 <div className="bg-gradient-to-br from-blue-50 to-indigo-50 dark:from-blue-950/20 dark:to-indigo-950/20 rounded-xl border border-blue-200 dark:border-blue-800 p-5">
-                  <p className="text-sm font-medium text-[#121321] dark:text-blue-100 mb-3">
+                  <p className="text-sm font-medium text-brand-navy dark:text-blue-100 mb-3">
                     How it works
                   </p>
                   <ul className="space-y-2.5">
@@ -394,10 +394,10 @@ export function LocationHierarchyManager({
                         key={tip}
                         className="flex items-start gap-2.5"
                       >
-                        <span className="text-[#121321] mt-0.5 shrink-0">
+                        <span className="text-brand-navy mt-0.5 shrink-0">
                           •
                         </span>
-                        <span className="text-md text-[#121321] dark:text-blue-200 leading-snug">
+                        <span className="text-md text-brand-navy dark:text-blue-200 leading-snug">
                           {tip}
                         </span>
                       </li>
@@ -424,8 +424,8 @@ export function LocationHierarchyManager({
 
             {treeData.length === 0 ? (
               <div className="flex flex-col items-center justify-center py-20 text-center">
-                <div className="w-20 h-20 rounded-full bg-[#f7f7f8] dark:bg-[#f7f7f8]/10 flex items-center justify-center mb-5">
-                  <Building2 className="w-10 h-10 text-[#121321]/30 dark:text-white/30" />
+                <div className="w-20 h-20 rounded-full bg-main-bg dark:bg-main-bg/10 flex items-center justify-center mb-5">
+                  <Building2 className="w-10 h-10 text-brand-navy/30 dark:text-white/30" />
                 </div>
                 <h3 className="text-xl font-medium mb-2">
                   No locations added yet
@@ -438,9 +438,9 @@ export function LocationHierarchyManager({
             ) : (
               <div className="space-y-1">
                 {/* Office Root node */}
-                <div className="flex items-center gap-3 py-3 px-4 rounded-xl bg-[#f7f7f8] dark:bg-[#f7f7f8]/10 border mb-3">
-                  <div className="w-9 h-9 rounded-lg bg-[#121321] dark:bg-white flex items-center justify-center shrink-0">
-                    <Building2 className="w-5 h-5 text-white dark:text-[#121321]" />
+                <div className="flex items-center gap-3 py-3 px-4 rounded-xl bg-main-bg dark:bg-main-bg/10 border mb-3">
+                  <div className="w-9 h-9 rounded-lg bg-brand-navy dark:bg-white flex items-center justify-center shrink-0">
+                    <Building2 className="w-5 h-5 text-white dark:text-brand-navy" />
                   </div>
                   <span className="font-medium text-base flex-1">
                     {currentOffice.name}

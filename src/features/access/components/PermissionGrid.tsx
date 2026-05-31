@@ -116,8 +116,8 @@ export function PermissionGrid({ permissions, onChange, readOnly = false }: Perm
     <div className="flex flex-col gap-3">
       {/* Expand / Collapse toolbar */}
       <div className="flex gap-2">
-        <Button variant="outline" className="text-[15px] h-9" onClick={expandAll}>Expand All</Button>
-        <Button variant="outline" className="text-[15px] h-9" onClick={collapseAll}>Collapse All</Button>
+        <Button variant="outline" className="text-15 h-9" onClick={expandAll}>Expand All</Button>
+        <Button variant="outline" className="text-15 h-9" onClick={collapseAll}>Collapse All</Button>
       </div>
 
       {/* Permission table */}
@@ -125,15 +125,15 @@ export function PermissionGrid({ permissions, onChange, readOnly = false }: Perm
         <Table>
           <TableHeader>
             <TableRow className="bg-muted/30 hover:bg-muted/30">
-              <TableHead className="w-64 text-[15px] font-semibold uppercase tracking-wide">
+              <TableHead className="w-64 text-15 font-semibold uppercase tracking-wide">
                 Module / Sub-Module
               </TableHead>
               {DISPLAY_ACTIONS.map((a) => (
-                <TableHead key={a} className="text-center w-20 text-[15px] font-semibold uppercase tracking-wide">
+                <TableHead key={a} className="text-center w-20 text-15 font-semibold uppercase tracking-wide">
                   {ACTION_LABELS[a]}
                 </TableHead>
               ))}
-              <TableHead className="text-center w-36 text-[15px] font-semibold uppercase tracking-wide">
+              <TableHead className="text-center w-36 text-15 font-semibold uppercase tracking-wide">
                 Quick Set
               </TableHead>
             </TableRow>
@@ -160,7 +160,7 @@ export function PermissionGrid({ permissions, onChange, readOnly = false }: Perm
                         }
                       </button>
                       {MODULE_ICONS[mod.module] ?? <Package className={ICON_CLS} />}
-                      <span className="font-medium text-[15px] font-['Manrope']">{mod.module}</span>
+                      <span className="font-medium text-15 font-['Manrope']">{mod.module}</span>
                     </div>
                   </TableCell>
                   {DISPLAY_ACTIONS.map((action) => {
@@ -213,8 +213,8 @@ export function PermissionGrid({ permissions, onChange, readOnly = false }: Perm
                     <TableRow key={`${mod.module}-${sub.name}`} className="hover:bg-muted/10">
                       <TableCell>
                         <div className="flex items-center gap-1 pl-12">
-                          <span className="text-muted-foreground text-[15px] mr-1">└</span>
-                          <span className="text-[15px] font-['Manrope']">{sub.name}</span>
+                          <span className="text-muted-foreground text-15 mr-1">└</span>
+                          <span className="text-15 font-['Manrope']">{sub.name}</span>
                         </div>
                       </TableCell>
                       {DISPLAY_ACTIONS.map((action) => (

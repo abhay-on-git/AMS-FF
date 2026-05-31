@@ -50,14 +50,14 @@ export function PasswordStrengthIndicator({ password }: PasswordStrengthIndicato
           />
         ))}
       </div>
-      <p className={cn('text-[13px] mt-1.5 font-medium', textColor)}>
+      <p className={cn('text-13 mt-1.5 font-medium', textColor)}>
         {label}
       </p>
       <div className="mt-2 space-y-1.5">
         {requirements.map((r) => {
           const passed = r.check(password)
           return (
-            <div key={r.label} className="flex items-center gap-2 text-[13px]">
+            <div key={r.label} className="flex items-center gap-2 text-13">
               <CheckCircle2
                 className={cn(
                   'h-4 w-4',

@@ -42,7 +42,7 @@ export function AssetDetailView({
       {/* Header */}
       <div className="flex items-start justify-between gap-4">
         <div>
-          <div className="flex items-center gap-2 text-[15px] mb-2">
+          <div className="flex items-center gap-2 text-15 mb-2">
             <button onClick={onBack} className="text-muted-foreground transition-colors">
               <ChevronLeft className="w-4 h-4" />
             </button>
@@ -64,7 +64,7 @@ export function AssetDetailView({
         </div>
         <div className="flex gap-2 shrink-0">
           {userRole !== 'auditor' && userRole !== 'senior_management' && (
-            <Button variant="outline" className="gap-1.5 text-[15px]" onClick={() => onEdit(asset)}>
+            <Button variant="outline" className="gap-1.5 text-15" onClick={() => onEdit(asset)}>
               <Pencil className="w-4 h-4" /> Edit
             </Button>
           )}
@@ -100,7 +100,7 @@ export function AssetDetailView({
             key={tab.key}
             onClick={() => setActiveTab(tab.key)}
             className={cn(
-              'px-4 py-1.5 rounded-[4px] text-[15px] transition-colors',
+              'px-4 py-1.5 rounded-[4px] text-15 transition-colors',
               activeTab === tab.key
                 ? 'bg-brand-navy text-white shadow-sm'
                 : 'text-foreground hover:bg-muted'

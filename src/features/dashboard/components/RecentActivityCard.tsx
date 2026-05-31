@@ -25,7 +25,7 @@ export function RecentActivityCard() {
   return (
     <Card className="h-full">
       <CardHeader className="pb-3">
-        <CardTitle className="flex items-center gap-2 text-[15px]">
+        <CardTitle className="flex items-center gap-2 text-15">
           <History className="w-5 h-5 text-brand-navy dark:text-brand-teal" />
           Recent Activity
         </CardTitle>
@@ -45,11 +45,11 @@ export function RecentActivityCard() {
                   <p className="text-[14px] leading-snug">{item.action}</p>
                 </div>
                 <div className="flex flex-wrap items-center gap-2 pl-4">
-                  <span className="text-[13px] text-muted-foreground">{item.user}</span>
+                  <span className="text-13 text-muted-foreground">{item.user}</span>
                   <Badge variant="outline" className="text-[11px] font-normal">
                     {item.module}
                   </Badge>
-                  <span className="text-[13px] text-muted-foreground">{item.time}</span>
+                  <span className="text-13 text-muted-foreground">{item.time}</span>
                 </div>
               </div>
             </div>
