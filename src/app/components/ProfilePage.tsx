@@ -1,3 +1,5 @@
+// TODO: Delete after LegacyApp decommission
+// Replaced by src/features/profile/
 import React, { useState } from "react";
 import {
   Card,

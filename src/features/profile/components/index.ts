@@ -1,2 +1,3 @@
-// src/features/profile/components
-
+export { ProfileView } from './ProfileView'
+export { ProfileHeader } from './ProfileHeader'
+export { PersonalInfoCard } from './PersonalInfoCard'

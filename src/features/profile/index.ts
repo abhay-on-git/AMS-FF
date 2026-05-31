@@ -1,3 +1,6 @@
-// src/features/profile — public API barrel
-// Populated during Sprint implementation
-
+export * from './types'
+export * from './constants'
+export * from './schemas'
+export * from './services'
+export * from './hooks'
+export * from './components'

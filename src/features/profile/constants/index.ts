@@ -1,2 +1,1 @@
-// src/features/profile/constants
-
+export { FIELD_OFFICE_OPTIONS, PHONE_COUNTRY_OPTIONS, ROLE_LABELS } from './profileConstants'

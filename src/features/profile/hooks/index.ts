@@ -1,2 +1,1 @@
-// src/features/profile/hooks
-
+export { useProfile, useUpdateProfile } from './useProfile'
